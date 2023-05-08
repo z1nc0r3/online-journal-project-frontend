@@ -1,6 +1,7 @@
 import "./App.css";
 import "./assets/css/main.css";
 import Login from "./layout/templates/main/Login";
+import AdminDashboard from "./layout/templates/admin/Dashboard";
 import { Box, Container } from "@mui/material";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
@@ -13,6 +14,8 @@ function App() {
 						<Routes>
 							<Route path='/' element={<Navigate to ="/login" />}></Route>
 							<Route path='/login' element={<Login />}></Route>
+							<Route path='/admin' element={<Navigate to ="/admin/dashboard" />}></Route>
+							<Route path='/admin/dashboard' element={<AdminDashboard />}></Route>
 						</Routes>
 					</BrowserRouter>
 				</Box>
