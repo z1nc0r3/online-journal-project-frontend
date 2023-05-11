@@ -9,10 +9,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 export default function AdminNavbar() {
 	return (
-		<Box sx={{ flexGrow: 1 }}>
+		<Box sx={{ flexGrow: 1, marginBottom: 4 }}>
 			<AppBar position="static">
 				<Toolbar>
-					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+					<Typography variant="h5" component="div" sx={{ flexGrow: 1, textAlign: "left", fontWeight: "light" }}>
 						Administrator
 					</Typography>
 					<Button color="inherit">Logout</Button>
