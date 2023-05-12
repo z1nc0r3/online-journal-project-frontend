@@ -19,7 +19,8 @@ function App() {
 							<Route path='/admin/dashboard' element={<AdminDashboard />}></Route> */}
 
 							{/* <Route path='/' element={<Layout layout="login"/>}></Route> */}
-							<Route path='/admin/dashboard' element={<Layout layout="admin_trainee_list"/>}></Route>
+							<Route path='/admin' element={<Navigate to="/admin/trainee_list"/>}></Route>
+							<Route path='/admin/dashboard' element={<Navigate to="/admin/trainee_list"/>}></Route>
 
 							<Route path='/admin/trainee_list' element={<Layout layout="admin_trainee_list"/>}></Route>
 							<Route path='/admin/trainee_list/edit/:id' element={<Layout layout="admin_trainee_edit"/>}></Route>
