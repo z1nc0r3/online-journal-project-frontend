@@ -58,9 +58,9 @@
     color: white;
 }
 
-/* Supervisor List */
+/* Supervisor List, Evaluator List */
 
-.supervisor_assign_box {
+.supervisor_assign_box, .evaluator_assign_box {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -68,7 +68,7 @@
     border-radius: 1.5rem;
 }
 
-.supervisor_assign_box p {
+.supervisor_assign_box p, .evaluator_assign_box p {
     margin: 1rem 2rem;
     font-size: 18px;
 }
