@@ -1,39 +1,32 @@
 import * as React from "react";
-import { Box, Container, Button, Paper, Grid } from "@mui/material";
+import { useState } from "react";
+import { Box, Container, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Typography from "@mui/material/Typography";
 import "../../../assets/css/main.css";
 
 function LeftWidget() {
+	const [activeButton, setActiveButton] = useState(0);
+
+	const buttons = [
+		{ label: "Trainee List", path: "/admin/trainee_list" },
+		{ label: "Supervisor List", path: "/admin/supervisor_list" },
+		{ label: "Evaluator List", path: "/admin/evaluator_list" },
+		{ label: "Create User", path: "/admin/create_user" },
+	];
+
 	return (
 		<Container component="main" className="left_widget_container">
 			<CssBaseline />
 
 			<Box className="left_widget">
-				<Link to="/admin/trainee_list" className="left_widget_link">
-					<Button variant="contained" className="left_widget_button" activeClassName="active">
-						Trainee List
-					</Button>
-				</Link>
-				<Link to="/admin/supervisor_list" className="left_widget_link">
-					<Button variant="contained" className="left_widget_button">
-						Supervisor List
-					</Button>
-				</Link>
-				<Link to="/admin/evaluator_list" className="left_widget_link">
-					<Button variant="contained" className="left_widget_button">
-						Evaluator List
-					</Button>
-				</Link>
-				<Link to="/admin/create_user" className="left_widget_link">
-					<Button variant="contained" className="left_widget_button">
-						Create User
-					</Button>
-				</Link>
+				{buttons.map((button, index) => (
+					<Link key={index} to={button.path} className="left_widget_link">
+						<Button variant="contained" onClick={() => setActiveButton(index)} className={`left_widget_button ${activeButton === index ? "active" : ""}`}>
+							{button.label}
+						</Button>
+					</Link>
+				))}
 			</Box>
 		</Container>
 	);
