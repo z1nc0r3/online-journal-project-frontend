@@ -1,9 +1,9 @@
-.trainee_list_container {
+.list_container {
     display: flex;
     justify-content: center;
 }
 
-.trainee_list {
+.list_box {
     display: flex;
     flex-direction: column;
     justify-content: center;

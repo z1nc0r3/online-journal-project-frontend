@@ -52,7 +52,7 @@ Button.left_widget_button.active {
 	color: white;
 }
 
-.trainee_list_main_grid {
+.list_box_main_grid {
     display: flex;
     justify-content: center;
 }
@@ -68,4 +68,11 @@ Button.left_widget_button.active {
 	padding: 1rem;
     width: 300px !important;
 	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+}
+
+.MuiPickersDay-today {
+    background-color: #2a95ff !important;
+    color: white !important;
+    font-weight: 500 !important;
+    border: none !important;
 }
