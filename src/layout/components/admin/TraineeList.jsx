@@ -10,7 +10,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-import "../../../assets/css/main.css";
+import "../../../assets/css/traineeList.css";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 
 function TraineeList() {
