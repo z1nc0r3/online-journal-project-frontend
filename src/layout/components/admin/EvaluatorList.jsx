@@ -8,7 +8,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Typography from "@mui/material/Typography";
 import "../../../assets/css/list.css";
 
-function SupervisorList() {
+function EvaluatorList() {
 	const [expanded, setExpanded] = React.useState(false);
 
 	const handleChange = (panel) => (event, isExpanded) => {
@@ -23,11 +23,11 @@ function SupervisorList() {
 				<Accordion expanded={expanded === "list_accordion"} onChange={handleChange("list_accordion")} sx={{ width: "100%", backgroundColor: "#dfefff", boxShadow: "none" }}>
 					<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
 						{/* <ModeEditIcon sx={{ color: "#1c93ff", marginRight: "1rem" }} /> */}
-						<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Name</Typography>
-						<Typography sx={{ color: "text.secondary", fontSize: "18px" }}>Position</Typography>
+						<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Evaluator Name</Typography>
+						<Typography sx={{ color: "text.secondary", fontSize: "18px" }}>Department</Typography>
 					</AccordionSummary>
 					<AccordionDetails>
-						<Box className="supervisor_assign_box">
+						<Box className="evaluator_assign_box">
 							<Typography>Assigned For :</Typography>
 							<Typography>Student Name</Typography>
 						</Box>
@@ -38,4 +38,4 @@ function SupervisorList() {
 	);
 }
 
-export default SupervisorList;
+export default EvaluatorList;
