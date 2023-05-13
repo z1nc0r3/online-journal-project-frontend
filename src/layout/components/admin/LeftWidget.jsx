@@ -10,7 +10,7 @@ import "../../../assets/css/main.css";
 
 function LeftWidget() {
 	return (
-		<Container component="main" className="login_container">
+		<Container component="main" className="left_widget_container">
 			<CssBaseline />
 
 			<Box className="left_widget" activeClassName="active">

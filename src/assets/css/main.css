@@ -5,3 +5,53 @@
     align-items: center;
     margin: 0 auto;
 }
+
+.dashboard_container {
+    display: flex;
+}
+
+.left_widget {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+}
+
+Button.left_widget_button {
+    margin: 0.4rem 0;
+    width: 100%;
+    background-color: #b9ddff;
+    /* background-color: #0085ff; */
+    color: #414141;
+    font-size: 16px;
+    height: 3rem;
+    border-radius: 0.5rem;
+    box-shadow: none;
+}
+
+Button.left_widget_button:hover {
+    background-color: #2a95ff;
+    color: white;
+}
+
+Button.left_widget_button.active {
+    background-color: #0085ff;
+    color: white;
+}
+
+.trainee_list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+}
