@@ -5,6 +5,9 @@ import AdminHeader from "./admin/AdminHeader";
 import AdminLeftWidget from "./admin/LeftWidget";
 import AdminTraineeList from "./admin/TraineeList";
 import CssBaseline from "@mui/material/CssBaseline";
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 
 function Layout(props) {
 	if (props.layout.includes("admin_trainee")) {
@@ -22,8 +25,13 @@ function Layout(props) {
 						<Grid item xs={3}>
 							<AdminLeftWidget />
 						</Grid>
-						<Grid item xs={9}>
+						<Grid item xs={6}>
 							<AdminTraineeList />
+						</Grid>
+						<Grid item xs={3}>
+							<LocalizationProvider dateAdapter={AdapterDayjs}>
+								<DateCalendar readOnly/>
+							</LocalizationProvider>
 						</Grid>
 					</Grid>
 				</Container>
