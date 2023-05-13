@@ -21,14 +21,14 @@
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    background-color: white;
+    background-color: #b9ddff;
     border-radius: 1.5rem;
     padding: 1rem;
     margin: 1rem 1rem;
 }
 
-.trainee_assign_form Typography {
-    margin: 0.5rem 0;
+.trainee_assign_form .MuiInputBase-root {
+    border-radius: 1.5rem;
 }
 
 .trainee_assign_form .assign_evaluator_row, .trainee_assign_form .assign_supervisor_row {
@@ -56,4 +56,19 @@
 .trainee_assign_form .assign_save:hover {
     background-color: #2a95ff;
     color: white;
+}
+
+/* Supervisor List */
+
+.supervisor_assign_box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #b9ddff;
+    border-radius: 1.5rem;
+}
+
+.supervisor_assign_box p {
+    margin: 1rem 2rem;
+    font-size: 18px;
 }
