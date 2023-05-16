@@ -15,7 +15,7 @@ export default function AdminNavbar() {
 					<Typography variant="h5" component="div" sx={{ flexGrow: 1, textAlign: "left", fontWeight: "light" }}>
 						Administrator
 					</Typography>
-					<Button color="inherit">Logout</Button>
+					<Button className="logout_button">Logout</Button>
 				</Toolbar>
 			</AppBar>
 		</Box>
