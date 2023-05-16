@@ -12,7 +12,7 @@ function LeftWidget() {
 		{ label: "Trainee List", path: "/admin/trainee_list" },
 		{ label: "Supervisor List", path: "/admin/supervisor_list" },
 		{ label: "Evaluator List", path: "/admin/evaluator_list" },
-		{ label: "Create User", path: "/admin/create_user" },
+		{ label: "Create User", path: "/admin/create_user/trainee" },
 	];
 
 	return (
