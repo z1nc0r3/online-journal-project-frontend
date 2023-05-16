@@ -10,6 +10,8 @@
 	display: flex;
 }
 
+/* Left Widget */
+
 .left_widget_container {
     display: flex;
     justify-content: center;
@@ -43,8 +45,8 @@ Button.left_widget_button {
 }
 
 Button.left_widget_button:hover {
-	background-color: #2a95ff;
-	color: white;
+	background-color: #88c6ff;
+	box-shadow: none;
 }
 
 Button.left_widget_button.active {
@@ -56,6 +58,8 @@ Button.left_widget_button.active {
     display: flex;
     justify-content: center;
 }
+
+/* Calendar */
 
 .calendar_container {
     display: flex;
@@ -75,4 +79,38 @@ Button.left_widget_button.active {
     color: white !important;
     font-weight: 500 !important;
     border: none !important;
+}
+
+/* Create Menu */
+
+.create_menu_container {
+	display: flex;
+	justify-content: center;
+}
+
+.create_menu {
+	display: flex;
+	justify-content: space-between;
+	padding: 1rem 5rem 2rem 5rem;
+}
+
+Button.create_menu_button {
+	width: 100%;
+	background-color: #89c6ff;
+	color: #414141;
+	font-size: 16px;
+	height: 2.5rem;
+	width: 12rem;
+	border-radius: 0.5rem;
+	box-shadow: none;
+}
+
+Button.create_menu_button:hover {
+	background-color: #b9ddff;
+	box-shadow: none;
+}
+
+Button.create_menu_button.active {
+	background-color: #ffffff;
+	color: #414141;
 }
