@@ -10,6 +10,20 @@
 	display: flex;
 }
 
+/* Admin Header */
+
+Button.logout_button {
+	color: white;
+	width: 5rem;
+	border-radius: 0.5rem;
+	box-shadow: none;
+}
+
+Button.logout_button:hover {
+	background-color: #ce002d;
+	color: white;
+}
+
 /* Left Widget */
 
 .left_widget_container {
@@ -99,7 +113,7 @@ Button.create_menu_button {
 	background-color: #89c6ff;
 	color: #414141;
 	font-size: 16px;
-	height: 2.5rem;
+	height: 3rem;
 	width: 12rem;
 	border-radius: 0.5rem;
 	box-shadow: none;
