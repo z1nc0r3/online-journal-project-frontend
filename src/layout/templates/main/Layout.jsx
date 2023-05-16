@@ -32,7 +32,7 @@ const Layout = (props) => {
 			case "admin_evaluator_list":
 				return <AdminEvaluatorList />;
 			case "admin_create_user":
-				return <CreateUser />;
+				return <CreateUser user={props.user} />;
 			default:
 				return null; //to-do: add 404 page
 		}
@@ -56,7 +56,7 @@ const Layout = (props) => {
 
 			<Grid container className="list_box_main_grid">
 				<Grid item lg={3}>
-					<AdminLeftWidget/>
+					<AdminLeftWidget />
 				</Grid>
 				<Grid item lg={6}>
 					{getView()}

@@ -2,44 +2,192 @@ import * as React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Box, Container, Button } from "@mui/material";
-import Accordion from "@mui/material/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import CssBaseline from "@mui/material/CssBaseline";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Typography from "@mui/material/Typography";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import "../../../assets/css/list.css";
 import CreateMenu from "../../components/admin/CreateMenu";
 
-function SupervisorList() {
-	const [expanded, setExpanded] = React.useState(false);
+function CreateUser(props) {
+	switch (props.user) {
+		case "trainee":
+			return (
+				<Container component="main" className="create_new_container" maxWidth={false}>
+					<CssBaseline />
 
-	const handleChange = (panel) => (event, isExpanded) => {
-		setExpanded(isExpanded ? panel : false);
-	};
+					<CreateMenu />
 
-	return (
-		<Container component="main" className="list_container" maxWidth={false}>
-			<CssBaseline />
+					<Box className="create_new_form" component="form">
+						<Box className="create_new_form_left">
+							<Typography>Assigned Supervisor </Typography>
+							<TextField variant="outlined" margin="normal" required fullWidth label="Full Name" name="fullname" autoComplete="fullname" autoFocus />
 
-			<CreateMenu />
+							<Typography>Registration No </Typography>
+							<TextField variant="outlined" margin="normal" required fullWidth label="Registration No" name="regno" autoComplete="regno" autoFocus />
 
-			<Box className="list_box">
-				<Accordion expanded={expanded === "list_accordion"} onChange={handleChange("list_accordion")} sx={{ width: "100%", backgroundColor: "#dfefff", boxShadow: "none" }}>
-					<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
-						<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Name</Typography>
-						<Typography sx={{ color: "text.secondary", fontSize: "18px" }}>Position</Typography>
-					</AccordionSummary>
-					<AccordionDetails>
-						<Box className="supervisor_assign_box">
-							<Typography>Assigned For :</Typography>
-							<Typography>Student Name</Typography>
+							<Typography>Department </Typography>
+							<TextField variant="outlined" margin="normal" required fullWidth label="Department" name="department" autoComplete="department" autoFocus />
+
+							<Typography>Address </Typography>
+							<TextField variant="outlined" margin="normal" required fullWidth label="Address" name="address" autoComplete="address" autoFocus />
+
+							<Typography>Email </Typography>
+							<TextField variant="outlined" margin="normal" required fullWidth label="Email" name="email" autoComplete="email" autoFocus />
+
+							<Typography>Phone </Typography>
+							<TextField variant="outlined" margin="normal" required fullWidth label="Phone" name="phone" autoComplete="phone" autoFocus />
 						</Box>
-					</AccordionDetails>
-				</Accordion>
-			</Box>
-		</Container>
-	);
+
+						<Box className="create_new_form_right">
+							<Typography>Name of the Establishement </Typography>
+							<TextField variant="outlined" margin="normal" required fullWidth label="Establishement Name" name="establishement_name" autoComplete="establishement_name" autoFocus />
+
+							<Typography>Address of the Establishement </Typography>
+							<TextField
+								variant="outlined"
+								margin="normal"
+								required
+								fullWidth
+								label="Establishement Address"
+								name="establishement_address"
+								autoComplete="establishement_address"
+								autoFocus
+							/>
+
+							<Typography>Training Period </Typography>
+							<Box className="training_period" sx={{display: "flex", flexDirection: "row"}}>
+								<Box className="training_period_from">
+								<Typography>From </Typography>
+								<TextField variant="outlined" margin="normal" required fullWidth label="From" name="from" autoComplete="from" autoFocus />
+								</Box>
+
+								<Box className="training_period_to">
+								<Typography>To </Typography>
+								<TextField variant="outlined" margin="normal" required fullWidth label="To" name="to" autoComplete="to" autoFocus />
+								</Box>
+							</Box>
+
+							<Typography>Password </Typography>
+							<TextField variant="outlined" margin="normal" required fullWidth label="Password" name="password" autoComplete="password" autoFocus />
+
+							<Typography>Confirm Password </Typography>
+							<TextField variant="outlined" margin="normal" required fullWidth label="Confirm Password" name="confirm_password" autoComplete="confirm_password" autoFocus />
+						</Box>
+					</Box>
+				</Container>
+			);
+		case "supervisor":
+			return (
+				<Container component="main" className="create_new_container" maxWidth={false}>
+					<CssBaseline />
+
+					<CreateMenu />
+
+					<Box className="create_new_form" component="form">
+						<TextField className="username" variant="outlined" margin="normal" required fullWidth id="username" label="Username" name="username" autoComplete="username" autoFocus />
+
+						<TextField
+							className="password"
+							variant="outlined"
+							margin="normal"
+							required
+							fullWidth
+							name="password"
+							label="Password"
+							type="password"
+							id="password"
+							autoComplete="current-password"
+						/>
+
+						<Container className="login_helper_container" sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "1rem", marginBottom: "1rem" }}>
+							<FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+							<Link href="#" variant="body2" sx={{ color: "#0057ff", textDecoration: "none" }}>
+								Forgot password?
+							</Link>
+						</Container>
+
+						<Button variant="contained" type="submit" className="loginButton" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "18px" }}>
+							Login
+						</Button>
+					</Box>
+				</Container>
+			);
+		case "evaluator":
+			return (
+				<Container component="main" className="create_new_container" maxWidth={false}>
+					<CssBaseline />
+
+					<CreateMenu />
+
+					<Box className="create_new_form" component="form">
+						<TextField className="username" variant="outlined" margin="normal" required fullWidth id="username" label="Username" name="username" autoComplete="username" autoFocus />
+
+						<TextField
+							className="password"
+							variant="outlined"
+							margin="normal"
+							required
+							fullWidth
+							name="password"
+							label="Password"
+							type="password"
+							id="password"
+							autoComplete="current-password"
+						/>
+
+						<Container className="login_helper_container" sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "1rem", marginBottom: "1rem" }}>
+							<FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+							<Link href="#" variant="body2" sx={{ color: "#0057ff", textDecoration: "none" }}>
+								Forgot password?
+							</Link>
+						</Container>
+
+						<Button variant="contained" type="submit" className="loginButton" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "18px" }}>
+							Login
+						</Button>
+					</Box>
+				</Container>
+			);
+		default:
+			return (
+				<Container component="main" className="create_new_container" maxWidth={false}>
+					<CssBaseline />
+
+					<CreateMenu />
+
+					<Box className="create_new_form" component="form">
+						<TextField className="username" variant="outlined" margin="normal" required fullWidth id="username" label="Username" name="username" autoComplete="username" autoFocus />
+
+						<TextField
+							className="password"
+							variant="outlined"
+							margin="normal"
+							required
+							fullWidth
+							name="password"
+							label="Password"
+							type="password"
+							id="password"
+							autoComplete="current-password"
+						/>
+
+						<Container className="login_helper_container" sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "1rem", marginBottom: "1rem" }}>
+							<FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+							<Link href="#" variant="body2" sx={{ color: "#0057ff", textDecoration: "none" }}>
+								Forgot password?
+							</Link>
+						</Container>
+
+						<Button variant="contained" type="submit" className="loginButton" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "18px" }}>
+							Login
+						</Button>
+					</Box>
+				</Container>
+			);
+	}
 }
 
-export default SupervisorList;
+export default CreateUser;
