@@ -1,9 +1,17 @@
+.login_container {
+    display: flex !important;
+    height: 100vh;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .login_form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    height: max-content;
     background-color: white;
     border-radius: 1.5rem;
     padding: 2rem;

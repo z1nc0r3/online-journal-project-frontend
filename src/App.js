@@ -9,7 +9,7 @@ function App() {
 	return (
 		<div className="App">
 			<Container maxWidth={false} disableGutters={true}>
-				<Box className="main_container" sx={{ background: "linear-gradient(60deg, rgba(0,133,255,1) 0%, rgba(55,159,255,1) 100%)", height: "auto", width: "auto", paddingBottom: "90px" }}>
+				<Box className="main_container" sx={{ background: "linear-gradient(60deg, rgba(0,133,255,1) 0%, rgba(55,159,255,1) 100%)" }}>
 					<BrowserRouter>
 						<Routes>
 							<Route path='/' element={<Navigate to ="/login" />}></Route>

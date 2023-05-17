@@ -4,10 +4,15 @@
 	justify-content: center;
 	align-items: center;
 	margin: 0 auto;
+	height: max-content;
+	width: auto;
 }
 
 .dashboard_container {
 	display: flex;
+	height: 100vh !important;
+	overflow: auto;
+	padding-bottom: 90px;
 }
 
 /* Admin Header */
