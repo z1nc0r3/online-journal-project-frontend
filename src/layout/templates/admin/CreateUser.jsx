@@ -12,6 +12,13 @@ import "../../../assets/css/list.css";
 import CreateMenu from "../../components/admin/CreateMenu";
 
 function CreateUser(props) {
+	const [phone, setPhone] = useState("");
+
+	const handlePhoneChange = (event) => {
+		const input = event.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+		setPhone(input);
+	};
+
 	switch (props.user) {
 		case "trainee":
 			return (
@@ -20,63 +27,77 @@ function CreateUser(props) {
 
 					<CreateMenu />
 
-					<Box className="create_new_form" component="form">
-						<Box className="create_new_form_left">
-							<Typography>Assigned Supervisor </Typography>
-							<TextField variant="outlined" margin="normal" required fullWidth label="Full Name" name="fullname" autoComplete="fullname" autoFocus />
+					<form>
+						<Box className="create_new_form" component="form">
+							<Box className="create_new_form_left">
+								<Typography>Assigned Supervisor </Typography>
+								<TextField variant="outlined" margin="normal" required fullWidth label="Full Name" name="fullname" autoComplete="fullname" autoFocus />
 
-							<Typography>Registration No </Typography>
-							<TextField variant="outlined" margin="normal" required fullWidth label="Registration No" name="regno" autoComplete="regno" autoFocus />
+								<Typography>Registration No </Typography>
+								<TextField variant="outlined" margin="normal" required fullWidth label="Registration No" name="regno" autoComplete="regno" autoFocus />
 
-							<Typography>Department </Typography>
-							<TextField variant="outlined" margin="normal" required fullWidth label="Department" name="department" autoComplete="department" autoFocus />
+								<Typography>Department </Typography>
+								<TextField variant="outlined" margin="normal" required fullWidth label="Department" name="department" autoComplete="department" autoFocus />
 
-							<Typography>Address </Typography>
-							<TextField variant="outlined" margin="normal" required fullWidth label="Address" name="address" autoComplete="address" autoFocus />
+								<Typography>Address </Typography>
+								<TextField variant="outlined" margin="normal" required fullWidth label="Address" name="address" autoComplete="address" autoFocus />
 
-							<Typography>Email </Typography>
-							<TextField variant="outlined" margin="normal" required fullWidth label="Email" name="email" autoComplete="email" autoFocus />
+								<Typography>Email </Typography>
+								<TextField variant="outlined" margin="normal" required fullWidth label="Email" name="email" autoComplete="email" autoFocus />
 
-							<Typography>Phone </Typography>
-							<TextField variant="outlined" margin="normal" required fullWidth label="Phone" name="phone" autoComplete="phone" autoFocus />
-						</Box>
-
-						<Box className="create_new_form_right">
-							<Typography>Name of the Establishement </Typography>
-							<TextField variant="outlined" margin="normal" required fullWidth label="Establishement Name" name="establishement_name" autoComplete="establishement_name" autoFocus />
-
-							<Typography>Address of the Establishement </Typography>
-							<TextField
-								variant="outlined"
-								margin="normal"
-								required
-								fullWidth
-								label="Establishement Address"
-								name="establishement_address"
-								autoComplete="establishement_address"
-								autoFocus
-							/>
-
-							<Typography>Training Period </Typography>
-							<Box className="training_period" sx={{display: "flex", flexDirection: "row"}}>
-								<Box className="training_period_from">
-								<Typography>From </Typography>
-								<TextField variant="outlined" margin="normal" required fullWidth label="From" name="from" autoComplete="from" autoFocus />
-								</Box>
-
-								<Box className="training_period_to">
-								<Typography>To </Typography>
-								<TextField variant="outlined" margin="normal" required fullWidth label="To" name="to" autoComplete="to" autoFocus />
-								</Box>
+								<Typography>Phone </Typography>
+								<TextField
+									variant="outlined"
+									margin="normal"
+									required
+									fullWidth
+									label="Phone"
+									name="phone"
+									autoComplete="phone"
+									autoFocus
+									value={phone}
+									inputProps={{ maxLength: 10 }}
+									onChange={handlePhoneChange}
+								/>
 							</Box>
 
-							<Typography>Password </Typography>
-							<TextField variant="outlined" margin="normal" required fullWidth label="Password" name="password" autoComplete="password" autoFocus />
+							<Box className="create_new_form_right">
+								<Typography>Name of the Establishement </Typography>
+								<TextField variant="outlined" margin="normal" required fullWidth label="Establishement Name" name="establishement_name" autoComplete="establishement_name" autoFocus />
 
-							<Typography>Confirm Password </Typography>
-							<TextField variant="outlined" margin="normal" required fullWidth label="Confirm Password" name="confirm_password" autoComplete="confirm_password" autoFocus />
+								<Typography>Address of the Establishement </Typography>
+								<TextField
+									variant="outlined"
+									margin="normal"
+									required
+									fullWidth
+									label="Establishement Address"
+									name="establishement_address"
+									autoComplete="establishement_address"
+									autoFocus
+								/>
+
+								<Typography>Training Period </Typography>
+								<Box className="training_period" sx={{ display: "flex", flexDirection: "row" }}>
+									<Box className="training_period_from">
+										<Typography>From </Typography>
+										<TextField variant="outlined" margin="normal" required fullWidth label="From" name="from" autoComplete="from" autoFocus />
+									</Box>
+
+									<Box className="training_period_to">
+										<Typography>To </Typography>
+										<TextField variant="outlined" margin="normal" required fullWidth label="To" name="to" autoComplete="to" autoFocus />
+									</Box>
+								</Box>
+
+								<Typography>Password </Typography>
+								<TextField variant="outlined" margin="normal" required fullWidth label="Password" name="password" autoComplete="password" autoFocus />
+
+								<Typography>Confirm Password </Typography>
+								<TextField variant="outlined" margin="normal" required fullWidth label="Confirm Password" name="confirm_password" autoComplete="confirm_password" autoFocus />
+							</Box>
 						</Box>
-					</Box>
+					</form>
 				</Container>
 			);
 		case "supervisor":

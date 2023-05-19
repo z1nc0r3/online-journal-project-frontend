@@ -94,6 +94,13 @@
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
+.create_new_form p {
+    font-weight: 500;
+    margin-top: 20px;
+    line-height: 0.5;
+    margin-bottom: -5px;
+}
+
 .create_new_form_left, .create_new_form_right {
     display: flex;
     flex-direction: column;
@@ -104,8 +111,16 @@
     padding: 0 1rem;
 }
 
+.training_period p {
+    text-align: left;
+}
+
 .training_period_from, .training_period_to {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.training_period_from {
+    padding-right: 10px;
 }
