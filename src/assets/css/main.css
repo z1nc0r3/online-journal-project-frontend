@@ -133,3 +133,9 @@ Button.create_menu_button.active {
 	background-color: #ffffff;
 	color: #414141;
 }
+
+Button.register_button {
+	height: 3.5rem;
+	margin-top: 16px;
+	box-shadow: none;
+}
