@@ -7,6 +7,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Typography from "@mui/material/Typography";
 import "../../../assets/css/list.css";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import { Link } from "react-router-dom";
+
+
 
 function EvaluatorList() {
 	const [expanded, setExpanded] = React.useState(false);
@@ -22,7 +26,7 @@ function EvaluatorList() {
 			<Box className="list_box">
 				<Accordion expanded={expanded === "list_accordion"} onChange={handleChange("list_accordion")} sx={{ width: "100%", backgroundColor: "#dfefff", boxShadow: "none" }}>
 					<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
-						{/* <ModeEditIcon sx={{ color: "#1c93ff", marginRight: "1rem" }} /> */}
+						<Link to= "/admin/evaluator_list/edit/:id"><ModeEditIcon sx={{ color: "#1c93ff", marginRight: "1rem" }} /></Link>
 						<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Evaluator Name</Typography>
 						<Typography sx={{ color: "text.secondary", fontSize: "18px" }}>Department</Typography>
 					</AccordionSummary>

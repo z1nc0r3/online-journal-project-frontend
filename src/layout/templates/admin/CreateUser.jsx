@@ -159,16 +159,53 @@ function CreateUser(props) {
 								/>
 
 								<Typography>Registration No </Typography>
-								<TextField variant="outlined" margin="normal" required fullWidth label="Registration No" name="regno" type="text" onChange={handleChange} />
+								<TextField 
+									variant="outlined" 
+									margin="normal" 
+									required 
+									fullWidth 
+									label="Registration No" 
+									name="regno" 
+									type="text" 
+									onChange={handleChange} 
+								/>
 
 								<Typography>Department </Typography>
-								<TextField variant="outlined" margin="normal" required fullWidth label="Department" name="department" type="text" value={formData.department} onChange={handleChange} />
+								<TextField 
+									variant="outlined" 
+									margin="normal" 
+									required 
+									fullWidth 
+									label="Department" 
+									name="department" 
+									type="text" 
+									value={formData.department} 
+									onChange={handleChange} 
+								/>
 
 								<Typography>Address </Typography>
-								<TextField variant="outlined" margin="normal" required fullWidth label="Address" name="address" type="text" value={formData.address} onChange={handleChange} />
+								<TextField 
+									variant="outlined" 
+									margin="normal" 
+									required 
+									fullWidth 
+									label="Address" 
+									name="address" 
+									type="text" 
+									value={formData.address} 
+									onChange={handleChange} />
 
 								<Typography>Email </Typography>
-								<TextField variant="outlined" margin="normal" required fullWidth label="Email" name="email" type="email" value={formData.email} onChange={handleEmailChange} />
+								<TextField 
+									variant="outlined" 
+									margin="normal" 
+									required 
+									fullWidth 
+									label="Email" 
+									name="email" 
+									type="email" 
+									value={formData.email} 
+									onChange={handleEmailChange} />
 
 								<Typography>Phone </Typography>
 								<TextField

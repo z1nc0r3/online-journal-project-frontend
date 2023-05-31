@@ -36,6 +36,13 @@ function App() {
 							<Route path='/admin/evaluator_list/edit/:id' element={<Layout layout="admin_evaluator_edit"/>}></Route>
 							<Route path='/admin/create_user/evaluator' element={<Layout layout="admin_create_user" user="evaluator"/>}></Route>
 							<Route path='/admin/evaluator_list/delete/:id' element={<Layout layout="admin_evaluator_delete"/>}></Route>
+
+							<Route path='/student/dashboard' element={<Layout layout="student_dashboard"/>}></Route>
+							<Route path='/student/past_reports' element={<Layout layout="student_past_reports"/>}></Route>
+							<Route path='/student/user_instruction' element={<Layout layout="student_user_instruction"/>}></Route>
+							<Route path='/student/user_edit_data' element={<Layout layout="student_user_edit_data"/>}></Route>
+							<Route path='/student/current_month_report' element={<Layout layout="student_current_month_report"/>}></Route>
+
 						</Routes>
 					</BrowserRouter>
 				</Box>

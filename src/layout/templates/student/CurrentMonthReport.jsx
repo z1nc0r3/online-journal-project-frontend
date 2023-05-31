@@ -11,21 +11,14 @@ import "../../../assets/css/list.css";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { Link } from "react-router-dom";
 
+function CurrentMonthReport() {
 
-function TraineeList() {
-	const [expanded, setExpanded] = React.useState(false);
-	
-
-	const handleChange = (panel) => (event, isExpanded) => {
-		setExpanded(isExpanded ? panel : false);
-	};
-
-	return (
+    return (
 		<Container component="main" className="list_container" maxWidth={false}>
 			<CssBaseline />
 
 			<Box className="list_box">
-				<Accordion expanded={expanded === "list_accordion"} onChange={handleChange("list_accordion")} sx={{ width: "100%", backgroundColor: "#dfefff", boxShadow: "none" }}>
+				<Accordion sx={{ width: "100%", backgroundColor: "#dfefff", boxShadow: "none" }}>
 					<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
 						<Link to="/admin/trainee_list/edit/:id"><ModeEditIcon sx={{ color: "#1c93ff", marginRight: "1rem" }} /></Link>
 						<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Student Name</Typography>
@@ -56,6 +49,7 @@ function TraineeList() {
 			</Box>
 		</Container>
 	);
+
 }
 
-export default TraineeList;
+export default CurrentMonthReport;
