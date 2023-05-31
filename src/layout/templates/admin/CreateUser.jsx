@@ -88,7 +88,7 @@ const CreateUser = (props) => {
 		}
 	};
 
-	const handleSubmitTrainee = (e) => {
+	const handleSubmit = (e, userType) => {
 		e.preventDefault();
 
 		if (!handlePasswordChange()) {
@@ -101,8 +101,23 @@ const CreateUser = (props) => {
 			return;
 		}
 
+		let url;
+		switch (userType) {
+			case "trainee":
+				url = "http://127.0.0.1:8000/api/create/trainee";
+				break;
+			case "supervisor":
+				url = "http://127.0.0.1:8000/api/create/supervisor";
+				break;
+			case "evaluator":
+				url = "http://127.0.0.1:8000/api/create/evaluator";
+				break;
+			default:
+				return;
+		}
+
 		axios
-			.post("http://127.0.0.1:8000/api/create/trainee", formData)
+			.post(url, formData)
 			.then((response) => {
 				console.log(response.data);
 				alert("Form submitted successfully!");
@@ -111,6 +126,62 @@ const CreateUser = (props) => {
 				console.error(error);
 				alert("Error submitting the form. Please try again.");
 			});
+	};
+
+	const handleSubmitTrainee = (e) => {
+		handleSubmit(e, "trainee");
+	};
+
+	const handleSubmitSupervisor = (e) => {
+		handleSubmit(e, "supervisor");
+	};
+
+	const handleSubmitEvaluator = (e) => {
+		handleSubmit(e, "evaluator");
+	};
+
+	const passwordFields = () => {
+		return (
+			<>
+				<Typography>Password </Typography>
+				<TextField
+					variant="outlined"
+					required
+					fullWidth
+					name="password"
+					type="password"
+					value={formData.password}
+					onChange={(e) => {
+						setFormData({ ...formData, password: e.target.value });
+						handlePasswordChange();
+					}}
+				/>
+
+				{passwordError && (
+					<Alert severity="error" sx={{ marginTop: "10px" }}>
+						{passwordError}
+					</Alert>
+				)}
+
+				<Typography>Confirm Password </Typography>
+				<TextField
+					variant="outlined"
+					required
+					fullWidth
+					name="confirm_password"
+					type="password"
+					value={formData.confirm_password}
+					onChange={(e) => {
+						setFormData({ ...formData, confirm_password: e.target.value });
+						handleConfirmPasswordChange();
+					}}
+				/>
+
+				<Button variant="contained" type="submit" className="register_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
+					Create User
+				</Button>
+			</>
+		);
 	};
 
 	switch (props.user) {
@@ -131,7 +202,15 @@ const CreateUser = (props) => {
 								<TextField variant="outlined" required fullWidth name="regNo" type="text" value={formData.regNo} onChange={handleChange} />
 
 								<Typography>Department </Typography>
-								<TextField variant="outlined" required fullWidth name="department" type="text" value={formData.department} onChange={handleChange} />
+								<Select variant="outlined" value={formData.department} required fullWidth name="department" type="text" onChange={handleChange}>
+									<MenuItem value={"computer_science"}>Computer Science</MenuItem>
+									<MenuItem value={"physics"}>Physics</MenuItem>
+									<MenuItem value={"zoology"}>Zoology</MenuItem>
+									<MenuItem value={"mathematics"}>Mathematics</MenuItem>
+									<MenuItem value={"statistics"}>Statistics</MenuItem>
+									<MenuItem value={"fisheries"}>Fisheries</MenuItem>
+									<MenuItem value={"biology"}>Biology</MenuItem>
+								</Select>
 
 								<Typography>Address </Typography>
 								<TextField variant="outlined" required fullWidth name="address" type="text" value={formData.address} onChange={handleChange} />
@@ -150,10 +229,9 @@ const CreateUser = (props) => {
 								<Typography>Address of the Establishment </Typography>
 								<TextField variant="outlined" required fullWidth name="estAddress" type="text" value={formData.estAddress} onChange={handleChange} />
 
-								<Typography>Training Period </Typography>
 								<Box className="training_period" sx={{ display: "flex", flexDirection: "row" }}>
 									<Box className="training_period_from">
-										<Typography>From </Typography>
+										<Typography>Starting From </Typography>
 										<TextField variant="outlined" required fullWidth name="startDate" type="date" value={formData.startDate} onChange={handleChange} />
 									</Box>
 
@@ -168,39 +246,79 @@ const CreateUser = (props) => {
 									</Box>
 								</Box>
 
-								<Typography>Password </Typography>
-								<TextField
-									variant="outlined"
-									required
-									fullWidth
-									name="password"
-									type="password"
-									value={formData.password}
-									onChange={(e) => {
-										setFormData({ ...formData, password: e.target.value });
-										handlePasswordChange();
-									}}
-								/>
+								{passwordFields()}
 
-								{passwordError && <Alert severity="error">{passwordError}</Alert>}
+							</Box>
+						</Box>
+					</form>
+				</Container>
+			);
+		case "supervisor":
+			return (
+				<Container component="main" className="create_new_container" maxWidth={false}>
+					<CssBaseline />
 
-								<Typography>Confirm Password </Typography>
-								<TextField
-									variant="outlined"
-									required
-									fullWidth
-									name="confirm_password"
-									type="password"
-									value={formData.confirm_password}
-									onChange={(e) => {
-										setFormData({ ...formData, confirm_password: e.target.value });
-										handleConfirmPasswordChange();
-									}}
-								/>
+					<CreateMenu />
 
-								<Button variant="contained" type="submit" className="register_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
-									Register
-								</Button>
+					<form onSubmit={handleSubmitSupervisor}>
+						<Box className="create_new_form">
+							<Box className="create_new_form_left">
+								<Typography>Full Name </Typography>
+								<TextField variant="outlined" required fullWidth name="fName" autoFocus type="text" value={formData.fName} onChange={handleFullNameChange} />
+
+								<Typography>Email </Typography>
+								<TextField variant="outlined" required fullWidth name="email" type="email" value={formData.email} onChange={handleChange} />
+
+								<Typography>Phone </Typography>
+								<TextField variant="outlined" required fullWidth name="phone" type="number" value={formData.phone} onChange={handlePhoneChange} inputProps={{ maxLength: 10 }} />
+
+								<Typography>Name of the Establishment </Typography>
+								<TextField variant="outlined" required fullWidth name="estName" type="text" value={formData.estName} onChange={handleChange} />
+
+								<Typography>Address of the Establishment </Typography>
+								<TextField variant="outlined" required fullWidth name="estAddress" type="text" value={formData.estAddress} onChange={handleChange} />
+							</Box>
+
+							<Box className="create_new_form_right">
+								{passwordFields()}
+							</Box>
+						</Box>
+					</form>
+				</Container>
+			);
+		case "evaluator":
+			return (
+				<Container component="main" className="create_new_container" maxWidth={false}>
+					<CssBaseline />
+
+					<CreateMenu />
+
+					<form onSubmit={handleSubmitEvaluator}>
+						<Box className="create_new_form">
+							<Box className="create_new_form_left">
+								<Typography>Full Name </Typography>
+								<TextField variant="outlined" required fullWidth name="fName" autoFocus type="text" value={formData.fName} onChange={handleFullNameChange} />
+
+								<Typography>Department </Typography>
+								<Select variant="outlined" value={formData.department} required fullWidth name="department" type="text" onChange={handleChange}>
+									<MenuItem value={"computer_science"}>Computer Science</MenuItem>
+									<MenuItem value={"physics"}>Physics</MenuItem>
+									<MenuItem value={"zoology"}>Zoology</MenuItem>
+									<MenuItem value={"mathematics"}>Mathematics</MenuItem>
+									<MenuItem value={"statistics"}>Statistics</MenuItem>
+									<MenuItem value={"fisheries"}>Fisheries</MenuItem>
+									<MenuItem value={"biology"}>Biology</MenuItem>
+								</Select>
+
+								<Typography>Email </Typography>
+								<TextField variant="outlined" required fullWidth name="email" type="email" value={formData.email} onChange={handleChange} />
+
+								<Typography>Phone </Typography>
+								<TextField variant="outlined" required fullWidth name="phone" type="number" value={formData.phone} onChange={handlePhoneChange} inputProps={{ maxLength: 10 }} />
+							</Box>
+
+							<Box className="create_new_form_right">
+								{passwordFields()}
 							</Box>
 						</Box>
 					</form>
