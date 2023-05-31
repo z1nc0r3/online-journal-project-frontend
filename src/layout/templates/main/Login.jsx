@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import "../../../assets/css/login.css";
 
 function Login() {
-	const [username, setUsername] = useState("");
+	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
 	const [role, setRole] = useState("");
@@ -25,7 +25,7 @@ function Login() {
 				"Access-Control-Allow-Headers": "Origin, X-Requested-With",
 			},
 			body: JSON.stringify({
-				username,
+				email,
 				password,
 			}),
 		});
@@ -74,12 +74,12 @@ function Login() {
 						margin="normal"
 						required
 						fullWidth
-						label="Username"
-						name="username"
-						autoComplete="username"
+						label="Email"
+						name="email"
+						autoComplete="email"
 						autoFocus
-						value={username}
-						onChange={(event) => setUsername(event.target.value)}
+						value={email}
+						onChange={(event) => setEmail(event.target.value)}
 					/>
 
 					<TextField
