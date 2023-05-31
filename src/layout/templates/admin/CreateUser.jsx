@@ -184,6 +184,47 @@ const CreateUser = (props) => {
 		);
 	};
 
+	const departmentList = () => {
+		return (
+			<>
+				<Typography>Department </Typography>
+				<Select variant="outlined" value={formData.department} required fullWidth name="department" type="text" onChange={handleChange}>
+					<MenuItem value={"computer_science"}>Computer Science</MenuItem>
+					<MenuItem value={"physics"}>Physics</MenuItem>
+					<MenuItem value={"zoology"}>Zoology</MenuItem>
+					<MenuItem value={"mathematics"}>Mathematics</MenuItem>
+					<MenuItem value={"statistics"}>Statistics</MenuItem>
+					<MenuItem value={"fisheries"}>Fisheries</MenuItem>
+					<MenuItem value={"biology"}>Biology</MenuItem>
+				</Select>
+			</>
+		);
+	};
+
+	const emailPhoneFields = () => {
+		return (
+			<>
+				<Typography>Email </Typography>
+				<TextField variant="outlined" required fullWidth name="email" type="email" value={formData.email} onChange={handleChange} />
+
+				<Typography>Phone </Typography>
+				<TextField variant="outlined" required fullWidth name="phone" type="number" value={formData.phone} onChange={handlePhoneChange} inputProps={{ maxLength: 10 }} />
+			</>
+		);
+	};
+
+	const establishmentFields = () => {
+		return (
+			<>
+				<Typography>Name of the Establishment </Typography>
+				<TextField variant="outlined" required fullWidth name="estName" type="text" value={formData.estName} onChange={handleChange} />
+
+				<Typography>Address of the Establishment </Typography>
+				<TextField variant="outlined" required fullWidth name="estAddress" type="text" value={formData.estAddress} onChange={handleChange} />
+			</>
+		);
+	};
+
 	switch (props.user) {
 		case "trainee":
 			return (
@@ -201,33 +242,16 @@ const CreateUser = (props) => {
 								<Typography>Registration No </Typography>
 								<TextField variant="outlined" required fullWidth name="regNo" type="text" value={formData.regNo} onChange={handleChange} />
 
-								<Typography>Department </Typography>
-								<Select variant="outlined" value={formData.department} required fullWidth name="department" type="text" onChange={handleChange}>
-									<MenuItem value={"computer_science"}>Computer Science</MenuItem>
-									<MenuItem value={"physics"}>Physics</MenuItem>
-									<MenuItem value={"zoology"}>Zoology</MenuItem>
-									<MenuItem value={"mathematics"}>Mathematics</MenuItem>
-									<MenuItem value={"statistics"}>Statistics</MenuItem>
-									<MenuItem value={"fisheries"}>Fisheries</MenuItem>
-									<MenuItem value={"biology"}>Biology</MenuItem>
-								</Select>
+								{departmentList()}
 
 								<Typography>Address </Typography>
 								<TextField variant="outlined" required fullWidth name="address" type="text" value={formData.address} onChange={handleChange} />
 
-								<Typography>Email </Typography>
-								<TextField variant="outlined" required fullWidth name="email" type="email" value={formData.email} onChange={handleChange} />
-
-								<Typography>Phone </Typography>
-								<TextField variant="outlined" required fullWidth name="phone" type="number" value={formData.phone} onChange={handlePhoneChange} inputProps={{ maxLength: 10 }} />
+								{emailPhoneFields()}
 							</Box>
 
 							<Box className="create_new_form_right">
-								<Typography>Name of the Establishment </Typography>
-								<TextField variant="outlined" required fullWidth name="estName" type="text" value={formData.estName} onChange={handleChange} />
-
-								<Typography>Address of the Establishment </Typography>
-								<TextField variant="outlined" required fullWidth name="estAddress" type="text" value={formData.estAddress} onChange={handleChange} />
+								{establishmentFields()}
 
 								<Box className="training_period" sx={{ display: "flex", flexDirection: "row" }}>
 									<Box className="training_period_from">
@@ -247,7 +271,6 @@ const CreateUser = (props) => {
 								</Box>
 
 								{passwordFields()}
-
 							</Box>
 						</Box>
 					</form>
@@ -266,22 +289,12 @@ const CreateUser = (props) => {
 								<Typography>Full Name </Typography>
 								<TextField variant="outlined" required fullWidth name="fName" autoFocus type="text" value={formData.fName} onChange={handleFullNameChange} />
 
-								<Typography>Email </Typography>
-								<TextField variant="outlined" required fullWidth name="email" type="email" value={formData.email} onChange={handleChange} />
+								{emailPhoneFields()}
 
-								<Typography>Phone </Typography>
-								<TextField variant="outlined" required fullWidth name="phone" type="number" value={formData.phone} onChange={handlePhoneChange} inputProps={{ maxLength: 10 }} />
-
-								<Typography>Name of the Establishment </Typography>
-								<TextField variant="outlined" required fullWidth name="estName" type="text" value={formData.estName} onChange={handleChange} />
-
-								<Typography>Address of the Establishment </Typography>
-								<TextField variant="outlined" required fullWidth name="estAddress" type="text" value={formData.estAddress} onChange={handleChange} />
+								{establishmentFields()}
 							</Box>
 
-							<Box className="create_new_form_right">
-								{passwordFields()}
-							</Box>
+							<Box className="create_new_form_right">{passwordFields()}</Box>
 						</Box>
 					</form>
 				</Container>
@@ -299,27 +312,12 @@ const CreateUser = (props) => {
 								<Typography>Full Name </Typography>
 								<TextField variant="outlined" required fullWidth name="fName" autoFocus type="text" value={formData.fName} onChange={handleFullNameChange} />
 
-								<Typography>Department </Typography>
-								<Select variant="outlined" value={formData.department} required fullWidth name="department" type="text" onChange={handleChange}>
-									<MenuItem value={"computer_science"}>Computer Science</MenuItem>
-									<MenuItem value={"physics"}>Physics</MenuItem>
-									<MenuItem value={"zoology"}>Zoology</MenuItem>
-									<MenuItem value={"mathematics"}>Mathematics</MenuItem>
-									<MenuItem value={"statistics"}>Statistics</MenuItem>
-									<MenuItem value={"fisheries"}>Fisheries</MenuItem>
-									<MenuItem value={"biology"}>Biology</MenuItem>
-								</Select>
+								{departmentList()}
 
-								<Typography>Email </Typography>
-								<TextField variant="outlined" required fullWidth name="email" type="email" value={formData.email} onChange={handleChange} />
-
-								<Typography>Phone </Typography>
-								<TextField variant="outlined" required fullWidth name="phone" type="number" value={formData.phone} onChange={handlePhoneChange} inputProps={{ maxLength: 10 }} />
+								{emailPhoneFields()}
 							</Box>
 
-							<Box className="create_new_form_right">
-								{passwordFields()}
-							</Box>
+							<Box className="create_new_form_right">{passwordFields()}</Box>
 						</Box>
 					</form>
 				</Container>
