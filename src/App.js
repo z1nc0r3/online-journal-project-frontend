@@ -14,11 +14,7 @@ function App() {
 						<Routes>
 							<Route path='/' element={<Navigate to ="/login" />}></Route>
 							<Route path='/login' element={<Login />}></Route>
-							{/* 
-							<Route path='/admin' element={<Navigate to ="/admin/dashboard" />}></Route>
-							<Route path='/admin/dashboard' element={<AdminDashboard />}></Route> */}
-
-							{/* <Route path='/' element={<Layout layout="login"/>}></Route> */}
+							
 							<Route path='/admin' element={<Navigate to="/admin/trainee_list"/>}></Route>
 							<Route path='/admin/dashboard' element={<Navigate to="/admin/trainee_list"/>}></Route>
 
