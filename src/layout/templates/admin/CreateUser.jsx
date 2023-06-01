@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Box, Container, Button, Typography, TextField, Select, MenuItem } from "@mui/material";
 import Alert from "@mui/material/Alert";
@@ -24,6 +24,14 @@ const CreateUser = (props) => {
 
 	const [passwordError, setPasswordError] = useState("");
 
+	useEffect(() => {
+		handlePasswordChange();
+	}, [formData.password]);
+
+	useEffect(() => {
+		handleConfirmPasswordChange();
+	}, [formData.confirm_password]);
+
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((prevFormData) => ({
@@ -35,7 +43,7 @@ const CreateUser = (props) => {
 	// verify full name
 	const handleFullNameChange = (e) => {
 		const { value } = e.target;
-		const fullNameRegex = /^[A-Za-z]+$/;
+		const fullNameRegex = /^[A-Za-z\s.]*$/;
 
 		if (value.match(fullNameRegex)) {
 			setFormData((prevFormData) => ({
@@ -101,6 +109,8 @@ const CreateUser = (props) => {
 			return;
 		}
 
+		setPasswordError("");
+
 		let url;
 		switch (userType) {
 			case "trainee":
@@ -119,11 +129,9 @@ const CreateUser = (props) => {
 		axios
 			.post(url, formData)
 			.then((response) => {
-				console.log(response.data);
 				alert("Form submitted successfully!");
 			})
 			.catch((error) => {
-				console.error(error);
 				alert("Error submitting the form. Please try again.");
 			});
 	};
@@ -150,7 +158,6 @@ const CreateUser = (props) => {
 					fullWidth
 					name="password"
 					type="password"
-					value={formData.password}
 					onChange={(e) => {
 						setFormData({ ...formData, password: e.target.value });
 						handlePasswordChange();
@@ -170,7 +177,6 @@ const CreateUser = (props) => {
 					fullWidth
 					name="confirm_password"
 					type="password"
-					value={formData.confirm_password}
 					onChange={(e) => {
 						setFormData({ ...formData, confirm_password: e.target.value });
 						handleConfirmPasswordChange();
