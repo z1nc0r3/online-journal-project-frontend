@@ -130,3 +130,40 @@
 .training_period_from {
     padding-right: 10px;
 }
+
+
+/* Create new user */
+
+.student_box_heading{
+    display: flex;
+    color: #ffffff;
+    align-content: start;
+    font-size: 20px;
+    padding-left: 15px;
+}
+
+.student_box_description{
+    padding: 20px;
+}
+
+.student_box_description_text{
+    color: black;
+    font-size: large    ;
+}
+
+.student_month_accordion{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    font-size: 30px;
+
+}
+
+.student_week{
+    background-color: #379eff4d;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+

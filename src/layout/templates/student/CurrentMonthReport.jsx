@@ -16,36 +16,24 @@ function CurrentMonthReport() {
     return (
 		<Container component="main" className="list_container" maxWidth={false}>
 			<CssBaseline />
-
-			<Box className="list_box">
-				<Accordion sx={{ width: "100%", backgroundColor: "#dfefff", boxShadow: "none" }}>
-					<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
-						<Link to="/admin/trainee_list/edit/:id"><ModeEditIcon sx={{ color: "#1c93ff", marginRight: "1rem" }} /></Link>
-						<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Student Name</Typography>
-						<Typography sx={{ color: "text.secondary", fontSize: "18px" }}>Department</Typography>
+			<Box>
+				<div>
+				<Accordion>
+					<AccordionSummary className="student_month_accordion"
+						expandIcon={<ExpandMoreIcon />}
+						aria-controls="panel1a-content"
+						id="panel1a-header"
+					>
+						<Typography>Month 01</Typography>
 					</AccordionSummary>
 					<AccordionDetails>
-						<Box className="trainee_assign_form" component="form">
-							<div className="assign_supervisor_row">
-								<Typography sx={{width: "35%"}}>
-									Assigned Supervisor :
-								</Typography>
-								<TextField label="Supervisor name" className="assigned_supervisor" variant="outlined" fullWidth id="supervisor" name="supervisor" required sx={{borderRadius: "1.5rem"}}/>
-							</div>
-
-							<div className="assign_evaluator_row">
-								<Typography sx={{width: "35%"}}>
-									Assigned Evaluator :
-								</Typography>
-								<TextField label="Evaluator name" variant="outlined" fullWidth id="evaluator" name="evaluator" required/>
-							</div>
-
-							<Button variant="contained" type="submit" className="assign_save">
-								Save
-							</Button>
-						</Box>
+						<Box className="student_week"><Typography>Week 01</Typography></Box>
+						<Box className="student_week"><Typography>Week 02</Typography></Box>
+						<Box className="student_week"><Typography>Week 03</Typography></Box>
+						<Box className="student_week"><Typography>Week 04</Typography></Box>
 					</AccordionDetails>
 				</Accordion>
+				</div>
 			</Box>
 		</Container>
 	);

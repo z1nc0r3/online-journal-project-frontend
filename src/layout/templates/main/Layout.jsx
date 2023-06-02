@@ -32,7 +32,12 @@ const titleMap = {
 	admin_evaluator_list: "Evaluator List",
 	admin_create_user: "Create New User",
 	admin_trainee_edit: "Update Trainee Detail",
-	admin_evaluator_edit: "Update Evaluator Detail"
+	admin_evaluator_edit: "Update Evaluator Detail",
+	student_dashboard: "Week no :",
+	student_past_reports: "Past Report",
+	student_user_instruction: "Instruction to maintain the Diary",
+	student_user_edit_data: "Edit User Data",
+	student_current_month_report: "Current Month Report",
 };
 
 const Layout = (props) => {
