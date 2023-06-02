@@ -15,7 +15,6 @@ function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [login_error, setError] = useState("");
-	const [role, setRole] = useState("");
 
 	// check for previous login and redirect accordingly
 	const checkLoggedIn = () => {
@@ -50,7 +49,6 @@ function Login() {
 
 		axios.post("http://127.0.0.1:8000/api/login/check", { email, password }).then((response) => {
 			const data = response.data;
-			console.log(data);
 
 			if (data.login_error) {
 				setError(data.login_error);
