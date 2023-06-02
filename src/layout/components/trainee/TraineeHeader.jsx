@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
-export default function StudentNavbar() {
+export default function TraineeNavbar() {
 	return (
 		<Box sx={{ flexGrow: 1, marginBottom: 4 }}>
 			<AppBar position="static">

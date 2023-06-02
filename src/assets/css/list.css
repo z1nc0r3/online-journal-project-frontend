@@ -135,7 +135,7 @@
 
 /* Create new user */
 
-.student_box_heading{
+.trainee_box_heading{
     display: flex;
     color: #ffffff;
     align-content: start;
@@ -143,16 +143,16 @@
     padding-left: 15px;
 }
 
-.student_box_description{
+.trainee_box_description{
     padding: 20px;
 }
 
-.student_box_description_text{
+.trainee_box_description_text{
     color: black;
     font-size: large    ;
 }
 
-.student_month_accordion{
+.trainee_month_accordion{
     display: flex;
     justify-content: center;
     margin-bottom: 15px;
@@ -161,7 +161,7 @@
 
 }
 
-.student_week{
+.trainee_week{
     background-color: #379eff4d;
     padding: 10px;
     border-radius: 10px;

@@ -11,7 +11,7 @@ import "../../../assets/css/list.css";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { Link } from "react-router-dom";
 
-function UserInstruction() {
+function UserEditData() {
 
     return (
 		<Container component="main" className="list_container" maxWidth={false}>
@@ -21,7 +21,7 @@ function UserInstruction() {
 				<Accordion sx={{ width: "100%", backgroundColor: "#dfefff", boxShadow: "none" }}>
 					<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
 						<Link to="/admin/trainee_list/edit/:id"><ModeEditIcon sx={{ color: "#1c93ff", marginRight: "1rem" }} /></Link>
-						<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Student Name</Typography>
+						<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Trainee Name</Typography>
 						<Typography sx={{ color: "text.secondary", fontSize: "18px" }}>Department</Typography>
 					</AccordionSummary>
 					<AccordionDetails>
@@ -52,4 +52,4 @@ function UserInstruction() {
 
 }
 
-export default UserInstruction;
+export default UserEditData;

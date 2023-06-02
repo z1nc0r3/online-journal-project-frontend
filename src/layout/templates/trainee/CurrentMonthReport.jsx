@@ -19,7 +19,7 @@ function CurrentMonthReport() {
 			<Box>
 				<div>
 				<Accordion>
-					<AccordionSummary className="student_month_accordion"
+					<AccordionSummary className="trainee_month_accordion"
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="panel1a-content"
 						id="panel1a-header"
@@ -27,10 +27,10 @@ function CurrentMonthReport() {
 						<Typography>Month 01</Typography>
 					</AccordionSummary>
 					<AccordionDetails>
-						<Box className="student_week"><Typography>Week 01</Typography></Box>
-						<Box className="student_week"><Typography>Week 02</Typography></Box>
-						<Box className="student_week"><Typography>Week 03</Typography></Box>
-						<Box className="student_week"><Typography>Week 04</Typography></Box>
+						<Box className="trainee_week"><Typography>Week 01</Typography></Box>
+						<Box className="trainee_week"><Typography>Week 02</Typography></Box>
+						<Box className="trainee_week"><Typography>Week 03</Typography></Box>
+						<Box className="trainee_week"><Typography>Week 04</Typography></Box>
 					</AccordionDetails>
 				</Accordion>
 				</div>

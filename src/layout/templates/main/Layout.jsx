@@ -8,17 +8,13 @@ import AdminSupervisorList from "../admin/SupervisorList";
 import AdminEvaluatorList from "../admin/EvaluatorList";
 import AdminEvaluatorListEdit from "../admin/EvaluatorListEdit";
 
-import StudentHeader from "../../components/student/StudentHeader";
-import StudentDashboard from "../student/dashboard";
-import StudentLeftWidget from "../../components/student/LeftWidget";
-import StudentPastReports from "../student/PastReports";
-import StudentUserInstruction from "../student/UserInstruction";
-import StudentUserEditInstruction from "../student/UserEditData";
-import StudentCurrentMonthReport from "../student/CurrentMonthReport";
-
-
-
-
+import TraineeHeader from "../../components/trainee/TraineeHeader";
+import TraineeDashboard from "../trainee/dashboard";
+import TraineeLeftWidget from "../../components/trainee/LeftWidget";
+import TraineePastReports from "../trainee/PastReports";
+import TraineeUserInstruction from "../trainee/UserInstruction";
+import TraineeUserEditInstruction from "../trainee/UserEditData";
+import TraineeCurrentMonthReport from "../trainee/CurrentMonthReport";
 
 import CreateUser from "../admin/CreateUser";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -33,11 +29,12 @@ const titleMap = {
 	admin_create_user: "Create New User",
 	admin_trainee_edit: "Update Trainee Detail",
 	admin_evaluator_edit: "Update Evaluator Detail",
-	student_dashboard: "Week no :",
-	student_past_reports: "Past Report",
-	student_user_instruction: "Instruction to maintain the Diary",
-	student_user_edit_data: "Edit User Data",
-	student_current_month_report: "Current Month Report",
+
+	trainee_dashboard: "Week no :",
+	trainee_past_reports: "Past Report",
+	trainee_user_instruction: "Instruction",
+	trainee_user_edit_data: "Edit User Data",
+	trainee_current_month_report: "Current Month Report",
 };
 
 const Layout = (props) => {
@@ -59,16 +56,16 @@ const Layout = (props) => {
 				return <AdminTraineeListEdit />;
 			case "admin_evaluator_edit":
 				return <AdminEvaluatorListEdit />;
-			case "student_dashboard":
-				return <StudentDashboard />;
-			case "student_past_reports":
-				return <StudentPastReports />;
-			case "student_user_instruction":
-				return <StudentUserInstruction />;
-			case "student_user_edit_data":
-				return <StudentUserEditInstruction />;
-			case "student_current_month_report":
-				return <StudentCurrentMonthReport />;
+			case "trainee_dashboard":
+				return <TraineeDashboard />;
+			case "trainee_past_reports":
+				return <TraineePastReports />;
+			case "trainee_user_instruction":
+				return <TraineeUserInstruction />;
+			case "trainee_user_edit_data":
+				return <TraineeUserEditInstruction />;
+			case "trainee_current_month_report":
+				return <TraineeCurrentMonthReport />;
 			default:
 				return null; //to-do: add 404 page
 		}
@@ -88,16 +85,16 @@ const Layout = (props) => {
 				return <AdminLeftWidget />;
 			case "admin_evaluator_edit":
 				return <AdminLeftWidget />;
-			case "student_dashboard":
-				return <StudentLeftWidget />;
-			case "student_past_reports":
-				return <StudentLeftWidget />;
-			case "student_user_instruction":
-				return <StudentLeftWidget />;
-			case "student_user_edit_data":
-				return <StudentLeftWidget />;
-			case "student_current_month_report":
-				return <StudentLeftWidget />;
+			case "trainee_dashboard":
+				return <TraineeLeftWidget />;
+			case "trainee_past_reports":
+				return <TraineeLeftWidget />;
+			case "trainee_user_instruction":
+				return <TraineeLeftWidget />;
+			case "trainee_user_edit_data":
+				return <TraineeLeftWidget />;
+			case "trainee_current_month_report":
+				return <TraineeLeftWidget />;
 			default:
 				return null; //to-do: add 404 page
 		}
@@ -117,16 +114,16 @@ const Layout = (props) => {
 				return <AdminHeader />;
 			case "admin_evaluator_edit":
 				return <AdminHeader />;
-			case "student_dashboard":
-				return <StudentHeader />;
-			case "student_past_reports":
-				return <StudentHeader />;
-			case "student_user_instruction":
-				return <StudentHeader />;
-			case "student_user_edit_data":
-				return <StudentHeader />;
-			case "student_current_month_report":
-				return <StudentHeader />;
+			case "trainee_dashboard":
+				return <TraineeHeader />;
+			case "trainee_past_reports":
+				return <TraineeHeader />;
+			case "trainee_user_instruction":
+				return <TraineeHeader />;
+			case "trainee_user_edit_data":
+				return <TraineeHeader />;
+			case "trainee_current_month_report":
+				return <TraineeHeader />;
 			default:
 				return null; //to-do: add 404 page
 		}

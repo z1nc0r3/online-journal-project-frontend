@@ -33,7 +33,7 @@ function EvaluatorList() {
 					<AccordionDetails>
 						<Box className="evaluator_assign_box">
 							<Typography>Assigned For :</Typography>
-							<Typography>Student Name</Typography>
+							<Typography>Trainee Name</Typography>
 						</Box>
 					</AccordionDetails>
 				</Accordion>

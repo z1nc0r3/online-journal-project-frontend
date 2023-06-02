@@ -9,11 +9,11 @@ function LeftWidget() {
 	const [activeButton, setActiveButton] = useState(0);
 
 	const buttons = [
-		{ label: "DashBoard", path: "/student/dashboard" },
-		{ label: "Past Reports", path: "/student/past_reports" },
-		{ label: "User Instructions", path: "/student/user_instruction" },
-		{ label: "Edit User Data", path: "/student/user_edit_data" },
-		{ label: "Current Month Report", path: "/student/current_month_report" },
+		{ label: "DashBoard", path: "/trainee/dashboard" },
+		{ label: "Past Reports", path: "/trainee/past_reports" },
+		{ label: "User Instructions", path: "/trainee/user_instruction" },
+		{ label: "Edit User Data", path: "/trainee/user_edit_data" },
+		{ label: "Current Month Report", path: "/trainee/current_month_report" },
 	];
 
 	return (
