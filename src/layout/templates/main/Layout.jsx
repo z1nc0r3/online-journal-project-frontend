@@ -9,7 +9,7 @@ import AdminEvaluatorList from "../admin/EvaluatorList";
 import AdminEvaluatorListEdit from "../admin/EvaluatorListEdit";
 
 import TraineeHeader from "../../components/trainee/TraineeHeader";
-import TraineeDashboard from "../trainee/dashboard";
+import TraineeDashboard from "../trainee/Dashboard";
 import TraineeLeftWidget from "../../components/trainee/LeftWidget";
 import TraineePastReports from "../trainee/PastReports";
 import TraineeUserInstruction from "../trainee/UserInstruction";

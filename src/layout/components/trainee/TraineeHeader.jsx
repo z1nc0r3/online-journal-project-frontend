@@ -13,8 +13,7 @@ export default function TraineeNavbar() {
 			<AppBar position="static">
 				<Toolbar>
 					<Typography variant="h5" component="div" sx={{ flexGrow: 1, textAlign: "left", fontWeight: "light" }}>
-						name of the user <br/>
-						department
+						Name of the User - Department
 					</Typography>
 					<Button className="logout_button">Logout</Button>
 				</Toolbar>

@@ -18,6 +18,8 @@ function App() {
 							<Route path='/admin' element={<Navigate to="/admin/trainee_list"/>}></Route>
 							<Route path='/admin/dashboard' element={<Navigate to="/admin/trainee_list"/>}></Route>
 
+							<Route path='/trainee' element={<Navigate to="/trainee/dashboard"/>}></Route>
+
 							<Route path='/admin/trainee_list' element={<Layout layout="admin_trainee_list"/>}></Route>
 							<Route path='/admin/trainee_list/edit/:id' element={<Layout layout="admin_trainee_edit"/>}></Route>
 							<Route path='/admin/create_user/trainee' element={<Layout layout="admin_create_user" user="trainee"/>}></Route>
