@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Container, Button } from "@mui/material";
 import { Navigate } from "react-router-dom";
+import axios from "axios";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
+import Alert from "@mui/material/Alert";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
@@ -12,51 +14,52 @@ import "../../../assets/css/login.css";
 function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [error, setError] = useState("");
+	const [login_error, setError] = useState("");
 	const [role, setRole] = useState("");
+
+	useEffect(() => {
+		loginError();
+	}, [login_error]);
+
+	const loginError = () => {
+		return (
+			login_error && (
+				<Alert severity="error" sx={{ margin: "0 0 15px 0" }}>
+					{login_error}
+				</Alert>
+			)
+		);
+	};
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
-		const request = new Request("https://cors-anywhere.herokuapp.com/https://gist.githubusercontent.com/z1nc0r3/019e0500785237de404fc46586e914d7/raw/bc323469c9af12bd3c19ea0ae56fa2e8b6467720/credentials.json", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				"Access-Control-Allow-Headers": "Origin, X-Requested-With",
-			},
-			body: JSON.stringify({
-				email,
-				password,
-			}),
-		});
-
-		fetch(request)
-			.then((response) => response.json())
-			.then((data) => {
-				if (data.error) {
-					setError(data.error);
-				} else {
-					setRole(data.role);
-					// Redirect to the appropriate page based on the role
-					switch (role) {
-						case "Trainee":
-							<Navigate to="/trainee" />;
-							break;
-						case "Supervisor":
-							<Navigate to="/supervisor" />;
-							break;
-						case "Evaluator":
-							<Navigate to="/evaluator" />;
-							break;
-						case "Super Admin":
-							<Navigate to="/admin" />;
-							break;
-						default:
-							<Navigate to="/login" />;
-							break;
-					}
+		axios.post("http://127.0.0.1:8000/api/login/check", { email: email, password: password }).then((data) => {
+			console.log(data.data);
+			if (data.data.login_error) {
+				setError(data.data.login_error);
+			} else {
+				setRole(data.data.role);
+				localStorage.setItem("role", data.data.role);
+				localStorage.setItem("authorized", true);
+				switch (localStorage.getItem("role")) {
+					case "trainee":
+						window.location.href = "/trainee";
+						break;
+					case "supervisor":
+						window.location.href = "/supervisor";
+						break;
+					case "evaluator":
+						window.location.href = "/evaluator";
+						break;
+					case "admin":
+						window.location.href = "/admin";
+						break;
+					default:
+						break;
 				}
-			});
+			}
+		});
 	};
 
 	return (
@@ -74,6 +77,7 @@ function Login() {
 						margin="normal"
 						required
 						fullWidth
+						type="email"
 						label="Email"
 						name="email"
 						autoComplete="email"
@@ -81,7 +85,6 @@ function Login() {
 						value={email}
 						onChange={(event) => setEmail(event.target.value)}
 					/>
-
 					<TextField
 						className="password"
 						variant="outlined"
@@ -95,7 +98,6 @@ function Login() {
 						value={password}
 						onChange={(event) => setPassword(event.target.value)}
 					/>
-
 					<Container className="login_helper_container" sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "1rem", marginBottom: "1rem" }}>
 						<FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
 						<Link href="#" variant="body2" sx={{ color: "#0057ff", textDecoration: "none" }}>
@@ -103,12 +105,13 @@ function Login() {
 						</Link>
 					</Container>
 
+					{loginError()}
+
 					<Button variant="contained" type="submit" className="loginButton" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "18px" }}>
 						Login
 					</Button>
 				</Box>
 			</form>
-			{error && <p>{error}</p>}
 		</Container>
 	);
 }
