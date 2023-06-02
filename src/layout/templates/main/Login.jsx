@@ -17,6 +17,20 @@ function Login() {
 	const [login_error, setError] = useState("");
 	const [role, setRole] = useState("");
 
+	// check for previous login and redirect accordingly
+	const checkLoggedIn = () => {
+		const role = localStorage.getItem("role");
+		const authorized = localStorage.getItem("authorized");
+
+		if (role && authorized) {
+			window.location.href = `/${role}`;
+		}
+	};
+
+	useEffect(() => {
+		checkLoggedIn();
+	}, []);
+
 	useEffect(() => {
 		loginError();
 	}, [login_error]);
@@ -34,30 +48,17 @@ function Login() {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
-		axios.post("http://127.0.0.1:8000/api/login/check", { email: email, password: password }).then((data) => {
-			console.log(data.data);
-			if (data.data.login_error) {
-				setError(data.data.login_error);
+		axios.post("http://127.0.0.1:8000/api/login/check", { email, password }).then((response) => {
+			const data = response.data;
+			console.log(data);
+
+			if (data.login_error) {
+				setError(data.login_error);
 			} else {
-				setRole(data.data.role);
-				localStorage.setItem("role", data.data.role);
+				const { role } = data;
+				localStorage.setItem("role", role);
 				localStorage.setItem("authorized", true);
-				switch (localStorage.getItem("role")) {
-					case "trainee":
-						window.location.href = "/trainee";
-						break;
-					case "supervisor":
-						window.location.href = "/supervisor";
-						break;
-					case "evaluator":
-						window.location.href = "/evaluator";
-						break;
-					case "admin":
-						window.location.href = "/admin";
-						break;
-					default:
-						break;
-				}
+				window.location.href = `/${role}`;
 			}
 		});
 	};
