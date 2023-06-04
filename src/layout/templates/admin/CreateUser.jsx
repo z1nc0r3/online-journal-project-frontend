@@ -106,7 +106,6 @@ const CreateUser = (props) => {
 
 	const handleSubmit = (e, userType) => {
 		e.preventDefault();
-		console.log(formData);
 
 		if (!handlePasswordChange()) {
 			setPasswordError("Password must be in standard format.");
