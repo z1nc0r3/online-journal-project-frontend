@@ -3,9 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+import LogoutButton from "../../templates/main/Logout";
 
 export default function AdminNavbar() {
 	return (
@@ -15,7 +13,7 @@ export default function AdminNavbar() {
 					<Typography variant="h5" component="div" sx={{ flexGrow: 1, textAlign: "left", fontWeight: "light" }}>
 						Administrator
 					</Typography>
-					<Button className="logout_button">Logout</Button>
+					<LogoutButton />
 				</Toolbar>
 			</AppBar>
 		</Box>

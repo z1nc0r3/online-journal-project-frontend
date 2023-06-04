@@ -1,5 +1,10 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { Container, Grid, Typography, CssBaseline } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+import UserVerification from "../main/UserVerification";
+
 import AdminHeader from "../../components/admin/AdminHeader";
 import AdminLeftWidget from "../../components/admin/LeftWidget";
 import AdminTraineeList from "../admin/TraineeList";
@@ -39,8 +44,19 @@ const titleMap = {
 
 const Layout = (props) => {
 	const { layout } = props;
-
+	const [loading, setLoading] = useState(true);
+	const navigate = useNavigate();
 	const getTitle = () => titleMap[layout];
+
+	useEffect(() => {
+		UserVerification().then((authorized) => {
+			if (!authorized) {
+				navigate("/login");
+			} else {
+				setLoading(false);
+			}
+		});
+	}, [navigate]);
 
 	const getView = () => {
 		switch (layout) {
@@ -129,6 +145,10 @@ const Layout = (props) => {
 		}
 	};
 
+	if (loading) {
+		return <div>Loading...</div>; // or you can render a loader component
+	}
+
 	return (
 		<Container component="main" className="dashboard_container" maxWidth={false} disableGutters={true} sx={{ height: "100%" }}>
 			<CssBaseline />
@@ -148,7 +168,6 @@ const Layout = (props) => {
 			<Grid container className="list_box_main_grid">
 				<Grid item lg={3}>
 					{getLeftWidget()}
-					{/* <AdminLeftWidget /> */}
 				</Grid>
 				<Grid item lg={6}>
 					{getView()}
