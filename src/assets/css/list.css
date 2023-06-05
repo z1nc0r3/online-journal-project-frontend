@@ -46,7 +46,7 @@
 .trainee_assign_form .assign_save {
     margin: 0.5rem 0 0 0;
     width: 100%;
-    background-color: #b9ddff;
+    background-color: #93cbff;
     color: #414141;
     font-size: 16px;
     height: 3rem;
@@ -57,6 +57,11 @@
 .trainee_assign_form .assign_save:hover {
     background-color: #2a95ff;
     color: white;
+    box-shadow: none;
+}
+
+.accordion_item:before {
+    display: none;
 }
 
 /* Supervisor List, Evaluator List */

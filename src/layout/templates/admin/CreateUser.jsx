@@ -40,6 +40,14 @@ const CreateUser = (props) => {
 		}));
 	};
 
+	const handleBlur = (event) => {
+		const { name, value } = event.target;
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			[name]: value,
+		}));
+	};
+
 	// verify full name
 	const handleFullNameChange = (e) => {
 		const { value } = e.target;
@@ -132,7 +140,7 @@ const CreateUser = (props) => {
 				alert("Form submitted successfully!");
 			})
 			.catch((error) => {
-				alert("Error submitting the form. Please try again.");
+				alert("Error submitting the form. Please try again." + error);
 			});
 	};
 
@@ -162,6 +170,7 @@ const CreateUser = (props) => {
 						setFormData({ ...formData, password: e.target.value });
 						handlePasswordChange();
 					}}
+					onBlur={handleBlur}
 				/>
 
 				{passwordError && (
@@ -181,6 +190,7 @@ const CreateUser = (props) => {
 						setFormData({ ...formData, confirm_password: e.target.value });
 						handleConfirmPasswordChange();
 					}}
+					onBlur={handleBlur}
 				/>
 
 				<Button variant="contained" type="submit" className="register_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
@@ -195,13 +205,13 @@ const CreateUser = (props) => {
 			<>
 				<Typography>Department </Typography>
 				<Select variant="outlined" value={formData.department} required fullWidth name="department" type="text" onChange={handleChange}>
-					<MenuItem value={"computer_science"}>Computer Science</MenuItem>
-					<MenuItem value={"physics"}>Physics</MenuItem>
-					<MenuItem value={"zoology"}>Zoology</MenuItem>
-					<MenuItem value={"mathematics"}>Mathematics</MenuItem>
-					<MenuItem value={"statistics"}>Statistics</MenuItem>
-					<MenuItem value={"fisheries"}>Fisheries</MenuItem>
-					<MenuItem value={"biology"}>Biology</MenuItem>
+					<MenuItem value={"Computer Science"}>Computer Science</MenuItem>
+					<MenuItem value={"Physics"}>Physics</MenuItem>
+					<MenuItem value={"Zoology"}>Zoology</MenuItem>
+					<MenuItem value={"Mathematics"}>Mathematics</MenuItem>
+					<MenuItem value={"Statistics"}>Statistics</MenuItem>
+					<MenuItem value={"Fisheries"}>Fisheries</MenuItem>
+					<MenuItem value={"Biology"}>Biology</MenuItem>
 				</Select>
 			</>
 		);
