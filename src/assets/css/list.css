@@ -74,6 +74,14 @@
     border-radius: 1.5rem;
 }
 
+.comment_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    background-color: white;
+    border-radius: 1.5rem;
+}
+
 .supervisor_assign_box p, .evaluator_assign_box p {
     margin: 1rem 2rem;
     font-size: 18px;

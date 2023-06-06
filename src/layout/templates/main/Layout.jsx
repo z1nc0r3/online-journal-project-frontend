@@ -14,12 +14,18 @@ import AdminEvaluatorList from "../admin/EvaluatorList";
 import AdminEvaluatorListEdit from "../admin/EvaluatorListEdit";
 
 import TraineeHeader from "../../components/trainee/TraineeHeader";
-import TraineeDashboard from "../trainee/Dashboard";
+import TraineeDashboard from "../trainee/dashboard";
 import TraineeLeftWidget from "../../components/trainee/LeftWidget";
 import TraineePastReports from "../trainee/PastReports";
 import TraineeUserInstruction from "../trainee/UserInstruction";
 import TraineeUserEditInstruction from "../trainee/UserEditData";
 import TraineeCurrentMonthReport from "../trainee/CurrentMonthReport";
+
+import SupervisorHeader from "../../components/supervisor/SupervisorHeader";
+import SupervisorDashboard from "../supervisor/dashboard";
+import SupervisorLeftWidget from "../../components/supervisor/LeftWidget";
+import SupervisorTraineeList from "../supervisor/traineeList";
+import SupervisorUserEditData from "../supervisor/UserEditData";
 
 import CreateUser from "../admin/CreateUser";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -40,6 +46,10 @@ const titleMap = {
 	trainee_user_instruction: "Instruction",
 	trainee_user_edit_data: "Edit User Data",
 	trainee_current_month_report: "Current Month Report",
+	
+	supervisor_dashboard: "Report for Reveiw",
+	supervisor_trainee_list: "Trainee List",
+	supervisor_user_edit_data: "Edit User Data",
 };
 
 const Layout = (props) => {
@@ -72,6 +82,7 @@ const Layout = (props) => {
 				return <AdminTraineeListEdit />;
 			case "admin_evaluator_edit":
 				return <AdminEvaluatorListEdit />;
+
 			case "trainee_dashboard":
 				return <TraineeDashboard />;
 			case "trainee_past_reports":
@@ -82,6 +93,13 @@ const Layout = (props) => {
 				return <TraineeUserEditInstruction />;
 			case "trainee_current_month_report":
 				return <TraineeCurrentMonthReport />;
+			
+			case "supervisor_dashboard":
+				return <SupervisorDashboard/>;
+			case "supervisor_trainee_list":
+				return <SupervisorTraineeList />;
+			case "supervisor_user_edit_data":
+				return <SupervisorUserEditData />;
 			default:
 				return null; //to-do: add 404 page
 		}
@@ -101,6 +119,7 @@ const Layout = (props) => {
 				return <AdminLeftWidget />;
 			case "admin_evaluator_edit":
 				return <AdminLeftWidget />;
+
 			case "trainee_dashboard":
 				return <TraineeLeftWidget />;
 			case "trainee_past_reports":
@@ -111,6 +130,13 @@ const Layout = (props) => {
 				return <TraineeLeftWidget />;
 			case "trainee_current_month_report":
 				return <TraineeLeftWidget />;
+			
+			case "supervisor_dashboard":
+				return <SupervisorLeftWidget/>;
+			case "supervisor_trainee_list":
+				return <SupervisorLeftWidget/>;
+			case "supervisor_user_edit_data":
+				return <SupervisorLeftWidget />;
 			default:
 				return null; //to-do: add 404 page
 		}
@@ -130,6 +156,7 @@ const Layout = (props) => {
 				return <AdminHeader />;
 			case "admin_evaluator_edit":
 				return <AdminHeader />;
+
 			case "trainee_dashboard":
 				return <TraineeHeader />;
 			case "trainee_past_reports":
@@ -140,6 +167,13 @@ const Layout = (props) => {
 				return <TraineeHeader />;
 			case "trainee_current_month_report":
 				return <TraineeHeader />;
+
+			case "supervisor_dashboard":
+				return <SupervisorHeader/>;
+			case "supervisor_trainee_list":
+				return <SupervisorHeader/>;
+			case "supervisor_user_edit_data":
+				return <SupervisorHeader />;
 			default:
 				return null; //to-do: add 404 page
 		}
