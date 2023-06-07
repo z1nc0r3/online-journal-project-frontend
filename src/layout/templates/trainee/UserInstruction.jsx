@@ -10,43 +10,31 @@ import Typography from "@mui/material/Typography";
 import "../../../assets/css/list.css";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { Link } from "react-router-dom";
+import { AddBoxOutlined } from "@mui/icons-material";
 
 function UserInstruction() {
 
     return (
 		<Container component="main" className="list_container" maxWidth={false}>
-			<CssBaseline />
-
-			<Box className="list_box">
-				<Accordion sx={{ width: "100%", backgroundColor: "#dfefff", boxShadow: "none" }}>
-					<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
-						<Link to="/admin/trainee_list/edit/:id"><ModeEditIcon sx={{ color: "#1c93ff", marginRight: "1rem" }} /></Link>
-						<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Trainee Name</Typography>
-						<Typography sx={{ color: "text.secondary", fontSize: "18px" }}>Department</Typography>
-					</AccordionSummary>
-					<AccordionDetails>
-						<Box className="trainee_assign_form" component="form">
-							<div className="assign_supervisor_row">
-								<Typography sx={{width: "35%"}}>
-									Assigned Supervisor :
-								</Typography>
-								<TextField label="Supervisor name" className="assigned_supervisor" variant="outlined" fullWidth id="supervisor" name="supervisor" required sx={{borderRadius: "1.5rem"}}/>
-							</div>
-
-							<div className="assign_evaluator_row">
-								<Typography sx={{width: "35%"}}>
-									Assigned Evaluator :
-								</Typography>
-								<TextField label="Evaluator name" variant="outlined" fullWidth id="evaluator" name="evaluator" required/>
-							</div>
-
-							<Button variant="contained" type="submit" className="assign_save">
-								Save
-							</Button>
-						</Box>
-					</AccordionDetails>
-				</Accordion>
-			</Box>
+			<Container className="trainee_box_description_text">
+				<Container className="trainee_instruction_box">
+					<Box>
+						<Typography sx={{textAlign: 'left', paddingBottom:'25px'}}>1. As credit will be given for the maintenance of the weekly diary at your Intern and Final Assessment you are advised to maintain your weekly diary neat and tidy and to keep it safe till the end of your training period.</Typography>
+					</Box>
+					<Box>
+						<Typography sx={{textAlign: 'left', paddingBottom:'25px'}}>2. It is important that weekly entries should be made at the end of each working week. The weekly entries should contain a brief description of the work done. All entries should be in ink.</Typography>
+					</Box>
+					<Box>
+						<Typography sx={{textAlign: 'left', paddingBottom:'25px'}}>3. Your submission of each week will be received by your Training Officer and he/she will give his approval.</Typography>
+					</Box>
+					<Box>
+						<Typography sx={{textAlign: 'left', paddingBottom:'25px'}}>4. In the blank spaces provided, write any new information you may have gathered, any reference that may be necessary and technical drawings that will be useful to you.</Typography>
+					</Box>
+					<Box>
+						<Typography sx={{textAlign: 'left', paddingBottom:'25px'}}>5. Overall Progress Report found at the rear of the weekly diary should be completed and certified by the employer of each establishment.</Typography>
+					</Box>
+				</Container>
+			</Container>
 		</Container>
 	);
 

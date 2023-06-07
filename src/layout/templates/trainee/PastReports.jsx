@@ -11,14 +11,16 @@ import "../../../assets/css/list.css";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { Link } from "react-router-dom";
 
+
+
 function PastReports() {
 
     return (
 		<Container component="main" className="list_container" maxWidth={false}>
 			<CssBaseline />
-			<Box>
+			<Box >
 				<div>
-				<Accordion>
+				<Accordion className="trainee_month_accordion_root">
 					<AccordionSummary className="trainee_month_accordion"
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="panel1a-content"

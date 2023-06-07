@@ -8,7 +8,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
+import Checkbox from "@mui/material/Checkbox";
+
 
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { Link } from "react-router-dom";
@@ -21,20 +22,28 @@ function dashboard() {
 			<CssBaseline />
 			<Box className="trainee_box">
 				<Box>
-					<h1 className="trainee_box_heading">Brief Description of work carried out</h1>
-					<Card className="trainee_box_description" variant="outlined">
+					<h1 className="trainee_box_heading">Brief Description of work carried out :</h1>
+					<Box className="trainee_box_description" variant="outlined">
 						<Typography variant="body1" className="trainee_box_description_text">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi culpa quisquam voluptate asperiores magni dolorum porro corporis quos perspiciatis, optio, rerum explicabo saepe aliquid ab reprehenderit impedit eum doloribus qui officia! Eligendi tempore earum aliquid! Reprehenderit dolore quas enim porro nobis! Earum at aliquam facere qui ad, nihil distinctio debitis rerum mollitia sapiente modi illum, corporis ullam dolores maiores laudantium sunt nulla voluptates itaque labore saepe nisi non obcaecati eius! Dignissimos ipsam illo in fugiat molestiae molestias omnis minima facilis, eaque tenetur optio modi repudiandae numquam, corrupti libero, nam iusto assumenda ex impedit magnam fugit asperiores sed velit architecto! Rerum?
+							<TextField multiline rows={6} required fullWidth name="address" type="text" placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus exercitationem omnis fuga ipsa reprehenderit repellendus, nam sunt voluptatibus illo perferendis at aspernatur enim praesentium ea ut recusandae minima delectus cumque perspiciatis, molestias nemo accusamus! Culpa accusamus aspernatur, alias aliquam consectetur consequatur soluta enim obcaecati molestiae repellat, natus quod optio distinctio!" />
 						</Typography>
-					</Card>
+					</Box>
 				</Box>
 				<Box>
-					<h1 className="trainee_box_heading">Brief Description of work carried out</h1>
-					<Card variant="outlined" className="trainee_box_description" >
+					<h1 className="trainee_box_heading">Problems Encountered and Solutions Found :</h1>
+					<Box variant="outlined" className="trainee_box_description" >
 						<Typography variant="body1" className="trainee_box_description_text">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi culpa quisquam voluptate asperiores magni dolorum porro corporis quos perspiciatis, optio, rerum explicabo saepe aliquid ab reprehenderit impedit eum doloribus qui officia! Eligendi tempore earum aliquid! Reprehenderit dolore quas enim porro nobis! Earum at aliquam facere qui ad, nihil distinctio debitis rerum mollitia sapiente modi illum, corporis ullam dolores maiores laudantium sunt nulla voluptates itaque labore saepe nisi non obcaecati eius! Dignissimos ipsam illo in fugiat molestiae molestias omnis minima facilis, eaque tenetur optio modi repudiandae numquam, corrupti libero, nam iusto assumenda ex impedit magnam fugit asperiores sed velit architecto! Rerum?
+							<TextField multiline rows={3} required fullWidth name="address" type="text" placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus exercitationem omnis fuga ipsa reprehenderit repellendus, nam sunt voluptatibus illo perferendis at aspernatur enim praesentium ea ut recusandae minima delectus cumque perspiciatis, molestias nemo accusamus! Culpa accusamus aspernatur, alias aliquam consectetur consequatur soluta enim obcaecati molestiae repellat, natus quod optio distinctio!" />
 						</Typography>
-					</Card>
+					</Box>
+				</Box>
+				<Box className="traine_submission_box">
+					<Button variant="contained" className="save_button_trianee">Contained</Button>
+					<Checkbox/>
+					<Typography className="agreement_trainee_submission" variant="body1" sx={{  color: 'white', marginTop: '23px' }}>
+					I hereby declare that all the information contained in this report is truth and correct. I take full responsibility for the correctness of the said information.
+					</Typography>
+
 				</Box>
 			</Box>
 		</Container>
