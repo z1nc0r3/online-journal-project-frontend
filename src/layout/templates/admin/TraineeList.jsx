@@ -93,7 +93,7 @@ function TraineeList() {
 										<Typography sx={{ width: "35%", fontSize: "14px" }}>Supervisor :</Typography>
 										<Select
 											variant="outlined"
-											value={trainee.connection && trainee.connection !== "" ? trainee.connection.supervisor_name : ""}
+											value={trainee.trainee_connection && trainee.trainee_connection !== "" ? trainee.trainee_connection.supervisor_name : ""}
 											required
 											fullWidth
 											name="duration"
@@ -112,7 +112,7 @@ function TraineeList() {
 										<Typography sx={{ width: "35%", fontSize: "14px" }}>Evaluator :</Typography>
 										<Select
 											variant="outlined"
-											value={trainee.connection ? trainee.connection.evaluator_name : ""}
+											value={trainee.trainee_connection ? trainee.trainee_connection.evaluator_name : ""}
 											required
 											fullWidth
 											name="duration"
