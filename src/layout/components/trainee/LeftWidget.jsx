@@ -10,10 +10,11 @@ function LeftWidget() {
 
 	const buttons = [
 		{ label: "DashBoard", path: "/trainee/dashboard" },
-		{ label: "Past Reports", path: "/trainee/past_reports" },
-		{ label: "User Instructions", path: "/trainee/user_instruction" },
-		{ label: "Edit User Data", path: "/trainee/user_edit_data" },
 		{ label: "Current Month Report", path: "/trainee/current_month_report" },
+		{ label: "Past Reports", path: "/trainee/past_reports" },
+		{ label: "Edit User Data", path: "/trainee/user_edit_data" },
+		{ label: "User Instructions", path: "/trainee/user_instruction" },
+
 	];
 
 	return (
