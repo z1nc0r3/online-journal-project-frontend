@@ -10,6 +10,7 @@ import AdminLeftWidget from "../../components/admin/LeftWidget";
 import AdminTraineeList from "../admin/TraineeList";
 import AdminTraineeListEdit from "../admin/TraineeListEdit";
 import AdminSupervisorList from "../admin/SupervisorList";
+import AdminSupervisorListEdit from "../admin/SupervisorListEdit";
 import AdminEvaluatorList from "../admin/EvaluatorList";
 import AdminEvaluatorListEdit from "../admin/EvaluatorListEdit";
 
@@ -33,6 +34,7 @@ const titleMap = {
 	admin_evaluator_list: "Evaluator List",
 	admin_create_user: "Create New User",
 	admin_trainee_edit: "Update Trainee Detail",
+	admin_supervisor_edit: "Update Supervisor Detail",
 	admin_evaluator_edit: "Update Evaluator Detail",
 
 	trainee_dashboard: "Week no :",
@@ -70,6 +72,8 @@ const Layout = (props) => {
 				return <CreateUser user={props.user} />;
 			case "admin_trainee_edit":
 				return <AdminTraineeListEdit />;
+			case "admin_supervisor_edit":
+				return <AdminSupervisorListEdit />;
 			case "admin_evaluator_edit":
 				return <AdminEvaluatorListEdit />;
 			case "trainee_dashboard":
@@ -99,6 +103,8 @@ const Layout = (props) => {
 				return <AdminLeftWidget />;
 			case "admin_trainee_edit":
 				return <AdminLeftWidget />;
+			case "admin_supervisor_edit":
+				return <AdminLeftWidget />;
 			case "admin_evaluator_edit":
 				return <AdminLeftWidget />;
 			case "trainee_dashboard":
@@ -127,6 +133,8 @@ const Layout = (props) => {
 			case "admin_create_user":
 				return <AdminHeader />;
 			case "admin_trainee_edit":
+				return <AdminHeader />;
+			case "admin_supervisor_edit":
 				return <AdminHeader />;
 			case "admin_evaluator_edit":
 				return <AdminHeader />;
