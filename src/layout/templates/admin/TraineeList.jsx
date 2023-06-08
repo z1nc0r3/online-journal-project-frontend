@@ -42,7 +42,6 @@ function TraineeList() {
 			if (data.login_error) {
 				console.log("error");
 			} else {
-				console.log(data.supervisors);
 				setSupervisor(data.supervisors);
 			}
 		});
@@ -55,7 +54,6 @@ function TraineeList() {
 			if (data.login_error) {
 				console.log("error");
 			} else {
-				console.log(data.evaluators);
 				setEvaluator(data.evaluators);
 			}
 		});

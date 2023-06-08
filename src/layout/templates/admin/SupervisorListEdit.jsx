@@ -144,8 +144,8 @@ const CreateUser = (props) => {
 			});
 	};
 
-	const handleSubmitTrainee = (e) => {
-		handleSubmit(e, "trainee");
+	const handleSubmitSupervisor = (e) => {
+		handleSubmit(e, "supervisor");
 	};
 
 	const passwordFields = () => {
@@ -192,23 +192,6 @@ const CreateUser = (props) => {
 		);
 	};
 
-	const departmentList = () => {
-		return (
-			<>
-				<Typography>Department </Typography>
-				<Select variant="outlined" value={formData.department} required fullWidth name="department" type="text" onChange={handleChange}>
-					<MenuItem value={"Computer Science"}>Computer Science</MenuItem>
-					<MenuItem value={"Physics"}>Physics</MenuItem>
-					<MenuItem value={"Zoology"}>Zoology</MenuItem>
-					<MenuItem value={"Mathematics"}>Mathematics</MenuItem>
-					<MenuItem value={"Statistics"}>Statistics</MenuItem>
-					<MenuItem value={"Fisheries"}>Fisheries</MenuItem>
-					<MenuItem value={"Biology"}>Biology</MenuItem>
-				</Select>
-			</>
-		);
-	};
-
 	const emailPhoneFields = () => {
 		return (
 			<>
@@ -237,45 +220,18 @@ const CreateUser = (props) => {
 		<Container component="main" className="create_new_container" maxWidth={false}>
 			<CssBaseline />
 
-			<form onSubmit={handleSubmitTrainee}>
+			<form onSubmit={handleSubmitSupervisor}>
 				<Box className="create_new_form">
 					<Box className="create_new_form_left">
 						<Typography>Full Name </Typography>
 						<TextField variant="outlined" required fullWidth name="fName" autoFocus type="text" value={formData.fName} onChange={handleFullNameChange} />
 
-						<Typography>Registration No </Typography>
-						<TextField variant="outlined" required fullWidth name="regNo" type="text" value={formData.regNo} onChange={handleChange} />
-
-						{departmentList()}
-
-						<Typography>Address </Typography>
-						<TextField variant="outlined" required fullWidth name="address" type="text" value={formData.address} onChange={handleChange} />
-
 						{emailPhoneFields()}
-					</Box>
 
-					<Box className="create_new_form_right">
 						{establishmentFields()}
-
-						<Box className="training_period" sx={{ display: "flex", flexDirection: "row" }}>
-							<Box className="training_period_from">
-								<Typography>Starting From </Typography>
-								<TextField variant="outlined" required fullWidth name="startDate" type="date" value={formData.startDate} onChange={handleChange} />
-							</Box>
-
-							<Box className="training_period_to">
-								<Typography>Duration </Typography>
-								<Select variant="outlined" value={formData.duration} required fullWidth name="duration" type="text" onChange={handleChange}>
-									<MenuItem value={3}>3 Months</MenuItem>
-									<MenuItem value={6}>6 Months</MenuItem>
-									<MenuItem value={9}>9 Months</MenuItem>
-									<MenuItem value={12}>12 Months</MenuItem>
-								</Select>
-							</Box>
-						</Box>
-
-						{passwordFields()}
 					</Box>
+
+					<Box className="create_new_form_right">{passwordFields()}</Box>
 				</Box>
 			</form>
 		</Container>
