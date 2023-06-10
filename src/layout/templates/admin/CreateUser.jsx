@@ -5,6 +5,8 @@ import Alert from "@mui/material/Alert";
 import CssBaseline from "@mui/material/CssBaseline";
 import "../../../assets/css/list.css";
 import CreateMenu from "../../components/admin/CreateMenu";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CreateUser = (props) => {
 	const [formData, setFormData] = useState({
@@ -137,10 +139,13 @@ const CreateUser = (props) => {
 		axios
 			.post(url, formData)
 			.then((response) => {
-				alert("Form submitted successfully!");
+				toast.success("New User Created Successfully. Redirecting...");
+				setTimeout(() => {
+					window.location.href = userType; // Replace "new-page-url" with your desired URL
+				}, 3000); // 3 seconds delay before redirecting
 			})
 			.catch((error) => {
-				alert("Error submitting the form. Please try again." + error);
+				toast.error("Error submitting the form. Please try again." + error);
 			});
 	};
 
@@ -249,6 +254,8 @@ const CreateUser = (props) => {
 
 					<CreateMenu />
 
+					<ToastContainer />
+
 					<form onSubmit={handleSubmitTrainee}>
 						<Box className="create_new_form">
 							<Box className="create_new_form_left">
@@ -299,6 +306,8 @@ const CreateUser = (props) => {
 
 					<CreateMenu />
 
+					<ToastContainer />
+
 					<form onSubmit={handleSubmitSupervisor}>
 						<Box className="create_new_form">
 							<Box className="create_new_form_left">
@@ -321,6 +330,8 @@ const CreateUser = (props) => {
 					<CssBaseline />
 
 					<CreateMenu />
+
+					<ToastContainer />
 
 					<form onSubmit={handleSubmitEvaluator}>
 						<Box className="create_new_form">
