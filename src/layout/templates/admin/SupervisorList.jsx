@@ -12,7 +12,6 @@ import "../../../assets/css/list.css";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { Link } from "react-router-dom";
 
-
 function SupervisorList() {
 	const [expanded, setExpanded] = React.useState(false);
 	const [supervisors, setSupervisors] = React.useState([]);
@@ -58,7 +57,9 @@ function SupervisorList() {
 						<AccordionDetails>
 							<Box className="supervisor_assign_form">
 								<div className="assign_evaluator_row">
-									<Typography sx={{ fontSize: "16px", textAlign: "left" }}>Assigned for : {supervisor.supervisor_connection ? supervisor.supervisor_connection.trainee_name : ""}</Typography>
+									<Typography sx={{ fontSize: "16px", textAlign: "left" }}>
+										Assigned for : {supervisor.supervisor_connection ? supervisor.supervisor_connection.trainee_name : "Not Assigned"}
+									</Typography>
 								</div>
 							</Box>
 						</AccordionDetails>
