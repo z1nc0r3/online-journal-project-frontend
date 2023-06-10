@@ -12,7 +12,6 @@ import "../../../assets/css/list.css";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { Link } from "react-router-dom";
 
-
 function EvaluatorList() {
 	const [expanded, setExpanded] = React.useState(false);
 	const [evaluators, setEvaluators] = React.useState([]);
@@ -58,7 +57,9 @@ function EvaluatorList() {
 						<AccordionDetails>
 							<Box className="evaluator_assign_form">
 								<div className="assign_evaluator_row">
-									<Typography sx={{ fontSize: "16px", textAlign: "left" }}>Assigned for : {evaluator.evaluator_connection ? evaluator.evaluator_connection.trainee_name : "Not Assigned"}</Typography>
+									<Typography sx={{ fontSize: "16px", textAlign: "left" }}>
+										Assigned for : {evaluator.evaluator_connection ? evaluator.evaluator_connection.trainee_name : "Not Assigned"}
+									</Typography>
 								</div>
 							</Box>
 						</AccordionDetails>
