@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Box, Container, Button, Typography, TextField, Select, MenuItem } from "@mui/material";
 import Alert from "@mui/material/Alert";
 import CssBaseline from "@mui/material/CssBaseline";
 import "../../../assets/css/list.css";
-import CreateMenu from "../../components/admin/CreateMenu";
 
-const CreateUser = (props) => {
+const CreateUser = () => {
 	const [formData, setFormData] = useState({
 		fName: "",
 		regNo: "",
@@ -23,6 +23,38 @@ const CreateUser = (props) => {
 	});
 
 	const [passwordError, setPasswordError] = useState("");
+	const { id } = useParams();
+
+	const getTraineeDetails = (event) => {
+		axios.get(`http://127.0.0.1:8000/api/get/trainee/${id}`).then((response) => {
+			const data = response.data.user;
+
+			if (data.login_error) {
+				console.log("error");
+			} else {
+				console.log(data.user);
+				setFormData((prevFormData) => ({
+					...prevFormData,
+					fName: data.fName,
+					regNo: data.regNo,
+					department: data.department,
+					address: data.address,
+					email: data.email,
+					phone: data.phone,
+					estName: data.estName,
+					estAddress: data.estAddress,
+					startDate: data.startDate,
+					duration: data.duration,
+				}));
+				console.log(formData);
+			}
+		});
+	};
+
+	useEffect(() => {
+		console.log(id);
+		getTraineeDetails();
+	}, []);
 
 	useEffect(() => {
 		handlePasswordChange();
@@ -119,28 +151,16 @@ const CreateUser = (props) => {
 
 		setPasswordError("");
 
-		let url;
-		switch (userType) {
-			case "trainee":
-				url = "http://127.0.0.1:8000/api/create/trainee";
-				break;
-			case "supervisor":
-				url = "http://127.0.0.1:8000/api/create/supervisor";
-				break;
-			case "evaluator":
-				url = "http://127.0.0.1:8000/api/create/evaluator";
-				break;
-			default:
-				return;
-		}
-
 		axios
-			.post(url, formData)
+			.post("url", formData)
 			.then((response) => {
-				alert("Form submitted successfully!");
+				const popupWindow = window.open("", "_blank", "width=400,height=300");
+				popupWindow.document.write("<p>Form submitted successfully!</p>");
 			})
 			.catch((error) => {
-				alert("Error submitting the form. Please try again." + error);
+				const popupWindow = window.open("", "_blank", "width=400,height=300");
+				popupWindow.document.write("<p>Error submitting the form. Please try again.</p>");
+				popupWindow.document.write("<p>" + error + "</p>");
 			});
 	};
 
