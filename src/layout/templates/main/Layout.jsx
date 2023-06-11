@@ -60,8 +60,8 @@ const titleMap = {
 	supervisor_user_edit_data: "Edit User Data",
 
 	evaluator_dashboard: "Pending approval",
-	evaluator_dashboard_trainee_list: "Trainee List",
-	evaluator_dashboard_user_edit_data: "Edit User Data",
+	evaluator_trainee_list: "Trainee List",
+	evaluator_user_edit_data: "Edit User Data",
 };
 
 const Layout = (props) => {
