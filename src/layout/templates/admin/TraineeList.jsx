@@ -2,9 +2,13 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Box, Container, Button } from "@mui/material";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import { CssBaseline, TextField, Typography, Select, MenuItem } from "@mui/material";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import CssBaseline from "@mui/material/CssBaseline";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import "../../../assets/css/list.css";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { Link } from "react-router-dom";
@@ -12,15 +16,9 @@ import { Link } from "react-router-dom";
 function TraineeList() {
 	const [expanded, setExpanded] = React.useState(false);
 	const [trainees, setTrainees] = React.useState([]);
-	const [supervisors, setSupervisor] = React.useState([]);
-	const [evaluators, setEvaluator] = React.useState([]);
 
 	const handleChange = (panel) => (event, isExpanded) => {
 		setExpanded(isExpanded ? panel : false);
-	};
-
-	const handleUpdate = (event) => {
-		event.preventDefault();
 	};
 
 	const getTraineeList = (event) => {
@@ -35,34 +33,8 @@ function TraineeList() {
 		});
 	};
 
-	const getSupervisorList = (event) => {
-		axios.get("http://127.0.0.1:8000/api/get/supervisor/list").then((response) => {
-			const data = response.data;
-
-			if (data.login_error) {
-				console.log("error");
-			} else {
-				setSupervisor(data.supervisors);
-			}
-		});
-	};
-
-	const getEvaluatorList = (event) => {
-		axios.get("http://127.0.0.1:8000/api/get/evaluator/list").then((response) => {
-			const data = response.data;
-
-			if (data.login_error) {
-				console.log("error");
-			} else {
-				setEvaluator(data.evaluators);
-			}
-		});
-	};
-
 	useEffect(() => {
 		getTraineeList();
-		getSupervisorList();
-		getEvaluatorList();
 	}, []);
 
 	return (
@@ -85,50 +57,30 @@ function TraineeList() {
 							<Typography sx={{ color: "text.secondary", fontSize: "14px" }}>{trainee.department}</Typography>
 						</AccordionSummary>
 						<AccordionDetails>
-							<form className="trainee_info_form" noValidate autoComplete="off">
-								<Box className="trainee_assign_form" component="form">
-									<div className="assign_supervisor_row">
-										<Typography sx={{ width: "35%", fontSize: "14px" }}>Supervisor :</Typography>
-										<Select
-											variant="outlined"
-											value={trainee.trainee_connection && trainee.trainee_connection !== "" ? trainee.trainee_connection.supervisor_name : ""}
-											required
-											fullWidth
-											name="duration"
-											type="text"
-											onChange={handleUpdate}>
-											<MenuItem value="">Not Assigned</MenuItem>
-											{supervisors.map((supervisor, i) => (
-												<MenuItem key={i} value={supervisor.fName}>
-													{supervisor.fName}
-												</MenuItem>
-											))}
-										</Select>
-									</div>
+							<Box className="trainee_assign_form" component="form">
+								<div className="assign_supervisor_row">
+									<Typography sx={{ width: "35%", fontSize: "14px" }}>Supervisor :</Typography>
+									<TextField
+										className="assigned_supervisor"
+										variant="outlined"
+										fullWidth
+										id="supervisor"
+										name="supervisor"
+										value={trainee.connection ? trainee.connection.supervisor_name : ""}
+										required
+										sx={{ borderRadius: "1.5rem" }}
+									/>
+								</div>
 
-									<div className="assign_evaluator_row">
-										<Typography sx={{ width: "35%", fontSize: "14px" }}>Evaluator :</Typography>
-										<Select
-											variant="outlined"
-											value={trainee.trainee_connection ? trainee.trainee_connection.evaluator_name : ""}
-											required
-											fullWidth
-											name="duration"
-											type="text"
-											onChange={handleUpdate}>
-											{evaluators.map((evaluator, i) => (
-												<MenuItem key={i} value={evaluator.fName}>
-													{evaluator.fName}
-												</MenuItem>
-											))}
-										</Select>
-									</div>
+								<div className="assign_evaluator_row">
+									<Typography sx={{ width: "35%", fontSize: "14px" }}>Evaluator :</Typography>
+									<TextField variant="outlined" fullWidth id="evaluator" name="evaluator" required value={trainee.connection ? trainee.connection.evaluator_name : ""}/>
+								</div>
 
-									<Button variant="contained" type="submit" className="assign_save">
-										Save
-									</Button>
-								</Box>
-							</form>
+								<Button variant="contained" type="submit" className="assign_save">
+									Save
+								</Button>
+							</Box>
 						</AccordionDetails>
 					</Accordion>
 				))}

@@ -41,6 +41,16 @@ function App() {
 							<Route path='/trainee/user_edit_data' element={<Layout layout="trainee_user_edit_data"/>}></Route>
 							<Route path='/trainee/current_month_report' element={<Layout layout="trainee_current_month_report"/>}></Route>
 
+							<Route path='/supervisor' element={<Navigate to="/supervisor/dashboard"/>}></Route>
+							<Route path='/supervisor/dashboard' element={<Layout layout="supervisor_dashboard"/>}></Route>
+							<Route path='/supervisor/trainee_list' element={<Layout layout="supervisor_trainee_list"/>}></Route>
+							<Route path='/supervisor/user_edit_data' element={<Layout layout="supervisor_user_edit_data"/>}></Route>
+
+							<Route path='/evaluator' element={<Navigate to="/evaluator/dashboard"/>}></Route>
+							<Route path='/evaluator/dashboard' element={<Layout layout="evaluator_dashboard"/>}></Route>
+							<Route path='/evaluator/trainee_list' element={<Layout layout="evaluator_trainee_list"/>}></Route>
+							<Route path='/evaluator/user_edit_data' element={<Layout layout="evaluator_user_edit_data"/>}></Route>
+
 						</Routes>
 					</BrowserRouter>
 				</Box>
