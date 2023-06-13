@@ -52,7 +52,8 @@ function SupervisorList() {
 							<Link to={"/admin/supervisor_list/edit/" + supervisor.id}>
 								<ModeEditIcon sx={{ color: "#1c93ff", marginRight: "1rem", fontSize: "18px" }} />
 							</Link>
-							<Typography sx={{ width: "90%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{supervisor.fName}</Typography>
+							<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{supervisor.fName}</Typography>
+							<Typography sx={{ color: "text.secondary", fontSize: "14px" }}>{supervisor.estName}</Typography>
 						</AccordionSummary>
 						<AccordionDetails>
 							<Box className="supervisor_assign_form">
