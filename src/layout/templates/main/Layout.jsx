@@ -13,6 +13,7 @@ import AdminSupervisorList from "../admin/SupervisorList";
 import AdminSupervisorListEdit from "../admin/SupervisorListEdit";
 import AdminEvaluatorList from "../admin/EvaluatorList";
 import AdminEvaluatorListEdit from "../admin/EvaluatorListEdit";
+import CreateUser from "../admin/CreateUser";
 
 import TraineeHeader from "../../components/trainee/TraineeHeader";
 import TraineeDashboard from "../trainee/dashboard";
@@ -22,7 +23,6 @@ import TraineeUserInstruction from "../trainee/UserInstruction";
 import TraineeUserEditInstruction from "../trainee/UserEditData";
 import TraineeCurrentMonthReport from "../trainee/CurrentMonthReport";
 
-import CreateUser from "../admin/CreateUser";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
@@ -60,107 +60,47 @@ const Layout = (props) => {
 		});
 	}, [navigate]);
 
-	const getView = () => {
+	const getComponent = () => {
 		switch (layout) {
 			case "admin_trainee_list":
-				return <AdminTraineeList />;
+				return { Header: AdminHeader, LeftWidget: AdminLeftWidget, Main: AdminTraineeList };
 			case "admin_supervisor_list":
-				return <AdminSupervisorList />;
+				return { Header: AdminHeader, LeftWidget: AdminLeftWidget, Main: AdminSupervisorList };
 			case "admin_evaluator_list":
-				return <AdminEvaluatorList />;
+				return { Header: AdminHeader, LeftWidget: AdminLeftWidget, Main: AdminEvaluatorList };
 			case "admin_create_user":
-				return <CreateUser user={props.user} />;
+				return { Header: AdminHeader, LeftWidget: AdminLeftWidget, Main: () => <CreateUser user={props.user} /> };
 			case "admin_trainee_edit":
-				return <AdminTraineeListEdit />;
+				return { Header: AdminHeader, LeftWidget: AdminLeftWidget, Main: AdminTraineeListEdit };
 			case "admin_supervisor_edit":
-				return <AdminSupervisorListEdit />;
+				return { Header: AdminHeader, LeftWidget: AdminLeftWidget, Main: AdminSupervisorListEdit };
 			case "admin_evaluator_edit":
-				return <AdminEvaluatorListEdit />;
+				return { Header: AdminHeader, LeftWidget: AdminLeftWidget, Main: AdminEvaluatorListEdit };
 			case "trainee_dashboard":
-				return <TraineeDashboard />;
+				return { Header: TraineeHeader, LeftWidget: TraineeLeftWidget, Main: TraineeDashboard };
 			case "trainee_past_reports":
-				return <TraineePastReports />;
+				return { Header: TraineeHeader, LeftWidget: TraineeLeftWidget, Main: TraineePastReports };
 			case "trainee_user_instruction":
-				return <TraineeUserInstruction />;
+				return { Header: TraineeHeader, LeftWidget: TraineeLeftWidget, Main: TraineeUserInstruction };
 			case "trainee_user_edit_data":
-				return <TraineeUserEditInstruction />;
+				return { Header: TraineeHeader, LeftWidget: TraineeLeftWidget, Main: TraineeUserEditInstruction };
 			case "trainee_current_month_report":
-				return <TraineeCurrentMonthReport />;
+				return { Header: TraineeHeader, LeftWidget: TraineeLeftWidget, Main: TraineeCurrentMonthReport };
 			default:
-				return null; //to-do: add 404 page
-		}
-	};
-
-	const getLeftWidget = () => {
-		switch (layout) {
-			case "admin_trainee_list":
-				return <AdminLeftWidget />;
-			case "admin_supervisor_list":
-				return <AdminLeftWidget />;
-			case "admin_evaluator_list":
-				return <AdminLeftWidget />;
-			case "admin_create_user":
-				return <AdminLeftWidget />;
-			case "admin_trainee_edit":
-				return <AdminLeftWidget />;
-			case "admin_supervisor_edit":
-				return <AdminLeftWidget />;
-			case "admin_evaluator_edit":
-				return <AdminLeftWidget />;
-			case "trainee_dashboard":
-				return <TraineeLeftWidget />;
-			case "trainee_past_reports":
-				return <TraineeLeftWidget />;
-			case "trainee_user_instruction":
-				return <TraineeLeftWidget />;
-			case "trainee_user_edit_data":
-				return <TraineeLeftWidget />;
-			case "trainee_current_month_report":
-				return <TraineeLeftWidget />;
-			default:
-				return null; //to-do: add 404 page
-		}
-	};
-
-	const getHeader = () => {
-		switch (layout) {
-			case "admin_trainee_list":
-				return <AdminHeader />;
-			case "admin_supervisor_list":
-				return <AdminHeader />;
-			case "admin_evaluator_list":
-				return <AdminHeader />;
-			case "admin_create_user":
-				return <AdminHeader />;
-			case "admin_trainee_edit":
-				return <AdminHeader />;
-			case "admin_supervisor_edit":
-				return <AdminHeader />;
-			case "admin_evaluator_edit":
-				return <AdminHeader />;
-			case "trainee_dashboard":
-				return <TraineeHeader />;
-			case "trainee_past_reports":
-				return <TraineeHeader />;
-			case "trainee_user_instruction":
-				return <TraineeHeader />;
-			case "trainee_user_edit_data":
-				return <TraineeHeader />;
-			case "trainee_current_month_report":
-				return <TraineeHeader />;
-			default:
-				return null; //to-do: add 404 page
+				return { Header: null, LeftWidget: null, Main: null };
 		}
 	};
 
 	if (loading) {
-		return <div>Loading...</div>; // or you can render a loader component
+		return <div>Loading...</div>;
 	}
+
+	const { Header, LeftWidget, Main } = getComponent();
 
 	return (
 		<Container component="main" className="dashboard_container" maxWidth={false} disableGutters={true} sx={{ height: "100%" }}>
 			<CssBaseline />
-			{getHeader()}
+			{Header && <Header />}
 
 			<Typography
 				component="h1"
@@ -175,10 +115,10 @@ const Layout = (props) => {
 
 			<Grid container className="list_box_main_grid">
 				<Grid item lg={3}>
-					{getLeftWidget()}
+					{LeftWidget && <LeftWidget />}
 				</Grid>
 				<Grid item lg={6}>
-					{getView()}
+					{Main && <Main />}
 				</Grid>
 				<Grid item lg={2.2}>
 					<Container className="calendar_container">
