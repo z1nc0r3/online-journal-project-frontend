@@ -76,10 +76,14 @@
 
 .comment_box{
     display: flex;
+    /* width: 750px;*/
+    height: 150px; 
     flex-direction: row;
     justify-content: left;
     background-color: white;
     border-radius: 1.5rem;
+    cursor: pointer;
+    object-fit: cover;
 }
 
 .supervisor_assign_box p, .evaluator_assign_box p {
@@ -181,3 +185,8 @@
     margin-bottom: 5px;
 }
 
+h2{
+    text-align: center;
+    margin-left: 45%;
+    color: #0085FF;
+}

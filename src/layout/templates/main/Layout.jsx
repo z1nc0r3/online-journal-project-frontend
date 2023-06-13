@@ -26,6 +26,8 @@ import SupervisorDashboard from "../supervisor/dashboard";
 import SupervisorLeftWidget from "../../components/supervisor/LeftWidget";
 import SupervisorTraineeList from "../supervisor/traineeList";
 import SupervisorUserEditData from "../supervisor/UserEditData";
+import SupervisorReportPrevious from "../supervisor/traineeListReportPrevious";
+
 
 import CreateUser from "../admin/CreateUser";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -50,6 +52,7 @@ const titleMap = {
 	supervisor_dashboard: "Report for Reveiw",
 	supervisor_trainee_list: "Trainee List",
 	supervisor_user_edit_data: "Edit User Data",
+	supervisor_report_prev_data: "Previous reports of : Student Name",
 };
 
 const Layout = (props) => {
@@ -100,6 +103,9 @@ const Layout = (props) => {
 				return <SupervisorTraineeList />;
 			case "supervisor_user_edit_data":
 				return <SupervisorUserEditData />;
+			case "supervisor_report_prev_data":
+				return <SupervisorReportPrevious/>;
+			
 			default:
 				return null; //to-do: add 404 page
 		}
@@ -137,6 +143,9 @@ const Layout = (props) => {
 				return <SupervisorLeftWidget/>;
 			case "supervisor_user_edit_data":
 				return <SupervisorLeftWidget />;
+			case "supervisor_report_prev_data":
+				return <SupervisorLeftWidget/>;
+
 			default:
 				return null; //to-do: add 404 page
 		}
@@ -174,6 +183,9 @@ const Layout = (props) => {
 				return <SupervisorHeader/>;
 			case "supervisor_user_edit_data":
 				return <SupervisorHeader />;
+			case "supervisor_report_prev_data":
+				return <SupervisorHeader/>;
+
 			default:
 				return null; //to-do: add 404 page
 		}
@@ -203,9 +215,11 @@ const Layout = (props) => {
 				<Grid item lg={3}>
 					{getLeftWidget()}
 				</Grid>
+
 				<Grid item lg={6}>
 					{getView()}
 				</Grid>
+
 				<Grid item lg={2.2}>
 					<Container className="calendar_container">
 						<LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -213,6 +227,7 @@ const Layout = (props) => {
 						</LocalizationProvider>
 					</Container>
 				</Grid>
+
 			</Grid>
 		</Container>
 	);

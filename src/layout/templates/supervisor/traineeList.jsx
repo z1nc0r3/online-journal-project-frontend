@@ -24,12 +24,29 @@ function TraineeList() {
       <CssBaseline />
 
       <Box className="list_box">
+        
+        <Accordion sx={{ width: "100%", backgroundColor: "#dfefff", boxShadow: "none" }}>
+          <AccordionSummary 
+            aria-controls="panel1bh-content"
+            id="panel1bh-header">
+
+            
+            <Typography>01</Typography> 
+            <Typography sx={{ width: "75%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>
+                Student Name  
+            </Typography>
+            
+            <Typography>Registration no</Typography> 
+            <Link to="/supervisor/report_previous_data"> <ExpandMoreIcon /></Link>
+          </AccordionSummary>
+        </Accordion><br/>
+
         <Accordion sx={{ width: "100%", backgroundColor: "#dfefff", boxShadow: "none" }}>
           <AccordionSummary
             aria-controls="panel1bh-content"
-            id="panel1bh-header"
-          >
-            <Typography>01</Typography> 
+            id="panel1bh-header">
+              
+            <Typography>02</Typography> 
             <Typography sx={{ width: "75%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>
                 Student Name 
             </Typography>

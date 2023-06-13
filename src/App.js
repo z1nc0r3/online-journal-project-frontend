@@ -45,6 +45,9 @@ function App() {
 							<Route path='/supervisor/dashboard' element={<Layout layout="supervisor_dashboard"/>}></Route>
 							<Route path='/supervisor/trainee_list' element={<Layout layout="supervisor_trainee_list"/>}></Route>
 							<Route path='/supervisor/user_edit_data' element={<Layout layout="supervisor_user_edit_data"/>}></Route>
+							<Route path='/supervisor/report_previous_data' element={<Layout layout="supervisor_report_prev_data"/>}></Route>
+
+							
 
 						</Routes>
 					</BrowserRouter>
