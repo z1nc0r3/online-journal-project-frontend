@@ -17,8 +17,7 @@ function CurrentMonthReport() {
 		<Container component="main" className="list_container" maxWidth={false}>
 			<CssBaseline />
 			<Box>
-				<div>
-				<Accordion>
+				<Accordion className="trainee_month_accordion_root">
 					<AccordionSummary className="trainee_month_accordion"
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="panel1a-content"
@@ -33,7 +32,6 @@ function CurrentMonthReport() {
 						<Box className="trainee_week"><Typography>Week 04</Typography></Box>
 					</AccordionDetails>
 				</Accordion>
-				</div>
 			</Box>
 		</Container>
 	);

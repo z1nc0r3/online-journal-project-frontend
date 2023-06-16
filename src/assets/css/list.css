@@ -150,7 +150,7 @@
 }
 
 
-/* Create new user */
+/* trainee user */
 
 .trainee_box_heading{
     display: flex;
@@ -161,12 +161,19 @@
 }
 
 .trainee_box_description{
-    padding: 20px;
+    padding-left: 15px;
 }
 
 .trainee_box_description_text{
-    color: black;
-    font-size: large    ;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    height: 100%;
+    background-color: white;
+    border-radius: 1.0rem;
+    padding: 2rem;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
 .trainee_month_accordion{
@@ -185,8 +192,53 @@
     margin-bottom: 5px;
 }
 
-h2{
-    text-align: center;
-    margin-left: 45%;
-    color: #0085FF;
+Button.save_button_trianee{
+    align-items: start;
+    margin: 0.4rem 2rem;   
+	background-color: #0085FF;
+	color: white;
+	font-size: 16px;
+    height: 100%;
+    width: 25%;
+    margin-top: 20px;
+	border-radius: 0.75rem;
+	box-shadow: none;
+    margin-right: 100px;
+}
+
+Button.save_button_trianee:hover {
+	background-color: #88c6ff;
+    color: black;
+	box-shadow: none;
+}
+
+.traine_submission_box{
+    display: flex;
+    justify-content: left;
+    margin-top: 20px;
+}
+
+.trainee_past_report{
+    background-color: white;
+    border-radius: 1.0rem;
+    padding: 1rem;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+}
+.trainee_instruction_box{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    height: 100%;
+    width: 100%;
+    background-color: #379eff60;
+    border-radius: 1.0rem;
+    padding: 2rem;
+}
+
+.trainee_month_accordion_root {
+    border-radius: 10px !important;
+}
+
+.agreement_trainee_submission{
+    text-align: left;
 }

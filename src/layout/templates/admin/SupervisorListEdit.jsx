@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Box, Container, Button, Typography, TextField, Select, MenuItem } from "@mui/material";
+import { Box, Container, Button, Typography, TextField } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import "../../../assets/css/list.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const UpdateUser = () => {
+const CreateUser = (props) => {
 	const [formData, setFormData] = useState({
 		fName: "",
 		regNo: "",
@@ -23,8 +23,8 @@ const UpdateUser = () => {
 
 	const { id } = useParams();
 
-	const getTraineeDetails = (event) => {
-		axios.get(`http://127.0.0.1:8000/api/get/trainee/${id}`).then((response) => {
+	const getSupervisorDetails = (event) => {
+		axios.get(`http://127.0.0.1:8000/api/get/supervisor/${id}`).then((response) => {
 			const data = response.data.user;
 
 			if (data.login_error) {
@@ -48,7 +48,7 @@ const UpdateUser = () => {
 	};
 
 	useEffect(() => {
-		getTraineeDetails();
+		getSupervisorDetails();
 	}, []);
 
 	const handleChange = (e) => {
@@ -85,11 +85,11 @@ const UpdateUser = () => {
 		}
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmitSupervisor = (e) => {
 		e.preventDefault();
 
 		axios
-			.post(`http://127.0.0.1:8000/api/update/trainee/${id}`, formData)
+			.post(`http://127.0.0.1:8000/api/update/supervisor/${id}`, formData)
 			.then((response) => {
 				toast.success("User data updated Successfully. Redirecting...");
 				setTimeout(() => {
@@ -101,30 +101,13 @@ const UpdateUser = () => {
 			});
 	};
 
-	const submitButton = () => {
+	const updateButton = () => {
 		return (
 			<>
 				<Typography></Typography>
 				<Button variant="contained" type="submit" className="update_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
 					Update User Data
 				</Button>
-			</>
-		);
-	};
-
-	const departmentList = () => {
-		return (
-			<>
-				<Typography>Department </Typography>
-				<Select variant="outlined" value={formData.department} required fullWidth name="department" type="text" onChange={handleChange}>
-					<MenuItem value={"Computer Science"}>Computer Science</MenuItem>
-					<MenuItem value={"Physics"}>Physics</MenuItem>
-					<MenuItem value={"Zoology"}>Zoology</MenuItem>
-					<MenuItem value={"Mathematics"}>Mathematics</MenuItem>
-					<MenuItem value={"Statistics"}>Statistics</MenuItem>
-					<MenuItem value={"Fisheries"}>Fisheries</MenuItem>
-					<MenuItem value={"Biology"}>Biology</MenuItem>
-				</Select>
 			</>
 		);
 	};
@@ -159,19 +142,11 @@ const UpdateUser = () => {
 
 			<ToastContainer />
 
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmitSupervisor}>
 				<Box className="create_new_form">
 					<Box className="create_new_form_left">
 						<Typography>Full Name </Typography>
 						<TextField variant="outlined" required fullWidth name="fName" autoFocus type="text" value={formData.fName} onChange={handleFullNameChange} />
-
-						<Typography>Registration No </Typography>
-						<TextField variant="outlined" required fullWidth name="regNo" type="text" value={formData.regNo} onChange={handleChange} />
-
-						{departmentList()}
-
-						<Typography>Address </Typography>
-						<TextField variant="outlined" required fullWidth name="address" type="text" value={formData.address} onChange={handleChange} />
 
 						{emailPhoneFields()}
 					</Box>
@@ -179,24 +154,7 @@ const UpdateUser = () => {
 					<Box className="create_new_form_right">
 						{establishmentFields()}
 
-						<Box className="training_period" sx={{ display: "flex", flexDirection: "row" }}>
-							<Box className="training_period_from">
-								<Typography>Starting From </Typography>
-								<TextField variant="outlined" required fullWidth name="startDate" type="date" value={formData.startDate} onChange={handleChange} />
-							</Box>
-
-							<Box className="training_period_to">
-								<Typography>Duration </Typography>
-								<Select variant="outlined" value={formData.duration} required fullWidth name="duration" type="text" onChange={handleChange}>
-									<MenuItem value={3}>3 Months</MenuItem>
-									<MenuItem value={6}>6 Months</MenuItem>
-									<MenuItem value={9}>9 Months</MenuItem>
-									<MenuItem value={12}>12 Months</MenuItem>
-								</Select>
-							</Box>
-						</Box>
-
-						{submitButton()}
+						{updateButton()}
 					</Box>
 				</Box>
 			</form>
@@ -204,4 +162,4 @@ const UpdateUser = () => {
 	);
 };
 
-export default UpdateUser;
+export default CreateUser;

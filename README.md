@@ -26,4 +26,3 @@ Your app is ready to be deployed!
 ### Super Admin
  - Email : _admin@interntracker.com_
  - Password : _admin123_
-
