@@ -17,7 +17,7 @@ import CreateUser from "../admin/CreateUser";
 
 import TraineeHeader from "../../components/trainee/TraineeHeader";
 import TraineeDashboard from "../trainee/dashboard";
-import TraineeDashboard from "../trainee/dashboard";
+// import TraineeDashboard from "../trainee/dashboard";
 import TraineeLeftWidget from "../../components/trainee/LeftWidget";
 import TraineePastReports from "../trainee/PastReports";
 import TraineeUserInstruction from "../trainee/UserInstruction";
@@ -101,6 +101,14 @@ const Layout = (props) => {
 				return { Header: TraineeHeader, LeftWidget: TraineeLeftWidget, Main: TraineeUserEditInstruction };
 			case "trainee_current_month_report":
 				return { Header: TraineeHeader, LeftWidget: TraineeLeftWidget, Main: TraineeCurrentMonthReport };
+			case "supervisor_dashboard":
+				return { Header: SupervisorHeader, LeftWidget: SupervisorLeftWidget, Main: SupervisorDashboard };
+			case "supervisor_trainee_list":
+				return { Header: SupervisorHeader, LeftWidget: SupervisorLeftWidget, Main: SupervisorTraineeList };
+			case "supervisor_user_edit_data":
+				return { Header: SupervisorHeader, LeftWidget: SupervisorLeftWidget, Main: SupervisorUserEditData };
+			case "supervisor_report_prev_data":
+				return { Header: SupervisorHeader, LeftWidget: SupervisorLeftWidget, Main: SupervisorReportPrevious };
 			default:
 				return { Header: null, LeftWidget: null, Main: null };
 		}
