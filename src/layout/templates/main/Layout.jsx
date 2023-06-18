@@ -31,8 +31,6 @@ import SupervisorTraineeList from "../supervisor/traineeList";
 import SupervisorUserEditData from "../supervisor/UserEditData";
 import SupervisorReportPrevious from "../supervisor/traineeListReportPrevious";
 
-
-import CreateUser from "../admin/CreateUser";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
