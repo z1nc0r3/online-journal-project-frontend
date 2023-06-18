@@ -52,7 +52,8 @@ function EvaluatorList() {
 							<Link to={"/admin/evaluator_list/edit/" + evaluator.id}>
 								<ModeEditIcon sx={{ color: "#1c93ff", marginRight: "1rem", fontSize: "18px" }} />
 							</Link>
-							<Typography sx={{ width: "90%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{evaluator.fName}</Typography>
+							<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{evaluator.fName}</Typography>
+							<Typography sx={{ color: "text.secondary", fontSize: "14px" }}>{evaluator.department}</Typography>
 						</AccordionSummary>
 						<AccordionDetails>
 							<Box className="evaluator_assign_form">

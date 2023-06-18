@@ -1,34 +1,45 @@
-import * as React from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Box, Container, Button } from "@mui/material";
-import Typography from "@mui/material/Typography";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { Box, Container, Button, Typography, TextField, Select, MenuItem } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import "../../../assets/css/list.css";
-import CreateMenu from "../../components/admin/CreateMenu";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function EvaluatorListEdit(){
-
-    const [formData, setFormData] = useState({
-		fullname: "",
-		regno: "",
+const UpdateUser = () => {
+	const [formData, setFormData] = useState({
+		fName: "",
 		department: "",
-		address: "",
 		email: "",
 		phone: "",
-		est_name: "",
-		est_address: "",
-		training_from: "",
-		training_to: "",
-		trainingPeriod: "",
-		password: "",
-		confirm_password: ""
 	});
 
-    const handleChange = (e) => {
+	const { id } = useParams();
+
+	const getEvaluatorDetails = (event) => {
+		axios.get(`http://127.0.0.1:8000/api/get/evaluator/${id}`).then((response) => {
+			const data = response.data.user;
+
+			if (data.login_error) {
+				console.log("error");
+			} else {
+				setFormData((prevFormData) => ({
+					...prevFormData,
+					fName: data.fName,
+					department: data.department,
+					email: data.email,
+					phone: data.phone,
+				}));
+			}
+		});
+	};
+
+	useEffect(() => {
+		getEvaluatorDetails();
+	}, []);
+
+	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((prevFormData) => ({
 			...prevFormData,
@@ -36,69 +47,24 @@ function EvaluatorListEdit(){
 		}));
 	};
 
+	// verify full name
 	const handleFullNameChange = (e) => {
 		const { value } = e.target;
-		const fullNameRegex = /^[A-Za-z]+$/;
+		const fullNameRegex = /^[A-Za-z\s.]*$/;
 
-		// Verify full name format (letters only)
 		if (value.match(fullNameRegex)) {
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				fullname: value,
+				fName: value,
 			}));
 		}
 	};
 
-	const handleEmailChange = (e) => {
-		const { value } = e.target;
-		const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-
-		// Verify email format
-		if (value.match(emailRegex)) {
-			setFormData((prevFormData) => ({
-				...prevFormData,
-				email: value,
-			}));
-		}
-	};
-
-	const handlePasswordChange = (e) => {
-		const { value } = e.target;
-
-		// Password policy verifications
-		const hasMinimumLength = value.length >= 8;
-		const hasUppercase = /[A-Z]/.test(value);
-		const hasLowercase = /[a-z]/.test(value);
-		const hasNumber = /[0-9]/.test(value);
-		const hasSpecialCharacter = /[!@#$%^&*()]/.test(value);
-
-		// Verify password meets all requirements
-		if (hasMinimumLength && hasUppercase && hasLowercase && hasNumber && hasSpecialCharacter) {
-			setFormData((prevFormData) => ({
-				...prevFormData,
-				password: value,
-			}));
-		}
-	};
-
-	const handleConfirmPasswordChange = (e) => {
-		const { value } = e.target;
-		const { password } = formData;
-
-		// Verify if confirm password matches the password
-		if (value === password) {
-			setFormData((prevFormData) => ({
-				...prevFormData,
-				confirm_password: value,
-			}));
-		}
-	};
-
+	// verify phone number
 	const handlePhoneChange = (e) => {
 		const { value } = e.target;
-		const phoneRegex = /^[0-9]{0,10}$/; // Updated regex to allow maximum of 10 numbers
+		const phoneRegex = /^[0-9]{0,10}$/;
 
-		// Verify phone format (limit to 10 numbers)
 		if (value.match(phoneRegex)) {
 			setFormData((prevFormData) => ({
 				...prevFormData,
@@ -107,192 +73,94 @@ function EvaluatorListEdit(){
 		}
 	};
 
-	const handleDateChange = (e) => {
-		const { name, value } = e.target;
-
-		setFormData((prevFormData) => ({
-			...prevFormData,
-			[name]: value,
-		}));
-
-		const { training_from, training_to } = formData;
-
-		// Verify end date is ahead of start date
-		if (name === "training_to" && training_from && training_to) {
-			const isEndDateValid = new Date(training_to) > new Date(training_from);
-
-			if (!isEndDateValid) {
-				// Perform the necessary action if end date is not ahead of start date
-				// For example, show an error message or disable a submit button
-			}
-		}
-	};
-
-    const handleSubmit = (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		// Perform form submission logic here
-		console.log(formData);
+
+		axios
+			.post(`http://127.0.0.1:8000/api/update/evaluator/${id}`, formData)
+			.then((response) => {
+				toast.success("User data updated Successfully. Redirecting...");
+				setTimeout(() => {
+					window.location.href = "..";
+				}, 3000);
+			})
+			.catch((error) => {
+				toast.error("Error updating user data. Please try again." + error);
+			});
 	};
 
-    return (
-        <Container component="main" className="create_new_container" maxWidth={false}>
-            <CssBaseline />
- 
-            <form onSubmit={handleSubmit}>
-                <Box className="create_new_form" component="form">
-                    <Box className="create_new_form_left">
-                        <Typography>Assigned Supervisor </Typography>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            label="Full Name"
-                            name="fullname"
-                            autoFocus
-                            type="text"
-                            value={formData.fullname}
-                            onChange={handleFullNameChange}
-                        />
-    
-                        <Typography>Registration No </Typography>
-                        <TextField 
-                            variant="outlined" 
-                            margin="normal" 
-                            required 
-                            fullWidth 
-                            label="Registration No" 
-                            name="regno" 
-                            type="text" 
-                            onChange={handleChange} 
-                        />
-    
-                        <Typography>Department </Typography>
-                        <TextField 
-                            variant="outlined" 
-                            margin="normal" 
-                            required 
-                            fullWidth 
-                            label="Department" 
-                            name="department" 
-                            type="text" 
-                            value={formData.department} 
-                            onChange={handleChange} 
-                        />
-    
-                        <Typography>Address </Typography>
-                        <TextField 
-                            variant="outlined" 
-                            margin="normal" 
-                            required 
-                            fullWidth 
-                            label="Address" 
-                            name="address" 
-                            type="text" 
-                            value={formData.address} 
-                            onChange={handleChange} />
-    
-                        <Typography>Email </Typography>
-                        <TextField 
-                            variant="outlined" 
-                            margin="normal" 
-                            required 
-                            fullWidth 
-                            label="Email" 
-                            name="email" 
-                            type="email" 
-                            value={formData.email} 
-                            onChange={handleEmailChange} />
-    
-                        <Typography>Phone </Typography>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            label="Phone"
-                            name="phone"
-                            type="number"
-                            value={formData.phone}
-                            onChange={handlePhoneChange}
-                            inputProps={{ maxLength: 10 }}
-                        />
-                    </Box>
-    
-                    <Box className="create_new_form_right">
-                        <Typography>Name of the Establishment </Typography>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            label="Establishment Name"
-                            name="est_name"
-                            type="text"
-                            value={formData.est_name}
-                            onChange={handleChange}
-                        />
-    
-                        <Typography>Address of the Establishment </Typography>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            label="Establishment Address"
-                            name="est_address"
-                            type="text"
-                            value={formData.est_address}
-                            onChange={handleChange}
-                        />
-    
-                        <Typography>Training Period </Typography>
-                        <Box className="training_period" sx={{ display: "flex", flexDirection: "row" }}>
-                            <Box className="training_period_from">
-                                <Typography>From </Typography>
-                                <TextField variant="outlined" margin="normal" required fullWidth name="training_from" type="date" value={formData.training_from} onChange={handleChange} />
-                            </Box>
-    
-                            <Box className="training_period_to">
-                                <Typography>To </Typography>
-                                <TextField variant="outlined" margin="normal" required fullWidth name="training_to" type="date" value={formData.training_to} onChange={handleDateChange} />
-                            </Box>
-                        </Box>
-    
-                        <Typography>Password </Typography>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            label="Password"
-                            name="password"
-                            type="password"
-                            value={formData.password}
-                            onChange={handlePasswordChange}
-                        />
-    
-                        <Typography>Confirm Password </Typography>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            label="Confirm Password"
-                            name="confirm_password"
-                            type="password"
-                            value={formData.confirm_password}
-                            onChange={handleConfirmPasswordChange}
-                        />
-    
-                        <Button variant="contained" type="submit" className="register_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
-                            Update
-                        </Button>
-                    </Box>
-                </Box>
-            </form>
-        </Container>
-    );
+	const submitButton = () => {
+		return (
+			<>
+				<Typography></Typography>
+				<Button variant="contained" type="submit" className="update_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
+					Update User Data
+				</Button>
+			</>
+		);
+	};
 
-}
-export default EvaluatorListEdit;
+	const departmentList = () => {
+		return (
+			<>
+				<Typography>Department </Typography>
+				<Select variant="outlined" value={formData.department} required fullWidth name="department" type="text" onChange={handleChange}>
+					<MenuItem value={"Computer Science"}>Computer Science</MenuItem>
+					<MenuItem value={"Physics"}>Physics</MenuItem>
+					<MenuItem value={"Zoology"}>Zoology</MenuItem>
+					<MenuItem value={"Mathematics"}>Mathematics</MenuItem>
+					<MenuItem value={"Statistics"}>Statistics</MenuItem>
+					<MenuItem value={"Fisheries"}>Fisheries</MenuItem>
+					<MenuItem value={"Biology"}>Biology</MenuItem>
+				</Select>
+			</>
+		);
+	};
+
+	const emailField = () => {
+		return (
+			<>
+				<Typography>Email </Typography>
+				<TextField variant="outlined" required fullWidth name="email" type="email" value={formData.email} onChange={handleChange} />
+			</>
+		);
+	};
+
+	const phoneField = () => {
+		return (
+			<>
+				<Typography>Phone </Typography>
+				<TextField variant="outlined" required fullWidth name="phone" type="number" value={formData.phone} onChange={handlePhoneChange} inputProps={{ maxLength: 10 }} />
+			</>
+		);
+	};
+
+	return (
+		<Container component="main" className="create_new_container" maxWidth={false}>
+			<CssBaseline />
+
+			<ToastContainer />
+
+			<form onSubmit={handleSubmit}>
+				<Box className="create_new_form">
+					<Box className="create_new_form_left">
+						<Typography>Full Name </Typography>
+						<TextField variant="outlined" required fullWidth name="fName" autoFocus type="text" value={formData.fName} onChange={handleFullNameChange} />
+
+						{departmentList()}
+
+						{emailField()}
+					</Box>
+
+					<Box className="create_new_form_right">
+                        {phoneField()}
+
+						{submitButton()}
+					</Box>
+				</Box>
+			</form>
+		</Container>
+	);
+};
+
+export default UpdateUser;

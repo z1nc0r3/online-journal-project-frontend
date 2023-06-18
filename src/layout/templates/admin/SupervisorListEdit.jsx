@@ -7,18 +7,14 @@ import "../../../assets/css/list.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const CreateUser = (props) => {
+const UpdateUser = (props) => {
 	const [formData, setFormData] = useState({
 		fName: "",
-		regNo: "",
-		department: "",
 		address: "",
 		email: "",
 		phone: "",
 		estName: "",
-		estAddress: "",
-		startDate: "",
-		duration: "",
+		estAddress: ""
 	});
 
 	const { id } = useParams();
@@ -33,15 +29,11 @@ const CreateUser = (props) => {
 				setFormData((prevFormData) => ({
 					...prevFormData,
 					fName: data.fName,
-					regNo: data.regNo,
-					department: data.department,
 					address: data.address,
 					email: data.email,
 					phone: data.phone,
 					estName: data.estName,
-					estAddress: data.estAddress,
-					startDate: data.startDate,
-					duration: data.duration,
+					estAddress: data.estAddress
 				}));
 			}
 		});
@@ -162,4 +154,4 @@ const CreateUser = (props) => {
 	);
 };
 
-export default CreateUser;
+export default UpdateUser;
