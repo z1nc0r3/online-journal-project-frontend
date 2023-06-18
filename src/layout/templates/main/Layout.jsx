@@ -17,12 +17,22 @@ import CreateUser from "../admin/CreateUser";
 
 import TraineeHeader from "../../components/trainee/TraineeHeader";
 import TraineeDashboard from "../trainee/dashboard";
+// import TraineeDashboard from "../trainee/dashboard";
 import TraineeLeftWidget from "../../components/trainee/LeftWidget";
 import TraineePastReports from "../trainee/PastReports";
 import TraineeUserInstruction from "../trainee/UserInstruction";
 import TraineeUserEditInstruction from "../trainee/UserEditData";
 import TraineeCurrentMonthReport from "../trainee/CurrentMonthReport";
 
+import SupervisorHeader from "../../components/supervisor/SupervisorHeader";
+import SupervisorDashboard from "../supervisor/dashboard";
+import SupervisorLeftWidget from "../../components/supervisor/LeftWidget";
+import SupervisorTraineeList from "../supervisor/traineeList";
+import SupervisorUserEditData from "../supervisor/UserEditData";
+import SupervisorReportPrevious from "../supervisor/traineeListReportPrevious";
+
+
+import CreateUser from "../admin/CreateUser";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
@@ -42,6 +52,11 @@ const titleMap = {
 	trainee_user_instruction: "Instruction",
 	trainee_user_edit_data: "Edit User Data",
 	trainee_current_month_report: "Current Month Report",
+	
+	supervisor_dashboard: "Report for Reveiw",
+	supervisor_trainee_list: "Trainee List",
+	supervisor_user_edit_data: "Edit User Data",
+	supervisor_report_prev_data: "Previous reports of : Student Name",
 };
 
 const Layout = (props) => {
@@ -86,6 +101,14 @@ const Layout = (props) => {
 				return { Header: TraineeHeader, LeftWidget: TraineeLeftWidget, Main: TraineeUserEditInstruction };
 			case "trainee_current_month_report":
 				return { Header: TraineeHeader, LeftWidget: TraineeLeftWidget, Main: TraineeCurrentMonthReport };
+			case "supervisor_dashboard":
+				return { Header: SupervisorHeader, LeftWidget: SupervisorLeftWidget, Main: SupervisorDashboard };
+			case "supervisor_trainee_list":
+				return { Header: SupervisorHeader, LeftWidget: SupervisorLeftWidget, Main: SupervisorTraineeList };
+			case "supervisor_user_edit_data":
+				return { Header: SupervisorHeader, LeftWidget: SupervisorLeftWidget, Main: SupervisorUserEditData };
+			case "supervisor_report_prev_data":
+				return { Header: SupervisorHeader, LeftWidget: SupervisorLeftWidget, Main: SupervisorReportPrevious };
 			default:
 				return { Header: null, LeftWidget: null, Main: null };
 		}
@@ -117,9 +140,11 @@ const Layout = (props) => {
 				<Grid item lg={3}>
 					{LeftWidget && <LeftWidget />}
 				</Grid>
+
 				<Grid item lg={6}>
 					{Main && <Main />}
 				</Grid>
+
 				<Grid item lg={2.2}>
 					<Container className="calendar_container">
 						<LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -127,6 +152,7 @@ const Layout = (props) => {
 						</LocalizationProvider>
 					</Container>
 				</Grid>
+
 			</Grid>
 		</Container>
 	);
