@@ -29,31 +29,36 @@ function Dashboard() {
 				<Accordion onChange={handleChange("list_accordion")} sx={{ width: "100%", backgroundColor: "#dfefff", boxShadow: "none" }}>
 					
 					<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
-						<Typography sx={{ width: "75%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Student Name - month</Typography>
+						<Typography sx={{ width: "75%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Student Name</Typography>
 					</AccordionSummary>
 					<AccordionDetails>
-						<Box className="supervisor_assign_box">
-							<Typography>Week - 1</Typography>
+						<Box className="evaluator_assign_box">
+						<Typography>Month - 1</Typography>
 						</Box>
 					</AccordionDetails>
 					<AccordionDetails>
 						<Box className="supervisor_assign_box">
-							<Typography>Week - 2</Typography>
+						<Typography>Month - 2</Typography>
 						</Box>
 					</AccordionDetails>
 					<AccordionDetails>
 						<Box className="supervisor_assign_box">
-							<Typography>Week - 3</Typography>
+							<Typography>Month - 3</Typography>
 						</Box>
 					</AccordionDetails>
 					<AccordionDetails>
 						<Box className="supervisor_assign_box">
-							<Typography>Week - 4</Typography>
+							<Typography>Month- 4</Typography>
 						</Box>
 					</AccordionDetails>
 					<AccordionDetails>
+						<Box className="supervisor_assign_box">
+							<Typography>Month- 5</Typography>
+						</Box>
+					</AccordionDetails>
+					 {/*<AccordionDetails>
 						<Box className="comment_box">
-							<Typography>Supervisor Comment</Typography>
+							<Typography>Evaluator Comment</Typography>
 						</Box>
 					</AccordionDetails>
 
@@ -62,49 +67,11 @@ function Dashboard() {
               	type="submit"
              	className="register_button"
               	sx={{ width: "75%", bgcolor: "#379fff", fontSize: "18px" }}
-           		 > Save </Button>
+	             	 Save </Button>*/}
 
 				</Accordion>
 
-				<Accordion sx={{ width: "100%", backgroundColor: "#dfefff", boxShadow: "none" }}>
-					<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">	
-						<Typography sx={{ width: "75%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Student Name - month</Typography>
-					</AccordionSummary>
-
-					<AccordionDetails>
-						<Box className="supervisor_assign_box">
-							<Typography>Week - 1</Typography>
-						</Box>
-					</AccordionDetails>
-					<AccordionDetails>
-						<Box className="supervisor_assign_box">
-							<Typography>Week - 2</Typography>
-						</Box>
-					</AccordionDetails>
-					<AccordionDetails>
-						<Box className="supervisor_assign_box">
-							<Typography>Week - 3</Typography>
-						</Box>
-					</AccordionDetails>
-					<AccordionDetails>
-						<Box className="supervisor_assign_box">
-							<Typography>Week - 4</Typography>
-						</Box>
-					</AccordionDetails>
-					<AccordionDetails>
-						<Box className="comment_box">
-							<Typography>Supervisor Comment</Typography>
-						</Box>
-					</AccordionDetails>
-
-					<Button
-              	variant="contained"
-              	type="submit"
-             	className="register_button"
-              	sx={{ width: "75%", bgcolor: "#379fff", fontSize: "18px" }}
-           		 > Save </Button>
-
-				</Accordion>
+				
 			</Box>
 
 		</Container>
