@@ -17,7 +17,6 @@ import CreateUser from "../admin/CreateUser";
 
 import TraineeHeader from "../../components/trainee/TraineeHeader";
 import TraineeDashboard from "../trainee/dashboard";
-// import TraineeDashboard from "../trainee/dashboard";
 import TraineeLeftWidget from "../../components/trainee/LeftWidget";
 import TraineePastReports from "../trainee/PastReports";
 import TraineeUserInstruction from "../trainee/UserInstruction";
@@ -29,6 +28,7 @@ import SupervisorDashboard from "../supervisor/dashboard";
 import SupervisorLeftWidget from "../../components/supervisor/LeftWidget";
 import SupervisorTraineeList from "../supervisor/traineeList";
 import SupervisorUserEditData from "../supervisor/UserEditData";
+import SupervisorReportPrevious from "../supervisor/traineeListReportPrevious";
 
 import EvaluatorHeader from "../../components/evaluator/EvaluatorHeader";
 import EvaluatorDashboard from "../evaluator/dashboard";
@@ -56,7 +56,7 @@ const titleMap = {
 	trainee_user_edit_data: "Edit User Data",
 	trainee_current_month_report: "Current Month Report",
 	
-	supervisor_dashboard: "Report for Reveiw",
+	supervisor_dashboard: "Report for Review",
 	supervisor_trainee_list: "Trainee List",
 	supervisor_user_edit_data: "Edit User Data",
 
