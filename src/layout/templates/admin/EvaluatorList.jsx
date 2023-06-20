@@ -1,5 +1,7 @@
 import * as React from "react";
 import { Box, Container } from "@mui/material";
+import axios from "axios";
+import { useEffect } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -10,33 +12,60 @@ import "../../../assets/css/list.css";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { Link } from "react-router-dom";
 
-
-
 function EvaluatorList() {
 	const [expanded, setExpanded] = React.useState(false);
+	const [evaluators, setEvaluators] = React.useState([]);
 
 	const handleChange = (panel) => (event, isExpanded) => {
 		setExpanded(isExpanded ? panel : false);
 	};
+
+	const getEvaluatorList = (event) => {
+		axios.get("http://127.0.0.1:8000/api/get/evaluator/list").then((response) => {
+			const data = response.data;
+
+			if (data.login_error) {
+				console.log("error");
+			} else {
+				setEvaluators(data.evaluators);
+			}
+		});
+	};
+
+	useEffect(() => {
+		getEvaluatorList();
+	}, []);
 
 	return (
 		<Container component="main" className="list_container" maxWidth={false}>
 			<CssBaseline />
 
 			<Box className="list_box">
-				<Accordion expanded={expanded === "list_accordion"} onChange={handleChange("list_accordion")} sx={{ width: "100%", backgroundColor: "#dfefff", boxShadow: "none" }}>
-					<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
-						<Link to= "/admin/evaluator_list/edit/:id"><ModeEditIcon sx={{ color: "#1c93ff", marginRight: "1rem" }} /></Link>
-						<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Evaluator Name</Typography>
-						<Typography sx={{ color: "text.secondary", fontSize: "18px" }}>Department</Typography>
-					</AccordionSummary>
-					<AccordionDetails>
-						<Box className="evaluator_assign_box">
-							<Typography>Assigned For :</Typography>
-							<Typography>Trainee Name</Typography>
-						</Box>
-					</AccordionDetails>
-				</Accordion>
+				{evaluators.map((evaluator, i) => (
+					<Accordion
+						expanded={expanded === i}
+						onChange={handleChange(i)}
+						sx={{ width: "100%", backgroundColor: "#dfefff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }}
+						key={i}
+						className="accordion_item">
+						<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
+							<Link to={"/admin/evaluator_list/edit/" + evaluator.id}>
+								<ModeEditIcon sx={{ color: "#1c93ff", marginRight: "1rem", fontSize: "18px" }} />
+							</Link>
+							<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{evaluator.fName}</Typography>
+							<Typography sx={{ color: "text.secondary", fontSize: "14px" }}>{evaluator.department}</Typography>
+						</AccordionSummary>
+						<AccordionDetails>
+							<Box className="evaluator_assign_form">
+								<div className="assign_evaluator_row">
+									<Typography sx={{ fontSize: "16px", textAlign: "left" }}>
+										Assigned for : {evaluator.evaluator_connection ? evaluator.evaluator_connection.trainee_name : "Not Assigned"}
+									</Typography>
+								</div>
+							</Box>
+						</AccordionDetails>
+					</Accordion>
+				))}
 			</Box>
 		</Container>
 	);
