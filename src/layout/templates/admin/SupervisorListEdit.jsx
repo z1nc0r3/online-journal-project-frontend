@@ -1,47 +1,50 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Box, Container, Button, Typography, TextField, Select, MenuItem } from "@mui/material";
-import Alert from "@mui/material/Alert";
+import { Box, Container, Button, Typography, TextField } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import "../../../assets/css/list.css";
-import CreateMenu from "../../components/admin/CreateMenu";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const CreateUser = (props) => {
+const UpdateUser = (props) => {
 	const [formData, setFormData] = useState({
 		fName: "",
-		regNo: "",
-		department: "",
 		address: "",
 		email: "",
 		phone: "",
 		estName: "",
-		estAddress: "",
-		startDate: "",
-		duration: "",
-		password: "",
-		confirm_password: "",
+		estAddress: ""
 	});
 
-	const [passwordError, setPasswordError] = useState("");
+	const { id } = useParams();
+
+	const getSupervisorDetails = (event) => {
+		axios.get(`http://127.0.0.1:8000/api/get/supervisor/${id}`).then((response) => {
+			const data = response.data.user;
+
+			if (data.login_error) {
+				console.log("error");
+			} else {
+				setFormData((prevFormData) => ({
+					...prevFormData,
+					fName: data.fName,
+					address: data.address,
+					email: data.email,
+					phone: data.phone,
+					estName: data.estName,
+					estAddress: data.estAddress
+				}));
+			}
+		});
+	};
 
 	useEffect(() => {
-		handlePasswordChange();
-	}, [formData.password]);
-
-	useEffect(() => {
-		handleConfirmPasswordChange();
-	}, [formData.confirm_password]);
+		getSupervisorDetails();
+	}, []);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		setFormData((prevFormData) => ({
-			...prevFormData,
-			[name]: value,
-		}));
-	};
-
-	const handleBlur = (event) => {
-		const { name, value } = event.target;
 		setFormData((prevFormData) => ({
 			...prevFormData,
 			[name]: value,
@@ -74,119 +77,28 @@ const CreateUser = (props) => {
 		}
 	};
 
-	// verify password
-	const handlePasswordChange = () => {
-		const value = formData.password;
-
-		const hasMinimumLength = value.length >= 8;
-		const hasUppercase = /[A-Z]/.test(value);
-		const hasLowercase = /[a-z]/.test(value);
-		const hasNumber = /[0-9]/.test(value);
-		const hasSpecialCharacter = /[!@#$%^&*()]/.test(value);
-
-		if (!hasMinimumLength || !hasUppercase || !hasLowercase || !hasNumber || !hasSpecialCharacter) {
-			setPasswordError("Password must be in standard format.");
-			return false;
-		} else {
-			setPasswordError("");
-			return true;
-		}
-	};
-
-	// confirm password
-	const handleConfirmPasswordChange = () => {
-		if (formData.password !== formData.confirm_password) {
-			setPasswordError("Passwords do not match.");
-			return false;
-		} else {
-			setPasswordError("");
-			return true;
-		}
-	};
-
-	const handleSubmit = (e, userType) => {
+	const handleSubmitSupervisor = (e) => {
 		e.preventDefault();
 
-		if (!handlePasswordChange()) {
-			setPasswordError("Password must be in standard format.");
-			return;
-		}
-
-		if (!handleConfirmPasswordChange()) {
-			setPasswordError("Passwords do not match.");
-			return;
-		}
-
-		setPasswordError("");
-
-		let url;
-		switch (userType) {
-			case "trainee":
-				url = "http://127.0.0.1:8000/api/create/trainee";
-				break;
-			case "supervisor":
-				url = "http://127.0.0.1:8000/api/create/supervisor";
-				break;
-			case "evaluator":
-				url = "http://127.0.0.1:8000/api/create/evaluator";
-				break;
-			default:
-				return;
-		}
-
 		axios
-			.post(url, formData)
+			.post(`http://127.0.0.1:8000/api/update/supervisor/${id}`, formData)
 			.then((response) => {
-				alert("Form submitted successfully!");
+				toast.success("User data updated Successfully. Redirecting...");
+				setTimeout(() => {
+					window.location.href = "..";
+				}, 3000);
 			})
 			.catch((error) => {
-				alert("Error submitting the form. Please try again." + error);
+				toast.error("Error updating user data. Please try again." + error);
 			});
 	};
 
-	const handleSubmitSupervisor = (e) => {
-		handleSubmit(e, "supervisor");
-	};
-
-	const passwordFields = () => {
+	const updateButton = () => {
 		return (
 			<>
-				<Typography>Password </Typography>
-				<TextField
-					variant="outlined"
-					required
-					fullWidth
-					name="password"
-					type="password"
-					onChange={(e) => {
-						setFormData({ ...formData, password: e.target.value });
-						handlePasswordChange();
-					}}
-					onBlur={handleBlur}
-				/>
-
-				{passwordError && (
-					<Alert severity="error" sx={{ marginTop: "10px" }}>
-						{passwordError}
-					</Alert>
-				)}
-
-				<Typography>Confirm Password </Typography>
-				<TextField
-					variant="outlined"
-					required
-					fullWidth
-					name="confirm_password"
-					type="password"
-					onChange={(e) => {
-						setFormData({ ...formData, confirm_password: e.target.value });
-						handleConfirmPasswordChange();
-					}}
-					onBlur={handleBlur}
-				/>
-
-				<Button variant="contained" type="submit" className="register_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
-					Create User
+				<Typography></Typography>
+				<Button variant="contained" type="submit" className="update_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
+					Update User Data
 				</Button>
 			</>
 		);
@@ -220,6 +132,8 @@ const CreateUser = (props) => {
 		<Container component="main" className="create_new_container" maxWidth={false}>
 			<CssBaseline />
 
+			<ToastContainer />
+
 			<form onSubmit={handleSubmitSupervisor}>
 				<Box className="create_new_form">
 					<Box className="create_new_form_left">
@@ -227,15 +141,17 @@ const CreateUser = (props) => {
 						<TextField variant="outlined" required fullWidth name="fName" autoFocus type="text" value={formData.fName} onChange={handleFullNameChange} />
 
 						{emailPhoneFields()}
-
-						{establishmentFields()}
 					</Box>
 
-					<Box className="create_new_form_right">{passwordFields()}</Box>
+					<Box className="create_new_form_right">
+						{establishmentFields()}
+
+						{updateButton()}
+					</Box>
 				</Box>
 			</form>
 		</Container>
 	);
 };
 
-export default CreateUser;
+export default UpdateUser;

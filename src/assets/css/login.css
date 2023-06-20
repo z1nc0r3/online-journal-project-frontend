@@ -22,3 +22,17 @@
 .login_helper_container {
     padding: 2px !important;
 }
+
+/* mobile view css */
+
+@media only screen and (max-width: 600px) {
+
+    .login_form {
+        padding: 1.5rem;
+        margin: 2rem 0.5rem;
+    }
+
+    .login_helper_container {
+        padding: 2px !important;
+    }
+}

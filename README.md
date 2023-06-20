@@ -1,10 +1,6 @@
 # Online Journal - Front-end
 
- Online Journal for Industrial training
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ Online Journal for Industrial training - Frontend project
 
 ## Available Scripts
 
@@ -26,4 +22,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Default Credentials
+### Super Admin
+ - Email : _admin@interntracker.com_
+ - Password : _admin123_

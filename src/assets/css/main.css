@@ -139,3 +139,9 @@ Button.register_button {
 	margin-top: 16px;
 	box-shadow: none;
 }
+
+Button.update_button {
+	height: 3.5rem;
+	margin-top: 8px;
+	box-shadow: none;
+}

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Box, Container, Button, Typography, TextField, Select, MenuItem } from "@mui/material";
-import Alert from "@mui/material/Alert";
 import CssBaseline from "@mui/material/CssBaseline";
 import "../../../assets/css/list.css";
-import CreateMenu from "../../components/admin/CreateMenu";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const CreateUser = (props) => {
+const UpdateUser = () => {
 	const [formData, setFormData] = useState({
 		fName: "",
 		regNo: "",
@@ -18,30 +19,40 @@ const CreateUser = (props) => {
 		estAddress: "",
 		startDate: "",
 		duration: "",
-		password: "",
-		confirm_password: "",
 	});
 
-	const [passwordError, setPasswordError] = useState("");
+	const { id } = useParams();
+
+	const getTraineeDetails = (event) => {
+		axios.get(`http://127.0.0.1:8000/api/get/trainee/${id}`).then((response) => {
+			const data = response.data.user;
+
+			if (data.login_error) {
+				console.log("error");
+			} else {
+				setFormData((prevFormData) => ({
+					...prevFormData,
+					fName: data.fName,
+					regNo: data.regNo,
+					department: data.department,
+					address: data.address,
+					email: data.email,
+					phone: data.phone,
+					estName: data.estName,
+					estAddress: data.estAddress,
+					startDate: data.startDate,
+					duration: data.duration,
+				}));
+			}
+		});
+	};
 
 	useEffect(() => {
-		handlePasswordChange();
-	}, [formData.password]);
-
-	useEffect(() => {
-		handleConfirmPasswordChange();
-	}, [formData.confirm_password]);
+		getTraineeDetails();
+	}, []);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		setFormData((prevFormData) => ({
-			...prevFormData,
-			[name]: value,
-		}));
-	};
-
-	const handleBlur = (event) => {
-		const { name, value } = event.target;
 		setFormData((prevFormData) => ({
 			...prevFormData,
 			[name]: value,
@@ -74,119 +85,28 @@ const CreateUser = (props) => {
 		}
 	};
 
-	// verify password
-	const handlePasswordChange = () => {
-		const value = formData.password;
-
-		const hasMinimumLength = value.length >= 8;
-		const hasUppercase = /[A-Z]/.test(value);
-		const hasLowercase = /[a-z]/.test(value);
-		const hasNumber = /[0-9]/.test(value);
-		const hasSpecialCharacter = /[!@#$%^&*()]/.test(value);
-
-		if (!hasMinimumLength || !hasUppercase || !hasLowercase || !hasNumber || !hasSpecialCharacter) {
-			setPasswordError("Password must be in standard format.");
-			return false;
-		} else {
-			setPasswordError("");
-			return true;
-		}
-	};
-
-	// confirm password
-	const handleConfirmPasswordChange = () => {
-		if (formData.password !== formData.confirm_password) {
-			setPasswordError("Passwords do not match.");
-			return false;
-		} else {
-			setPasswordError("");
-			return true;
-		}
-	};
-
-	const handleSubmit = (e, userType) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		if (!handlePasswordChange()) {
-			setPasswordError("Password must be in standard format.");
-			return;
-		}
-
-		if (!handleConfirmPasswordChange()) {
-			setPasswordError("Passwords do not match.");
-			return;
-		}
-
-		setPasswordError("");
-
-		let url;
-		switch (userType) {
-			case "trainee":
-				url = "http://127.0.0.1:8000/api/create/trainee";
-				break;
-			case "supervisor":
-				url = "http://127.0.0.1:8000/api/create/supervisor";
-				break;
-			case "evaluator":
-				url = "http://127.0.0.1:8000/api/create/evaluator";
-				break;
-			default:
-				return;
-		}
-
 		axios
-			.post(url, formData)
+			.post(`http://127.0.0.1:8000/api/update/trainee/${id}`, formData)
 			.then((response) => {
-				alert("Form submitted successfully!");
+				toast.success("User data updated Successfully. Redirecting...");
+				setTimeout(() => {
+					window.location.href = "..";
+				}, 3000);
 			})
 			.catch((error) => {
-				alert("Error submitting the form. Please try again." + error);
+				toast.error("Error updating user data. Please try again." + error);
 			});
 	};
 
-	const handleSubmitTrainee = (e) => {
-		handleSubmit(e, "trainee");
-	};
-
-	const passwordFields = () => {
+	const submitButton = () => {
 		return (
 			<>
-				<Typography>Password </Typography>
-				<TextField
-					variant="outlined"
-					required
-					fullWidth
-					name="password"
-					type="password"
-					onChange={(e) => {
-						setFormData({ ...formData, password: e.target.value });
-						handlePasswordChange();
-					}}
-					onBlur={handleBlur}
-				/>
-
-				{passwordError && (
-					<Alert severity="error" sx={{ marginTop: "10px" }}>
-						{passwordError}
-					</Alert>
-				)}
-
-				<Typography>Confirm Password </Typography>
-				<TextField
-					variant="outlined"
-					required
-					fullWidth
-					name="confirm_password"
-					type="password"
-					onChange={(e) => {
-						setFormData({ ...formData, confirm_password: e.target.value });
-						handleConfirmPasswordChange();
-					}}
-					onBlur={handleBlur}
-				/>
-
-				<Button variant="contained" type="submit" className="register_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
-					Create User
+				<Typography></Typography>
+				<Button variant="contained" type="submit" className="update_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
+					Update User Data
 				</Button>
 			</>
 		);
@@ -237,7 +157,9 @@ const CreateUser = (props) => {
 		<Container component="main" className="create_new_container" maxWidth={false}>
 			<CssBaseline />
 
-			<form onSubmit={handleSubmitTrainee}>
+			<ToastContainer />
+
+			<form onSubmit={handleSubmit}>
 				<Box className="create_new_form">
 					<Box className="create_new_form_left">
 						<Typography>Full Name </Typography>
@@ -274,7 +196,7 @@ const CreateUser = (props) => {
 							</Box>
 						</Box>
 
-						{passwordFields()}
+						{submitButton()}
 					</Box>
 				</Box>
 			</form>
@@ -282,4 +204,4 @@ const CreateUser = (props) => {
 	);
 };
 
-export default CreateUser;
+export default UpdateUser;
