@@ -5,6 +5,10 @@ import { Link } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import "../../../assets/css/main.css";
 
+//to print the PDF files
+import jsPDF from 'jspdf';
+
+
 function LeftWidget() {
 	const [activeButton, setActiveButton] = useState(0);
 
@@ -13,6 +17,8 @@ function LeftWidget() {
 		{ label: "Supervisor List", path: "/admin/supervisor_list" },
 		{ label: "Evaluator List", path: "/admin/evaluator_list" },
 		{ label: "Create User", path: "/admin/create_user/trainee" },
+		{ label: "Print", path: "/admin/print" },
+
 	];
 
 	return (
