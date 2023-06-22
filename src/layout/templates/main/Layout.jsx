@@ -55,7 +55,7 @@ const titleMap = {
 	trainee_user_instruction: "Instruction",
 	trainee_user_edit_data: "Edit User Data",
 	trainee_current_month_report: "Current Month Report",
-	
+
 	supervisor_dashboard: "Report for Review",
 	supervisor_trainee_list: "Trainee List",
 	supervisor_user_edit_data: "Edit User Data",
@@ -149,22 +149,21 @@ const Layout = (props) => {
 			</Typography>
 
 			<Grid container className="list_box_main_grid">
-				<Grid item lg={3}>
+				<Grid item xs={12} sm={4} md={4} lg={3}>
 					{LeftWidget && <LeftWidget />}
 				</Grid>
 
-				<Grid item lg={6}>
+				<Grid item xs={12} sm={8} md={8} lg={6}>
 					{Main && <Main />}
 				</Grid>
 
-				<Grid item lg={2.2}>
+				<Grid item xs={0} sm={0} md={0} lg={3} className="calendar">
 					<Container className="calendar_container">
 						<LocalizationProvider dateAdapter={AdapterDayjs}>
 							<DateCalendar readOnly />
 						</LocalizationProvider>
 					</Container>
 				</Grid>
-
 			</Grid>
 		</Container>
 	);
