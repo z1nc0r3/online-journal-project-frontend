@@ -57,7 +57,7 @@ function EvaluatorList() {
 						</AccordionSummary>
 						<AccordionDetails>
 							<Box className="evaluator_assign_form">
-								<div className="assign_evaluator_row">
+								<div className="assigned_student">
 									<Typography sx={{ fontSize: "16px", textAlign: "left" }}>
 										Assigned for : {evaluator.evaluator_connection ? evaluator.evaluator_connection.trainee_name : "Not Assigned"}
 									</Typography>
