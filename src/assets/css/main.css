@@ -75,7 +75,6 @@ Button.left_widget_button.active {
 
 .list_box_main_grid {
     display: flex;
-    justify-content: center;
 }
 
 /* Calendar */
@@ -89,7 +88,7 @@ Button.left_widget_button.active {
 	background-color: white;
 	border-radius: 1.5rem;
 	padding: 1rem;
-    width: 300px !important;
+    width: auto !important;
 	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -144,4 +143,26 @@ Button.update_button {
 	height: 3.5rem;
 	margin-top: 8px;
 	box-shadow: none;
+}
+
+@media only screen and (max-width: 1200px) {
+	.calendar {
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	.left_widget {
+		padding: 1rem;
+	}
+
+	Button.left_widget_button {
+		font-size: 12px;
+	}
+}
+
+/* mobile view css */
+
+@media only screen and (max-width: 480px) {
+	
 }
