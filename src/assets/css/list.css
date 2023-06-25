@@ -99,6 +99,8 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
 .create_new_form {
@@ -245,15 +247,18 @@ Button.save_button_trianee:hover {
     text-align: left;
 }
 
-/* max-width: 1200px */
 @media only screen and (max-width: 1200px) {
-    .list_container {
+    .list_container, .create_new_container {
         padding-right: 16px !important;
+    }
+
+    .create_new_form {
+        padding: 1.5rem;
     }
 }
 
 @media only screen and (max-width: 900px) {
-    .list_container {
+    .list_container, .create_new_container {
         padding-left: 16px !important;
     }
 
@@ -276,12 +281,13 @@ Button.save_button_trianee:hover {
     .trainee_assign_form .MuiButton-root {
         font-size: 14px;
     }
+
 }
 
 /* mobile view css */
 
 @media only screen and (max-width: 600px) {
-    .list_container {
+    .list_container, .create_new_container {
         padding-left: 16px !important;
     }
 
@@ -311,5 +317,28 @@ Button.save_button_trianee:hover {
 
     .supervisor_assign_form p, .evaluator_assign_form p {
         font-size: 14px;
+    }
+
+    .create_menu_container {
+        max-width: 400px !important;
+    }
+
+    .create_new_form {
+        padding: 1rem;
+        flex-direction: column;
+    }
+
+    .create_new_form_left, .create_new_form_right {
+        width: 100%;
+    }
+
+    .create_new_form p {
+        font-size: 14px;
+        line-height: 1;
+    }
+
+    Button.create_menu_button {
+        font-size: 14px;
+        width: 6.5rem;
     }
 }
