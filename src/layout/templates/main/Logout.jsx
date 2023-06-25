@@ -1,4 +1,5 @@
 import Button from "@mui/material/Button";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const LogoutButton = () => {
 	const handleLogout = () => {
@@ -10,7 +11,7 @@ const LogoutButton = () => {
         window.location.href = "/login";
 	};
 
-	return (<Button onClick={handleLogout} className="logout_button">Logout</Button>);
+	return (<Button onClick={handleLogout} className="logout_button"><LogoutIcon />&nbsp;&nbsp;Logout</Button>);
 };
 
 export default LogoutButton;
