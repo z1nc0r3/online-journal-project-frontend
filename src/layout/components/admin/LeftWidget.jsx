@@ -18,7 +18,6 @@ function LeftWidget() {
 		{ label: "Evaluator List", path: "/admin/evaluator_list" },
 		{ label: "Create User", path: "/admin/create_user/trainee" },
 		{ label: "Print", path: "/admin/print" },
-
 	];
 
 	return (

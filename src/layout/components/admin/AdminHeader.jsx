@@ -9,15 +9,16 @@ import Menu from "@mui/material/Menu";
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import Button from "@mui/material/Button";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import SupervisorAccount from "@mui/icons-material/SupervisorAccount";
+import AssignmentInd from "@mui/icons-material/AssignmentInd";
+import AddCircle from "@mui/icons-material/AddCircle";
+import LocalPrintShop from "@mui/icons-material/LocalPrintshop";
 import { Link } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
 import LogoutButton from "../../templates/main/Logout";
@@ -28,10 +29,6 @@ const pages = ["Trainee List", "Supervisor List", "Evaluation List", "Create Use
 function ResponsiveAppBar() {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 
-	const handleOpenNavMenu = (event) => {
-		setAnchorElNav(event.currentTarget);
-	};
-
 	const handleCloseNavMenu = () => {
 		setAnchorElNav(null);
 	};
@@ -39,8 +36,6 @@ function ResponsiveAppBar() {
 	const [state, setState] = React.useState({
 		left: false,
 	});
-
-	const [activeButton, setActiveButton] = useState(0);
 
 	const toggleDrawer = (anchor, open) => (event) => {
 		if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
@@ -51,26 +46,42 @@ function ResponsiveAppBar() {
 	};
 
 	const buttons = [
-		{ label: "Trainee List", path: "/admin/trainee_list" },
+		{ label: "Trainee List", path: "/admin/trainee_list", icon: "SupervisorAccount" },
 		{ label: "Supervisor List", path: "/admin/supervisor_list" },
 		{ label: "Evaluator List", path: "/admin/evaluator_list" },
 		{ label: "Create User", path: "/admin/create_user/trainee" },
+		{ label: "Print", path: "/admin/print" },
 	];
 
 	const list = (anchor) => (
 		<Box sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }} role="presentation" onClick={toggleDrawer(anchor, false)} onKeyDown={toggleDrawer(anchor, false)}>
 			<List>
-				{["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-					<ListItem key={text} disablePadding>
-						<ListItemButton>
-							<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-							<ListItemText primary={text} />
+				{buttons.map((button, index) => (
+					<ListItem key={button.label} disablePadding>
+						<ListItemButton component={Link} to={button.path}>
+							<ListItemIcon>{handleIcon(index)}</ListItemIcon>
+							<ListItemText primary={button.label} className="sideBarLinkText" />
 						</ListItemButton>
 					</ListItem>
 				))}
 			</List>
 		</Box>
 	);
+
+	function handleIcon(index) {
+		switch (index) {
+			case 0:
+				return <AccountCircle />;
+			case 1:
+				return <SupervisorAccount />;
+			case 2:
+				return <AssignmentInd />;
+			case 3:
+				return <AddCircle />;
+			default:
+				return <LocalPrintShop />;
+		}
+	}
 
 	return (
 		<AppBar position="static" sx={{ marginBottom: 3 }}>
