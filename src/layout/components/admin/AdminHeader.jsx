@@ -85,7 +85,7 @@ function ResponsiveAppBar() {
 
 	return (
 		<AppBar position="static" sx={{ marginBottom: 3 }}>
-			<Container maxWidth="xl">
+			<Container maxWidth="">
 				<Toolbar disableGutters>
 					<Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
 						<Drawer anchor={"left"} open={state["left"]} onClose={toggleDrawer("left", false)}>
