@@ -138,6 +138,7 @@ const Layout = (props) => {
 			{Header && <Header />}
 
 			<Typography
+				className="dashboard_title"
 				component="h1"
 				sx={{
 					fontWeight: "medium",
@@ -149,11 +150,11 @@ const Layout = (props) => {
 			</Typography>
 
 			<Grid container className="list_box_main_grid">
-				<Grid item xs={12} sm={4} md={4} lg={3}>
+				<Grid item xs={0} sm={0} md={4} lg={3}>
 					{LeftWidget && <LeftWidget />}
 				</Grid>
 
-				<Grid item xs={12} sm={8} md={8} lg={6}>
+				<Grid item xs={12} sm={12} md={8} lg={6}>
 					{Main && <Main />}
 				</Grid>
 
