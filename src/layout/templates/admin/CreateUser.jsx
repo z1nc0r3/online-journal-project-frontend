@@ -7,6 +7,7 @@ import "../../../assets/css/list.css";
 import CreateMenu from "../../components/admin/CreateMenu";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 const CreateUser = (props) => {
 	const [formData, setFormData] = useState({
@@ -234,6 +235,53 @@ const CreateUser = (props) => {
 		);
 	};
 
+	const [selectedFile, setSelectedFile] = useState(null);
+
+	//bulk data entry
+	const bulkdataentry = () => {
+
+		const handleFileUpload = (e) => {
+			const file = e.target.files[0];
+			setSelectedFile(file);
+		}
+		
+		return (
+			<>
+			<Typography>Upload File</Typography>
+			<input type="file" accept=".txt" onChange={handleFileUpload} />
+		  
+			<Button
+				variant="contained"
+				type="submit"
+				className="register_button"
+				name="bulk_register"
+				onClick={handleBulkDataUpload}
+				sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
+				Import
+			</Button>
+			</>
+		);
+		  
+	};
+
+	const handleBulkDataUpload = () => {
+		if (selectedFile) {
+		  const formData = new FormData();
+		  formData.append("file", selectedFile);
+	  
+		  axios
+			.post("http://your-php-api-endpoint", formData)
+			.then((response) => {
+			  toast.success("Bulk data uploaded successfully.");
+			})
+			.catch((error) => {
+			  toast.error("Error uploading bulk data. Please try again.");
+			});
+		} else {
+		  toast.error("Please select a file.");
+		}
+	  };
+
 	const establishmentFields = () => {
 		return (
 			<>
@@ -271,6 +319,7 @@ const CreateUser = (props) => {
 								<TextField variant="outlined" required fullWidth name="address" type="text" value={formData.address} onChange={handleChange} />
 
 								{emailPhoneFields()}
+
 							</Box>
 
 							<Box className="create_new_form_right">
@@ -294,7 +343,12 @@ const CreateUser = (props) => {
 								</Box>
 
 								{passwordFields()}
+
+								<Box>
+								{bulkdataentry()}
+								</Box>
 							</Box>
+						
 						</Box>
 					</form>
 				</Container>
