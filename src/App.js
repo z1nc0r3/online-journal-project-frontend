@@ -35,6 +35,8 @@ function App() {
 							<Route path='/admin/create_user/evaluator' element={<Layout layout="admin_create_user" user="evaluator"/>}></Route>
 							<Route path='/admin/evaluator_list/delete/:id' element={<Layout layout="admin_evaluator_delete"/>}></Route>
 
+							<Route path='/admin/print' element={<Layout layout="admin_print"/>}></Route>
+
 							<Route path='/trainee/dashboard' element={<Layout layout="trainee_dashboard"/>}></Route>
 							<Route path='/trainee/past_reports' element={<Layout layout="trainee_past_reports"/>}></Route>
 							<Route path='/trainee/user_instruction' element={<Layout layout="trainee_user_instruction"/>}></Route>
