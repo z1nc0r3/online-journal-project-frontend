@@ -3,6 +3,7 @@ import jsPDF from 'jspdf';
 import { Button } from '@mui/material';
 import axios from "axios";
 import { useState, useEffect } from "react";
+import 'jspdf-autotable';
 
 
 
@@ -19,14 +20,29 @@ const PrintPDF = () => {
 				console.log("error");
 			} else {
                 console.log(data.trainees);
-				// Add content to the PDF
                 let y = 10;
+				// Add content to the PDF
+                const tableHeaders = ['ID', 'Name', 'Department',];
 
-                // Add data to the PDF
-                data.trainees.forEach((item) => {
-                  doc.text(`Name: ${item.fName}     Department: ${item.department}`,5, y);
-                  y += 5; // Adjust the vertical position for the next item
-                });
+                // Define the table rows
+                const tableRows = data.trainees.map(item => [item.id, item.fName, item.department ,]);
+                
+                // Set the table options
+                const tableOptions = {
+                  // eslint-disable-next-line no-undef
+                  startY: y + 10, // Adjust the vertical position for the table
+                  margin: { top: 10 },
+                  styles: { overflow: 'linebreak' },
+                  headStyles: { fillColor: '#dddddd' },
+                  columnStyles: {
+                    0: { cellWidth: 15 },  // Adjust the width of the ID column
+                    1: { cellWidth: 50 },  // Adjust the width of the Name column
+                    2: { cellWidth: 50 },  // Adjust the width of the department column
+                  }
+                };
+                
+                // Add the table to the PDF
+                doc.autoTable(tableHeaders, tableRows, tableOptions);
               
                 // Save the PDF
                 doc.save('trainees.pdf');
@@ -50,12 +66,28 @@ const PrintPDF = () => {
                  console.log(data.evaluators);
                  // Add content to the PDF
                  let y = 10;
- 
-                 // Add data to the PDF
-                 data.evaluators.forEach((item) => {
-                   doc.text(`ID: ${item.id}     Name: ${item.fName}`,5, y);
-                   y += 5; // Adjust the vertical position for the next item
-                 });
+
+                // Add content to the PDF
+                const tableHeaders = ['ID', 'Name',];
+
+                // Define the table rows
+                const tableRows = data.evaluators.map(item => [item.id, item.fName,]);
+                
+                // Set the table options
+                const tableOptions = {
+                // eslint-disable-next-line no-undef
+                startY: y + 10, // Adjust the vertical position for the table
+                margin: { top: 10 },
+                styles: { overflow: 'linebreak' },
+                headStyles: { fillColor: '#dddddd' },
+                columnStyles: {
+                    0: { cellWidth: 15 },  // Adjust the width of the ID column
+                    1: { cellWidth: 50 },  // Adjust the width of the Name column
+                }
+                };
+                
+                // Add the table to the PDF
+                doc.autoTable(tableHeaders, tableRows, tableOptions);
                
                  // Save the PDF
                  doc.save('evaluators.pdf');
@@ -78,11 +110,30 @@ const PrintPDF = () => {
                  // Add content to the PDF
                  let y = 10;
  
-                 // Add data to the PDF
-                 data.supervisors.forEach((item) => {
-                   doc.text(`ID: ${item.id}     Name: ${item.fName}     Estate: ${item.estName}`,5, y);
-                   y += 5; // Adjust the vertical position for the next item
-                 });
+                 // Add content to the PDF
+                const tableHeaders = ['ID', 'Name', 'EstName',];
+
+                // Define the table rows
+                const tableRows = data.supervisors.map(item => [item.id, item.fName, item.estName ,]);
+                
+                // Set the table options
+                const tableOptions = {
+                  // eslint-disable-next-line no-undef
+                  startY: y + 10, // Adjust the vertical position for the table
+                  margin: { top: 10 },
+                  styles: { overflow: 'linebreak' },
+                  headStyles: { fillColor: '#dddddd' },
+                  columnStyles: {
+                    0: { cellWidth: 15 },  // Adjust the width of the ID column
+                    1: { cellWidth: 50 },  // Adjust the width of the Name column
+                    2: { cellWidth: 50 },  // Adjust the width of the department column
+                    3: { cellWidth: 50 },  // Adjust the width of the evaluator column
+                    4: { cellWidth: 50 },  // Adjust the width of the supervisor column
+                  }
+                };
+                
+                // Add the table to the PDF
+                doc.autoTable(tableHeaders, tableRows, tableOptions);
                
                  // Save the PDF
                  doc.save('supervisors.pdf');
