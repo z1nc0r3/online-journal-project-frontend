@@ -88,7 +88,7 @@ function TraineeList() {
 							<form className="trainee_info_form" noValidate autoComplete="off">
 								<Box className="trainee_assign_form" component="form">
 									<div className="assign_supervisor_row">
-										<Typography sx={{ width: "35%", fontSize: "14px" }}>Supervisor :</Typography>
+										<Typography sx={{ width: "35%", fontSize: "14px" }}>Supervisor</Typography>
 										<Select
 											variant="outlined"
 											value={trainee.trainee_connection && trainee.trainee_connection !== "" ? trainee.trainee_connection.supervisor_name : ""}
@@ -107,7 +107,7 @@ function TraineeList() {
 									</div>
 
 									<div className="assign_evaluator_row">
-										<Typography sx={{ width: "35%", fontSize: "14px" }}>Evaluator :</Typography>
+										<Typography sx={{ width: "35%", fontSize: "14px" }}>Evaluator</Typography>
 										<Select
 											variant="outlined"
 											value={trainee.trainee_connection ? trainee.trainee_connection.evaluator_name : ""}

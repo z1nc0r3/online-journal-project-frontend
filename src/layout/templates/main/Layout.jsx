@@ -15,6 +15,8 @@ import AdminEvaluatorListEdit from "../admin/EvaluatorListEdit";
 import AdminSupervisorListEdit from "../admin/SupervisorListEdit";
 import CreateUser from "../admin/CreateUser";
 
+import AdminPrint from "../admin/print";
+
 import TraineeHeader from "../../components/trainee/TraineeHeader";
 import TraineeDashboard from "../trainee/dashboard";
 import TraineeLeftWidget from "../../components/trainee/LeftWidget";
@@ -41,6 +43,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import "../../../assets/css/main.css";
 
+//to print the PDF files
+import jsPDF from 'jspdf';
+
+
 const titleMap = {
 	admin_trainee_list: "Trainee List",
 	admin_supervisor_list: "Supervisor List",
@@ -49,13 +55,14 @@ const titleMap = {
 	admin_trainee_edit: "Update Trainee Detail",
 	admin_evaluator_edit: "Update Evaluator Detail",
 	admin_supervisor_edit: "Update Supervisor Detail",
+	admin_print: "print",
 
 	trainee_dashboard: "Week no :",
 	trainee_past_reports: "Past Report",
 	trainee_user_instruction: "Instruction",
 	trainee_user_edit_data: "Edit User Data",
 	trainee_current_month_report: "Current Month Report",
-	
+
 	supervisor_dashboard: "Report for Review",
 	supervisor_trainee_list: "Trainee List",
 	supervisor_user_edit_data: "Edit User Data",
@@ -97,6 +104,8 @@ const Layout = (props) => {
 				return { Header: AdminHeader, LeftWidget: AdminLeftWidget, Main: AdminSupervisorListEdit };
 			case "admin_evaluator_edit":
 				return { Header: AdminHeader, LeftWidget: AdminLeftWidget, Main: AdminEvaluatorListEdit };
+			case "admin_print":
+				return { Header: AdminHeader, LeftWidget: AdminLeftWidget, Main: AdminPrint };
 			case "trainee_dashboard":
 				return { Header: TraineeHeader, LeftWidget: TraineeLeftWidget, Main: TraineeDashboard };
 			case "trainee_past_reports":
@@ -138,6 +147,7 @@ const Layout = (props) => {
 			{Header && <Header />}
 
 			<Typography
+				className="dashboard_title"
 				component="h1"
 				sx={{
 					fontWeight: "medium",
@@ -149,22 +159,21 @@ const Layout = (props) => {
 			</Typography>
 
 			<Grid container className="list_box_main_grid">
-				<Grid item lg={3}>
+				<Grid item xs={0} sm={0} md={4} lg={3}>
 					{LeftWidget && <LeftWidget />}
 				</Grid>
 
-				<Grid item lg={6}>
+				<Grid item xs={12} sm={12} md={8} lg={6}>
 					{Main && <Main />}
 				</Grid>
 
-				<Grid item lg={2.2}>
+				<Grid item xs={0} sm={0} md={0} lg={3} className="calendar">
 					<Container className="calendar_container">
 						<LocalizationProvider dateAdapter={AdapterDayjs}>
 							<DateCalendar readOnly />
 						</LocalizationProvider>
 					</Container>
 				</Grid>
-
 			</Grid>
 		</Container>
 	);

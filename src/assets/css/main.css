@@ -12,14 +12,18 @@
 	display: flex;
 	height: 100vh !important;
 	overflow: auto;
-	padding-bottom: 90px;
+	padding-bottom: 40px;
+}
+
+.sideBarLinkText span {
+	font-weight: 500;
 }
 
 /* Admin Header */
 
 Button.logout_button {
 	color: white;
-	width: 5rem;
+	width: 7rem;
 	border-radius: 0.5rem;
 	box-shadow: none;
 }
@@ -32,8 +36,8 @@ Button.logout_button:hover {
 /* Left Widget */
 
 .left_widget_container {
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 .left_widget {
@@ -74,43 +78,41 @@ Button.left_widget_button.active {
 }
 
 .list_box_main_grid {
-    display: flex;
-    justify-content: center;
+	display: flex;
 }
 
 /* Calendar */
 
 .calendar_container {
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 .MuiDateCalendar-root {
 	background-color: white;
 	border-radius: 1.5rem;
 	padding: 1rem;
-    width: 300px !important;
+	width: auto !important;
 	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
 .MuiPickersDay-today {
-    background-color: #2a95ff !important;
-    color: white !important;
-    font-weight: 500 !important;
-    border: none !important;
+	background-color: #2a95ff !important;
+	color: white !important;
+	font-weight: 500 !important;
+	border: none !important;
 }
 
 /* Create Menu */
 
 .create_menu_container {
-	display: flex;
-	justify-content: center;
+	max-width: 600px !important;
 }
 
 .create_menu {
 	display: flex;
 	justify-content: space-between;
-	padding: 1rem 5rem 2rem 5rem;
+	padding: 0rem 0 1rem 0;
 }
 
 Button.create_menu_button {
@@ -119,7 +121,7 @@ Button.create_menu_button {
 	color: #414141;
 	font-size: 16px;
 	height: 3rem;
-	width: 12rem;
+	width: 10rem;
 	border-radius: 0.5rem;
 	box-shadow: none;
 }
@@ -144,4 +146,47 @@ Button.update_button {
 	height: 3.5rem;
 	margin-top: 8px;
 	box-shadow: none;
+}
+
+@media screen and (max-width: 1400px) {
+	.create_menu_container {
+		max-width: 660px !important;
+	}
+}
+
+@media only screen and (max-width: 1200px) {
+	.dashboard_container {
+		padding-bottom: 20px;
+	}
+
+	.calendar {
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	.left_widget {
+		display: none;
+	}
+
+	Button.left_widget_button {
+		font-size: 12px;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.dashboard_title {
+		font-size: 1.5rem !important;
+		margin-bottom: 20px !important;
+	}
+
+	.left_widget {
+		flex-direction: row;
+		padding: 0.5rem;
+		margin-bottom: 20px;
+	}
+
+	.left_widget_link {
+		width: 80%;
+	}
 }
