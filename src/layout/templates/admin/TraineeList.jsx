@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Box, Container, Button } from "@mui/material";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import { CssBaseline, TextField, Typography, Select, MenuItem } from "@mui/material";
+import { CssBaseline, Typography, Select, MenuItem } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "../../../assets/css/list.css";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function TraineeList() {
 	const [expanded, setExpanded] = React.useState(false);
@@ -15,12 +17,36 @@ function TraineeList() {
 	const [supervisors, setSupervisor] = React.useState([]);
 	const [evaluators, setEvaluator] = React.useState([]);
 
+	const [formData, setFormData] = useState({});
+
 	const handleChange = (panel) => (event, isExpanded) => {
 		setExpanded(isExpanded ? panel : false);
 	};
 
-	const handleUpdate = (event) => {
-		event.preventDefault();
+	const handleSupervisorUpdate = (trainee) => (event) => {
+		const { value } = event.target;
+
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			[trainee.id]: {
+				...prevFormData[trainee.id],
+				supervisor_id: supervisors.find((supervisor) => supervisor.fName === value)?.id || "",
+				supervisor: value,
+			},
+		}));
+	};
+
+	const handleEvaluatorUpdate = (trainee) => (event) => {
+		const { value } = event.target;
+
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			[trainee.id]: {
+				...prevFormData[trainee.id],
+				evaluator_id: evaluators.find((evaluator) => evaluator.fName === value)?.id || "",
+				evaluator: value,
+			},
+		}));
 	};
 
 	const getTraineeList = (event) => {
@@ -30,7 +56,18 @@ function TraineeList() {
 			if (data.login_error) {
 				console.log("error");
 			} else {
+				const traineesData = data.trainees.reduce((acc, trainee) => {
+					acc[trainee.id] = {
+						supervisor_id: trainee.trainee_connection ? trainee.trainee_connection.supervisor_id : "",
+						supervisor: trainee.trainee_connection ? trainee.trainee_connection.supervisor_name : "",
+						evaluator_id: trainee.trainee_connection ? trainee.trainee_connection.evaluator_id : "",
+						evaluator: trainee.trainee_connection ? trainee.trainee_connection.evaluator_name : "",
+					};
+					return acc;
+				}, {});
+
 				setTrainees(data.trainees);
+				setFormData(traineesData);
 			}
 		});
 	};
@@ -59,6 +96,33 @@ function TraineeList() {
 		});
 	};
 
+	const handleSubmit = (event, trainee) => {
+		event.preventDefault();
+
+		// Assuming trainee is the current trainee object being submitted
+		const updatedTrainee = {
+			...trainee,
+			trainee_connection: {
+				supervisor_id: formData[trainee.id]?.supervisor_id,
+				supervisor_name: formData[trainee.id]?.supervisor,
+				evaluator_id: formData[trainee.id]?.evaluator_id,
+				evaluator_name: formData[trainee.id]?.evaluator,
+			},
+		};
+
+		axios
+			.post("http://127.0.0.1:8000/api/update/assign/", updatedTrainee)
+			.then((response) => {
+				toast.success(response.data.message);
+				setTimeout(() => {
+					window.location.href = 'trainee_list';
+				}, 2000);
+			})
+			.catch((error) => {
+				toast.error(error.response.data.message);
+			});
+	};
+
 	useEffect(() => {
 		getTraineeList();
 		getSupervisorList();
@@ -68,6 +132,8 @@ function TraineeList() {
 	return (
 		<Container component="main" className="list_container" maxWidth={false}>
 			<CssBaseline />
+
+			<ToastContainer />
 
 			<Box className="list_box">
 				{trainees.map((trainee, i) => (
@@ -85,18 +151,18 @@ function TraineeList() {
 							<Typography sx={{ color: "text.secondary", fontSize: "14px" }}>{trainee.department}</Typography>
 						</AccordionSummary>
 						<AccordionDetails>
-							<form className="trainee_info_form" noValidate autoComplete="off">
-								<Box className="trainee_assign_form" component="form">
+							<form className="trainee_info_form" noValidate autoComplete="off" onSubmit={(event) => handleSubmit(event, trainee)}>
+								<Box className="trainee_assign_form">
 									<div className="assign_supervisor_row">
 										<Typography sx={{ width: "35%", fontSize: "14px" }}>Supervisor</Typography>
 										<Select
 											variant="outlined"
-											value={trainee.trainee_connection && trainee.trainee_connection !== "" ? trainee.trainee_connection.supervisor_name : ""}
+											value={formData[trainee.id]?.supervisor || ""}
 											required
 											fullWidth
-											name="duration"
+											name="supervisor"
 											type="text"
-											onChange={handleUpdate}>
+											onChange={handleSupervisorUpdate(trainee)}>
 											<MenuItem value="">Not Assigned</MenuItem>
 											{supervisors.map((supervisor, i) => (
 												<MenuItem key={i} value={supervisor.fName}>
@@ -110,12 +176,13 @@ function TraineeList() {
 										<Typography sx={{ width: "35%", fontSize: "14px" }}>Evaluator</Typography>
 										<Select
 											variant="outlined"
-											value={trainee.trainee_connection ? trainee.trainee_connection.evaluator_name : ""}
+											value={formData[trainee.id]?.evaluator || ""}
 											required
 											fullWidth
-											name="duration"
+											name="evaluator"
 											type="text"
-											onChange={handleUpdate}>
+											onChange={handleEvaluatorUpdate(trainee)}>
+											<MenuItem value="">Not Assigned</MenuItem>
 											{evaluators.map((evaluator, i) => (
 												<MenuItem key={i} value={evaluator.fName}>
 													{evaluator.fName}
