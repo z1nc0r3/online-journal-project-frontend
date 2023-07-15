@@ -115,7 +115,7 @@ function TraineeList() {
 			.then((response) => {
 				toast.success(response.data.message);
 				setTimeout(() => {
-					window.location.href = 'trainee_list';
+					window.location.reload();
 				}, 2000);
 			})
 			.catch((error) => {

@@ -145,7 +145,7 @@ const CreateUser = (props) => {
 				}, 3000); // 3 seconds delay before redirecting
 			})
 			.catch((error) => {
-				toast.error("Error submitting the form. Please try again." + error);
+				toast.error("Error submitting the form." + error.response.data.message);
 			});
 	};
 
