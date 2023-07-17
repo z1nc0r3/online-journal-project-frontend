@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 
+
 const CreateUser = (props) => {
 	const [formData, setFormData] = useState({
 		fName: "",
@@ -26,6 +27,7 @@ const CreateUser = (props) => {
 	});
 
 	const [passwordError, setPasswordError] = useState("");
+	
 
 	useEffect(() => {
 		handlePasswordChange();
@@ -168,7 +170,7 @@ const CreateUser = (props) => {
 				<Typography>Password </Typography>
 				<TextField
 					variant="outlined"
-					required
+					//required
 					fullWidth
 					name="password"
 					type="password"
@@ -236,52 +238,92 @@ const CreateUser = (props) => {
 	};
 
 	const [selectedFile, setSelectedFile] = useState(null);
+	const [uploadedFiles, setUploadedFiles] = useState([]);
+
+	const handleFileUpload = (e) => {
+		const file = e.target.files[0];
+		setSelectedFile(file);
+	};
+
 
 	//bulk data entry
 	const bulkdataentry = () => {
-
-		const handleFileUpload = (e) => {
-			const file = e.target.files[0];
-			setSelectedFile(file);
-		}
-		
 		return (
-			<>
+		  <>
 			<Typography>Upload File</Typography>
 			<input type="file" accept=".txt" onChange={handleFileUpload} />
-		  
-			<Button
-				variant="contained"
-				type="submit"
-				className="register_button"
-				name="bulk_register"
-				onClick={handleBulkDataUpload}
-				sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
-				Import
-			</Button>
-			</>
-		);
-		  
-	};
-
-	const handleBulkDataUpload = () => {
-		if (selectedFile) {
-		  const formData = new FormData();
-		  formData.append("file", selectedFile);
 	  
-		  axios
-			.post("http://your-php-api-endpoint", formData)
-			.then((response) => {
-			  toast.success("Bulk data uploaded successfully.");
-			})
-			.catch((error) => {
-			  toast.error("Error uploading bulk data. Please try again.");
+			<Button
+			  variant="contained"
+			  type="submit"
+			  className="register_button"
+			  name="bulk_register"
+			  onClick={handleBulkDataUpload}
+			  sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}
+			>
+			  Import
+			</Button>
+		  </>
+		);
+	  };
+	  
+
+	  const handleBulkDataUpload = () => {
+		if (selectedFile) {
+		  const reader = new FileReader();
+		  reader.onload = function (e) {
+			const fileContent = e.target.result;
+			const userData = fileContent.split("\n\n").map((data) => {
+			  const fields = data.split(",").map((field) => field.trim());
+			  const user = {};
+			  for (let field of fields) {
+				const [key, value] = field.split(":");
+				user[key.trim()] = value.trim();
+				}
+			  return user;
 			});
+	  
+			for (let user of userData) {
+			  const { role, name, regno, department, address, email, phone, estName, estAddress, startDate, duration, password, confirm_password} = user;
+	  
+			  setFormData((prevFormData) => ({
+				...prevFormData,
+				fName: name,
+				regNo: regno,
+				department: department,
+				address: address,
+				email: email,
+				phone: phone,
+				estName: estName,
+				estAddress: estAddress,
+				startDate: startDate,
+				duration: duration,
+				password: password,
+				confirm_password: confirm_password, // Assuming confirm_password field should match the password
+			}));
+	  
+			switch (role) {
+				case "trainee":
+				  handleSubmitTrainee({ preventDefault: () => {} });
+				  break;
+				case "supervisor":
+				  handleSubmitSupervisor({ preventDefault: () => {} });
+				  break;
+				case "evaluator":
+				  handleSubmitEvaluator({ preventDefault: () => {} });
+				  break;
+				default:
+				  break;
+			  }
+			}
+		};
+		reader.readAsText(selectedFile);
 		} else {
 		  toast.error("Please select a file.");
 		}
-	  };
-
+	};
+	  
+	  
 	const establishmentFields = () => {
 		return (
 			<>
