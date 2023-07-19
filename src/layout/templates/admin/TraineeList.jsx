@@ -53,8 +53,8 @@ function TraineeList() {
 		axios.get("http://127.0.0.1:8000/api/get/trainee/list").then((response) => {
 			const data = response.data;
 
-			if (data.login_error) {
-				console.log("error");
+			if (data.error) {
+				console.log(data.error);
 			} else {
 				const traineesData = data.trainees.reduce((acc, trainee) => {
 					acc[trainee.id] = {
@@ -76,8 +76,8 @@ function TraineeList() {
 		axios.get("http://127.0.0.1:8000/api/get/supervisor/list").then((response) => {
 			const data = response.data;
 
-			if (data.login_error) {
-				console.log("error");
+			if (data.error) {
+				console.log(data.error);
 			} else {
 				setSupervisor(data.supervisors);
 			}
@@ -88,8 +88,8 @@ function TraineeList() {
 		axios.get("http://127.0.0.1:8000/api/get/evaluator/list").then((response) => {
 			const data = response.data;
 
-			if (data.login_error) {
-				console.log("error");
+			if (data.error) {
+				console.log(data.error);
 			} else {
 				setEvaluator(data.evaluators);
 			}

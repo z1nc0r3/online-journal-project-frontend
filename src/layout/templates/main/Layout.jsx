@@ -15,7 +15,7 @@ import AdminEvaluatorListEdit from "../admin/EvaluatorListEdit";
 import AdminSupervisorListEdit from "../admin/SupervisorListEdit";
 import CreateUser from "../admin/CreateUser";
 
-import AdminPrint from "../admin/print";
+import AdminPrintDetails from "../admin/PrintDetails";
 
 import TraineeHeader from "../../components/trainee/TraineeHeader";
 import TraineeDashboard from "../trainee/dashboard";
@@ -43,10 +43,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import "../../../assets/css/main.css";
 
-//to print the PDF files
-import jsPDF from 'jspdf';
-
-
 const titleMap = {
 	admin_trainee_list: "Trainee List",
 	admin_supervisor_list: "Supervisor List",
@@ -55,7 +51,7 @@ const titleMap = {
 	admin_trainee_edit: "Update Trainee Detail",
 	admin_evaluator_edit: "Update Evaluator Detail",
 	admin_supervisor_edit: "Update Supervisor Detail",
-	admin_print: "print",
+	admin_print: "Print Details",
 
 	trainee_dashboard: "Week no :",
 	trainee_past_reports: "Past Report",
@@ -105,7 +101,7 @@ const Layout = (props) => {
 			case "admin_evaluator_edit":
 				return { Header: AdminHeader, LeftWidget: AdminLeftWidget, Main: AdminEvaluatorListEdit };
 			case "admin_print":
-				return { Header: AdminHeader, LeftWidget: AdminLeftWidget, Main: AdminPrint };
+				return { Header: AdminHeader, LeftWidget: AdminLeftWidget, Main: AdminPrintDetails };
 			case "trainee_dashboard":
 				return { Header: TraineeHeader, LeftWidget: TraineeLeftWidget, Main: TraineeDashboard };
 			case "trainee_past_reports":
