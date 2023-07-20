@@ -1,21 +1,38 @@
 import * as React from "react";
 import "../../../assets/css/list.css";
 import { Box, Container, Button, colors } from "@mui/material";
-import Accordion from "@mui/material/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary";
 import CssBaseline from "@mui/material/CssBaseline";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import { Link } from "react-router-dom";
 
+function Dashboard() {
+	const [records, setRecords] = React.useState([]);
 
-function dashboard() {
+	const getRecords = (event) => {
+		axios.get("http://127.0.0.1:8000/api/record/week").then((response) => {
+			const data = response.data;
+
+			if (data.login_error) {
+				console.log("error");
+				console.log(response.data);
+
+			} else {
+				console.log(data);
+
+				// setRecords(data.evaluators);
+			}
+		});
+	};
+
+	useEffect(() => {
+		getRecords();
+	}, []);
+
 
     return (
 		<Container component="main" className="list_container" maxWidth={false}>
@@ -51,4 +68,4 @@ function dashboard() {
 
 }
 
-export default dashboard;
+export default Dashboard;

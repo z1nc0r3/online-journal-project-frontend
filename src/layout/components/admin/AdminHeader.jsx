@@ -24,6 +24,7 @@ import MenuItem from "@mui/material/MenuItem";
 import LogoutButton from "../../templates/main/Logout";
 import "../../../assets/css/main.css";
 
+// update this according to the user menu
 const pages = ["Trainee List", "Supervisor List", "Evaluation List", "Create User"];
 
 function ResponsiveAppBar() {
@@ -45,6 +46,7 @@ function ResponsiveAppBar() {
 		setState({ ...state, [anchor]: open });
 	};
 
+	// update this
 	const buttons = [
 		{ label: "Trainee List", path: "/admin/trainee_list", icon: "SupervisorAccount" },
 		{ label: "Supervisor List", path: "/admin/supervisor_list" },
@@ -68,6 +70,7 @@ function ResponsiveAppBar() {
 		</Box>
 	);
 
+	// update icons
 	function handleIcon(index) {
 		switch (index) {
 			case 0:
