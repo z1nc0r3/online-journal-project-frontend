@@ -14,7 +14,7 @@ function Dashboard() {
 	const [records, setRecords] = React.useState([]);
 
 	const getRecords = (event) => {
-		axios.get("http://127.0.0.1:8000/api/record/week").then((response) => {
+		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/record/week`).then((response) => {
 			const data = response.data;
 
 			if (data.login_error) {

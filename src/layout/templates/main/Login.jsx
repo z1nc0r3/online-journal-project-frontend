@@ -46,7 +46,9 @@ function Login() {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
-		axios.post("http://127.0.0.1:8000/api/login/check", { email, password }).then((response) => {
+		console.log(process.env.REACT_APP_BACKEND_API_URL);
+
+		axios.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/login/check`, { email, password }).then((response) => {
 			const data = response.data;
 
 			if (data.login_error) {

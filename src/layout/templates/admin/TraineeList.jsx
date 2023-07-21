@@ -50,7 +50,7 @@ function TraineeList() {
 	};
 
 	const getTraineeList = (event) => {
-		axios.get("http://127.0.0.1:8000/api/get/trainee/list").then((response) => {
+		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/trainee/list`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
@@ -73,7 +73,7 @@ function TraineeList() {
 	};
 
 	const getSupervisorList = (event) => {
-		axios.get("http://127.0.0.1:8000/api/get/supervisor/list").then((response) => {
+		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/supervisor/list`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
@@ -85,7 +85,7 @@ function TraineeList() {
 	};
 
 	const getEvaluatorList = (event) => {
-		axios.get("http://127.0.0.1:8000/api/get/evaluator/list").then((response) => {
+		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/evaluator/list`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
@@ -111,7 +111,7 @@ function TraineeList() {
 		};
 
 		axios
-			.post("http://127.0.0.1:8000/api/update/assign/", updatedTrainee)
+			.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/update/assign/`, updatedTrainee)
 			.then((response) => {
 				toast.success(response.data.message);
 				setTimeout(() => {
