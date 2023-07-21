@@ -124,13 +124,13 @@ const CreateUser = (props) => {
 		let url;
 		switch (userType) {
 			case "trainee":
-				url = "http://127.0.0.1:8000/api/create/trainee";
+				url = `${process.env.REACT_APP_BACKEND_API_URL}/api/create/trainee`;
 				break;
 			case "supervisor":
-				url = "http://127.0.0.1:8000/api/create/supervisor";
+				url = `${process.env.REACT_APP_BACKEND_API_URL}/api/create/supervisor`;
 				break;
 			case "evaluator":
-				url = "http://127.0.0.1:8000/api/create/evaluator";
+				url = `${process.env.REACT_APP_BACKEND_API_URL}/api/create/evaluator`;
 				break;
 			default:
 				return;
