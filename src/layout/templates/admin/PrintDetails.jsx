@@ -11,7 +11,7 @@ const PrintPDF = () => {
 		const doc = new jsPDF();
 
 		//get trainee list
-		axios.get("http://127.0.0.1:8000/api/get/trainee/list").then((response) => {
+		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/trainee/list`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
@@ -53,7 +53,7 @@ const PrintPDF = () => {
 		const doc = new jsPDF();
 
 		//get trainee list
-		axios.get("http://127.0.0.1:8000/api/get/evaluator/list").then((response) => {
+		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/evaluator/list`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
@@ -95,7 +95,7 @@ const PrintPDF = () => {
 		const doc = new jsPDF();
 
 		//get trainee list
-		axios.get("http://127.0.0.1:8000/api/get/supervisor/list").then((response) => {
+		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/supervisor/list`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
