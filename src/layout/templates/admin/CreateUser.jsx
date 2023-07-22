@@ -282,6 +282,24 @@ const CreateUser = (props) => {
 				}
 			  return user;
 			});
+
+			 // Declare the usersDataArray before the for loop
+			 const usersDataArray = userData.map((user) => {
+				return {
+				  fName: user.name,
+				  regNo: user.regno,
+				  department: user.department,
+				  address: user.address,
+				  email: user.email,
+				  phone: user.phone,
+				  estName: user.estName,
+				  estAddress: user.estAddress,
+				  startDate: user.startDate,
+				  duration: user.duration,
+				  password: user.password,
+				  confirm_password: user.confirm_password,
+				};
+			  });
 	  
 			for (let user of userData) {
 			  const { role, name, regno, department, address, email, phone, estName, estAddress, startDate, duration, password, confirm_password} = user;
@@ -316,6 +334,20 @@ const CreateUser = (props) => {
 				  break;
 			  }
 			}
+
+			const bulkCreateUrl = "http://127.0.0.1:8000/api/users/bulk";
+
+			axios
+				.post(bulkCreateUrl, { users: usersDataArray })
+				.then((response) => {
+					toast.success("Bulk User Creation Successful. Redirecting...");
+					setTimeout(() => {
+						window.location.href = "/users"; // Replace "/users" with your desired URL after successful creation
+					}, 3000); // 3 seconds delay before redirecting
+				})
+				.catch((error) => {
+					toast.error("Error submitting the form. Please try again." + error);
+				});
 		};
 		reader.readAsText(selectedFile);
 		} else {
