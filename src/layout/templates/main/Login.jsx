@@ -54,8 +54,9 @@ function Login() {
 			if (data.login_error) {
 				setError(data.login_error);
 			} else {
-				const { role } = data;
+				const { role, user_id } = data;
 				localStorage.setItem("role", role);
+				localStorage.setItem("user_id", user_id);
 				localStorage.setItem("authorized", true);
 				window.location.href = `/${role}`;
 			}
