@@ -165,7 +165,7 @@
 }
 
 .trainee_box_description{
-    padding-left: 15px;
+    outline: none;
 }
 
 .trainee_box_description_text{
@@ -176,7 +176,7 @@
     height: 100%;
     background-color: white;
     border-radius: 1.0rem;
-    padding: 2rem;
+    padding: 1rem;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -186,7 +186,6 @@
     margin-bottom: 15px;
     border-radius: 20px;
     font-size: 30px;
-
 }
 
 .trainee_week{
@@ -196,30 +195,36 @@
     margin-bottom: 5px;
 }
 
-Button.save_button_trianee{
+Button.save_button_trainee{
     align-items: start;
     margin: 0.4rem 2rem;   
-	background-color: #0085FF;
-	color: white;
+	background-color: #ffffff;
+	color: #414141;
 	font-size: 16px;
+    font-weight: 600;
     height: 100%;
     width: 25%;
-    margin-top: 20px;
 	border-radius: 0.75rem;
 	box-shadow: none;
-    margin-right: 100px;
 }
 
-Button.save_button_trianee:hover {
+Button.save_button_trainee:hover {
 	background-color: #88c6ff;
     color: black;
 	box-shadow: none;
 }
 
-.traine_submission_box{
+.trainee_submission_box{
     display: flex;
     justify-content: left;
-    margin-top: 20px;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.trainee_submission_box_text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .trainee_past_report{
@@ -244,6 +249,7 @@ Button.save_button_trianee:hover {
 }
 
 .agreement_trainee_submission{
+    color: white;
     text-align: left;
 }
 

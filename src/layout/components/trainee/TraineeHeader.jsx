@@ -99,7 +99,7 @@ export default function TraineeNavbar() {
 							<MenuIcon />
 						</IconButton>
 						<Typography variant="h6" component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light", marginLeft: 1 }}>
-							Administrator
+							{localStorage.getItem("fName")}
 						</Typography>
 						<Menu
 							id="menu-appbar"
@@ -128,7 +128,7 @@ export default function TraineeNavbar() {
 
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
 						<Typography variant="h5" component="div" sx={{ flexGrow: 1, textAlign: "left", fontWeight: "light" }}>
-							Name of the User - Department
+							{localStorage.getItem("fName")}
 						</Typography>
 					</Box>
 
