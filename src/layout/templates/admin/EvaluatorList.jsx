@@ -21,7 +21,7 @@ function EvaluatorList() {
 	};
 
 	const getEvaluatorList = (event) => {
-		axios.get("http://127.0.0.1:8000/api/get/evaluator/list").then((response) => {
+		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/evaluator/list`).then((response) => {
 			const data = response.data;
 
 			if (data.login_error) {
