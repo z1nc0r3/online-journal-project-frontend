@@ -1,70 +1,74 @@
 import * as React from "react";
-import "../../../assets/css/list.css";
+import axios from "axios";
 import { Box, Container, Button, colors } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-
-
+import "../../../assets/css/list.css";
 
 function Dashboard() {
 	const [recordData, setRecordData] = useState({
-		discription: "",
-		prob_and_sol: "",
+		user_id: "",
+		description:  localStorage.getItem("description") || "",
+		solutions: localStorage.getItem("solutions") || "",
 		week: "",
 		month: "",
 		year: "",
 	});
-	
 
-	const getRecords = (event) => {
-		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/record/week`).then((response) => {
-			const data = response.data;
+	const [isChecked, setIsChecked] = useState(false);
 
-			if (data.login_error) {
-				console.log("error");
-				console.log(response.data);
+	useEffect(() => {
+		if (isChecked) {
+			document.querySelector(".save_button_trainee").disabled = false;
+		} else {
+			document.querySelector(".save_button_trainee").disabled = true;
+		}
+	}, [isChecked]);
 
-			} else {
-				console.log(data);
+	useEffect(() => {
+		localStorage.setItem("description", recordData.description);
+		localStorage.setItem("solutions", recordData.solutions);
+	}, [recordData]);
 
-				// setRecords(data.evaluators);
-			}
-		});
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setRecordData((prevFormData) => ({
+			...prevFormData,
+			[name]: value,
+		}));
 	};
 
-	const handleSubmitRecord = (event) =>{
-		// recordData.discription = 'no description';
-		// recordData.prob_and_sol = 'no problem';
-		recordData.week = '02';
-		recordData.month = 'july';
-		recordData.year = '2023';
+	const handleSubmitRecord = (event) => {
+		event.preventDefault();
+		
+		recordData.user_id = localStorage.getItem("user_id");
+		recordData.week = "02";
+		recordData.month = new Date().getMonth() + 1;
+		recordData.year = new Date().getFullYear();
 
 		console.log(recordData);
 
-		axios.post("http://127.0.0.1:8000/api/addRecord/week", recordData).then((response) => {
-				toast.success("New User Created Successfully. Redirecting...");
+		axios
+			.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/addRecord/week`, recordData)
+			.then((response) => {
+				toast.success("Form submitted successfully.");
+				localStorage.removeItem("description");
+				localStorage.removeItem("solutions");
+
 				setTimeout(() => {
-					window.location.href = 'trianee'; // Replace "new-page-url" with your desired URL
-				}, 3000); // 3 seconds delay before redirecting
+					window.location.reload();
+				}, 3000);
 			})
 			.catch((error) => {
 				toast.error("Error submitting the form." + error.response.data.message);
 			});
+	};
 
-
-	}
-
-	useEffect(() => {
-		getRecords();
-	}, []);
-
-
-    return (
+	return (
 		<Container component="main" className="list_container" maxWidth={false}>
 			<CssBaseline />
 			<Box className="trainee_box">
@@ -72,32 +76,70 @@ function Dashboard() {
 					<Box>
 						<h1 className="trainee_box_heading">Brief Description of work carried out :</h1>
 						<Box className="trainee_box_description" variant="outlined">
-							<Typography variant="body1" className="trainee_box_description_text">
-								<TextField multiline rows={6}  variant="outlined" required fullWidth name="discri" type="text" value={recordData.discription} placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus exercitationem omnis fuga ipsa reprehenderit repellendus, nam sunt voluptatibus illo perferendis at aspernatur enim praesentium ea ut recusandae minima delectus cumque perspiciatis, molestias nemo accusamus! Culpa accusamus aspernatur, alias aliquam consectetur consequatur soluta enim obcaecati molestiae repellat, natus quod optio distinctio!" />
+							<Typography component={'span'} variant="body1" className="trainee_box_description_text">
+								<TextField
+									multiline
+									rows={6}
+									variant="outlined"
+									required
+									fullWidth
+									name="description"
+									type="text"
+									value={recordData.description}
+									placeholder="Write your description here."
+									onChange={handleChange}
+									sx={{
+										"& fieldset": { border: "none" },
+									}}
+								/>
 							</Typography>
 						</Box>
 					</Box>
-					<Box>
+					<Box sx={{ marginTop: "30px" }}>
 						<h1 className="trainee_box_heading">Problems Encountered and Solutions Found :</h1>
-						<Box variant="outlined" className="trainee_box_description" >
-							<Typography variant="body1" className="trainee_box_description_text">
-								<TextField multiline rows={3}  variant="outlined" required fullWidth name="prob_and_sol" type="text" value={recordData.prob_and_sol} placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus exercitationem omnis fuga ipsa reprehenderit repellendus, nam sunt voluptatibus illo perferendis at aspernatur enim praesentium ea ut recusandae minima delectus cumque perspiciatis, molestias nemo accusamus! Culpa accusamus aspernatur, alias aliquam consectetur consequatur soluta enim obcaecati molestiae repellat, natus quod optio distinctio!" />
+						<Box variant="outlined" className="trainee_box_description">
+							<Typography component={'span'} variant="body1" className="trainee_box_description_text">
+								<TextField
+									multiline
+									rows={3}
+									variant="outlined"
+									required
+									fullWidth
+									name="solutions"
+									type="text"
+									value={recordData.solutions}
+									placeholder="Write your problems and solutions here."
+									onChange={handleChange}
+									sx={{
+										"& fieldset": { border: "none" },
+									}}
+								/>
 							</Typography>
 						</Box>
 					</Box>
-					<Box className="traine_submission_box">
-						<Button variant="contained" className="save_button_trianee" type="submit">Contained</Button>
-						<Checkbox/>
-						<Typography className="agreement_trainee_submission" variant="body1" sx={{  color: 'white', marginTop: '23px' }}>
-						I hereby declare that all the information contained in this report is truth and correct. I take full responsibility for the correctness of the said information.
-						</Typography>
-
+					<Box className="trainee_submission_box">
+						<Button variant="contained" className="save_button_trainee" type="submit" disabled={!isChecked}>
+							Submit
+						</Button>
+						<Box className="trainee_submission_box_text">
+							<Checkbox
+								sx={{
+									color: "white",
+									"&.Mui-checked": {
+										color: "white",
+									},
+								}}
+								onChange={(e) => setIsChecked(e.target.checked)}
+							/>
+							<Typography className="agreement_trainee_submission" component={'span'} variant="body1">
+								I hereby declare that all the information contained in this report is truth and correct. I take full responsibility for the correctness of the said information.
+							</Typography>
+						</Box>
 					</Box>
 				</form>
 			</Box>
 		</Container>
 	);
-
 }
 
 export default Dashboard;
