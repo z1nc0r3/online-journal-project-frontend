@@ -250,7 +250,7 @@ const CreateUser = (props) => {
 	//bulk data entry
 	const bulkdataentry = () => {
 		return (
-		  <>
+		  <form onSubmit={handleBulkDataUpload}>
 			<Typography>Upload File</Typography>
 			<input type="file" accept=".txt" onChange={handleFileUpload} />
 	  
@@ -259,68 +259,39 @@ const CreateUser = (props) => {
 			  type="submit"
 			  className="register_button"
 			  name="bulk_register"
-			  onClick={handleBulkDataUpload}
 			  sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}
 			>
 			  Import
 			</Button>
-		  </>
+		  </form>
 		);
-	  };
+	};
 	  
 
-	  const handleBulkDataUpload = () => {
+	const handleBulkDataUpload = (e) => {
+		e.preventDefault();
 		if (selectedFile) {
 			const reader = new FileReader();
 			reader.onload = function (e) {
 			  const fileContent = e.target.result;
-			  const userData = fileContent.split("\n\n").map((data) => {
-				const fields = data.split(",").map((field) => field.trim());
-				const user = {};
-				for (let field of fields) {
-				  const [key, value] = field.split(":");
-				  user[key.trim()] = value.trim();
-				  }
-				return user;
-			  });
+			  console.log(fileContent);
+			  const url = `http://127.0.0.1:8000/api/create/bulk`;
 
-	  
-			  for (let user of userData) {
-				const { role, name, regno, department, address, email, phone, estName, estAddress, startDate, duration, password, confirm_password} = user;
-		
-				setFormData((prevFormData) => ({
-				  ...prevFormData,
-				  fName: name,
-				  regNo: regno,
-				  department: department,
-				  address: address,
-				  email: email,
-				  phone: phone,
-				  estName: estName,
-				  estAddress: estAddress,
-				  startDate: startDate,
-				  duration: duration,
-				  password: password,
-				  confirm_password: confirm_password, // Assuming confirm_password field should match the password
-			  }));
-	  
-			switch (role) {
-				case "trainee":
-				  handleSubmitTrainee({ preventDefault: () => {} });
-				  break;
-				case "supervisor":
-				  handleSubmitSupervisor({ preventDefault: () => {} });
-				  break;
-				case "evaluator":
-				  handleSubmitEvaluator({ preventDefault: () => {} });
-				  break;
-				default:
-				  break;
-			  }
-			}
-		};
-		reader.readAsText(selectedFile);
-		} else {
+			  axios
+			  .post(url, fileContent)
+			  .then((response) => {
+				  toast.success("New User Created Successfully. Redirecting...");
+				  setTimeout(() => {
+					  window.location.href.reload(); // Replace "new-page-url" with your desired URL
+				  }, 3000); // 3 seconds delay before redirecting
+			  })
+			  .catch((error) => {
+				  toast.error("Error submitting the form." + error.response.data.message);
+			  });
+			};
+			  reader.readAsText(selectedFile);
+		}
+		 else {
 		  toast.error("Please select a file.");
 		}
 	};
@@ -388,13 +359,13 @@ const CreateUser = (props) => {
 
 								{passwordFields()}
 
-								<Box>
-								{bulkdataentry()}
-								</Box>
 							</Box>
 						
 						</Box>
 					</form>
+					<Box>
+						{bulkdataentry()}
+					</Box>
 				</Container>
 			);
 		case "supervisor":
