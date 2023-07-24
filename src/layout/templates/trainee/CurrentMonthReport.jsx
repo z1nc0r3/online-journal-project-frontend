@@ -26,10 +26,22 @@ function CurrentMonthReport() {
 						<Typography>Month 01</Typography>
 					</AccordionSummary>
 					<AccordionDetails>
-						<Box className="trainee_week"><Typography>Week 01</Typography></Box>
-						<Box className="trainee_week"><Typography>Week 02</Typography></Box>
-						<Box className="trainee_week"><Typography>Week 03</Typography></Box>
-						<Box className="trainee_week"><Typography>Week 04</Typography></Box>
+						
+						{Array.from({length: 4}, (_, i) => (
+							<Box className="trainee_week">
+							<Accordion key={i+1}>
+							<AccordionSummary>
+								<Typography>{`Week ${i+1}`}</Typography>
+							</AccordionSummary>
+							<AccordionDetails>
+								<Typography>
+								DESCRIPTION : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+								</Typography>
+							</AccordionDetails>
+							</Accordion>
+							</Box>
+						))}
+
 					</AccordionDetails>
 				</Accordion>
 			</Box>

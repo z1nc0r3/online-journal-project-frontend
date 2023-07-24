@@ -24,7 +24,7 @@ const UpdateUser = () => {
 	const { id } = useParams();
 
 	const getTraineeDetails = (event) => {
-		axios.get(`http://127.0.0.1:8000/api/get/trainee/${id}`).then((response) => {
+		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/trainee/${id}`).then((response) => {
 			const data = response.data.user;
 
 			if (data.login_error) {
@@ -89,7 +89,7 @@ const UpdateUser = () => {
 		e.preventDefault();
 
 		axios
-			.post(`http://127.0.0.1:8000/api/update/trainee/${id}`, formData)
+			.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/update/trainee/${id}`, formData)
 			.then((response) => {
 				toast.success("User data updated Successfully. Redirecting...");
 				setTimeout(() => {
