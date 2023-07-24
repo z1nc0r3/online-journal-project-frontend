@@ -7,6 +7,8 @@ import "../../../assets/css/list.css";
 import CreateMenu from "../../components/admin/CreateMenu";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
+
 
 const CreateUser = (props) => {
 	const [formData, setFormData] = useState({
@@ -25,6 +27,7 @@ const CreateUser = (props) => {
 	});
 
 	const [passwordError, setPasswordError] = useState("");
+
 
 	useEffect(() => {
 		handlePasswordChange();
@@ -136,6 +139,7 @@ const CreateUser = (props) => {
 				return;
 		}
 
+		
 		axios
 			.post(url, formData)
 			.then((response) => {
@@ -167,7 +171,7 @@ const CreateUser = (props) => {
 				<Typography>Password </Typography>
 				<TextField
 					variant="outlined"
-					required
+					//required
 					fullWidth
 					name="password"
 					type="password"
@@ -234,6 +238,65 @@ const CreateUser = (props) => {
 		);
 	};
 
+	const [selectedFile, setSelectedFile] = useState(null);
+	const [uploadedFiles, setUploadedFiles] = useState([]);
+
+	const handleFileUpload = (e) => {
+		const file = e.target.files[0];
+		setSelectedFile(file);
+	};
+
+
+	//bulk data entry
+	const bulkdataentry = () => {
+		return (
+		  <form onSubmit={handleBulkDataUpload}>
+			<Typography>Upload File</Typography>
+			<input type="file" accept=".txt" onChange={handleFileUpload} />
+	  
+			<Button
+			  variant="contained"
+			  type="submit"
+			  className="register_button"
+			  name="bulk_register"
+			  sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}
+			>
+			  Import
+			</Button>
+		  </form>
+		);
+	};
+	  
+
+	const handleBulkDataUpload = (e) => {
+		e.preventDefault();
+		if (selectedFile) {
+			const reader = new FileReader();
+			reader.onload = function (e) {
+			  const fileContent = e.target.result;
+			  console.log(fileContent);
+			  const url = `http://127.0.0.1:8000/api/create/bulk`;
+
+			  axios
+			  .post(url, fileContent)
+			  .then((response) => {
+				  toast.success("New User Created Successfully. Redirecting...");
+				  setTimeout(() => {
+					  window.location.href.reload(); // Replace "new-page-url" with your desired URL
+				  }, 3000); // 3 seconds delay before redirecting
+			  })
+			  .catch((error) => {
+				  toast.error("Error submitting the form." + error.response.data.message);
+			  });
+			};
+			  reader.readAsText(selectedFile);
+		}
+		 else {
+		  toast.error("Please select a file.");
+		}
+	};
+	  
+	  
 	const establishmentFields = () => {
 		return (
 			<>
@@ -271,6 +334,7 @@ const CreateUser = (props) => {
 								<TextField variant="outlined" required fullWidth name="address" type="text" value={formData.address} onChange={handleChange} />
 
 								{emailPhoneFields()}
+
 							</Box>
 
 							<Box className="create_new_form_right">
@@ -294,9 +358,14 @@ const CreateUser = (props) => {
 								</Box>
 
 								{passwordFields()}
+
 							</Box>
+						
 						</Box>
 					</form>
+					<Box>
+						{bulkdataentry()}
+					</Box>
 				</Container>
 			);
 		case "supervisor":
