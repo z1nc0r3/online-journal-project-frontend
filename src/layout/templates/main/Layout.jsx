@@ -18,7 +18,7 @@ import CreateUser from "../admin/CreateUser";
 import AdminPrintDetails from "../admin/PrintDetails";
 
 import TraineeHeader from "../../components/trainee/TraineeHeader";
-import TraineeDashboard from "../trainee/dashboard";
+import TraineeDashboard from "../trainee/Dashboard";
 import TraineeLeftWidget from "../../components/trainee/LeftWidget";
 import TraineePastReports from "../trainee/PastReports";
 import TraineeUserInstruction from "../trainee/UserInstruction";
@@ -26,14 +26,14 @@ import TraineeUserEditInstruction from "../trainee/UserEditData";
 import TraineeCurrentMonthReport from "../trainee/CurrentMonthReport";
 
 import SupervisorHeader from "../../components/supervisor/SupervisorHeader";
-import SupervisorDashboard from "../supervisor/dashboard";
+import SupervisorDashboard from "../supervisor/Dashboard";
 import SupervisorLeftWidget from "../../components/supervisor/LeftWidget";
 import SupervisorTraineeList from "../supervisor/traineeList";
 import SupervisorUserEditData from "../supervisor/UserEditData";
 import SupervisorReportPrevious from "../supervisor/traineeListReportPrevious";
 
 import EvaluatorHeader from "../../components/evaluator/EvaluatorHeader";
-import EvaluatorDashboard from "../evaluator/dashboard";
+import EvaluatorDashboard from "../evaluator/Dashboard";
 import EvaluatorLeftWidget from "../../components/evaluator/LeftWidget";
 import EvaluatorTraineeList from "../evaluator/traineeList";
 import EvaluatorUserEditData from "../evaluator/UserEditData";
