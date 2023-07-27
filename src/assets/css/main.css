@@ -167,6 +167,44 @@ Button.print_details_button:hover {
 	flex-direction: column;
 }
 
+/* alert dialog styles */
+
+.MuiDialog-paper {
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 1.5rem !important;
+    padding: 1rem;
+}
+
+.MuiDialog-paper .alert_actions {
+	width: 85%;
+	justify-content: space-between;
+}
+
+.MuiDialog-paper Button.MuiButton-root {
+	background-color: #0085ff ;
+	color: white;
+	font-size: 16px;
+	height: 3rem;
+	width: 6rem;
+	margin-bottom: 10px;
+	border-radius: 0.5rem;
+	box-shadow: none;
+}
+
+.MuiDialog-paper Button.MuiButton-root.alert_agree:hover {
+	background-color: #ce002d;
+	box-shadow: none;
+}
+
+.MuiDialog-paper Button.MuiButton-root.alert_disagree:hover {
+	background-color: #4ca8ff;
+	box-shadow: none;
+}
+
 @media screen and (max-width: 1400px) {
 	.create_menu_container {
 		max-width: 660px !important;
