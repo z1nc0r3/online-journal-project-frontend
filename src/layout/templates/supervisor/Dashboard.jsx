@@ -13,7 +13,6 @@ import "../../../assets/css/list.css";
 
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { Link } from "react-router-dom";
-//import SupervisorCommentButton from "./SupervisorCommentButton";
 
 function Dashboard() {
 	const [expanded, setExpanded] = React.useState(false);
@@ -52,36 +51,18 @@ function Dashboard() {
 							<Typography>Week - 4</Typography>
 						</Box>
 					</AccordionDetails>
-					
 					<AccordionDetails>
-							<Box className="comment_box">
-								<Typography>Supervisor Comment</Typography>
-							</Box>
-						</AccordionDetails>
+						<Box className="comment_box">
+							<Typography>Supervisor Comment</Typography>
+						</Box>
+					</AccordionDetails>
 
-						<Button
-						variant="contained"
-						type="submit"
-						className="register_button"
-						sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }}
-						> Save </Button>
-					
- 
-					{/*	
-						//<SupervisorCommentButton/>
-
-						<AccordionDetails>
-							<Box className="comment_box">
-								<Typography>Supervisor Comment</Typography>
-							</Box>
-						</AccordionDetails>
-
-						<Button
-						variant="contained"
-						type="submit"
-						className="register_button"
-						sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }}
-						> Save </Button> */}
+					<Button
+              	variant="contained"
+              	type="submit"
+             	className="register_button"
+              	sx={{ width: "75%", bgcolor: "#379fff", fontSize: "18px" }}
+           		 > Save </Button>
 
 				</Accordion>
 
@@ -120,7 +101,7 @@ function Dashboard() {
               	variant="contained"
               	type="submit"
              	className="register_button"
-              	sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }}
+              	sx={{ width: "75%", bgcolor: "#379fff", fontSize: "18px" }}
            		 > Save </Button>
 
 				</Accordion>

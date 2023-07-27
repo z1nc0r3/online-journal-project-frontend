@@ -124,13 +124,13 @@ const CreateUser = (props) => {
 		let url;
 		switch (userType) {
 			case "trainee":
-				url = "http://127.0.0.1:8000/api/create/trainee";
+				url = `${process.env.REACT_APP_BACKEND_API_URL}/api/create/trainee`;
 				break;
 			case "supervisor":
-				url = "http://127.0.0.1:8000/api/create/supervisor";
+				url = `${process.env.REACT_APP_BACKEND_API_URL}/api/create/supervisor`;
 				break;
 			case "evaluator":
-				url = "http://127.0.0.1:8000/api/create/evaluator";
+				url = `${process.env.REACT_APP_BACKEND_API_URL}/api/create/evaluator`;
 				break;
 			default:
 				return;
@@ -141,11 +141,11 @@ const CreateUser = (props) => {
 			.then((response) => {
 				toast.success("New User Created Successfully. Redirecting...");
 				setTimeout(() => {
-					window.location.href = userType; // Replace "new-page-url" with your desired URL
-				}, 3000); // 3 seconds delay before redirecting
+					window.location.href = userType;
+				}, 3000);
 			})
 			.catch((error) => {
-				toast.error("Error submitting the form. Please try again." + error);
+				toast.error("Error submitting the form." + error.response.data.message);
 			});
 	};
 
@@ -167,7 +167,7 @@ const CreateUser = (props) => {
 				<Typography>Password </Typography>
 				<TextField
 					variant="outlined"
-					required
+					//required
 					fullWidth
 					name="password"
 					type="password"
@@ -234,6 +234,53 @@ const CreateUser = (props) => {
 		);
 	};
 
+	const [selectedFile, setSelectedFile] = useState(null);
+
+	const handleFileUpload = (e) => {
+		const file = e.target.files[0];
+		setSelectedFile(file);
+	};
+
+	//bulk data entry
+	const bulkDataEntry = () => {
+		return (
+			<form onSubmit={handleBulkDataUpload}>
+				<Typography>Upload File</Typography>
+				<input type="file" accept=".txt" onChange={handleFileUpload} />
+
+				<Button variant="contained" type="submit" className="register_button" name="bulk_register" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
+					Import
+				</Button>
+			</form>
+		);
+	};
+
+	const handleBulkDataUpload = (e) => {
+		e.preventDefault();
+		if (selectedFile) {
+			const reader = new FileReader();
+			reader.onload = function (e) {
+				const fileContent = JSON.parse(e.target.result);
+				console.log(fileContent);
+
+				axios
+					.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/create/bulk`, fileContent)
+					.then((response) => {
+						toast.success("Bulk Users Successfully. Redirecting...");
+						setTimeout(() => {
+							window.location.href.reload(); // Replace "new-page-url" with your desired URL
+						}, 3000); // 3 seconds delay before redirecting
+					})
+					.catch((error) => {
+						toast.error("Error adding bulk users." + error.response.data.message);
+					});
+			};
+			reader.readAsText(selectedFile);
+		} else {
+			toast.error("Please select a file.");
+		}
+	};
+
 	const establishmentFields = () => {
 		return (
 			<>
@@ -297,6 +344,7 @@ const CreateUser = (props) => {
 							</Box>
 						</Box>
 					</form>
+					<Box>{bulkDataEntry()}</Box>
 				</Container>
 			);
 		case "supervisor":

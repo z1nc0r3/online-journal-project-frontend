@@ -2,6 +2,8 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
 .list_box {
@@ -97,6 +99,8 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
 .create_new_form {
@@ -161,7 +165,7 @@
 }
 
 .trainee_box_description{
-    padding-left: 15px;
+    outline: none;
 }
 
 .trainee_box_description_text{
@@ -172,7 +176,7 @@
     height: 100%;
     background-color: white;
     border-radius: 1.0rem;
-    padding: 2rem;
+    padding: 1rem;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -182,7 +186,6 @@
     margin-bottom: 15px;
     border-radius: 20px;
     font-size: 30px;
-
 }
 
 .trainee_week{
@@ -192,30 +195,36 @@
     margin-bottom: 5px;
 }
 
-Button.save_button_trianee{
+Button.save_button_trainee{
     align-items: start;
     margin: 0.4rem 2rem;   
-	background-color: #0085FF;
-	color: white;
+	background-color: #ffffff;
+	color: #414141;
 	font-size: 16px;
+    font-weight: 600;
     height: 100%;
     width: 25%;
-    margin-top: 20px;
 	border-radius: 0.75rem;
 	box-shadow: none;
-    margin-right: 100px;
 }
 
-Button.save_button_trianee:hover {
+Button.save_button_trainee:hover {
 	background-color: #88c6ff;
     color: black;
 	box-shadow: none;
 }
 
-.traine_submission_box{
+.trainee_submission_box{
     display: flex;
     justify-content: left;
-    margin-top: 20px;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.trainee_submission_box_text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .trainee_past_report{
@@ -240,5 +249,102 @@ Button.save_button_trianee:hover {
 }
 
 .agreement_trainee_submission{
+    color: white;
     text-align: left;
+}
+
+@media only screen and (max-width: 1200px) {
+    .list_container, .create_new_container {
+        padding-right: 16px !important;
+    }
+
+    .create_new_form {
+        padding: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .list_container, .create_new_container {
+        padding-left: 16px !important;
+    }
+
+	.list_box {
+		padding: 1rem;
+	}
+
+    .assign_supervisor_row .MuiSelect-select, .assign_evaluator_row .MuiSelect-select {
+        font-size: 14px;
+    }
+
+    .assign_supervisor_row p, .assign_evaluator_row p {
+        width: 50%;
+    }
+
+    .trainee_assign_form {
+        margin: 0;
+    }
+
+    .trainee_assign_form .MuiButton-root {
+        font-size: 14px;
+    }
+
+}
+
+/* mobile view css */
+
+@media only screen and (max-width: 600px) {
+    .list_container, .create_new_container {
+        padding-left: 16px !important;
+    }
+
+    .list_box .MuiAccordionSummary-contentGutters p, .list_box .MuiAccordionSummary-contentGutters a svg {
+        font-size: 14px;
+    }
+
+    .list_box .MuiAccordionSummary-contentGutters > p {
+        width: 50%;
+    }
+
+    .MuiList-root.MuiMenu-list li {
+        font-size: 14px;
+    }
+
+    .assign_supervisor_row, .assign_evaluator_row {
+        height: 40px;
+    }
+
+    .assign_supervisor_row .MuiOutlinedInput-root, .assign_evaluator_row .MuiOutlinedInput-root {
+        height: 40px;
+    }
+
+    .trainee_assign_form .assign_save {
+        height: 40px;
+    }
+
+    .supervisor_assign_form p, .evaluator_assign_form p {
+        font-size: 14px;
+    }
+
+    .create_menu_container {
+        max-width: 400px !important;
+    }
+
+    .create_new_form {
+        padding: 1rem;
+        flex-direction: column;
+    }
+
+    .create_new_form_left, .create_new_form_right {
+        width: 100%;
+    }
+
+    .create_new_form p {
+        font-size: 14px;
+        line-height: 1;
+    }
+
+    Button.create_menu_button {
+        font-size: 14px;
+        width: 6.5rem;
+    }
 }
