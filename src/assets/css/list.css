@@ -253,6 +253,34 @@ Button.save_button_trainee:hover {
     text-align: left;
 }
 
+/* bulk user entry */
+
+.bulk_user_entry {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    background-color: white;
+    border-radius: 1.5rem;
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+}
+
+.bulk_user_entry_input {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: baseline;
+    width: 100%;
+}
+
+Button.import_button {
+    height: 3rem;
+    width: 10rem;
+	box-shadow: none;
+}
+
 @media only screen and (max-width: 1200px) {
     .list_container, .create_new_container {
         padding-right: 16px !important;
@@ -260,6 +288,10 @@ Button.save_button_trainee:hover {
 
     .create_new_form {
         padding: 1.5rem;
+    }
+
+    .bulk_user_entry_input {
+        justify-content: center;
     }
 }
 
@@ -286,6 +318,10 @@ Button.save_button_trainee:hover {
 
     .trainee_assign_form .MuiButton-root {
         font-size: 14px;
+    }
+
+    .bulk_user_entry {
+        padding: 1rem;
     }
 
 }
@@ -346,5 +382,20 @@ Button.save_button_trainee:hover {
     Button.create_menu_button {
         font-size: 14px;
         width: 6.5rem;
+    }
+
+    .bulk_user_entry {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .bulk_user_entry_input p {
+        font-size: 14px;
+    }
+
+    Button.import_button {
+        font-size: 14px;
+        margin-top: 10px;
+        width: 100%;
     }
 }

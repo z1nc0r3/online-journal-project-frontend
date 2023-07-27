@@ -138,7 +138,6 @@ Button.create_menu_button.active {
 
 Button.register_button {
 	height: 3.5rem;
-	margin-top: 16px;
 	box-shadow: none;
 }
 
