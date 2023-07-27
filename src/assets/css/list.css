@@ -270,7 +270,7 @@ Button.save_button_trainee:hover {
 .bulk_user_entry_input {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: start;
     align-items: baseline;
     width: 100%;
 }
