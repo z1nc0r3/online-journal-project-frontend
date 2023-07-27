@@ -139,13 +139,13 @@ const PrintPDF = () => {
 	return (
 		<div className="print_button_container">
 			<Button onClick={generateTraineePDF} variant="contained" type="submit" className="print_details_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
-				Print Trainee Details
+				Trainee Details
 			</Button>
 			<Button onClick={generateEvaluatorPDF} variant="contained" type="submit" className="print_details_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
-				Print Evaluator Details
+				Evaluator Details
 			</Button>
 			<Button onClick={generateSupervisorPDF} variant="contained" type="submit" className="print_details_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
-				Print Supervisor Details
+				Supervisor Details
 			</Button>
 		</div>
 	);
