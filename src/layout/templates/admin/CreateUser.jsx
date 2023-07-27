@@ -25,6 +25,7 @@ const CreateUser = (props) => {
 	});
 
 	const [passwordError, setPasswordError] = useState("");
+	const [selectedFile, setSelectedFile] = useState(null);
 
 	useEffect(() => {
 		handlePasswordChange();
@@ -106,6 +107,7 @@ const CreateUser = (props) => {
 		}
 	};
 
+	// handle submit
 	const handleSubmit = (e, userType) => {
 		e.preventDefault();
 
@@ -197,7 +199,7 @@ const CreateUser = (props) => {
 					}}
 					onBlur={handleBlur}
 				/>
-
+				<Typography>&nbsp;</Typography>
 				<Button variant="contained" type="submit" className="register_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
 					Create User
 				</Button>
@@ -234,23 +236,24 @@ const CreateUser = (props) => {
 		);
 	};
 
-	const [selectedFile, setSelectedFile] = useState(null);
-
 	const handleFileUpload = (e) => {
 		const file = e.target.files[0];
 		setSelectedFile(file);
 	};
 
-	//bulk data entry
+	//bulk data entry UI
 	const bulkDataEntry = () => {
 		return (
 			<form onSubmit={handleBulkDataUpload}>
-				<Typography>Upload File</Typography>
-				<input type="file" accept=".txt" onChange={handleFileUpload} />
-
-				<Button variant="contained" type="submit" className="register_button" name="bulk_register" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
-					Import
-				</Button>
+				<Box className="bulk_user_entry">
+					<Box className="bulk_user_entry_input">
+						<Typography sx={{ fontWeight: "medium", marginRight: 2 }}>Upload JSON File</Typography>
+						<input type="file" accept=".json" className="file_upload" onChange={handleFileUpload} />
+					</Box>
+					<Button variant="contained" type="submit" className="import_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
+						Import
+					</Button>
+				</Box>
 			</form>
 		);
 	};
@@ -261,15 +264,14 @@ const CreateUser = (props) => {
 			const reader = new FileReader();
 			reader.onload = function (e) {
 				const fileContent = JSON.parse(e.target.result);
-				console.log(fileContent);
 
 				axios
 					.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/create/bulk`, fileContent)
 					.then((response) => {
 						toast.success("Bulk Users Successfully. Redirecting...");
 						setTimeout(() => {
-							window.location.href.reload(); // Replace "new-page-url" with your desired URL
-						}, 3000); // 3 seconds delay before redirecting
+							window.location.href.reload();
+						}, 3000);
 					})
 					.catch((error) => {
 						toast.error("Error adding bulk users." + error.response.data.message);
@@ -370,6 +372,7 @@ const CreateUser = (props) => {
 							<Box className="create_new_form_right">{passwordFields()}</Box>
 						</Box>
 					</form>
+					<Box>{bulkDataEntry()}</Box>
 				</Container>
 			);
 		case "evaluator":
@@ -395,6 +398,7 @@ const CreateUser = (props) => {
 							<Box className="create_new_form_right">{passwordFields()}</Box>
 						</Box>
 					</form>
+					<Box>{bulkDataEntry()}</Box>
 				</Container>
 			);
 		default:
