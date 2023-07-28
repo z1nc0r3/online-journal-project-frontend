@@ -9,13 +9,14 @@ import "../../../assets/css/main.css";
 
 class AlertDialog extends React.Component {
 	render() {
-		const { open, onClose, onAgree, onDisagree, title, description, agreeText, disagreeText } = this.props;
+		const { open, onClose, onAgree, onDisagree, title, description, sub_description="", agreeText, disagreeText } = this.props;
 
 		return (
 			<Dialog open={open} onClose={onClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
 				<DialogTitle id="alert-dialog-title">{title}</DialogTitle>
 				<DialogContent>
-					<DialogContentText id="alert-dialog-description">{description}</DialogContentText>
+					<DialogContentText className="alert-dialog-des" id="alert-dialog-description">{description}</DialogContentText>
+					<DialogContentText className="alert-dialog-subdes" id="alert-dialog-description">{sub_description}</DialogContentText>
 				</DialogContent>
 				<DialogActions className="alert_actions">
 					<Button onClick={onDisagree} color="primary" className="alert_disagree" autoFocus>
