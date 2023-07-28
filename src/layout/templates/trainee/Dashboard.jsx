@@ -61,7 +61,7 @@ function Dashboard() {
 
 				setTimeout(() => {
 					window.location.reload();
-				}, 3000);
+				}, 2000);
 			})
 			.catch((error) => {
 				toast.error("Error submitting the form." + error.response.data.message);

@@ -144,7 +144,7 @@ const CreateUser = (props) => {
 				toast.success("New User Created Successfully. Redirecting...");
 				setTimeout(() => {
 					window.location.href = userType;
-				}, 3000);
+				}, 2000);
 			})
 			.catch((error) => {
 				toast.error("Error submitting the form." + error.response.data.message);
@@ -271,7 +271,7 @@ const CreateUser = (props) => {
 						toast.success("Bulk Users Successfully. Redirecting...");
 						setTimeout(() => {
 							window.location.href.reload();
-						}, 3000);
+						}, 2000);
 					})
 					.catch((error) => {
 						toast.error("Error adding bulk users." + error.response.data.message);

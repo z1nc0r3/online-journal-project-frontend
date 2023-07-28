@@ -86,7 +86,7 @@ const UpdateUser = (props) => {
 				toast.success("User data updated Successfully. Redirecting...");
 				setTimeout(() => {
 					window.location.href = "..";
-				}, 3000);
+				}, 2000);
 			})
 			.catch((error) => {
 				toast.error("Error updating user data. Please try again." + error);
