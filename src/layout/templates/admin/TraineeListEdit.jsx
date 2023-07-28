@@ -97,7 +97,7 @@ const UpdateUser = () => {
 				toast.success("User data updated Successfully. Redirecting...");
 				setTimeout(() => {
 					window.location.href = "..";
-				}, 3000);
+				}, 2000);
 			})
 			.catch((error) => {
 				toast.error("Error updating user data. Please try again." + error);
@@ -189,11 +189,8 @@ const UpdateUser = () => {
 
 			try {
 				const response = await axios.post(`${API_URL}/api/reset/password/${id}`);
-				if (response.data.success) {
+				if (response.status === 200) {
 					showToast("Password reset successfully. Reloading...");
-					setTimeout(() => {
-						window.location.reload();
-					}, 3000);
 				} else {
 					showToast("Error resetting password. Please try again.", true);
 				}
@@ -208,12 +205,12 @@ const UpdateUser = () => {
 		handleCloseAlert();
 
 		try {
-			const response = await axios.post(`${API_URL}/api/delete/user/${id}`);
-			if (response.data.success) {
+			const response = await axios.post(`${API_URL}/api/delete/${id}`);
+			if (response.status === 200) {
 				showToast("User deleted successfully. Redirecting...");
 				setTimeout(() => {
 					window.location.href = "..";
-				}, 3000);
+				}, 2000);
 			} else {
 				showToast("Error deleting user. Please try again.", true);
 			}
