@@ -132,6 +132,7 @@ const Layout = (props) => {
 	};
 
 	if (loading) {
+		// Todo: Add loading animation
 		return <div>Loading...</div>;
 	}
 
