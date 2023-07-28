@@ -171,17 +171,17 @@ Button.print_details_button:hover {
 
 .MuiDialog-paper {
 	display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    border-radius: 1.5rem !important;
-    padding: 1rem;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: white;
+	border-radius: 1.5rem !important;
+	padding: 1rem;
 	width: 25rem;
 }
 
 .MuiDialog-paper .alert_actions {
-	width: 80%;
+	width: 70%;
 	justify-content: space-between;
 }
 
@@ -195,7 +195,7 @@ Button.print_details_button:hover {
 }
 
 .MuiDialog-paper Button.MuiButton-root {
-	background-color: #0085ff ;
+	background-color: #0085ff;
 	color: white;
 	font-size: 16px;
 	height: 3rem;
@@ -267,5 +267,11 @@ Button.print_details_button:hover {
 
 	.print_button_container button {
 		font-size: 14px;
+	}
+}
+
+@media only screen and (max-width: 440px) {
+	.MuiDialog-paper .alert_actions {
+		width: 80%;
 	}
 }
