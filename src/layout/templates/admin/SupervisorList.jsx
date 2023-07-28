@@ -24,8 +24,8 @@ function SupervisorList() {
 		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/supervisor/list`).then((response) => {
 			const data = response.data;
 
-			if (data.login_error) {
-				console.log("error");
+			if (data.error) {
+				console.log(data.error);
 			} else {
 				setSupervisors(data.supervisors);
 			}

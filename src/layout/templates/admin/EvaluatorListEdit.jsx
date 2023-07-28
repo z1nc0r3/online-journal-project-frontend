@@ -21,8 +21,8 @@ const UpdateUser = () => {
 		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/evaluator/${id}`).then((response) => {
 			const data = response.data.user;
 
-			if (data.login_error) {
-				console.log("error");
+			if (data.error) {
+				console.log(data.error);
 			} else {
 				setFormData((prevFormData) => ({
 					...prevFormData,

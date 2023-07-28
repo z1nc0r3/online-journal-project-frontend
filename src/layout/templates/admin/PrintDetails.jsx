@@ -17,7 +17,6 @@ const PrintPDF = () => {
 			if (data.error) {
 				console.log(data.error);
 			} else {
-				console.log(data.trainees);
 				let y = 10;
 				// Add content to the PDF
 				const tableHeaders = ["ID", "Name", "Department"];
@@ -101,7 +100,6 @@ const PrintPDF = () => {
 			if (data.error) {
 				console.log(data.error);
 			} else {
-				console.log(data.supervisors);
 				// Add content to the PDF
 				let y = 10;
 

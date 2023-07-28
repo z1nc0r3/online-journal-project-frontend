@@ -30,8 +30,8 @@ const UpdateUser = () => {
 		axios.get(`${API_URL}/api/get/trainee/${id}`).then((response) => {
 			const data = response.data.user;
 
-			if (data.login_error) {
-				console.log("error");
+			if (data.error) {
+				console.log(data.error);
 			} else {
 				setFormData((prevFormData) => ({
 					...prevFormData,

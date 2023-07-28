@@ -30,7 +30,6 @@ function LeftWidget() {
 
 	const handleButtonClick = (index) => {
 		setActiveButton(index);
-		console.log(index);
 	};
 
 	return (
