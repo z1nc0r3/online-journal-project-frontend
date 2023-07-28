@@ -287,7 +287,7 @@ Button.save_button_trainee:hover {
 
 Button.user_controller_button {
     height: 3rem;
-    width: 18rem;
+    width: 49%;
     box-shadow: none;
 }
 
@@ -410,6 +410,7 @@ Button.import_button {
 
     .create_new_form_left, .create_new_form_right {
         width: 100%;
+        padding: 0 0.5rem;
     }
 
     .create_new_form p {
@@ -435,5 +436,9 @@ Button.import_button {
         font-size: 14px;
         margin-top: 10px;
         width: 100%;
+    }
+
+    Button.user_controller_button {
+        font-size: 14px;
     }
 }
