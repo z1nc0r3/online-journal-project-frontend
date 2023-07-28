@@ -46,7 +46,7 @@ function Dashboard() {
 		event.preventDefault();
 		
 		recordData.user_id = localStorage.getItem("user_id");
-		recordData.week = "02";
+		recordData.week = "04";
 		recordData.month = new Date().getMonth() + 1;
 		recordData.year = new Date().getFullYear();
 
