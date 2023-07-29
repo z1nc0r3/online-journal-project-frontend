@@ -100,8 +100,8 @@ function Dashboard() {
 					</Box>
 					<Box sx={{ marginTop: "30px" }}>
 						<h1 className="trainee_box_heading">Problems Encountered and Solutions Found :</h1>
-						<Box variant="outlined" className="trainee_box_description">
-							<Typography component={"span"} variant="body1" className="trainee_box_description_text">
+						<Box variant="outlined" className="trainee_box_solutions">
+							<Typography component={'span'} variant="body1" className="trainee_box_description_text">
 								<TextField
 									multiline
 									rows={3}
