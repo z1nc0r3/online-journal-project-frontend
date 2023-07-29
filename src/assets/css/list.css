@@ -164,8 +164,12 @@
     padding-left: 15px;
 }
 
-.trainee_box_description{
+.trainee_box_description, .trainee_box_solutions{
     outline: none;
+}
+
+.trainee_box_description{
+    height: 300px;
 }
 
 .trainee_box_description_text{
