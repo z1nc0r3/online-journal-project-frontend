@@ -1,4 +1,4 @@
-.list_container {
+.list_container, .month_report_container {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -6,7 +6,7 @@
     padding-right: 0 !important;
 }
 
-.list_box {
+.list_box, .month_report_box {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -60,6 +60,10 @@
     background-color: #2a95ff;
     color: white;
     box-shadow: none;
+}
+
+.month_report_box .accordion_item {
+    background-color: #9dd0ff;
 }
 
 .accordion_item:before {
@@ -153,7 +157,6 @@
     padding-right: 10px;
 }
 
-
 /* trainee user */
 
 .trainee_box_heading{
@@ -193,7 +196,6 @@
 }
 
 .trainee_week{
-    background-color: #379eff4d;
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 5px;
@@ -323,8 +325,37 @@ Button.import_button {
 	box-shadow: none;
 }
 
+/* Trainee UI : reports view */
+
+.weekly_report_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.weekly_report_des, .weekly_report_sol {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: white;
+}
+
+.weekly_report_container .report_title {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 0.5rem ;
+    padding-left: 0.5rem;
+}
+
+.weekly_report_container .report_title_sol {
+    margin-top: 1rem;
+}
+
 @media only screen and (max-width: 1200px) {
-    .list_container, .create_new_container {
+    .list_container, .create_new_container, .month_report_container {
         padding-right: 16px !important;
     }
 
@@ -338,11 +369,11 @@ Button.import_button {
 }
 
 @media only screen and (max-width: 900px) {
-    .list_container, .create_new_container {
+    .list_container, .create_new_container, .month_report_container {
         padding-left: 16px !important;
     }
 
-	.list_box {
+	.list_box, .month_report_box {
 		padding: 1rem;
 	}
 
@@ -371,7 +402,7 @@ Button.import_button {
 /* mobile view css */
 
 @media only screen and (max-width: 600px) {
-    .list_container, .create_new_container {
+    .list_container, .create_new_container, .month_report_container {
         padding-left: 16px !important;
     }
 
