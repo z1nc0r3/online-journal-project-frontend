@@ -14,7 +14,7 @@
     height: 100%;
     background-color: white;
     border-radius: 1.5rem;
-    padding: 2rem;
+    padding: 2rem 2rem 1.5rem 2rem;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -354,6 +354,14 @@ Button.import_button {
     margin-top: 1rem;
 }
 
+.month_report_container .month_item {
+    border-radius: 0.5rem !important;
+    background-color: white;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    box-shadow: none;
+}
+
 @media only screen and (max-width: 1200px) {
     .list_container, .create_new_container, .month_report_container {
         padding-right: 16px !important;
@@ -374,7 +382,7 @@ Button.import_button {
     }
 
 	.list_box, .month_report_box {
-		padding: 1rem;
+		padding: 1rem 1rem 0.5rem 1rem;
 	}
 
     .assign_supervisor_row .MuiSelect-select, .assign_evaluator_row .MuiSelect-select {
@@ -475,5 +483,9 @@ Button.import_button {
 
     Button.user_controller_button {
         font-size: 14px;
+    }
+
+    .month_report_container .MuiAccordionDetails-root {
+        padding: 8px 8px 16px ;
     }
 }
