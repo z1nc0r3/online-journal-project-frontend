@@ -5,37 +5,61 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import CssBaseline from "@mui/material/CssBaseline";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import "../../../assets/css/list.css";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function CurrentMonthReport() {
+	const [getMonthRecords, setGetMonthRecords] = useState({
+		user_id: localStorage.getItem("user_id"),
+		month: new Date().getMonth() + 1,
+		year: new Date().getFullYear(),
+	});
+	const [currentMonthRecords, setCurrentMonthRecords] = useState([]);
 
-    return (
-		<Container component="main" className="list_container" maxWidth={false}>
+	const getRecords = (e) => {
+		const { user_id, month, year } = getMonthRecords;
+		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/record/currentMonth/week/${user_id}?month=${month}&year=${year}`).then((response) => {
+			const data = response.data.records;
+			setCurrentMonthRecords(data);
+		});
+	};
+
+	useEffect(() => {
+		getRecords();
+	}, []);
+
+	return (
+		<Container component="main" className="month_report_container" maxWidth={false}>
 			<CssBaseline />
-			<Box>
-				<Accordion className="trainee_month_accordion_root">
-					<AccordionSummary className="trainee_month_accordion"
-						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
-					>
-						<Typography>Month 01</Typography>
-					</AccordionSummary>
-					<AccordionDetails>
-						<Box className="trainee_week"><Typography>Week 01</Typography></Box>
-						<Box className="trainee_week"><Typography>Week 02</Typography></Box>
-						<Box className="trainee_week"><Typography>Week 03</Typography></Box>
-						<Box className="trainee_week"><Typography>Week 04</Typography></Box>
-					</AccordionDetails>
-				</Accordion>
+			<Box className="month_report_box">
+				{currentMonthRecords.map((record, i) => (
+					<Accordion sx={{ width: "100%", backgroundColor: "#dfefff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }} className="accordion_item">
+						<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
+							<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>Week : {record.week}</Typography>
+						</AccordionSummary>
+						<AccordionDetails>
+							<Box className="weekly_report_container">
+								<Typography className="report_title report_title_des">Description :</Typography>
+								<Box className="weekly_report_des">
+									<Typography sx={{ fontSize: "16px", textAlign: "left" }}>
+										{record.description}
+									</Typography>
+								</Box>
+								<Typography className="report_title report_title_sol">Solution :</Typography>
+								<Box className="weekly_report_sol">
+									<Typography sx={{ fontSize: "16px", textAlign: "left" }}>
+										{record.solutions}
+									</Typography>
+								</Box>
+							</Box>
+						</AccordionDetails>
+					</Accordion>
+				))}
 			</Box>
 		</Container>
 	);
-
 }
 
 export default CurrentMonthReport;

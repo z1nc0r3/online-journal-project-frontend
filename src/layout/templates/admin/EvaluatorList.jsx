@@ -21,11 +21,11 @@ function EvaluatorList() {
 	};
 
 	const getEvaluatorList = (event) => {
-		axios.get("http://127.0.0.1:8000/api/get/evaluator/list").then((response) => {
+		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/evaluator/list`).then((response) => {
 			const data = response.data;
 
-			if (data.login_error) {
-				console.log("error");
+			if (data.error) {
+				console.log(data.error);
 			} else {
 				setEvaluators(data.evaluators);
 			}
@@ -57,7 +57,7 @@ function EvaluatorList() {
 						</AccordionSummary>
 						<AccordionDetails>
 							<Box className="evaluator_assign_form">
-								<div className="assign_evaluator_row">
+								<div className="assigned_student">
 									<Typography sx={{ fontSize: "16px", textAlign: "left" }}>
 										Assigned for : {evaluator.evaluator_connection ? evaluator.evaluator_connection.trainee_name : "Not Assigned"}
 									</Typography>

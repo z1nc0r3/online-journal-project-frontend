@@ -25,6 +25,7 @@ const CreateUser = (props) => {
 	});
 
 	const [passwordError, setPasswordError] = useState("");
+	const [selectedFile, setSelectedFile] = useState(null);
 
 	useEffect(() => {
 		handlePasswordChange();
@@ -106,6 +107,7 @@ const CreateUser = (props) => {
 		}
 	};
 
+	// handle submit
 	const handleSubmit = (e, userType) => {
 		e.preventDefault();
 
@@ -124,13 +126,13 @@ const CreateUser = (props) => {
 		let url;
 		switch (userType) {
 			case "trainee":
-				url = "http://127.0.0.1:8000/api/create/trainee";
+				url = `${process.env.REACT_APP_BACKEND_API_URL}/api/create/trainee`;
 				break;
 			case "supervisor":
-				url = "http://127.0.0.1:8000/api/create/supervisor";
+				url = `${process.env.REACT_APP_BACKEND_API_URL}/api/create/supervisor`;
 				break;
 			case "evaluator":
-				url = "http://127.0.0.1:8000/api/create/evaluator";
+				url = `${process.env.REACT_APP_BACKEND_API_URL}/api/create/evaluator`;
 				break;
 			default:
 				return;
@@ -141,11 +143,11 @@ const CreateUser = (props) => {
 			.then((response) => {
 				toast.success("New User Created Successfully. Redirecting...");
 				setTimeout(() => {
-					window.location.href = userType; // Replace "new-page-url" with your desired URL
-				}, 3000); // 3 seconds delay before redirecting
+					window.location.href = userType;
+				}, 2000);
 			})
 			.catch((error) => {
-				toast.error("Error submitting the form. Please try again." + error);
+				toast.error("Error submitting the form." + error.response.data.message);
 			});
 	};
 
@@ -167,7 +169,7 @@ const CreateUser = (props) => {
 				<Typography>Password </Typography>
 				<TextField
 					variant="outlined"
-					required
+					//required
 					fullWidth
 					name="password"
 					type="password"
@@ -197,7 +199,7 @@ const CreateUser = (props) => {
 					}}
 					onBlur={handleBlur}
 				/>
-
+				<Typography>&nbsp;</Typography>
 				<Button variant="contained" type="submit" className="register_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
 					Create User
 				</Button>
@@ -232,6 +234,53 @@ const CreateUser = (props) => {
 				<TextField variant="outlined" required fullWidth name="phone" type="number" value={formData.phone} onChange={handlePhoneChange} inputProps={{ maxLength: 10 }} />
 			</>
 		);
+	};
+
+	const handleFileUpload = (e) => {
+		const file = e.target.files[0];
+		setSelectedFile(file);
+	};
+
+	//bulk data entry UI
+	const bulkDataEntry = () => {
+		return (
+			<form onSubmit={handleBulkDataUpload}>
+				<Box className="bulk_user_entry">
+					<Box className="bulk_user_entry_input">
+						<Typography sx={{ fontWeight: "medium", marginRight: 2 }}>Upload JSON File</Typography>
+						<input type="file" accept=".json" className="file_upload" onChange={handleFileUpload} />
+					</Box>
+					<Button variant="contained" type="submit" className="import_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
+						Import
+					</Button>
+				</Box>
+			</form>
+		);
+	};
+
+	const handleBulkDataUpload = (e) => {
+		e.preventDefault();
+		if (selectedFile) {
+			const reader = new FileReader();
+			reader.onload = function (e) {
+				const fileContent = JSON.parse(e.target.result);
+
+				axios
+					.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/create/bulk`, fileContent)
+					.then((response) => {
+						toast.success("Bulk Users Successfully. Redirecting...");
+						setTimeout(() => {
+							window.location.href.reload();
+						}, 2000);
+					})
+					.catch((error) => {
+						toast.error("Error adding bulk users." + error.response.data.message);
+					});
+			};
+			reader.readAsText(selectedFile);
+		} else {
+			toast.error("Please select a file.");
+		}
 	};
 
 	const establishmentFields = () => {
@@ -297,6 +346,7 @@ const CreateUser = (props) => {
 							</Box>
 						</Box>
 					</form>
+					<Box>{bulkDataEntry()}</Box>
 				</Container>
 			);
 		case "supervisor":
@@ -322,6 +372,7 @@ const CreateUser = (props) => {
 							<Box className="create_new_form_right">{passwordFields()}</Box>
 						</Box>
 					</form>
+					<Box>{bulkDataEntry()}</Box>
 				</Container>
 			);
 		case "evaluator":
@@ -347,6 +398,7 @@ const CreateUser = (props) => {
 							<Box className="create_new_form_right">{passwordFields()}</Box>
 						</Box>
 					</form>
+					<Box>{bulkDataEntry()}</Box>
 				</Container>
 			);
 		default:

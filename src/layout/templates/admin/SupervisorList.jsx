@@ -21,11 +21,11 @@ function SupervisorList() {
 	};
 
 	const getSupervisorList = (event) => {
-		axios.get("http://127.0.0.1:8000/api/get/supervisor/list").then((response) => {
+		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/supervisor/list`).then((response) => {
 			const data = response.data;
 
-			if (data.login_error) {
-				console.log("error");
+			if (data.error) {
+				console.log(data.error);
 			} else {
 				setSupervisors(data.supervisors);
 			}
@@ -57,7 +57,7 @@ function SupervisorList() {
 						</AccordionSummary>
 						<AccordionDetails>
 							<Box className="supervisor_assign_form">
-								<div className="assign_evaluator_row">
+								<div className="assigned_student">
 									<Typography sx={{ fontSize: "16px", textAlign: "left" }}>
 										Assigned for : {supervisor.supervisor_connection ? supervisor.supervisor_connection.trainee_name : "Not Assigned"}
 									</Typography>

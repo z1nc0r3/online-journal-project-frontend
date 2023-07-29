@@ -20,11 +20,11 @@ const UpdateUser = (props) => {
 	const { id } = useParams();
 
 	const getSupervisorDetails = (event) => {
-		axios.get(`http://127.0.0.1:8000/api/get/supervisor/${id}`).then((response) => {
+		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/supervisor/${id}`).then((response) => {
 			const data = response.data.user;
 
-			if (data.login_error) {
-				console.log("error");
+			if (data.error) {
+				console.log(data.error);
 			} else {
 				setFormData((prevFormData) => ({
 					...prevFormData,
@@ -81,12 +81,12 @@ const UpdateUser = (props) => {
 		e.preventDefault();
 
 		axios
-			.post(`http://127.0.0.1:8000/api/update/supervisor/${id}`, formData)
+			.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/update/supervisor/${id}`, formData)
 			.then((response) => {
 				toast.success("User data updated Successfully. Redirecting...");
 				setTimeout(() => {
 					window.location.href = "..";
-				}, 3000);
+				}, 2000);
 			})
 			.catch((error) => {
 				toast.error("Error updating user data. Please try again." + error);
