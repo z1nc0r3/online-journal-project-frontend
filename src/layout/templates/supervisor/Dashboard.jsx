@@ -91,15 +91,18 @@ function Dashboard() {
 
 					<AccordionDetails>
 						{Array.from({length: 4}, (_, i) => (
-							<Box className="supervisor_week">
-								<Accordion key={i+1}>
+							<Box className="list_container">
+								<Accordion sx={{ width: "100%", backgroundColor: "#9dd0ff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }} className="accordion_item" >
 									<AccordionSummary>
-										<Typography>{`Week ${i+1}`}</Typography>
+										<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }} >{`Week ${i+1}`}</Typography>
 									</AccordionSummary>
-									<AccordionDetails>
-										<Typography>
-										DESCRIPTION : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-										</Typography>
+									<AccordionDetails className="report_detail_container">
+										<Box className="weekly_report_container">
+											<Typography className="report_title report_title_des">Description :</Typography>
+											<Box className="weekly_report_des">
+												<Typography sx={{ fontSize: "16px", textAlign: "left" }}></Typography>
+											</Box>
+										</Box>
 									</AccordionDetails>
 								</Accordion>
 							</Box>
