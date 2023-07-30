@@ -8,6 +8,8 @@ import CreateMenu from "../../components/admin/CreateMenu";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+const API_URL = process.env.REACT_APP_BACKEND_API_URL;
+
 const CreateUser = (props) => {
 	const [formData, setFormData] = useState({
 		fName: "",
@@ -126,13 +128,13 @@ const CreateUser = (props) => {
 		let url;
 		switch (userType) {
 			case "trainee":
-				url = `${process.env.REACT_APP_BACKEND_API_URL}/api/create/trainee`;
+				url = `${API_URL}/api/create/trainee`;
 				break;
 			case "supervisor":
-				url = `${process.env.REACT_APP_BACKEND_API_URL}/api/create/supervisor`;
+				url = `${API_URL}/api/create/supervisor`;
 				break;
 			case "evaluator":
-				url = `${process.env.REACT_APP_BACKEND_API_URL}/api/create/evaluator`;
+				url = `${API_URL}/api/create/evaluator`;
 				break;
 			default:
 				return;
@@ -266,7 +268,7 @@ const CreateUser = (props) => {
 				const fileContent = JSON.parse(e.target.result);
 
 				axios
-					.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/create/bulk`, fileContent)
+					.post(`${API_URL}/api/create/bulk`, fileContent)
 					.then((response) => {
 						toast.success("Bulk Users Successfully. Redirecting...");
 						setTimeout(() => {

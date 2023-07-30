@@ -46,8 +46,6 @@ function Login() {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
-		console.log(process.env.REACT_APP_BACKEND_API_URL);
-
 		axios.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/login/check`, { email, password }).then((response) => {
 			const data = response.data;
 
