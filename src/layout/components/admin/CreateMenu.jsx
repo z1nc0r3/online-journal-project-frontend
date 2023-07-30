@@ -21,7 +21,6 @@ function CreateMenu() {
 
 	const handleButtonClick = (index) => {
 		setActiveIndex(index);
-		console.log(index);
 	};
 
 	return (

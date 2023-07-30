@@ -12,7 +12,7 @@ import "../../../assets/css/list.css";
 function Dashboard() {
 	const [recordData, setRecordData] = useState({
 		user_id: "",
-		description:  localStorage.getItem("description") || "",
+		description: localStorage.getItem("description") || "",
 		solutions: localStorage.getItem("solutions") || "",
 		week: "",
 		month: "",
@@ -44,9 +44,9 @@ function Dashboard() {
 
 	const handleSubmitRecord = (event) => {
 		event.preventDefault();
-		
+
 		recordData.user_id = localStorage.getItem("user_id");
-		recordData.week = "02";
+		recordData.week = "04";
 		recordData.month = new Date().getMonth() + 1;
 		recordData.year = new Date().getFullYear();
 
@@ -55,28 +55,31 @@ function Dashboard() {
 		axios
 			.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/addRecord/week`, recordData)
 			.then((response) => {
-				toast.success("Form submitted successfully.");
+				toast.success("Form submitted successfully. Reloading...");
 				localStorage.removeItem("description");
 				localStorage.removeItem("solutions");
 
 				setTimeout(() => {
 					window.location.reload();
-				}, 3000);
+				}, 2000);
 			})
 			.catch((error) => {
-				toast.error("Error submitting the form." + error.response.data.message);
+				toast.error("Error submitting the form. Please try again.");
 			});
 	};
 
 	return (
 		<Container component="main" className="list_container" maxWidth={false}>
 			<CssBaseline />
+
+			<ToastContainer />
+			
 			<Box className="trainee_box">
 				<form onSubmit={handleSubmitRecord}>
 					<Box>
 						<h1 className="trainee_box_heading">Brief Description of work carried out :</h1>
 						<Box className="trainee_box_description" variant="outlined">
-							<Typography component={'span'} variant="body1" className="trainee_box_description_text">
+							<Typography component={"span"} variant="body1" className="trainee_box_description_text">
 								<TextField
 									multiline
 									rows={6}
@@ -97,7 +100,7 @@ function Dashboard() {
 					</Box>
 					<Box sx={{ marginTop: "30px" }}>
 						<h1 className="trainee_box_heading">Problems Encountered and Solutions Found :</h1>
-						<Box variant="outlined" className="trainee_box_description">
+						<Box variant="outlined" className="trainee_box_solutions">
 							<Typography component={'span'} variant="body1" className="trainee_box_description_text">
 								<TextField
 									multiline
@@ -131,7 +134,7 @@ function Dashboard() {
 								}}
 								onChange={(e) => setIsChecked(e.target.checked)}
 							/>
-							<Typography className="agreement_trainee_submission" component={'span'} variant="body1">
+							<Typography className="agreement_trainee_submission" component={"span"} variant="body1">
 								I hereby declare that all the information contained in this report is truth and correct. I take full responsibility for the correctness of the said information.
 							</Typography>
 						</Box>

@@ -53,7 +53,7 @@ const titleMap = {
 	admin_supervisor_edit: "Update Supervisor Detail",
 	admin_print: "Print Details",
 
-	trainee_dashboard: "Week no :",
+	trainee_dashboard: "Week no : 04",    // here need change the week number now its hard coded 
 	trainee_past_reports: "Past Report",
 	trainee_user_instruction: "Instruction",
 	trainee_user_edit_data: "Edit User Data",
@@ -132,6 +132,7 @@ const Layout = (props) => {
 	};
 
 	if (loading) {
+		// Todo: Add loading animation
 		return <div>Loading...</div>;
 	}
 

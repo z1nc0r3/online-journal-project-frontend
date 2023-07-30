@@ -5,19 +5,20 @@ import axios from "axios";
 import "jspdf-autotable";
 import "../../../assets/css/main.css";
 
+const API_URL = process.env.REACT_APP_BACKEND_API_URL;
+
 const PrintPDF = () => {
 	const generateTraineePDF = () => {
 		// Create a new jsPDF instance
 		const doc = new jsPDF();
 
 		//get trainee list
-		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/trainee/list`).then((response) => {
+		axios.get(`${API_URL}/api/get/trainee/list`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
 				console.log(data.error);
 			} else {
-				console.log(data.trainees);
 				let y = 10;
 				// Add content to the PDF
 				const tableHeaders = ["ID", "Name", "Department"];
@@ -53,7 +54,7 @@ const PrintPDF = () => {
 		const doc = new jsPDF();
 
 		//get trainee list
-		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/evaluator/list`).then((response) => {
+		axios.get(`${API_URL}/api/get/evaluator/list`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
@@ -95,13 +96,12 @@ const PrintPDF = () => {
 		const doc = new jsPDF();
 
 		//get trainee list
-		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/supervisor/list`).then((response) => {
+		axios.get(`${API_URL}/api/get/supervisor/list`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
 				console.log(data.error);
 			} else {
-				console.log(data.supervisors);
 				// Add content to the PDF
 				let y = 10;
 
@@ -139,15 +139,16 @@ const PrintPDF = () => {
 	return (
 		<div className="print_button_container">
 			<Button onClick={generateTraineePDF} variant="contained" type="submit" className="print_details_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
-				Print Trainee Details
+				Trainee Details
 			</Button>
 			<Button onClick={generateEvaluatorPDF} variant="contained" type="submit" className="print_details_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
-				Print Evaluator Details
+				Evaluator Details
 			</Button>
 			<Button onClick={generateSupervisorPDF} variant="contained" type="submit" className="print_details_button" sx={{ width: "100%", bgcolor: "#379fff", fontSize: "16px" }}>
-				Print Supervisor Details
+				Supervisor Details
 			</Button>
 		</div>
 	);
 };
+
 export default PrintPDF;

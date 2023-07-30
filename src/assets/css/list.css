@@ -1,4 +1,4 @@
-.list_container {
+.list_container, .month_report_container {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -6,7 +6,7 @@
     padding-right: 0 !important;
 }
 
-.list_box {
+.list_box, .month_report_box {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -14,7 +14,7 @@
     height: 100%;
     background-color: white;
     border-radius: 1.5rem;
-    padding: 2rem;
+    padding: 2rem 2rem 1.5rem 2rem;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -60,6 +60,10 @@
     background-color: #2a95ff;
     color: white;
     box-shadow: none;
+}
+
+.month_report_box .accordion_item {
+    background-color: #9dd0ff;
 }
 
 .accordion_item:before {
@@ -153,7 +157,6 @@
     padding-right: 10px;
 }
 
-
 /* trainee user */
 
 .trainee_box_heading{
@@ -164,8 +167,12 @@
     padding-left: 15px;
 }
 
-.trainee_box_description{
+.trainee_box_description, .trainee_box_solutions{
     outline: none;
+}
+
+.trainee_box_description{
+    height: 300px;
 }
 
 .trainee_box_description_text{
@@ -201,7 +208,6 @@
 }
 
 .trainee_week{
-    background-color: #379eff4d;
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 5px;
@@ -274,23 +280,130 @@ Button.save_button_trainee:hover {
     text-align: left;
 }
 
+/* bulk user entry */
+
+.bulk_user_entry {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    background-color: white;
+    border-radius: 1.5rem;
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+}
+
+.bulk_user_entry_input {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: baseline;
+    width: 100%;
+}
+
+/* user controllers */
+
+.user_controller_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 1rem;
+}
+
+Button.user_controller_button {
+    height: 3rem;
+    width: 49%;
+    box-shadow: none;
+}
+
+Button.reset_button {
+    background-color: white;
+    color: #414141;
+}
+
+Button.reset_button:hover {
+    background-color: #d32f2f;
+    color: white;
+    box-shadow: none;
+}
+
+Button.delete_button {
+    background-color: white;
+    color: #414141;
+}
+
+Button.delete_button:hover {
+    background-color: #d32f2f;
+    color: white;
+    box-shadow: none;
+}
+
+Button.import_button {
+    height: 3rem;
+    width: 10rem;
+	box-shadow: none;
+}
+
+/* Trainee UI : reports view */
+
+.weekly_report_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.weekly_report_des, .weekly_report_sol {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: white;
+}
+
+.weekly_report_container .report_title {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 0.5rem ;
+    padding-left: 0.5rem;
+}
+
+.weekly_report_container .report_title_sol {
+    margin-top: 1rem;
+}
+
+.month_report_container .month_item {
+    border-radius: 0.5rem !important;
+    background-color: white;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    box-shadow: none;
+}
+
 @media only screen and (max-width: 1200px) {
-    .list_container, .create_new_container {
+    .list_container, .create_new_container, .month_report_container {
         padding-right: 16px !important;
     }
 
     .create_new_form {
         padding: 1.5rem;
     }
+
+    .bulk_user_entry_input {
+        justify-content: center;
+    }
 }
 
 @media only screen and (max-width: 900px) {
-    .list_container, .create_new_container {
+    .list_container, .create_new_container, .month_report_container {
         padding-left: 16px !important;
     }
 
-	.list_box {
-		padding: 1rem;
+	.list_box, .month_report_box {
+		padding: 1rem 1rem 0.5rem 1rem;
 	}
 
     .assign_supervisor_row .MuiSelect-select, .assign_evaluator_row .MuiSelect-select {
@@ -309,12 +422,16 @@ Button.save_button_trainee:hover {
         font-size: 14px;
     }
 
+    .bulk_user_entry {
+        padding: 1rem;
+    }
+
 }
 
 /* mobile view css */
 
 @media only screen and (max-width: 600px) {
-    .list_container, .create_new_container {
+    .list_container, .create_new_container, .month_report_container {
         padding-left: 16px !important;
     }
 
@@ -357,6 +474,7 @@ Button.save_button_trainee:hover {
 
     .create_new_form_left, .create_new_form_right {
         width: 100%;
+        padding: 0 0.5rem;
     }
 
     .create_new_form p {
@@ -367,5 +485,28 @@ Button.save_button_trainee:hover {
     Button.create_menu_button {
         font-size: 14px;
         width: 6.5rem;
+    }
+
+    .bulk_user_entry {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .bulk_user_entry_input p {
+        font-size: 14px;
+    }
+
+    Button.import_button {
+        font-size: 14px;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    Button.user_controller_button {
+        font-size: 14px;
+    }
+
+    .month_report_container .MuiAccordionDetails-root {
+        padding: 8px 8px 16px ;
     }
 }

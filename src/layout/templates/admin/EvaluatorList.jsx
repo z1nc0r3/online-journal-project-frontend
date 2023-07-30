@@ -24,8 +24,8 @@ function EvaluatorList() {
 		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/evaluator/list`).then((response) => {
 			const data = response.data;
 
-			if (data.login_error) {
-				console.log("error");
+			if (data.error) {
+				console.log(data.error);
 			} else {
 				setEvaluators(data.evaluators);
 			}
