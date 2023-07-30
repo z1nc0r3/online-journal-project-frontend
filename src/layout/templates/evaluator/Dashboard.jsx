@@ -30,85 +30,70 @@ function Dashboard() {
 	};
   
 	return (
-	  <Container component="main" className="list_container" maxWidth={false}>
+	 <Container component="main" className="list_container" maxWidth={false}>
 		<CssBaseline />
   
 		<Box className="list_box">
-		  <Accordion
-			expanded={expandedStudent}
-			onChange={handleStudentChange("panel")}
-			sx={{width: "100%",backgroundColor: "#dfefff",boxShadow: "none",}}>
-			<AccordionSummary
-			  expandIcon={<ExpandMoreIcon />}
-			  aria-controls="panel1bh-content"
-			  id="panel1bh-header"
-			>
-			  <Typography sx={{ width: "75%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>
-				Student Name
-			  </Typography>
+		<Accordion expanded={expandedStudent} onChange={handleStudentChange("panel")} sx={{width: "100%",backgroundColor: "#dfefff",boxShadow: "none",}}>
+			<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
+			  <Typography sx={{ width: "75%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Student Name</Typography>
 			</AccordionSummary>
+              <AccordionDetails>
+				{Array.from({length: 5}, (_, i) => (
+					<Box  sx={{ width: "100%", backgroundColor: "#79bcfc", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }}> 
+					    <Accordion>
+							<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="month1-content" id="month1-header">
+								<Typography sx={{ fontWeight: "bold", textAlign: "center", color: "#414141",paddingLeft: 0.5 }}>{`Month ${i+1}`}</Typography>
+							</AccordionSummary>
 
+						    <AccordionDetails>
+								{Array.from({length: 4}, (_, i) => (
+									<Box sx={{ width: "100%", backgroundColor: "#319fd6", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }}>
+										<Accordion sx={{ width: "100%", backgroundColor: "#b2d9fe", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }} >
+											<AccordionSummary>
+											<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{`Week ${i+1}`}</Typography>
+											</AccordionSummary>
+											<AccordionDetails  >
+												<Box className="weekly_report_container">
+													<Typography className="report_title report_title_des">Description :</Typography>
+													<Box className="weekly_report_des">
+													<Typography sx={{ fontSize: "16px", textAlign: "left" }}></Typography>
+													</Box>
+												</Box>
+											</AccordionDetails>
+										</Accordion>
+									</Box>
+									
+								))}
+
+								<Box>
+								<Accordion sx={{width: "100%",backgroundColor: "#078be8",boxShadow: "none",}}>
+									<AccordionSummary>
+									<Typography>Supervisor Report</Typography>
+									</AccordionSummary>
+								</Accordion>
+								</Box>
+
+							</AccordionDetails>
+						</Accordion>
+					</Box>
 					
-
-						
-			<AccordionDetails>
-
-{Array.from({length: 5}, (_, i) => (
-<Box className="list_container">  
-<Accordion className="month_item">
-	<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="month1-content" id="month1-header">
-		<Typography sx={{ fontWeight: "bold", textAlign: "center", color: "#414141", paddingLeft: 0.5 }}>{`Month ${i+1}`}</Typography>
-	</AccordionSummary>
-
-	<AccordionDetails>
-		{Array.from({length: 4}, (_, i) => (
-		<Box className="list_container">
-			<Accordion sx={{ width: "100%", backgroundColor: "#9dd0ff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }} className="accordion_item">
-				<AccordionSummary>
-					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{`Week ${i+1}`}</Typography>
-				</AccordionSummary>
-				<AccordionDetails  className="report_detail_container">
-					<Box className="weekly_report_container">
-						<Typography className="report_title report_title_des">Description :</Typography>
-					<Box className="weekly_report_des">
-						<Typography sx={{ fontSize: "16px", textAlign: "left" }}></Typography>
+                ))}
+              </AccordionDetails>
+					<Box sx={{ width: "100%", backgroundColor: "#9dd0ff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }}>
+					  <Accordion sx={{width: "100%",backgroundColor: "#078be8",boxShadow: "none",}}>
+					     <AccordionSummary>
+					       <Typography>Evaluator Report</Typography>
+					     </AccordionSummary>
+					    <AccordionDetails>
+					      <textarea id="w3review" name="w3review" rows="15" cols="75"></textarea>
+					      <Button variant="contained" type="submit" className="register_button" sx={{ width: "89%", bgcolor: "#379fff", fontSize: "16px" }}>Save</Button>
+					    </AccordionDetails>
+					   </Accordion>
 					</Box>
-					</Box>
-				</AccordionDetails>
-			</Accordion>
-		</Box>
-	))}
-
-<Box className="list_container_xx">
-<Accordion sx={{width: "100%",backgroundColor: "#65aaee",boxShadow: "none",}}>
-<AccordionSummary>
-<Typography>Supervisor Report</Typography>
-</AccordionSummary>
-</Accordion>
-</Box>
-
-</AccordionDetails>
-</Accordion>
-</Box>
-))}
-</AccordionDetails>
-<Box className="list_container_xx">
-<Accordion sx={{width: "100%",backgroundColor: "#65aaee",boxShadow: "none",}}>
-<AccordionSummary>
-<Typography>Evaluator Report</Typography>
-</AccordionSummary>
-<AccordionDetails>
-<textarea id="w3review" name="w3review" rows="8" cols="75"></textarea>
-<Button variant="contained" type="submit" className="register_button" sx={{ width: "99%", bgcolor: "#379fff", fontSize: "16px" }}>Update</Button>
-</AccordionDetails>
-</Accordion>
-</Box>
-				</Accordion>
-				
-			
-				
-			</Box>
-		</Container>
+		</Accordion>
+	    </Box>
+	 </Container>
 	);
 }
 
