@@ -186,6 +186,18 @@
     padding: 1rem;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
+.supervisor_box_comment_text{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    border-radius: 1.0rem;
+    padding: 1rem;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+}
 
 .trainee_month_accordion{
     display: flex;
@@ -199,6 +211,15 @@
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 5px;
+}
+.supervisor_week{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color:#b9ddff;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 1rem;
 }
 
 Button.save_button_trainee{
@@ -359,6 +380,32 @@ Button.import_button {
     background-color: white;
     padding: 0.5rem;
     margin-bottom: 0.5rem;
+    box-shadow: none;
+}
+
+/* Supervisor dashboard */
+
+.supervisor_report_field {
+    background-color: white;
+    margin: 1rem;
+    border-radius: 1rem;
+}
+
+.list_box .report_submit {
+    margin: 0.5rem 0 0 0;
+    width: 95%;
+    background-color: #93cbff;
+    color: #414141;
+    font-size: 16px;
+    height: 3rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    box-shadow: none;
+}
+
+.list_box .report_submit:hover {
+    background-color: #2a95ff;
+    color: white;
     box-shadow: none;
 }
 
