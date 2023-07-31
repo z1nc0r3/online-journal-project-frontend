@@ -383,6 +383,32 @@ Button.import_button {
     box-shadow: none;
 }
 
+/* Supervisor dashboard */
+
+.supervisor_report_field {
+    background-color: white;
+    margin: 1rem;
+    border-radius: 1rem;
+}
+
+.list_box .report_submit {
+    margin: 0.5rem 0 0 0;
+    width: 95%;
+    background-color: #93cbff;
+    color: #414141;
+    font-size: 16px;
+    height: 3rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    box-shadow: none;
+}
+
+.list_box .report_submit:hover {
+    background-color: #2a95ff;
+    color: white;
+    box-shadow: none;
+}
+
 @media only screen and (max-width: 1200px) {
     .list_container, .create_new_container, .month_report_container {
         padding-right: 16px !important;
