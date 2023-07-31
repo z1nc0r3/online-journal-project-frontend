@@ -108,20 +108,21 @@ function Dashboard() {
 							</Box>
 						))}
 
-						<Box>
+						
 							<Accordion sx={{ width: "100%", backgroundColor: "#379fff", boxShadow: "none" }}>
 								<AccordionSummary  aria-controls="panel1bh-content" id="panel1bh-header">
-									<Typography sx={{ width: "75%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Report</Typography>
+									<Typography sx={{ width: "95%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Report</Typography>
 								</AccordionSummary>
+
 								<AccordionDetails>
-									<Box >
+								
 										<Accordion>
 											<AccordionSummary>
-												<Typography component={'span'} variant="body1" className="supervisor_box_comment_text">
+												<Typography component={'span'} variant="body1">
 													<TextField
 														multiline rows={6} variant="outlined" required
 														fullWidth name="description" type="text" value={recordData.description}
-														placeholder="Write supervisor comments here." onChange={handleChange}
+														placeholder="Write comments here." onChange={handleChange}
 														sx={{"& fieldset": { border: "none" },}}
 													/>
 												</Typography>
@@ -131,10 +132,10 @@ function Dashboard() {
 												> Save </Button>
 											</AccordionDetails> 
 										</Accordion>
-									</Box>
+								
 								</AccordionDetails>
 							</Accordion>
-						</Box>
+					
 
 					</AccordionDetails>
 

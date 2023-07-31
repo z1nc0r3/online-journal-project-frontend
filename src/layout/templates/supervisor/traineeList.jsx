@@ -80,10 +80,8 @@ function TraineeList() {
 	}, []);
 
   return (
-    <Container component="main" className="list_container" maxWidth={false}>
+    <Container component="main" className="month_report_container" maxWidth={false}>
       <CssBaseline />
-
-      <ToastContainer />
 
 		<Box className="list_box">
 				{trainees.map((trainee, i) => (
@@ -95,7 +93,6 @@ function TraineeList() {
 						className="accordion_item">
 							
 						<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
-							
 							<Typography sx={{ width: "5%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{i + 1}</Typography>
 							<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{trainee.fName}</Typography>
 							<Typography sx={{ color: "text.secondary", fontSize: "14px" }}>{trainee.department}</Typography>
@@ -129,20 +126,20 @@ function TraineeList() {
 										</Box>
 									))}
 
-							<Box>
+						
 							<Accordion sx={{ width: "100%", backgroundColor: "#379fff", boxShadow: "none" }}>
 								<AccordionSummary  aria-controls="panel1bh-content" id="panel1bh-header">
-									<Typography sx={{ width: "75%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Report</Typography>
+									<Typography sx={{ width: "95%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Report</Typography>
 								</AccordionSummary>
+
 								<AccordionDetails>
-									<Box >
 										<Accordion>
 											<AccordionSummary>
-												<Typography component={'span'} variant="body1" className="supervisor_box_comment_text">
+												<Typography component={'span'} variant="body1">
 													<TextField
 														multiline rows={6} variant="outlined" required
 														fullWidth name="description" type="text" 
-														placeholder="Write supervisor comments here." onChange={handleChange}
+														placeholder="Write comments here." onChange={handleChange}
 														sx={{"& fieldset": { border: "none" },}}
 													/>
 												</Typography>
@@ -152,10 +149,10 @@ function TraineeList() {
 												> Update </Button>
 											</AccordionDetails> 
 										</Accordion>
-									</Box>
+									
 								</AccordionDetails>
 							</Accordion>
-						</Box>
+						
 								
 							</AccordionDetails>
 						</Accordion>
