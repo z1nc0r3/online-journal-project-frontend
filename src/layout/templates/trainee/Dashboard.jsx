@@ -48,10 +48,12 @@ function Dashboard() {
 	const handleSubmitRecord = (event) => {
 		event.preventDefault();
 
+		const data = getWeekInfo(new Date());
+
 		recordData.user_id = localStorage.getItem("user_id");
-		recordData.week = "04";
-		recordData.month = new Date().getMonth() + 1;
-		recordData.year = new Date().getFullYear();
+		recordData.week = data.currentWeek;
+		recordData.month = data.currentMonth;
+		recordData.year = data.currentYear;
 
 		console.log(recordData);
 

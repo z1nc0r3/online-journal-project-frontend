@@ -9,8 +9,11 @@ import Typography from "@mui/material/Typography";
 import "../../../assets/css/list.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import getWeekInfo from "../../components/main/GetWeekInfo";
+
 
 function CurrentMonthReport() {
+	const timeDate = getWeekInfo(new Date());
 	const [getMonthRecords, setGetMonthRecords] = useState({
 		user_id: localStorage.getItem("user_id"),
 		month: new Date().getMonth() + 1,
