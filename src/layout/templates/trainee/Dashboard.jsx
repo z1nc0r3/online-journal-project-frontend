@@ -1,6 +1,6 @@
 import * as React from "react";
 import axios from "axios";
-import { Box, Container, Button, colors } from "@mui/material";
+import { Box, Container, Button } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -8,6 +8,9 @@ import Checkbox from "@mui/material/Checkbox";
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "../../../assets/css/list.css";
+import getWeekInfo from "../../components/main/GetWeekInfo";
+
+console.log(getWeekInfo(new Date()));
 
 function Dashboard() {
 	const [recordData, setRecordData] = useState({
@@ -73,7 +76,7 @@ function Dashboard() {
 			<CssBaseline />
 
 			<ToastContainer />
-			
+
 			<Box className="trainee_box">
 				<form onSubmit={handleSubmitRecord}>
 					<Box>
