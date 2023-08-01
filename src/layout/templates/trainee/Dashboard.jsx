@@ -52,7 +52,9 @@ function getWeekNumberOfMonth(date) {
 
 	if (startOffset) { // if the first week has less than 3 days, then the current week should be the last week of the last month
 		currentWeek--;
-	} else if (currentWeek > weeks) { // if the last week has less than 3 days, then the current week should be the first week of the next month
+	}
+	
+	if (currentWeek > weeks) { // if the last week has less than 3 days, then the current week should be the first week of the next month
 		currentWeek = 1;
 	}
 
@@ -74,7 +76,7 @@ function getWeekNumberOfMonth(date) {
 	return weeks;
 }
 
-getWeekNumberOfMonth(new Date());
+getWeekNumberOfMonth(new Date('2023-07-31'));
 
 function Dashboard() {
 	const [recordData, setRecordData] = useState({
