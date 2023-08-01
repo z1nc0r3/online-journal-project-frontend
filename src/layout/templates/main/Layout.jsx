@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Container, Grid, Typography, CssBaseline } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import "dayjs/locale/en-gb";
 
 import UserVerification from "../main/UserVerification";
 
@@ -166,8 +167,8 @@ const Layout = (props) => {
 
 				<Grid item xs={0} sm={0} md={0} lg={3} className="calendar">
 					<Container className="calendar_container">
-						<LocalizationProvider dateAdapter={AdapterDayjs}>
-							<DateCalendar readOnly />
+						<LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
+							<DateCalendar readOnly displayWeekNumber/>
 						</LocalizationProvider>
 					</Container>
 				</Grid>
