@@ -11,7 +11,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import getWeekInfo from "../../components/main/GetWeekInfo";
 
-
 function CurrentMonthReport() {
 	const timeDate = getWeekInfo(new Date());
 	const [getMonthRecords, setGetMonthRecords] = useState({

@@ -56,7 +56,7 @@ const titleMap = {
 	admin_supervisor_edit: "Update Supervisor Detail",
 	admin_print: "Print Details",
 
-	trainee_dashboard: `Week No : ${currentWeekData.currentWeek}`,    // here need change the week number now its hard coded 
+	trainee_dashboard: `Week No : ${currentWeekData.currentWeek}`,
 	trainee_past_reports: "Past Report",
 	trainee_user_instruction: "Instruction",
 	trainee_user_edit_data: "Edit User Data",

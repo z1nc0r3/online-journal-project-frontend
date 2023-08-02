@@ -10,8 +10,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "../../../assets/css/list.css";
 import getWeekInfo from "../../components/main/GetWeekInfo";
 
-console.log(getWeekInfo(new Date()));
-
 function Dashboard() {
 	const [recordData, setRecordData] = useState({
 		user_id: "",
