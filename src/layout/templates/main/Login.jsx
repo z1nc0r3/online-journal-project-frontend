@@ -17,6 +17,8 @@ function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [login_error, setError] = useState("");
+	const [rememberMe, setRememberMe] = useState(false);
+	var expires = 0;
 
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget);
@@ -25,6 +27,10 @@ function Login() {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
+
+	const handleCheckboxChange = (event) => {
+		setRememberMe(event.target.checked);
+	}
 
 	const open = Boolean(anchorEl);
 	const id = open ? 'simple-popover' : undefined;
@@ -60,6 +66,8 @@ function Login() {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
+		console.log(rememberMe);
+
 		axios.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/login/check`, { email, password }).then((response) => {
 			const data = response.data;
 
@@ -67,10 +75,12 @@ function Login() {
 				setError(data.login_error);
 			} else {
 				const { role, user_id, fName } = data;
-				Cookies.set("role", role, { expires: 1 });
-				Cookies.set("user_id", user_id, { expires: 1 });
-				Cookies.set("fName", fName, { expires: 1 });
-				Cookies.set("authorized", true, { expires: 1 });
+				const expires = rememberMe ? 3 : null;
+
+				Cookies.set("role", role, { expires });
+				Cookies.set("user_id", user_id, { expires });
+				Cookies.set("fName", fName, { expires });
+				Cookies.set("authorized", true, { expires });
 				window.location.href = `/${role}`;
 			}
 		});
@@ -113,7 +123,7 @@ function Login() {
 						onChange={(event) => setPassword(event.target.value)}
 					/>
 					<Container className="login_helper_container" sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "1rem", marginBottom: "1rem" }}>
-						<FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+						<FormControlLabel control={<Checkbox value="remember" color="primary" defaultChecked={false} onChange={handleCheckboxChange} />} label="Remember me" />
 						<Link variant="body2" sx={{ color: "#0057ff", textDecoration: "none", cursor: "pointer" }} onClick={handleClick}>
 							Forgot password?
 						</Link>
