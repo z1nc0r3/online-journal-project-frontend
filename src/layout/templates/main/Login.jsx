@@ -9,6 +9,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Popover from '@mui/material/Popover';
+import Cookies from "js-cookie";
 import "../../../assets/css/login.css";
 
 function Login() {
@@ -30,8 +31,8 @@ function Login() {
 
 	// check for previous login and redirect accordingly
 	const checkLoggedIn = () => {
-		const role = localStorage.getItem("role");
-		const authorized = localStorage.getItem("authorized");
+		const role = Cookies.get("role");
+		const authorized = Cookies.get("authorized");
 
 		if (role && authorized) {
 			window.location.href = `/${role}`;
@@ -66,10 +67,10 @@ function Login() {
 				setError(data.login_error);
 			} else {
 				const { role, user_id, fName } = data;
-				localStorage.setItem("role", role);
-				localStorage.setItem("user_id", user_id);
-				localStorage.setItem("fName", fName);
-				localStorage.setItem("authorized", true);
+				Cookies.set("role", role, { expires: 1 });
+				Cookies.set("user_id", user_id, { expires: 1 });
+				Cookies.set("fName", fName, { expires: 1 });
+				Cookies.set("authorized", true, { expires: 1 });
 				window.location.href = `/${role}`;
 			}
 		});
