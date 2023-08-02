@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+const API_URL = process.env.REACT_APP_BACKEND_API_URL;
+
 function TraineeList() {
 	const [expanded, setExpanded] = React.useState(false);
 	const [trainees, setTrainees] = React.useState([]);
@@ -50,7 +52,7 @@ function TraineeList() {
 	};
 
 	const getTraineeList = (event) => {
-		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/trainee/list`).then((response) => {
+		axios.get(`${API_URL}/api/get/trainee/list`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
@@ -73,7 +75,7 @@ function TraineeList() {
 	};
 
 	const getSupervisorList = (event) => {
-		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/supervisor/list`).then((response) => {
+		axios.get(`${API_URL}/api/get/supervisor/list`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
@@ -85,7 +87,7 @@ function TraineeList() {
 	};
 
 	const getEvaluatorList = (event) => {
-		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/evaluator/list`).then((response) => {
+		axios.get(`${API_URL}/api/get/evaluator/list`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
@@ -111,7 +113,7 @@ function TraineeList() {
 		};
 
 		axios
-			.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/update/assign/`, updatedTrainee)
+			.post(`${API_URL}/api/update/assign/`, updatedTrainee)
 			.then((response) => {
 				toast.success(response.data.message);
 				setTimeout(() => {

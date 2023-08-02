@@ -1,6 +1,6 @@
 import * as React from "react";
 import axios from "axios";
-import { Box, Container, Button, colors } from "@mui/material";
+import { Box, Container, Button } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -8,11 +8,12 @@ import Checkbox from "@mui/material/Checkbox";
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "../../../assets/css/list.css";
+import getWeekInfo from "../../components/main/GetWeekInfo";
 
 function Dashboard() {
 	const [recordData, setRecordData] = useState({
 		user_id: "",
-		description:  localStorage.getItem("description") || "",
+		description: localStorage.getItem("description") || "",
 		solutions: localStorage.getItem("solutions") || "",
 		week: "",
 		month: "",
@@ -44,18 +45,20 @@ function Dashboard() {
 
 	const handleSubmitRecord = (event) => {
 		event.preventDefault();
-		
+
+		const data = getWeekInfo(new Date());
+
 		recordData.user_id = localStorage.getItem("user_id");
-		recordData.week = "04";
-		recordData.month = new Date().getMonth() + 1;
-		recordData.year = new Date().getFullYear();
+		recordData.week = data.currentWeek;
+		recordData.month = data.currentMonth;
+		recordData.year = data.currentYear;
 
 		console.log(recordData);
 
 		axios
 			.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/addRecord/week`, recordData)
 			.then((response) => {
-				toast.success("Form submitted successfully.");
+				toast.success("Form submitted successfully. Reloading...");
 				localStorage.removeItem("description");
 				localStorage.removeItem("solutions");
 
@@ -64,19 +67,22 @@ function Dashboard() {
 				}, 2000);
 			})
 			.catch((error) => {
-				toast.error("Error submitting the form." + error.response.data.message);
+				toast.error("Error submitting the form. Please try again.");
 			});
 	};
 
 	return (
 		<Container component="main" className="list_container" maxWidth={false}>
 			<CssBaseline />
+
+			<ToastContainer />
+
 			<Box className="trainee_box">
 				<form onSubmit={handleSubmitRecord}>
 					<Box>
 						<h1 className="trainee_box_heading">Brief Description of work carried out :</h1>
 						<Box className="trainee_box_description" variant="outlined">
-							<Typography component={'span'} variant="body1" className="trainee_box_description_text">
+							<Typography component={"span"} variant="body1" className="trainee_box_description_text">
 								<TextField
 									multiline
 									rows={6}
@@ -97,7 +103,7 @@ function Dashboard() {
 					</Box>
 					<Box sx={{ marginTop: "30px" }}>
 						<h1 className="trainee_box_heading">Problems Encountered and Solutions Found :</h1>
-						<Box variant="outlined" className="trainee_box_description">
+						<Box variant="outlined" className="trainee_box_solutions">
 							<Typography component={'span'} variant="body1" className="trainee_box_description_text">
 								<TextField
 									multiline
@@ -131,7 +137,7 @@ function Dashboard() {
 								}}
 								onChange={(e) => setIsChecked(e.target.checked)}
 							/>
-							<Typography className="agreement_trainee_submission" component={'span'} variant="body1">
+							<Typography className="agreement_trainee_submission" component={"span"} variant="body1">
 								I hereby declare that all the information contained in this report is truth and correct. I take full responsibility for the correctness of the said information.
 							</Typography>
 						</Box>

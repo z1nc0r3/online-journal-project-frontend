@@ -14,11 +14,11 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import SupervisorAccount from "@mui/icons-material/SupervisorAccount";
-import AssignmentInd from "@mui/icons-material/AssignmentInd";
-import AddCircle from "@mui/icons-material/AddCircle";
-import LocalPrintShop from "@mui/icons-material/LocalPrintshop";
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import DateRangeIcon from '@mui/icons-material/DateRange';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { Link } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
 import LogoutButton from "../../templates/main/Logout";
@@ -27,7 +27,7 @@ import "../../../assets/css/main.css";
 const pages = ["Dashboard", "Current Month Report", "Past Report", "Edit User Data", "User Instructions"];
 
 export default function TraineeNavbar() {
-
+	
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 
 	const handleCloseNavMenu = () => {
@@ -48,7 +48,7 @@ export default function TraineeNavbar() {
 
 	const buttons = [
 		{ label: "DashBoard", path: "/trainee/dashboard" },
-		{ label: "Current Month Report", path: "/trainee/current_month_report" },
+		{ label: "Current Report", path: "/trainee/current_month_report" },
 		{ label: "Past Reports", path: "/trainee/past_reports" },
 		{ label: "Edit User Data", path: "/trainee/user_edit_data" },
 		{ label: "User Instructions", path: "/trainee/user_instruction" },
@@ -74,18 +74,17 @@ export default function TraineeNavbar() {
 	function handleIcon(index) {
 		switch (index) {
 			case 0:
-				return <AccountCircle />;
+				return <DashboardIcon />;
 			case 1:
-				return <SupervisorAccount />;
+				return <DateRangeIcon />;
 			case 2:
-				return <AssignmentInd />;
+				return <CalendarMonthIcon />;
 			case 3:
-				return <AddCircle />;
+				return <ModeEditIcon />;
 			default:
-				return <LocalPrintShop />;
+				return <FormatListBulletedIcon />;
 		}
 	}
-
 
 	return (
 		<AppBar position="static" sx={{ marginBottom: 3 }}>

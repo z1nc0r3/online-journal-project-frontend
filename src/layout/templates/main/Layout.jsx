@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Container, Grid, Typography, CssBaseline } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import "dayjs/locale/en-gb";
 
 import UserVerification from "../main/UserVerification";
 
@@ -42,7 +43,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import "../../../assets/css/main.css";
+import getWeekInfo from "../../components/main/GetWeekInfo";
 
+const currentWeekData = getWeekInfo(new Date());
 const titleMap = {
 	admin_trainee_list: "Trainee List",
 	admin_supervisor_list: "Supervisor List",
@@ -53,11 +56,11 @@ const titleMap = {
 	admin_supervisor_edit: "Update Supervisor Detail",
 	admin_print: "Print Details",
 
-	trainee_dashboard: "Week no :",
+	trainee_dashboard: `Week No : ${currentWeekData.currentWeek}`,
 	trainee_past_reports: "Past Report",
 	trainee_user_instruction: "Instruction",
 	trainee_user_edit_data: "Edit User Data",
-	trainee_current_month_report: "Current Month Report",
+	trainee_current_month_report: currentWeekData.currentMonthName,
 
 	supervisor_dashboard: "Report for Review",
 	supervisor_trainee_list: "Trainee List",
@@ -166,8 +169,8 @@ const Layout = (props) => {
 
 				<Grid item xs={0} sm={0} md={0} lg={3} className="calendar">
 					<Container className="calendar_container">
-						<LocalizationProvider dateAdapter={AdapterDayjs}>
-							<DateCalendar readOnly />
+						<LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
+							<DateCalendar readOnly displayWeekNumber/>
 						</LocalizationProvider>
 					</Container>
 				</Grid>

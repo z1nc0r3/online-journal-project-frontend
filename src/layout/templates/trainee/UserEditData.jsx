@@ -6,6 +6,8 @@ import "../../../assets/css/list.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+const API_URL = process.env.REACT_APP_BACKEND_API_URL;
+
 const UpdateUser = () => {
 	const [formData, setFormData] = useState({
 		fName: "",
@@ -23,7 +25,7 @@ const UpdateUser = () => {
 	const id = localStorage.getItem("user_id");
 
 	const getTraineeDetails = (event) => {
-		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/trainee/${id}`).then((response) => {
+		axios.get(`${API_URL}/api/get/trainee/${id}`).then((response) => {
 			const data = response.data.user;
 
 			if (data.login_error) {
@@ -88,7 +90,7 @@ const UpdateUser = () => {
 		e.preventDefault();
 
 		axios
-			.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/update/trainee/${id}`, formData)
+			.post(`${API_URL}/api/update/trainee/${id}`, formData)
 			.then((response) => {
 				toast.success("User data updated Successfully. Redirecting...");
 				setTimeout(() => {
