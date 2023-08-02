@@ -1,5 +1,8 @@
 import * as React from "react";
 import { Box, Container } from "@mui/material";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -7,13 +10,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Typography from "@mui/material/Typography";
 import "../../../assets/css/list.css";
-import "../../../assets/css/list.css";
-import { useState, useEffect } from "react";
-import axios from "axios";
 
 function PastReports() {
 	const [getAllRecords, setGetAllRecords] = useState({
-		user_id: localStorage.getItem("user_id"),
+		user_id: Cookies.get("user_id"),
 		month: new Date().getMonth() + 1,
 		year: new Date().getFullYear(),
 	});

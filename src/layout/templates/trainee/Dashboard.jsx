@@ -1,20 +1,21 @@
 import * as React from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
 import { Box, Container, Button } from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+import Cookies from "js-cookie";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
-import { useState, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "../../../assets/css/list.css";
 import getWeekInfo from "../../components/main/GetWeekInfo";
+import "../../../assets/css/list.css";
 
 function Dashboard() {
 	const [recordData, setRecordData] = useState({
 		user_id: "",
-		description: localStorage.getItem("description") || "",
-		solutions: localStorage.getItem("solutions") || "",
+		description: Cookies.get("description") || "",
+		solutions: Cookies.get("solutions") || "",
 		week: "",
 		month: "",
 		year: "",
@@ -31,8 +32,8 @@ function Dashboard() {
 	}, [isChecked]);
 
 	useEffect(() => {
-		localStorage.setItem("description", recordData.description);
-		localStorage.setItem("solutions", recordData.solutions);
+		Cookies.set("description", recordData.description);
+		Cookies.set("solutions", recordData.solutions);
 	}, [recordData]);
 
 	const handleChange = (e) => {
@@ -48,7 +49,7 @@ function Dashboard() {
 
 		const data = getWeekInfo(new Date());
 
-		recordData.user_id = localStorage.getItem("user_id");
+		recordData.user_id = Cookies.get("user_id");
 		recordData.week = data.currentWeek;
 		recordData.month = data.currentMonth;
 		recordData.year = data.currentYear;
@@ -59,8 +60,8 @@ function Dashboard() {
 			.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/addRecord/week`, recordData)
 			.then((response) => {
 				toast.success("Form submitted successfully. Reloading...");
-				localStorage.removeItem("description");
-				localStorage.removeItem("solutions");
+				Cookies.remove("description");
+				Cookies.remove("solutions");
 
 				setTimeout(() => {
 					window.location.reload();
