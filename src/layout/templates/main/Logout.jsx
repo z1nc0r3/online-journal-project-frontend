@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AlertDialog from "../../components/main/AlertDialog";
+import Cookies from "js-cookie";
 
 const LogoutButton = () => {
 	const [isLogoutAlertOpen, setLogoutAlertOpen] = useState(false);
@@ -15,14 +16,14 @@ const LogoutButton = () => {
 	};
 
 	const handleLogout = () => {
-		// Remove authentication details from localStorage
-		localStorage.setItem("authorized", false);
-		localStorage.removeItem("role");
-		localStorage.removeItem("user_id");
-		localStorage.removeItem("fName");
+		// User agreed with logout, clear the cookies
+		Cookies.set("authorized", false);
+		Cookies.remove("role");
+		Cookies.remove("user_id");
+		Cookies.remove("fName");
 
-		localStorage.removeItem("description");
-		localStorage.removeItem("solutions");
+		Cookies.remove("description");
+		Cookies.remove("solutions");
 
 		// Redirect the user to the login page or homepage
 		window.location.href = "/login";

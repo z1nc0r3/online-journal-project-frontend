@@ -1,5 +1,6 @@
 import * as React from "react";
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -19,7 +20,6 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import { Link } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
 import LogoutButton from "../../templates/main/Logout";
 import "../../../assets/css/main.css";
@@ -48,12 +48,12 @@ export default function EvaluatorNavbar() {
 
 	const buttons = [
 		{ label: "DashBoard", path: "/evaluator/dashboard" },
-		{ label: "Current Report", path: "/evaluator/trainee_list"},
+		{ label: "Current Report", path: "/evaluator/trainee_list" },
 		{ label: "Edit User Data", path: "/evaluator/user_edit_data" },
-		
+
 
 	];
-	
+
 	const list = (anchor) => (
 		<Box sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }} role="presentation" onClick={toggleDrawer(anchor, false)} onKeyDown={toggleDrawer(anchor, false)}>
 			<List>
@@ -85,7 +85,6 @@ export default function EvaluatorNavbar() {
 		}
 	}
 
-
 	return (
 		<AppBar position="static" sx={{ marginBottom: 3 }}>
 			<Container maxWidth="">
@@ -98,7 +97,7 @@ export default function EvaluatorNavbar() {
 							<MenuIcon />
 						</IconButton>
 						<Typography variant="h6" component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light", marginLeft: 1 }}>
-							{localStorage.getItem("fName")}
+							{Cookies.get("fName")}
 						</Typography>
 						<Menu
 							id="menu-appbar"
@@ -127,7 +126,7 @@ export default function EvaluatorNavbar() {
 
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
 						<Typography variant="h5" component="div" sx={{ flexGrow: 1, textAlign: "left", fontWeight: "light" }}>
-							{localStorage.getItem("fName")}
+							{Cookies.get("fName")}
 						</Typography>
 					</Box>
 

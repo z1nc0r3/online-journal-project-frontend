@@ -1,33 +1,30 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Box, Container, Button } from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
+import Cookies from "js-cookie";
 import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import "../../../assets/css/list.css";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function UserEditData() {
-  const [formData, setFormData] = useState({
-    fName: "",
-    regNo: "",
-    address: "",
-    email: "",
-    phone: "",
-    estName: "",
-    estAddress: "",
-    password: ""
-  });
+	const [formData, setFormData] = useState({
+		fName: "",
+		regNo: "",
+		address: "",
+		email: "",
+		phone: "",
+		estName: "",
+		estAddress: "",
+		password: ""
+	});
 
-  const id = localStorage.getItem("user_id");
+	const id = localStorage.getItem("user_id");
 
-  const getSupervisorDetails = (event) => {
+	const getSupervisorDetails = (event) => {
 		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/supervisor/${id}`).then((response) => {
 			const data = response.data.user;
 
@@ -47,31 +44,31 @@ function UserEditData() {
 		});
 	};
 
-  useEffect(() => {
+	useEffect(() => {
 		getSupervisorDetails();
 	}, []);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			[name]: value,
+		}));
+	};
 
-  const handleFullNameChange = (e) => {
-    const { value } = e.target;
-    const fullNameRegex = /^[A-Za-z]+$/;
+	const handleFullNameChange = (e) => {
+		const { value } = e.target;
+		const fullNameRegex = /^[A-Za-z]+$/;
 
-    if (value.match(fullNameRegex)) {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        fName: value,
-      }));
-    }
-  };
+		if (value.match(fullNameRegex)) {
+			setFormData((prevFormData) => ({
+				...prevFormData,
+				fName: value,
+			}));
+		}
+	};
 
-  const handlePhoneChange = (e) => {
+	const handlePhoneChange = (e) => {
 		const { value } = e.target;
 		const phoneRegex = /^[0-9]{0,10}$/;
 
@@ -83,7 +80,7 @@ function UserEditData() {
 		}
 	};
 
-  const handleSubmitSupervisor = (e) => {
+	const handleSubmitSupervisor = (e) => {
 		e.preventDefault();
 
 		axios
@@ -99,7 +96,7 @@ function UserEditData() {
 			});
 	};
 
-  const updateButton = () => {
+	const updateButton = () => {
 		return (
 			<>
 				<Typography></Typography>
@@ -110,11 +107,11 @@ function UserEditData() {
 		);
 	};
 
-  const emailPhoneFields = () => {
+	const emailPhoneFields = () => {
 		return (
 			<>
 				<Typography>Email </Typography>
-				<TextField variant="outlined" required fullWidth name="email" type="email" value={formData.email} onChange={handleChange} disabled/>
+				<TextField variant="outlined" required fullWidth name="email" type="email" value={formData.email} onChange={handleChange} disabled />
 
 				<Typography>Phone </Typography>
 				<TextField variant="outlined" required fullWidth name="phone" type="number" value={formData.phone} onChange={handlePhoneChange} inputProps={{ maxLength: 10 }} />
@@ -126,50 +123,50 @@ function UserEditData() {
 		return (
 			<>
 				<Typography>Name of the Establishment </Typography>
-				<TextField variant="outlined" required fullWidth name="estName" type="text" value={formData.estName} onChange={handleChange} disabled/>
+				<TextField variant="outlined" required fullWidth name="estName" type="text" value={formData.estName} onChange={handleChange} disabled />
 
 				<Typography>Address of the Establishment </Typography>
-				<TextField variant="outlined" required fullWidth name="estAddress" type="text" value={formData.estAddress} onChange={handleChange} disabled/>
+				<TextField variant="outlined" required fullWidth name="estAddress" type="text" value={formData.estAddress} onChange={handleChange} disabled />
 			</>
 		);
 	};
 
-  return (
-    <Container component="main" className="create_new_container" maxWidth={false}>
-      <CssBaseline />
+	return (
+		<Container component="main" className="create_new_container" maxWidth={false}>
+			<CssBaseline />
 
-      <ToastContainer />
+			<ToastContainer />
 
-      <form onSubmit={handleSubmitSupervisor}>
-        <Box className="create_new_form">
-          <Box className="create_new_form_left">
+			<form onSubmit={handleSubmitSupervisor}>
+				<Box className="create_new_form">
+					<Box className="create_new_form_left">
 
-            <Typography>Full Name</Typography>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth label="Full Name"
-              name="fullname"
-              autoFocus
-              type="text"
-              value={formData.fName}
-              onChange={handleFullNameChange}
-              disabled
-            />
-            {emailPhoneFields()}
+						<Typography>Full Name</Typography>
+						<TextField
+							variant="outlined"
+							margin="normal"
+							required
+							fullWidth label="Full Name"
+							name="fullname"
+							autoFocus
+							type="text"
+							value={formData.fName}
+							onChange={handleFullNameChange}
+							disabled
+						/>
+						{emailPhoneFields()}
 
-            </Box>
+					</Box>
 
-          <Box className="create_new_form_right">
+					<Box className="create_new_form_right">
 						{establishmentFields()}
 
 						{updateButton()}
 					</Box>
-        </Box>
-      </form>
-    </Container>
-  );
+				</Box>
+			</form>
+		</Container>
+	);
 };
 
 export default UserEditData;

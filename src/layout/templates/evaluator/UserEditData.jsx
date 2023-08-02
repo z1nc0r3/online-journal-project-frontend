@@ -4,6 +4,7 @@ import { Box, Container, Button, Typography, TextField, Select, MenuItem } from 
 import CssBaseline from "@mui/material/CssBaseline";
 import "../../../assets/css/list.css";
 import { ToastContainer, toast } from "react-toastify";
+import Cookies from "js-cookie";
 import "react-toastify/dist/ReactToastify.css";
 
 const API_URL = process.env.REACT_APP_BACKEND_API_URL;
@@ -22,7 +23,7 @@ const UpdateUser = () => {
 		duration: "",
 	});
 
-	const id = localStorage.getItem("user_id");
+	const id = Cookies.get("user_id");
 
 	const getTraineeDetails = (event) => {
 		axios.get(`${API_URL}/api/get/evaluator/${id}`).then((response) => {
@@ -134,7 +135,7 @@ const UpdateUser = () => {
 		return (
 			<>
 				<Typography>Email </Typography>
-				<TextField component={'span'} variant="outlined" required fullWidth name="email" type="email" value={formData.email} onChange={handleChange} disabled/>
+				<TextField component={'span'} variant="outlined" required fullWidth name="email" type="email" value={formData.email} onChange={handleChange} disabled />
 
 				<Typography>Phone </Typography>
 				<TextField variant="outlined" required fullWidth name="phone" type="number" value={formData.phone} onChange={handlePhoneChange} inputProps={{ maxLength: 10 }} />
@@ -152,15 +153,15 @@ const UpdateUser = () => {
 				<Box className="create_new_form">
 					<Box className="create_new_form_left">
 						<Typography>Full Name </Typography>
-						<TextField variant="outlined" required fullWidth name="fName" autoFocus type="text" value={formData.fName} onChange={handleFullNameChange} disabled/>
-            
+						<TextField variant="outlined" required fullWidth name="fName" autoFocus type="text" value={formData.fName} onChange={handleFullNameChange} disabled />
+
 						{emailPhoneFields()}
-            
+
 					</Box>
 
 					<Box className="create_new_form_right">
-            {departmentList()}
-            {submitButton()}
+						{departmentList()}
+						{submitButton()}
 					</Box>
 				</Box>
 			</form>

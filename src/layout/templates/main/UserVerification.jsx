@@ -1,6 +1,8 @@
+import Cookies from "js-cookie";
+
 const UserVerification = () => {
 	return new Promise((resolve) => {
-		const authorized = localStorage.getItem("authorized");
+		const authorized = Cookies.get("authorized");
 
 		if (authorized === "false") {
 			window.location.href = "/login";

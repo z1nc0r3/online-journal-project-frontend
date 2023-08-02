@@ -1,16 +1,16 @@
 import * as React from "react";
-import "../../../assets/css/list.css";
+import { useState, useEffect } from "react";
 import { Box, Container, Button } from "@mui/material";
-import Accordion from "@mui/material/Accordion";
+import { ToastContainer } from "react-toastify";
+import Cookies from "js-cookie";
 import axios from "axios";
+import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import CssBaseline from "@mui/material/CssBaseline";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { ToastContainer } from "react-toastify";
-import { useState, useEffect } from "react";
 import "../../../assets/css/list.css";
 
 function Dashboard() {
@@ -20,8 +20,8 @@ function Dashboard() {
 
 	const [recordData, setRecordData] = useState({
 		user_id: "",
-		description: localStorage.getItem("description") || "",
-		solutions: localStorage.getItem("solutions") || "",
+		description: Cookies.get("description") || "",
+		solutions: Cookies.get("solutions") || "",
 		week: "",
 		month: "",
 		year: "",
