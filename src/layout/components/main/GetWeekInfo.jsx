@@ -61,6 +61,7 @@ function getWeekInfo(date) {
     }
 
     const currentMonthName = months[currentMonth];
+    currentMonth++;
 
     return { currentYear, currentMonth, currentMonthName, currentWeek, totalWeeks };
 }

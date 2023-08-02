@@ -43,7 +43,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import "../../../assets/css/main.css";
+import getWeekInfo from "../../components/main/GetWeekInfo";
 
+const currentWeekData = getWeekInfo(new Date());
 const titleMap = {
 	admin_trainee_list: "Trainee List",
 	admin_supervisor_list: "Supervisor List",
@@ -54,11 +56,11 @@ const titleMap = {
 	admin_supervisor_edit: "Update Supervisor Detail",
 	admin_print: "Print Details",
 
-	trainee_dashboard: "Week no : 04",    // here need change the week number now its hard coded 
+	trainee_dashboard: `Week No : ${currentWeekData.currentWeek}`,
 	trainee_past_reports: "Past Report",
 	trainee_user_instruction: "Instruction",
 	trainee_user_edit_data: "Edit User Data",
-	trainee_current_month_report: "Current Month Report",
+	trainee_current_month_report: currentWeekData.currentMonthName,
 
 	supervisor_dashboard: "Report for Review",
 	supervisor_trainee_list: "Trainee List",

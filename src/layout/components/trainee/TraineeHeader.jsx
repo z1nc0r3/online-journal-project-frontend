@@ -27,7 +27,7 @@ import "../../../assets/css/main.css";
 const pages = ["Dashboard", "Current Month Report", "Past Report", "Edit User Data", "User Instructions"];
 
 export default function TraineeNavbar() {
-
+	
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 
 	const handleCloseNavMenu = () => {
@@ -85,7 +85,6 @@ export default function TraineeNavbar() {
 				return <FormatListBulletedIcon />;
 		}
 	}
-
 
 	return (
 		<AppBar position="static" sx={{ marginBottom: 3 }}>
