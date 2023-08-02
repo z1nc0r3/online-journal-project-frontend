@@ -8,12 +8,25 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
+import Popover from '@mui/material/Popover';
 import "../../../assets/css/login.css";
 
 function Login() {
+	const [anchorEl, setAnchorEl] = useState(null);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [login_error, setError] = useState("");
+
+	const handleClick = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
+
+	const open = Boolean(anchorEl);
+	const id = open ? 'simple-popover' : undefined;
 
 	// check for previous login and redirect accordingly
 	const checkLoggedIn = () => {
@@ -102,9 +115,30 @@ function Login() {
 					/>
 					<Container className="login_helper_container" sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "1rem", marginBottom: "1rem" }}>
 						<FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-						<Link href="#" variant="body2" sx={{ color: "#0057ff", textDecoration: "none" }}>
+						<Link variant="body2" sx={{ color: "#0057ff", textDecoration: "none", cursor: "pointer" }} onClick={handleClick}>
 							Forgot password?
 						</Link>
+
+						<Popover
+							id={id}
+							open={open}
+							anchorEl={anchorEl}
+							onClose={handleClose}
+							anchorOrigin={{
+								vertical: 'center',
+								horizontal: 'right',
+							}}
+							transformOrigin={{
+								vertical: 'top',
+								horizontal: 'left',
+							}}
+							className="forgot-pw-container"
+						>
+							<Box>
+								<Typography className="forgot-pw-tooltip">Please contact the system administrator to reset your password.</Typography>
+							</Box>
+						</Popover>
+
 					</Container>
 
 					{loginError()}
