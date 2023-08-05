@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { Box, Container, Button } from "@mui/material";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import Cookies from "js-cookie";
 import axios from "axios";
 import Accordion from "@mui/material/Accordion";
@@ -11,7 +11,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import getWeekInfo from "../../components/main/GetWeekInfo";
 import "../../../assets/css/list.css";
+
+const API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
 function Dashboard() {
 	const [expanded, setExpanded] = React.useState(false);
@@ -37,7 +40,7 @@ function Dashboard() {
 	};
 
 	const getTraineeList = (event) => {
-		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/trainee/list`).then((response) => {
+		axios.get(`${API_URL}/api/get/trainee/list`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
@@ -58,10 +61,37 @@ function Dashboard() {
 			}
 		});
 	};
+	
+	const handleSubmit = (event) => {
+		event.preventDefault();
+
+		const data = getWeekInfo(new Date());
+
+		recordData.user_id = Cookies.get("user_id");
+		recordData.week = data.currentWeek;
+		recordData.month = data.currentMonth;
+		recordData.year = data.currentYear;
+
+		console.log(recordData);
+
+		axios.post(`${API_URL}/api/submit/supervisor/report`, recordData)
+		  .then((response) => {
+			toast.success("Supervisor report submitted successfully!");
+			Cookies.remove("description");
+
+			setTimeout(() => {
+				window.location.reload();
+			}, 2000);
+		})
+		  .catch((error) => {
+			toast.error("Failed to submit supervisor report!");
+		  });
+	};
 
 	useEffect(() => {
+		Cookies.set("description", recordData.description);
 		getTraineeList();
-	}, []);
+	}, [recordData]);
 
 	return (
 		<Container component="main" className="list_container" maxWidth={false}>
@@ -102,13 +132,14 @@ function Dashboard() {
 								</Box>
 							))}
 
-							<Accordion sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5 }}>
-								<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
-									<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Report</Typography>
-								</AccordionSummary>
+							<form onSubmit={handleSubmit}>
+								<Accordion sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5 }}>
+									<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
+										<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Report</Typography>
+									</AccordionSummary>
 
-								<Box className="supervisor_report_field">
-									<div className="assigned_student">
+									<Box className="supervisor_report_field" variant="outlined">
+										<div className="assigned_student">
 										<Typography component={"span"} variant="body1">
 											<TextField
 												multiline
@@ -122,14 +153,18 @@ function Dashboard() {
 												placeholder="Write comments here."
 												onChange={handleChange}
 												sx={{ "& fieldset": { border: "none" } }}
-											/>
+												/>
 										</Typography>
-									</div>
-								</Box>
-								<Button variant="contained" type="submit" className="report_submit" sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }}>
-									Save
-								</Button>
-							</Accordion>
+										</div>
+									</Box>
+									<Button variant="contained" type="submit" className="report_submit" sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }}>
+										Save
+									</Button>
+																
+								</Accordion>
+							
+							</form>
+							
 						</AccordionDetails>
 					</Accordion>
 				))}

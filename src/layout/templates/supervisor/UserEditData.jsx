@@ -144,10 +144,8 @@ function UserEditData() {
 						<Typography>Full Name</Typography>
 						<TextField
 							variant="outlined"
-							margin="normal"
 							required
-							fullWidth label="Full Name"
-							name="fullname"
+							fullWidth 
 							autoFocus
 							type="text"
 							value={formData.fName}

@@ -10,23 +10,36 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 //import CssBaseline from "@mui/material/CssBaseline";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
-import Card from "@mui/material/Card";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+
+const API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
 function TraineeList() {
   const [expanded, setExpanded] = React.useState(false);
   const [trainees, setTrainees] = React.useState([]);
-
   const [formData, setFormData] = useState({});
+
+//   const [recordData, setRecordData] = useState({
+// 	user_id: "",
+// 	description: Cookies.get("description") || "",
+// 	solutions: Cookies.get("solutions") || "",
+// 	week: "",
+// 	month: "",
+// 	year: "",
+// });
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
+
+	// const { name, value } = event.target;
+	// 	setRecordData((prevFormData) => ({
+	// 		...prevFormData,
+	// 		[name]: value,
+	// 	}));
   };
 
   const getTraineeList = (event) => {
-		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/trainee/list`).then((response) => {
+		axios.get(`${API_URL}/api/get/trainee/list`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
@@ -63,7 +76,7 @@ function TraineeList() {
 		};
 
 		axios
-			.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/update/assign/`, updatedTrainee)
+			.post(`${API_URL}/api/update/assign/`, updatedTrainee)
 			.then((response) => {
 				toast.success(response.data.message);
 				setTimeout(() => {
@@ -127,32 +140,37 @@ function TraineeList() {
 									))}
 
 						
-							<Accordion sx={{ width: "100%", backgroundColor: "#379fff", boxShadow: "none" }}>
-								<AccordionSummary  aria-controls="panel1bh-content" id="panel1bh-header">
-									<Typography sx={{ width: "95%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Report</Typography>
-								</AccordionSummary>
+								<form onSubmit={handleSubmit}>
+								<Accordion sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5 }}>
+									<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
+										<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Report</Typography>
+									</AccordionSummary>
 
-								<AccordionDetails>
-										<Accordion>
-											<AccordionSummary>
-												<Typography component={'span'} variant="body1">
-													<TextField
-														multiline rows={6} variant="outlined" required
-														fullWidth name="description" type="text" 
-														placeholder="Write comments here." onChange={handleChange}
-														sx={{"& fieldset": { border: "none" },}}
-													/>
-												</Typography>
-											</AccordionSummary>
-											<AccordionDetails>
-												<Button variant="contained"  type="submit" className="register_button" sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }}
-												> Update </Button>
-											</AccordionDetails> 
-										</Accordion>
-									
-								</AccordionDetails>
-							</Accordion>
-						
+									<Box className="supervisor_report_field" variant="outlined">
+										<div className="assigned_student">
+										<Typography component={"span"} variant="body1">
+											<TextField
+												multiline
+												rows={6}
+												variant="outlined"
+												required
+												fullWidth
+												name="description"
+												type="text"
+												
+												placeholder="Write comments here."
+												onChange={handleChange}
+												sx={{ "& fieldset": { border: "none" } }}
+												/>
+										</Typography>
+										</div>
+									</Box>
+									<Button variant="contained" type="submit" className="report_submit" sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }}>
+										Save
+									</Button>
+																
+								</Accordion>
+							</form>
 								
 							</AccordionDetails>
 						</Accordion>
