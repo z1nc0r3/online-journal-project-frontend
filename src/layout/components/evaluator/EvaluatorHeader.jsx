@@ -24,7 +24,7 @@ import MenuItem from "@mui/material/MenuItem";
 import LogoutButton from "../../templates/main/Logout";
 import "../../../assets/css/main.css";
 
-const pages = ["Dashboard", "Trainee list", "Edit User Data"];
+const pages = ["Evaluator Dashboard", "Trainee list", "Edit User Data"];
 
 export default function EvaluatorNavbar() {
 
@@ -47,8 +47,8 @@ export default function EvaluatorNavbar() {
 	};
 
 	const buttons = [
-		{ label: "DashBoard", path: "/evaluator/dashboard" },
-		{ label: "Current Report", path: "/evaluator/trainee_list"},
+		{ label: "Evaluator DashBoard", path: "/evaluator/dashboard" },
+		{ label: "Trainee List", path: "/evaluator/trainee_list"},
 		{ label: "Edit User Data", path: "/evaluator/user_edit_data" },
 		
 

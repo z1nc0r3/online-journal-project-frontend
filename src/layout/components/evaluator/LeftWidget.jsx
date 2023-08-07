@@ -10,7 +10,7 @@ function LeftWidget() {
 	const [activeButton, setActiveButton] = useState(null);
 
 	const buttons = [
-		{ label: "DashBoard", path: "/evaluator/dashboard" },
+		{ label: "Evaluator DashBoard", path: "/evaluator/dashboard" },
 		{ label: "Trainee List", path: "/evaluator/trainee_list" },
 		{ label: "Edit User Data", path: "/evaluator/user_edit_data" },
 	];
