@@ -11,6 +11,8 @@ import Checkbox from "@mui/material/Checkbox";
 import getWeekInfo from "../../components/main/GetWeekInfo";
 import "../../../assets/css/list.css";
 
+const API_URL = process.env.REACT_APP_BACKEND_API_URL;
+
 function Dashboard() {
 	const [recordData, setRecordData] = useState({
 		user_id: "",
@@ -57,7 +59,7 @@ function Dashboard() {
 		console.log(recordData);
 
 		axios
-			.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/addRecord/week`, recordData)
+			.post(`${API_URL}/api/set/record/week`, recordData)
 			.then((response) => {
 				toast.success("Form submitted successfully. Reloading...");
 				Cookies.remove("description");

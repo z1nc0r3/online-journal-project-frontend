@@ -18,6 +18,17 @@
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
+.month_report_box2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #dfefff;
+    border-radius: 1.5rem;
+    padding: 2rem 2rem 1.5rem 2rem;
+
+}
 .trainee_assign_form {
     display: flex;
     flex-direction: column;
@@ -62,6 +73,10 @@
 }
 
 .month_report_box .accordion_item {
+    background-color: #9dd0ff;
+}
+
+.month_report_box2 .accordion_item {
     background-color: #9dd0ff;
 }
 
@@ -430,6 +445,10 @@ Button.import_button {
 	.list_box, .month_report_box {
 		padding: 1rem 1rem 0.5rem 1rem;
 	}
+
+    .month_report_box2{
+        padding: 1rem 1rem 0.5rem 1rem;
+    }
 
     .assign_supervisor_row .MuiSelect-select, .assign_evaluator_row .MuiSelect-select {
         font-size: 14px;
