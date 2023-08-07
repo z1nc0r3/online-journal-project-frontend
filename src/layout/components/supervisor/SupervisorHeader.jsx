@@ -130,7 +130,7 @@ export default function SupervisorNavbar() {
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
 						<Typography variant="h5" component="div" sx={{ flexGrow: 1, textAlign: "left", fontWeight: "light" }}>
 							{Cookies.get("fName")}
-							<Typography component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light", marginLeft: 1}} >Supervisor Dashboard </Typography>
+							<Typography component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light"}} >Supervisor Dashboard</Typography>
 						</Typography>
 					</Box>
 
