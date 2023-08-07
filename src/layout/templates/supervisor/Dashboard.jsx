@@ -98,8 +98,9 @@ function Dashboard() {
 	const [currentMonthRecords, setCurrentMonthRecords] = useState([]);
 	const getRecords = (e) => {
 		const { user_id, month, year } = getMonthRecords;
-		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/record/currentMonth/week/${user_id}?month=${month}&year=${year}`).then((response) => {
+		axios.get(`${API_URL}/api/record/currentMonth/week/${user_id}?month=${month}&year=${year}`).then((response) => {
 			const data = response.data.records;
+			console.log(`${API_URL}/api/record/currentMonth/week/${user_id}?month=${month}&year=${year}`);
 			setCurrentMonthRecords(data);
 		});
 	};
