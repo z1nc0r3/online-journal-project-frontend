@@ -15,7 +15,9 @@ const API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
 function Dashboard() {
 	const [recordData, setRecordData] = useState({
-		user_id: "",
+		user_id: Cookies.get("user_id"),
+		supervisor_id: "",
+		evaluator_id: "",
 		description: Cookies.get("description") || "",
 		solutions: Cookies.get("solutions") || "",
 		week: "",
@@ -46,6 +48,27 @@ function Dashboard() {
 		}));
 	};
 
+	const getConnection = (event) => {
+			axios.get(`${API_URL}/api/get/connection/trainee/${recordData.user_id}`).then((response) => {
+				const data = response.data.records;
+				console.log(data);
+	
+				if (data.error) {
+					console.log(data.error);
+				} else {
+					recordData.supervisor_id = data.supervisor_id;
+					recordData.evaluator_id = data.evaluator_id;
+				}
+			});
+
+		console.log(recordData);
+
+	};
+
+	useEffect(()=>{
+		getConnection();
+	},[]);
+
 	const handleSubmitRecord = (event) => {
 		event.preventDefault();
 
@@ -55,8 +78,6 @@ function Dashboard() {
 		recordData.week = data.currentWeek;
 		recordData.month = data.currentMonth;
 		recordData.year = data.currentYear;
-
-		console.log(recordData);
 
 		axios
 			.post(`${API_URL}/api/set/record/week`, recordData)
