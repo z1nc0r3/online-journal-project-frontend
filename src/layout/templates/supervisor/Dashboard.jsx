@@ -88,10 +88,27 @@ function Dashboard() {
 		  });
 	};
 
+	const timeDate = getWeekInfo(new Date());
+	const [getMonthRecords, setGetMonthRecords] = useState({
+		user_id: Cookies.get("user_id"),
+		month: new Date().getMonth() + 1,
+		year: new Date().getFullYear(),
+	});
+	
+	const [currentMonthRecords, setCurrentMonthRecords] = useState([]);
+	const getRecords = (e) => {
+		const { user_id, month, year } = getMonthRecords;
+		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/record/currentMonth/week/${user_id}?month=${month}&year=${year}`).then((response) => {
+			const data = response.data.records;
+			setCurrentMonthRecords(data);
+		});
+	};
+
 	useEffect(() => {
-		Cookies.set("description", recordData.description);
+		// Cookies.set("description", recordData.description);
 		getTraineeList();
-	}, [recordData]);
+		getRecords();
+	}, []);
 
 	return (
 		<Container component="main" className="list_container" maxWidth={false}>
@@ -114,7 +131,7 @@ function Dashboard() {
 						</AccordionSummary>
 
 						<AccordionDetails>
-							{Array.from({ length: 4 }, (_, i) => (
+							{/* {Array.from({ length: 4 }, (_, i) => (
 								<Box className="list_container">
 									<Accordion sx={{ width: "100%", backgroundColor: "#9dd0ff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }} className="accordion_item">
 										<AccordionSummary>
@@ -130,8 +147,48 @@ function Dashboard() {
 										</AccordionDetails>
 									</Accordion>
 								</Box>
-							))}
+							))} */}
+							<Box className="month_report_box2">
+								{currentMonthRecords.map((record, i) => (
+									<Accordion sx={{ width: "100%", backgroundColor: "#dfefff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }} className="accordion_item">
+										<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
+											<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>Week : {record.week}</Typography>
+										</AccordionSummary>
+										
+										<AccordionDetails>
+											<Box className="weekly_report_container">
+												<Typography className="report_title report_title_des">Description :</Typography>
+												<Box className="weekly_report_des">
+													<Typography sx={{ fontSize: "16px", textAlign: "left" }}>
+														{record.description}
+													</Typography>
+												</Box>
+												{/* <Typography className="report_title report_title_sol">Supervisor Weekly Report :</Typography>
+												<Box className="weekly_report_sol">
+													<Typography component={"span"} variant="body1">
+														<TextField
+															multiline
+															rows={3}
+															variant="outlined"
+															required
+															fullWidth
+															name="description"
+															type="text"
+															value={recordData.description}
+															placeholder="Write comments here."
+															onChange={handleChange}
+															sx={{ "& fieldset": { border: "none" } }}
+															/>
+													</Typography>
+												</Box> */}
+											</Box>
+										</AccordionDetails>
+									</Accordion>
+								))}
 
+								
+							
+							</Box>
 							<form onSubmit={handleSubmit}>
 								<Accordion sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5 }}>
 									<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
@@ -164,6 +221,8 @@ function Dashboard() {
 								</Accordion>
 							
 							</form>
+
+
 							
 						</AccordionDetails>
 					</Accordion>
