@@ -23,7 +23,33 @@
     padding: 2px !important;
 }
 
+.forgot-pw-container {
+    top: -50px !important;
+    left: 15px !important;
+}
+
+.forgot-pw-container .MuiPopover-paper {
+    box-shadow: none;
+    border-radius: 1rem;
+    background-color: #1565c0;
+    color: white;
+}
+
+.forgot-pw-tooltip {
+    font-size: 1rem;
+    padding: 1rem;
+    width: 15rem;
+}
+
 /* mobile view css */
+
+@media only screen and (max-width: 900px) {
+
+    .forgot-pw-container {
+        top: 20px !important;
+        left: -50px !important;
+    }
+}
 
 @media only screen and (max-width: 600px) {
 
@@ -34,5 +60,10 @@
 
     .login_helper_container {
         padding: 2px !important;
+    }
+
+    .forgot-pw-container {
+        top: 20px !important;
+        left: -8px !important;
     }
 }

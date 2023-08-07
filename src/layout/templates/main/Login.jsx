@@ -8,17 +8,37 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
+import Popover from '@mui/material/Popover';
+import Cookies from "js-cookie";
 import "../../../assets/css/login.css";
 
 function Login() {
+	const [anchorEl, setAnchorEl] = useState(null);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [login_error, setError] = useState("");
+	const [rememberMe, setRememberMe] = useState(false);
+	var expires = 0;
+
+	const handleClick = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
+
+	const handleCheckboxChange = (event) => {
+		setRememberMe(event.target.checked);
+	}
+
+	const open = Boolean(anchorEl);
+	const id = open ? 'simple-popover' : undefined;
 
 	// check for previous login and redirect accordingly
 	const checkLoggedIn = () => {
-		const role = localStorage.getItem("role");
-		const authorized = localStorage.getItem("authorized");
+		const role = Cookies.get("role");
+		const authorized = Cookies.get("authorized");
 
 		if (role && authorized) {
 			window.location.href = `/${role}`;
@@ -46,7 +66,7 @@ function Login() {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
-		console.log(process.env.REACT_APP_BACKEND_API_URL);
+		console.log(rememberMe);
 
 		axios.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/login/check`, { email, password }).then((response) => {
 			const data = response.data;
@@ -55,10 +75,12 @@ function Login() {
 				setError(data.login_error);
 			} else {
 				const { role, user_id, fName } = data;
-				localStorage.setItem("role", role);
-				localStorage.setItem("user_id", user_id);
-				localStorage.setItem("fName", fName);
-				localStorage.setItem("authorized", true);
+				const expires = rememberMe ? 3 : null;
+
+				Cookies.set("role", role, { expires });
+				Cookies.set("user_id", user_id, { expires });
+				Cookies.set("fName", fName, { expires });
+				Cookies.set("authorized", true, { expires });
 				window.location.href = `/${role}`;
 			}
 		});
@@ -101,10 +123,31 @@ function Login() {
 						onChange={(event) => setPassword(event.target.value)}
 					/>
 					<Container className="login_helper_container" sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "1rem", marginBottom: "1rem" }}>
-						<FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-						<Link href="#" variant="body2" sx={{ color: "#0057ff", textDecoration: "none" }}>
+						<FormControlLabel control={<Checkbox value="remember" color="primary" defaultChecked={false} onChange={handleCheckboxChange} />} label="Remember me" />
+						<Link variant="body2" sx={{ color: "#0057ff", textDecoration: "none", cursor: "pointer" }} onClick={handleClick}>
 							Forgot password?
 						</Link>
+
+						<Popover
+							id={id}
+							open={open}
+							anchorEl={anchorEl}
+							onClose={handleClose}
+							anchorOrigin={{
+								vertical: 'center',
+								horizontal: 'right',
+							}}
+							transformOrigin={{
+								vertical: 'top',
+								horizontal: 'left',
+							}}
+							className="forgot-pw-container"
+						>
+							<Box>
+								<Typography className="forgot-pw-tooltip">Please contact the system administrator to reset your password.</Typography>
+							</Box>
+						</Popover>
+
 					</Container>
 
 					{loginError()}

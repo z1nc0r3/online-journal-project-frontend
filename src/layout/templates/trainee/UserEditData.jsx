@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Box, Container, Button, Typography, TextField, Select, MenuItem } from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+import Cookies from "js-cookie";
 import CssBaseline from "@mui/material/CssBaseline";
 import "../../../assets/css/list.css";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+const API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
 const UpdateUser = () => {
 	const [formData, setFormData] = useState({
@@ -20,10 +23,10 @@ const UpdateUser = () => {
 		duration: "",
 	});
 
-	const id = localStorage.getItem("user_id");
+	const id = Cookies.get("user_id");
 
 	const getTraineeDetails = (event) => {
-		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/trainee/${id}`).then((response) => {
+		axios.get(`${API_URL}/api/get/trainee/${id}`).then((response) => {
 			const data = response.data.user;
 
 			if (data.login_error) {
@@ -88,7 +91,7 @@ const UpdateUser = () => {
 		e.preventDefault();
 
 		axios
-			.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/update/trainee/${id}`, formData)
+			.post(`${API_URL}/api/update/trainee/${id}`, formData)
 			.then((response) => {
 				toast.success("User data updated Successfully. Redirecting...");
 				setTimeout(() => {
@@ -132,7 +135,7 @@ const UpdateUser = () => {
 		return (
 			<>
 				<Typography>Email </Typography>
-				<TextField component={'span'} variant="outlined" required fullWidth name="email" type="email" value={formData.email} onChange={handleChange} disabled/>
+				<TextField component={'span'} variant="outlined" required fullWidth name="email" type="email" value={formData.email} onChange={handleChange} disabled />
 
 				<Typography>Phone </Typography>
 				<TextField variant="outlined" required fullWidth name="phone" type="number" value={formData.phone} onChange={handlePhoneChange} inputProps={{ maxLength: 10 }} />
@@ -144,10 +147,10 @@ const UpdateUser = () => {
 		return (
 			<>
 				<Typography>Name of the Establishment </Typography>
-				<TextField variant="outlined" required fullWidth name="estName" type="text" value={formData.estName} onChange={handleChange} disabled/>
+				<TextField variant="outlined" required fullWidth name="estName" type="text" value={formData.estName} onChange={handleChange} disabled />
 
 				<Typography>Address of the Establishment </Typography>
-				<TextField variant="outlined" required fullWidth name="estAddress" type="text" value={formData.estAddress} onChange={handleChange} disabled/>
+				<TextField variant="outlined" required fullWidth name="estAddress" type="text" value={formData.estAddress} onChange={handleChange} disabled />
 			</>
 		);
 	};
@@ -162,10 +165,10 @@ const UpdateUser = () => {
 				<Box className="create_new_form">
 					<Box className="create_new_form_left">
 						<Typography>Full Name </Typography>
-						<TextField variant="outlined" required fullWidth name="fName" autoFocus type="text" value={formData.fName} onChange={handleFullNameChange} disabled/>
+						<TextField variant="outlined" required fullWidth name="fName" autoFocus type="text" value={formData.fName} onChange={handleFullNameChange} disabled />
 
 						<Typography>Registration No </Typography>
-						<TextField variant="outlined" required fullWidth name="regNo" type="text" value={formData.regNo} onChange={handleChange} disabled/>
+						<TextField variant="outlined" required fullWidth name="regNo" type="text" value={formData.regNo} onChange={handleChange} disabled />
 
 						<Typography>Address </Typography>
 						<TextField variant="outlined" required fullWidth name="address" type="text" value={formData.address} onChange={handleChange} />
@@ -181,12 +184,12 @@ const UpdateUser = () => {
 						<Box className="training_period" sx={{ display: "flex", flexDirection: "row" }}>
 							<Box className="training_period_from">
 								<Typography>Starting From </Typography>
-								<TextField variant="outlined" required fullWidth name="startDate" type="date" value={formData.startDate} onChange={handleChange} disabled/>
+								<TextField variant="outlined" required fullWidth name="startDate" type="date" value={formData.startDate} onChange={handleChange} disabled />
 							</Box>
 
 							<Box className="training_period_to">
 								<Typography>Duration </Typography>
-								<Select variant="outlined" value={formData.duration} required fullWidth name="duration" type="text" onChange={handleChange}disabled>
+								<Select variant="outlined" value={formData.duration} required fullWidth name="duration" type="text" onChange={handleChange} disabled>
 									<MenuItem value={3}>3 Months</MenuItem>
 									<MenuItem value={6}>6 Months</MenuItem>
 									<MenuItem value={9}>9 Months</MenuItem>

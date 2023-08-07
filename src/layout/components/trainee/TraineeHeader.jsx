@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -22,6 +21,7 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { Link } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
 import LogoutButton from "../../templates/main/Logout";
+import Cookies from "js-cookie";
 import "../../../assets/css/main.css";
 
 const pages = ["Dashboard", "Current Month Report", "Past Report", "Edit User Data", "User Instructions"];
@@ -54,7 +54,7 @@ export default function TraineeNavbar() {
 		{ label: "User Instructions", path: "/trainee/user_instruction" },
 
 	];
-	
+
 	const list = (anchor) => (
 		<Box sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }} role="presentation" onClick={toggleDrawer(anchor, false)} onKeyDown={toggleDrawer(anchor, false)}>
 			<List>
@@ -86,7 +86,6 @@ export default function TraineeNavbar() {
 		}
 	}
 
-
 	return (
 		<AppBar position="static" sx={{ marginBottom: 3 }}>
 			<Container maxWidth="">
@@ -99,7 +98,7 @@ export default function TraineeNavbar() {
 							<MenuIcon />
 						</IconButton>
 						<Typography variant="h6" component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light", marginLeft: 1 }}>
-							{localStorage.getItem("fName")}
+							{Cookies.get("fName")}
 						</Typography>
 						<Menu
 							id="menu-appbar"
@@ -128,7 +127,7 @@ export default function TraineeNavbar() {
 
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
 						<Typography variant="h5" component="div" sx={{ flexGrow: 1, textAlign: "left", fontWeight: "light" }}>
-							{localStorage.getItem("fName")}
+							{Cookies.get("fName")}
 						</Typography>
 					</Box>
 

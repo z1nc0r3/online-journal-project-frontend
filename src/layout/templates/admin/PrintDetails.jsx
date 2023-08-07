@@ -5,13 +5,15 @@ import axios from "axios";
 import "jspdf-autotable";
 import "../../../assets/css/main.css";
 
+const API_URL = process.env.REACT_APP_BACKEND_API_URL;
+
 const PrintPDF = () => {
 	const generateTraineePDF = () => {
 		// Create a new jsPDF instance
 		const doc = new jsPDF();
 
 		//get trainee list
-		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/trainee/list`).then((response) => {
+		axios.get(`${API_URL}/api/get/trainee/list`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
@@ -52,7 +54,7 @@ const PrintPDF = () => {
 		const doc = new jsPDF();
 
 		//get trainee list
-		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/evaluator/list`).then((response) => {
+		axios.get(`${API_URL}/api/get/evaluator/list`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
@@ -94,7 +96,7 @@ const PrintPDF = () => {
 		const doc = new jsPDF();
 
 		//get trainee list
-		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/supervisor/list`).then((response) => {
+		axios.get(`${API_URL}/api/get/supervisor/list`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
@@ -148,4 +150,5 @@ const PrintPDF = () => {
 		</div>
 	);
 };
+
 export default PrintPDF;

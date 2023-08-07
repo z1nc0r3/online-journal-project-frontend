@@ -14,7 +14,7 @@
     height: 100%;
     background-color: white;
     border-radius: 1.5rem;
-    padding: 2rem;
+    padding: 2rem 2rem 1.5rem 2rem;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -25,9 +25,8 @@
     align-items: center;
     margin: 0 auto;
     background-color: #b9ddff;
-    border-radius: 1.5rem;
+    border-radius: 0.5rem;
     padding: 1rem;
-    margin: 1rem 1rem;
 }
 
 .trainee_assign_form .MuiInputBase-root {
@@ -48,7 +47,7 @@
 .trainee_assign_form .assign_save {
     margin: 0.5rem 0 0 0;
     width: 100%;
-    background-color: #93cbff;
+    background-color: #78beff;
     color: #414141;
     font-size: 16px;
     height: 3rem;
@@ -186,6 +185,18 @@
     padding: 1rem;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
+.supervisor_box_comment_text{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    border-radius: 1.0rem;
+    padding: 1rem;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+}
 
 .trainee_month_accordion{
     display: flex;
@@ -199,6 +210,15 @@
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 5px;
+}
+.supervisor_week{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color:#b9ddff;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 1rem;
 }
 
 Button.save_button_trainee{
@@ -354,6 +374,40 @@ Button.import_button {
     margin-top: 1rem;
 }
 
+.month_report_container .month_item {
+    border-radius: 0.5rem !important;
+    background-color: white;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    box-shadow: none;
+}
+
+/* Supervisor dashboard */
+
+.supervisor_report_field {
+    background-color: white;
+    margin: 1rem;
+    border-radius: 1rem;
+}
+
+.list_box .report_submit {
+    margin: 0.5rem 0 0 0;
+    width: 95%;
+    background-color: #93cbff;
+    color: #414141;
+    font-size: 16px;
+    height: 3rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    box-shadow: none;
+}
+
+.list_box .report_submit:hover {
+    background-color: #2a95ff;
+    color: white;
+    box-shadow: none;
+}
+
 @media only screen and (max-width: 1200px) {
     .list_container, .create_new_container, .month_report_container {
         padding-right: 16px !important;
@@ -374,7 +428,7 @@ Button.import_button {
     }
 
 	.list_box, .month_report_box {
-		padding: 1rem;
+		padding: 1rem 1rem 0.5rem 1rem;
 	}
 
     .assign_supervisor_row .MuiSelect-select, .assign_evaluator_row .MuiSelect-select {
@@ -475,5 +529,9 @@ Button.import_button {
 
     Button.user_controller_button {
         font-size: 14px;
+    }
+
+    .month_report_container .MuiAccordionDetails-root {
+        padding: 8px 8px 16px ;
     }
 }

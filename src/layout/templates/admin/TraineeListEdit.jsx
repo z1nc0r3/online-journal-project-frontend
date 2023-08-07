@@ -190,7 +190,7 @@ const UpdateUser = () => {
 			try {
 				const response = await axios.post(`${API_URL}/api/reset/password/${id}`);
 				if (response.status === 200) {
-					showToast("Password reset successfully. Reloading...");
+					showToast("Password reset successfully.");
 				} else {
 					showToast("Error resetting password. Please try again.", true);
 				}
