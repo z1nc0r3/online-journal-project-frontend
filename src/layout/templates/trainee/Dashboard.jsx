@@ -57,7 +57,7 @@ function Dashboard() {
 		console.log(recordData);
 
 		axios
-			.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/addRecord/week`, recordData)
+			.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/set/record/week`, recordData)
 			.then((response) => {
 				toast.success("Form submitted successfully. Reloading...");
 				Cookies.remove("description");
