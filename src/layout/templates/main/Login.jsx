@@ -75,7 +75,7 @@ function Login() {
 				setError(data.login_error);
 			} else {
 				const { role, user_id, fName } = data;
-				const expires = rememberMe ? 3 : null;
+				const expires = rememberMe ? 3 : 0.5;
 
 				Cookies.set("role", role, { expires });
 				Cookies.set("user_id", user_id, { expires });
