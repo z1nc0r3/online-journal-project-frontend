@@ -10,6 +10,9 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Popover from '@mui/material/Popover';
 import Cookies from "js-cookie";
+import IconButton from "@mui/material/IconButton";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import "../../../assets/css/login.css";
 
 function Login() {
@@ -18,7 +21,7 @@ function Login() {
 	const [password, setPassword] = useState("");
 	const [login_error, setError] = useState("");
 	const [rememberMe, setRememberMe] = useState(false);
-	var expires = 0;
+	const [showPassword, setShowPassword] = useState(false);
 
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget);
@@ -117,10 +120,22 @@ function Login() {
 						fullWidth
 						name="password"
 						label="Password"
-						type="password"
+						type={showPassword ? "text" : "password"}
 						autoComplete="current-password"
 						value={password}
 						onChange={(event) => setPassword(event.target.value)}
+						InputProps={{
+							endAdornment: (
+								<IconButton
+									aria-label="toggle password visibility"
+									onClick={() => setShowPassword(!showPassword)}
+									onMouseDown={(event) => event.preventDefault()}
+									edge="end"
+								>
+									{showPassword ? <VisibilityOff /> : <Visibility />}
+								</IconButton>
+							),
+						}}
 					/>
 					<Container className="login_helper_container" sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "1rem", marginBottom: "1rem" }}>
 						<FormControlLabel control={<Checkbox value="remember" color="primary" defaultChecked={false} onChange={handleCheckboxChange} />} label="Remember me" />
