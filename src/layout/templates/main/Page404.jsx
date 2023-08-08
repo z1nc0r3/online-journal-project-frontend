@@ -16,7 +16,7 @@ function Page404() {
             } else {
                 window.location.href = "/login";
             }
-        }, 150020);
+        }, 3000);
     };
 
     useEffect(() => {
