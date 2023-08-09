@@ -4,15 +4,15 @@ import { Box, Container, Button } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import Cookies from "js-cookie";
 import axios from "axios";
-import Accordion from "@mui/material/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import CssBaseline from "@mui/material/CssBaseline";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { CssBaseline, Typography, Select, MenuItem } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import getWeekInfo from "../../components/main/GetWeekInfo";
 import "../../../assets/css/list.css";
+import { Link } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 
 const API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -27,12 +27,14 @@ function Dashboard() {
 		solutions: Cookies.get("solutions") || "",
 		week: "",
 		month: "",
-		year: "",
 	});
 
 	const handleChange = (panel) => (event, isExpanded) => {
 		setExpanded(isExpanded ? panel : false);
-		const { name, value } = event.target;
+	};
+
+	const handleChange2 = (e) => {
+		const { name, value } = e.target;
 		setRecordData((prevFormData) => ({
 			...prevFormData,
 			[name]: value,
@@ -62,19 +64,20 @@ function Dashboard() {
 		});
 	};
 	
-	const handleSubmit = (event) => {
+	const handleSubmit = (event, trainee) => {
 		event.preventDefault();
 
-		const data = getWeekInfo(new Date());
+		const updatedTrainee = {
+			...trainee,
+			trainee_connection: {
+				supervisor_id: formData[trainee.id]?.supervisor_id,
+				supervisor_name: formData[trainee.id]?.supervisor,
+				evaluator_id: formData[trainee.id]?.evaluator_id,
+				evaluator_name: formData[trainee.id]?.evaluator,
+			},
+		};
 
-		recordData.user_id = Cookies.get("user_id");
-		recordData.week = data.currentWeek;
-		recordData.month = data.currentMonth;
-		recordData.year = data.currentYear;
-
-		console.log(recordData);
-
-		axios.post(`${API_URL}/api/submit/supervisor/report`, recordData)
+		axios.post(`${API_URL}/api/submit/supervisor/report`, updatedTrainee)
 		  .then((response) => {
 			toast.success("Supervisor report submitted successfully!");
 			Cookies.remove("description");
@@ -88,7 +91,7 @@ function Dashboard() {
 		  });
 	};
 
-	const timeDate = getWeekInfo(new Date());
+	//const timeDate = getWeekInfo(new Date());
 	const [getMonthRecords, setGetMonthRecords] = useState({
 		user_id: Cookies.get("user_id"),
 		month: new Date().getMonth() + 1,
@@ -105,7 +108,7 @@ function Dashboard() {
 	};
 
 	useEffect(() => {
-		// Cookies.set("description", recordData.description);
+		Cookies.set("description", recordData.description);
 		getTraineeList();
 		getRecords();
 	}, []);
@@ -125,29 +128,12 @@ function Dashboard() {
 						key={i}
 						className="accordion_item">
 						<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
-							<Typography sx={{ width: "5%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{i + 1}</Typography>
+							<Typography sx={{ marginRight: "1rem", fontSize: "18px" }}>{i + 1}</Typography>
 							<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{trainee.fName}</Typography>
 							<Typography sx={{ color: "text.secondary", fontSize: "14px" }}>{trainee.department}</Typography>
 						</AccordionSummary>
 
 						<AccordionDetails>
-							{/* {Array.from({ length: 4 }, (_, i) => (
-								<Box className="list_container">
-									<Accordion sx={{ width: "100%", backgroundColor: "#9dd0ff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }} className="accordion_item">
-										<AccordionSummary>
-											<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{`Week ${i + 1}`}</Typography>
-										</AccordionSummary>
-										<AccordionDetails className="report_detail_container">
-											<Box className="weekly_report_container">
-												<Typography className="report_title report_title_des">Description :</Typography>
-												<Box className="weekly_report_des">
-													<Typography sx={{ fontSize: "16px", textAlign: "left" }}></Typography>
-												</Box>
-											</Box>
-										</AccordionDetails>
-									</Accordion>
-								</Box>
-							))} */}
 							<Box className="month_report_box2">
 								{currentMonthRecords.map((record, i) => (
 									<Accordion sx={{ width: "100%", backgroundColor: "#dfefff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }} className="accordion_item">
@@ -176,7 +162,7 @@ function Dashboard() {
 															type="text"
 															value={recordData.description}
 															placeholder="Write comments here."
-															onChange={handleChange}
+															onChange={handleChange2}
 															sx={{ "& fieldset": { border: "none" } }}
 															/>
 													</Typography>
@@ -185,10 +171,8 @@ function Dashboard() {
 										</AccordionDetails>
 									</Accordion>
 								))}
-
-								
-							
 							</Box>
+							
 							<form onSubmit={handleSubmit}>
 								<Accordion sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5 }}>
 									<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
@@ -198,19 +182,20 @@ function Dashboard() {
 									<Box className="supervisor_report_field" variant="outlined">
 										<div className="assigned_student">
 										<Typography component={"span"} variant="body1">
-											<TextField
-												multiline
-												rows={6}
-												variant="outlined"
-												required
-												fullWidth
-												name="description"
-												type="text"
-												value={recordData.description}
-												placeholder="Write comments here."
-												onChange={handleChange}
-												sx={{ "& fieldset": { border: "none" } }}
-												/>
+										<TextField
+											multiline
+											rows={6}
+											variant="outlined"
+											required
+											fullWidth
+											name="description"
+											type="text"
+											placeholder="Write your description here."
+											onChange={handleChange2}
+											sx={{
+												"& fieldset": { border: "none" },
+											}}
+										/>
 										</Typography>
 										</div>
 									</Box>
@@ -220,10 +205,7 @@ function Dashboard() {
 																
 								</Accordion>
 							
-							</form>
-
-
-							
+							</form>	
 						</AccordionDetails>
 					</Accordion>
 				))}

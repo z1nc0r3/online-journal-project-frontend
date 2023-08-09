@@ -19,23 +19,9 @@ function TraineeList() {
   const [trainees, setTrainees] = React.useState([]);
   const [formData, setFormData] = useState({});
 
-//   const [recordData, setRecordData] = useState({
-// 	user_id: "",
-// 	description: Cookies.get("description") || "",
-// 	solutions: Cookies.get("solutions") || "",
-// 	week: "",
-// 	month: "",
-// 	year: "",
-// });
-
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
 
-	// const { name, value } = event.target;
-	// 	setRecordData((prevFormData) => ({
-	// 		...prevFormData,
-	// 		[name]: value,
-	// 	}));
   };
 
   const getTraineeList = (event) => {
@@ -106,7 +92,7 @@ function TraineeList() {
 						className="accordion_item">
 							
 						<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
-							<Typography sx={{ width: "5%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{i + 1}</Typography>
+							<Typography sx={{ marginRight: "1rem", fontSize: "18px" }}>{i + 1}</Typography>
 							<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{trainee.fName}</Typography>
 							<Typography sx={{ color: "text.secondary", fontSize: "14px" }}>{trainee.department}</Typography>
 						</AccordionSummary>
