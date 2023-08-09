@@ -72,8 +72,6 @@ function Dashboard() {
 		recordData.month = data.currentMonth;
 		recordData.year = data.currentYear;
 
-		console.log(recordData);
-
 		axios.post(`${API_URL}/api/submit/supervisor/report`, recordData)
 		  .then((response) => {
 			toast.success("Supervisor report submitted successfully!");
@@ -100,7 +98,6 @@ function Dashboard() {
 		const { user_id, month, year } = getMonthRecords;
 		axios.get(`${API_URL}/api/get/record/currentMonth/week/${user_id}?month=${month}&year=${year}`).then((response) => {
 			const data = response.data.records;
-			console.log(`${API_URL}/api/get/record/currentMonth/week/${user_id}?month=${month}&year=${year}`);
 			setCurrentMonthRecords(data);
 		});
 	};

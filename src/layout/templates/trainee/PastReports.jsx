@@ -33,7 +33,6 @@ function PastReports() {
 			const data = response.data.records;
 			const groupedByMonth = groupByMonth(data);
 			setCurrentMonthRecords(groupedByMonth);
-			console.log(groupedByMonth);
 		});
 	};
 

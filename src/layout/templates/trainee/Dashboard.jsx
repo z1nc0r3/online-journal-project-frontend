@@ -62,7 +62,7 @@ function Dashboard() {
 		const getCurrentWeekRecord = async () => {
 		  const weekDetails = getWeekInfo(new Date());
 		  const response = await axios.get(
-			`${process.env.REACT_APP_BACKEND_API_URL}/api/get/record/current/week/${recordData.user_id}?week=${weekDetails.currentWeek}&month=${weekDetails.currentMonth}&year=${weekDetails.currentYear}`
+			`${API_URL}/api/get/record/current/week/${recordData.user_id}?week=${weekDetails.currentWeek}&month=${weekDetails.currentMonth}&year=${weekDetails.currentYear}`
 		  );
 		  const data = response.data.record;
 	
@@ -122,6 +122,7 @@ function Dashboard() {
 				})
 				.catch((error) => {
 					toast.error("Error submitting the form. Please try again.");
+					console.log(error);
 				});
 		}
 	};

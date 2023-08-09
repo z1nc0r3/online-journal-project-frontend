@@ -97,7 +97,6 @@ const evaluatorLayouts = ["evaluator_dashboard", "evaluator_trainee_list", "eval
 
 const Layout = (props) => {
 	const { layout } = props;
-	console.log(layout);
 	const [loading, setLoading] = useState(true);
 	const navigate = useNavigate();
 	const getTitle = () => titleMap[layout];
