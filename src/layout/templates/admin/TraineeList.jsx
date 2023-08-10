@@ -60,10 +60,10 @@ function TraineeList() {
 			} else {
 				const traineesData = data.trainees.reduce((acc, trainee) => {
 					acc[trainee.id] = {
-						supervisor_id: trainee.trainee_connection ? trainee.trainee_connection.supervisor_id : "",
-						supervisor: trainee.trainee_connection ? trainee.trainee_connection.supervisor_name : "",
-						evaluator_id: trainee.trainee_connection ? trainee.trainee_connection.evaluator_id : "",
-						evaluator: trainee.trainee_connection ? trainee.trainee_connection.evaluator_name : "",
+						supervisor_id: trainee.trainee_connection[0] ? trainee.trainee_connection[0].supervisor_id : "",
+						supervisor: trainee.trainee_connection[0] ? trainee.trainee_connection[0].supervisor_name : "",
+						evaluator_id: trainee.trainee_connection[0] ? trainee.trainee_connection[0].evaluator_id : "",
+						evaluator: trainee.trainee_connection[0] ? trainee.trainee_connection[0].evaluator_name : "",
 					};
 					return acc;
 				}, {});
@@ -111,6 +111,8 @@ function TraineeList() {
 				evaluator_name: formData[trainee.id]?.evaluator,
 			},
 		};
+
+		console.log(updatedTrainee);
 
 		axios
 			.post(`${API_URL}/api/update/assign/`, updatedTrainee)
