@@ -19,6 +19,10 @@
 	font-weight: 500;
 }
 
+.blur {
+	filter: blur(4px);
+}
+
 /* Admin Header */
 
 Button.logout_button {
