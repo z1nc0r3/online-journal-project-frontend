@@ -12,6 +12,7 @@ class AlertDialog extends React.Component {
 		const { open, onClose, onAgree, onDisagree, title, description, sub_description="", agreeText, disagreeText } = this.props;
 
 		// blur out the background root element when the dialog is open
+		// FIXME
 		if (open) {
 			document.querySelector("#root").classList.add("blur");
 		} else {
