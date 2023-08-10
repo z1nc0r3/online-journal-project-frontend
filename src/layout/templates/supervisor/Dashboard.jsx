@@ -65,30 +65,7 @@ function Dashboard() {
 	};
 	
 	const handleSubmit = (event, trainee) => {
-		event.preventDefault();
-
-		const updatedTrainee = {
-			...trainee,
-			trainee_connection: {
-				supervisor_id: formData[trainee.id]?.supervisor_id,
-				supervisor_name: formData[trainee.id]?.supervisor,
-				evaluator_id: formData[trainee.id]?.evaluator_id,
-				evaluator_name: formData[trainee.id]?.evaluator,
-			},
-		};
-
-		axios.post(`${API_URL}/api/submit/supervisor/report`, updatedTrainee)
-		  .then((response) => {
-			toast.success("Supervisor report submitted successfully!");
-			Cookies.remove("description");
-
-			setTimeout(() => {
-				window.location.reload();
-			}, 2000);
-		})
-		  .catch((error) => {
-			toast.error("Failed to submit supervisor report!");
-		  });
+		console.log('supervisor report submit');
 	};
 
 	//const timeDate = getWeekInfo(new Date());
