@@ -1,7 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Container, Grid, Typography, CssBaseline } from "@mui/material";
+import { Container, Grid, Typography, CssBaseline, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import ReactLoading from "react-loading";
 import "dayjs/locale/en-gb";
 
 import UserVerification from "../main/UserVerification";
@@ -176,8 +177,8 @@ const Layout = (props) => {
 	};
 
 	if (loading) {
-		// Todo: Add loading animation
-		return <div>Loading...</div>;
+		return <Box sx={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}><ReactLoading type="spin" color="white"
+			height={100} width={50} /></Box>;
 	}
 
 	const { Header, LeftWidget, Main } = getComponent();
