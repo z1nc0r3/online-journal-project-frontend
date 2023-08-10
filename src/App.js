@@ -1,6 +1,7 @@
 import "./App.css";
 import "./assets/css/main.css";
 import Login from "./layout/templates/main/Login";
+import Page404 from "./layout/templates/main/Page404";
 import { Box, Container } from "@mui/material";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Layout from "./layout/templates/main/Layout";
@@ -14,6 +15,7 @@ function App() {
 						<Routes>
 							<Route path='/' element={<Navigate to ="/login" />}></Route>
 							<Route path='/login' element={<Login />}></Route>
+							<Route path='/404' element={<Page404/>}></Route>
 							
 							<Route path='/admin' element={<Navigate to="/admin/trainee_list"/>}></Route>
 							<Route path='/admin/dashboard' element={<Navigate to="/admin/trainee_list"/>}></Route>
@@ -53,6 +55,7 @@ function App() {
 							<Route path='/evaluator/trainee_list' element={<Layout layout="evaluator_trainee_list"/>}></Route>
 							<Route path='/evaluator/user_edit_data' element={<Layout layout="evaluator_user_edit_data"/>}></Route>
 
+							<Route path='*' element={<Navigate to="/404"/>}></Route>
 						</Routes>
 					</BrowserRouter>
 				</Box>

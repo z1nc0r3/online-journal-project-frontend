@@ -23,7 +23,7 @@ function CurrentMonthReport() {
 
 	const getRecords = (e) => {
 		const { user_id, month, year } = getMonthRecords;
-		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/record/currentMonth/week/${user_id}?month=${month}&year=${year}`).then((response) => {
+		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/record/current/month/${user_id}?month=${month}&year=${year}`).then((response) => {
 			const data = response.data.records;
 			setCurrentMonthRecords(data);
 		});

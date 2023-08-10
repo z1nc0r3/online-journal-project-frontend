@@ -29,11 +29,10 @@ function PastReports() {
 
 	const getRecords = (e) => {
 		const trainee_id = getAllRecords.user_id;
-		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/record/week/${trainee_id}`).then((response) => {
+		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/record/week/${trainee_id}`).then((response) => {
 			const data = response.data.records;
 			const groupedByMonth = groupByMonth(data);
 			setCurrentMonthRecords(groupedByMonth);
-			console.log(groupedByMonth);
 		});
 	};
 
