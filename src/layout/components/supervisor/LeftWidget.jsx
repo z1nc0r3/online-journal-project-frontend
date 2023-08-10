@@ -7,7 +7,7 @@ import "../../../assets/css/main.css";
 
 function LeftWidget() {
 	const location = useLocation();
-	const [activeButton, setActiveButton] = useState(0);
+	const [activeButton, setActiveButton] = useState(null);
 
 	const buttons = [
 		{ label: "DashBoard", path: "/supervisor/dashboard" },
@@ -18,9 +18,9 @@ function LeftWidget() {
 	const links = [
 		"/supervisor/dashboard",
 		"/supervisor/trainee_list",
-		"/supervisor/user_edit_data",
-		
+		"/supervisor/user_edit_data"
 	]
+
 	useEffect(() => {
 		const index = buttons.findIndex((button) => location.pathname.includes(button.path) || (button.path.includes("/admin/create_user") && links.includes(location.pathname)));
 		setActiveButton(index);
@@ -38,7 +38,7 @@ function LeftWidget() {
 			<Box className="left_widget">
 				{buttons.map((button, index) => (
 					<Link key={index} to={button.path} className="left_widget_link">
-						<Button variant="contained" onClick={() => setActiveButton(index)} className={`left_widget_button ${activeButton === index ? "active" : ""}`}>
+						<Button variant="contained" onClick={() => handleButtonClick(index)} className={`left_widget_button ${activeButton === index ? "active" : ""}`}>
 							{button.label}
 						</Button>
 					</Link>

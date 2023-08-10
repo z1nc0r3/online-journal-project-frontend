@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import Cookies from "js-cookie";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -15,19 +15,20 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import DateRangeIcon from '@mui/icons-material/DateRange';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import SupervisorAccount from "@mui/icons-material/SupervisorAccount";
+import AssignmentInd from "@mui/icons-material/AssignmentInd";
+import AddCircle from "@mui/icons-material/AddCircle";
+import LocalPrintShop from "@mui/icons-material/LocalPrintshop";
+import { Link } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
 import LogoutButton from "../../templates/main/Logout";
 import "../../../assets/css/main.css";
 
+// update this according to the user menu
 const pages = ["Dashboard", "Trainee list", "Edit User Data"];
 
-export default function SupervisorNavbar() {
-
+function SupervisorNavbar() {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 
 	const handleCloseNavMenu = () => {
@@ -49,9 +50,9 @@ export default function SupervisorNavbar() {
 	const buttons = [
 		{ label: "DashBoard", path: "/supervisor/dashboard" },
 		{ label: "Trainee List", path: "/supervisor/trainee_list" },
-		{ label: "Edit User Data", path: "/supervisor/user_edit_data" },
-
+		{ label: "Edit User Data", path: "/supervisor/user_edit_data" }
 	];
+
 
 	const list = (anchor) => (
 		<Box sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }} role="presentation" onClick={toggleDrawer(anchor, false)} onKeyDown={toggleDrawer(anchor, false)}>
@@ -72,15 +73,15 @@ export default function SupervisorNavbar() {
 	function handleIcon(index) {
 		switch (index) {
 			case 0:
-				return <DashboardIcon />;
+				return <AccountCircle />;
 			case 1:
-				return <DateRangeIcon />;
+				return <SupervisorAccount />;
 			case 2:
-				return <CalendarMonthIcon />;
+				return <AssignmentInd />;
 			case 3:
-				return <ModeEditIcon />;
+				return <AddCircle />;
 			default:
-				return <FormatListBulletedIcon />;
+				return <LocalPrintShop />;
 		}
 	}
 
@@ -95,13 +96,12 @@ export default function SupervisorNavbar() {
 						<IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={toggleDrawer("left", true)} color="inherit">
 							<MenuIcon />
 						</IconButton>
-						<Typography variant="h6" component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light", marginLeft: 1 }}>
+						<Typography variant="h6" component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light", marginLeft: 1}}>
 							{Cookies.get("fName")}
-							<Typography component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light", marginLeft: 1 }}>
-							Supervisor Dashboard 
-							</Typography>
 						</Typography>
-						
+						<Typography  component="div" sx={{ display: "flex",alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light" }}>
+							Supervisor Dashboard 
+						</Typography>
 						<Menu
 							id="menu-appbar"
 							anchorEl={anchorElNav}
@@ -128,7 +128,7 @@ export default function SupervisorNavbar() {
 					</Box>
 
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-						<Typography variant="h5" component="div" sx={{ flexGrow: 1, textAlign: "left", fontWeight: "light" }}>
+					<Typography variant="h5" component="div" sx={{ flexGrow: 1, textAlign: "left", fontWeight: "light" }}>
 							{Cookies.get("fName")}
 							<Typography component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light"}} >Supervisor Dashboard</Typography>
 						</Typography>
@@ -142,4 +142,4 @@ export default function SupervisorNavbar() {
 		</AppBar>
 	);
 }
-
+export default SupervisorNavbar;
