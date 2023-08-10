@@ -28,6 +28,7 @@ function SupervisorList() {
 				console.log(data.error);
 			} else {
 				setSupervisors(data.supervisors);
+				console.log(data);
 			}
 		});
 	};
@@ -56,11 +57,18 @@ function SupervisorList() {
 							<Typography sx={{ color: "text.secondary", fontSize: "14px" }}>{supervisor.estName}</Typography>
 						</AccordionSummary>
 						<AccordionDetails>
-							<Box className="supervisor_assign_form">
-								<div className="assigned_student">
-									<Typography sx={{ fontSize: "16px", textAlign: "left" }}>
-										Assigned for : {supervisor.supervisor_connection ? supervisor.supervisor_connection.trainee_name : "Not Assigned"}
-									</Typography>
+							<Box className="supervisor_assign_form" sx={{ display: "flex", flexDirection: "row"}}>
+								<Typography sx={{ fontSize: "16px", textAlign: "left", marginRight: 1 }}>
+									Assigned for : 
+								</Typography>
+								<div>
+									{supervisor.supervisor_connection.map((supervisorConnection, index) => (
+										<div className="assigned_student" key={index}>
+											<Typography sx={{ fontSize: "16px", textAlign: "left", fontWeight: "500" }}>
+												{supervisorConnection.trainee_name}
+											</Typography>
+										</div>
+									))}
 								</div>
 							</Box>
 						</AccordionDetails>
