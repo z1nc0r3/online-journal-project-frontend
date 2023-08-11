@@ -21,7 +21,6 @@ function PendingApprovals() {
 
 	const handleChange = (panel) => (event, isExpanded) => {
 		setExpanded(isExpanded ? panel : false);
-
 	};
 
 	const getTraineeList = (event) => {
