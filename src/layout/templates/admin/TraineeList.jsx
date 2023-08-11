@@ -112,8 +112,6 @@ function TraineeList() {
 			},
 		};
 
-		console.log(updatedTrainee);
-
 		axios
 			.post(`${API_URL}/api/update/assign/`, updatedTrainee)
 			.then((response) => {

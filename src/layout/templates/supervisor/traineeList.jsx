@@ -15,16 +15,16 @@ import { ToastContainer, toast } from "react-toastify";
 const API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
 function TraineeList() {
-  const [expanded, setExpanded] = React.useState(false);
-  const [trainees, setTrainees] = React.useState([]);
-  const [formData, setFormData] = useState({});
+	const [expanded, setExpanded] = React.useState(false);
+	const [trainees, setTrainees] = React.useState([]);
+	const [formData, setFormData] = useState({});
 
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
+	const handleChange = (panel) => (event, isExpanded) => {
+		setExpanded(isExpanded ? panel : false);
 
-  };
+	};
 
-  const getTraineeList = (event) => {
+	const getTraineeList = (event) => {
 		axios.get(`${API_URL}/api/get/trainee/list`).then((response) => {
 			const data = response.data;
 
@@ -47,7 +47,7 @@ function TraineeList() {
 		});
 	};
 
-  const handleSubmit = (event, trainee) => {
+	const handleSubmit = (event, trainee) => {
 		event.preventDefault();
 
 		// Assuming trainee is the current trainee object being submitted
@@ -73,16 +73,16 @@ function TraineeList() {
 				toast.error(error.response.data.message);
 			});
 	};
-  
-  useEffect(() => {
+
+	useEffect(() => {
 		getTraineeList();
 	}, []);
 
-  return (
-    <Container component="main" className="month_report_container" maxWidth={false}>
-      <CssBaseline />
+	return (
+		<Container component="main" className="month_report_container" maxWidth={false}>
+			<CssBaseline />
 
-		<Box className="list_box">
+			<Box className="list_box">
 				{trainees.map((trainee, i) => (
 					<Accordion
 						expanded={expanded === i}
@@ -90,7 +90,7 @@ function TraineeList() {
 						sx={{ width: "100%", backgroundColor: "#dfefff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }}
 						key={i}
 						className="accordion_item">
-							
+
 						<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
 							<Typography sx={{ marginRight: "1rem", fontSize: "18px" }}>{i + 1}</Typography>
 							<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{trainee.fName}</Typography>
@@ -99,76 +99,76 @@ function TraineeList() {
 
 						<AccordionDetails>
 
-								{Array.from({length: 5}, (_, i) => (
-								<Box className="list_container">  
-								<Accordion className="month_item">
-									<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="month1-content" id="month1-header">
-										<Typography sx={{ fontWeight: "bold", textAlign: "center", color: "#414141", paddingLeft: 0.5 }}>{`Month ${i+1}`}</Typography>
-									</AccordionSummary>
+							{Array.from({ length: 5 }, (_, i) => (
+								<Box className="list_container">
+									<Accordion className="month_item">
+										<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="month1-content" id="month1-header">
+											<Typography sx={{ fontWeight: "bold", textAlign: "center", color: "#414141", paddingLeft: 0.5 }}>{`Month ${i + 1}`}</Typography>
+										</AccordionSummary>
 
-									<AccordionDetails>
-										{Array.from({length: 4}, (_, i) => (
-										<Box className="list_container">
-											<Accordion sx={{ width: "100%", backgroundColor: "#9dd0ff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }} className="accordion_item">
-												<AccordionSummary>
-													<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{`Week ${i+1}`}</Typography>
-												</AccordionSummary>
-												<AccordionDetails  className="report_detail_container">
-													<Box className="weekly_report_container">
-														<Typography className="report_title report_title_des">Description :</Typography>
-													<Box className="weekly_report_des">
-														<Typography sx={{ fontSize: "16px", textAlign: "left" }}></Typography>
+										<AccordionDetails>
+											{Array.from({ length: 4 }, (_, i) => (
+												<Box className="list_container">
+													<Accordion sx={{ width: "100%", backgroundColor: "#9dd0ff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }} className="accordion_item">
+														<AccordionSummary>
+															<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{`Week ${i + 1}`}</Typography>
+														</AccordionSummary>
+														<AccordionDetails className="report_detail_container">
+															<Box className="weekly_report_container">
+																<Typography className="report_title report_title_des">Description :</Typography>
+																<Box className="weekly_report_des">
+																	<Typography sx={{ fontSize: "16px", textAlign: "left" }}></Typography>
+																</Box>
+															</Box>
+														</AccordionDetails>
+													</Accordion>
+												</Box>
+											))}
+
+
+											<form onSubmit={handleSubmit}>
+												<Accordion sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5 }}>
+													<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
+														<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Report</Typography>
+													</AccordionSummary>
+
+													<Box className="supervisor_report_field" variant="outlined">
+														<div className="assigned_student">
+															<Typography component={"span"} variant="body1">
+																<TextField
+																	multiline
+																	rows={6}
+																	variant="outlined"
+																	required
+																	fullWidth
+																	name="description"
+																	type="text"
+
+																	placeholder="Write comments here."
+																	onChange={handleChange}
+																	sx={{ "& fieldset": { border: "none" } }}
+																/>
+															</Typography>
+														</div>
 													</Box>
-													</Box>
-												</AccordionDetails>
-											</Accordion>
-										</Box>
-									))}
+													<Button variant="contained" type="submit" className="report_submit" sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }}>
+														Save
+													</Button>
 
-						
-								<form onSubmit={handleSubmit}>
-								<Accordion sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5 }}>
-									<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
-										<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Report</Typography>
-									</AccordionSummary>
+												</Accordion>
+											</form>
 
-									<Box className="supervisor_report_field" variant="outlined">
-										<div className="assigned_student">
-										<Typography component={"span"} variant="body1">
-											<TextField
-												multiline
-												rows={6}
-												variant="outlined"
-												required
-												fullWidth
-												name="description"
-												type="text"
-												
-												placeholder="Write comments here."
-												onChange={handleChange}
-												sx={{ "& fieldset": { border: "none" } }}
-												/>
-										</Typography>
-										</div>
-									</Box>
-									<Button variant="contained" type="submit" className="report_submit" sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }}>
-										Save
-									</Button>
-																
-								</Accordion>
-							</form>
-								
-							</AccordionDetails>
-						</Accordion>
-						</Box>
-					))}
-			 		</AccordionDetails>
-					
+										</AccordionDetails>
+									</Accordion>
+								</Box>
+							))}
+						</AccordionDetails>
+
 					</Accordion>
 				))}
 			</Box>
-    </Container>
-  );
+		</Container>
+	);
 }
 
 export default TraineeList;
