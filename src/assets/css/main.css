@@ -233,6 +233,11 @@ Button.print_details_button:hover {
 	.print_button_container {
 		margin-right: 20px;
 	}
+
+	.headername{
+		display: flex;
+		font-size: 20px !important;
+	}
 }
 
 @media only screen and (max-width: 900px) {
@@ -246,6 +251,14 @@ Button.print_details_button:hover {
 
 	.print_button_container {
 		margin: 0 20px;
+	}
+
+	.headername{
+		font-size: 23px !important;
+	}
+
+	.rolename{
+		font-size: 15px !important;
 	}
 }
 
@@ -268,10 +281,29 @@ Button.print_details_button:hover {
 	.print_button_container button {
 		font-size: 14px;
 	}
+
+	.headername{
+		display: flex;
+		font-size: 21px !important;
+		padding: 1px;
+	}
+
+	.rolename{
+		font-size: 14.5px !important;
+	}
 }
 
 @media only screen and (max-width: 440px) {
 	.MuiDialog-paper .alert_actions {
 		width: 80%;
+	}
+
+	.headername{
+		display: flex;
+		font-size: 19.5px !important;
+	}
+
+	.rolename{
+		font-size: 13px !important;
 	}
 }
