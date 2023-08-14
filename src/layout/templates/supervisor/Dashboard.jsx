@@ -50,10 +50,10 @@ function Dashboard() {
 			} else {
 				const traineesData = data.trainees.reduce((acc, trainee) => {
 					acc[trainee.id] = {
-						supervisor_id: trainee.trainee_connection ? trainee.trainee_connection.supervisor_id : "",
-						supervisor: trainee.trainee_connection ? trainee.trainee_connection.supervisor_name : "",
-						evaluator_id: trainee.trainee_connection ? trainee.trainee_connection.evaluator_id : "",
-						evaluator: trainee.trainee_connection ? trainee.trainee_connection.evaluator_name : "",
+						supervisor_id: trainee.trainee_connection[0] ? trainee.trainee_connection[0].supervisor_id : "",
+						supervisor: trainee.trainee_connection[0] ? trainee.trainee_connection[0].supervisor_name : "",
+						evaluator_id: trainee.trainee_connection[0] ? trainee.trainee_connection[0].evaluator_id : "",
+						evaluator: trainee.trainee_connection[0] ? trainee.trainee_connection[0].evaluator_name : "",
 					};
 					return acc;
 				}, {});
@@ -64,33 +64,10 @@ function Dashboard() {
 		});
 	};
 	
-	const handleSubmit = (event, trainee) => {
-		event.preventDefault();
-
-		const updatedTrainee = {
-			...trainee,
-			trainee_connection: {
-				supervisor_id: formData[trainee.id]?.supervisor_id,
-				supervisor_name: formData[trainee.id]?.supervisor,
-				evaluator_id: formData[trainee.id]?.evaluator_id,
-				evaluator_name: formData[trainee.id]?.evaluator,
-			},
-		};
-
-		axios.post(`${API_URL}/api/submit/supervisor/report`, updatedTrainee)
-		  .then((response) => {
-			toast.success("Supervisor report submitted successfully!");
-			Cookies.remove("description");
-
-			setTimeout(() => {
-				window.location.reload();
-			}, 2000);
-		})
-		  .catch((error) => {
-			toast.error("Failed to submit supervisor report!");
-		  });
+  const handleSubmit = (event, trainee) => {
+		console.log('supervisor report submit');
 	};
-
+  
 	//const timeDate = getWeekInfo(new Date());
 	const [getMonthRecords, setGetMonthRecords] = useState({
 		user_id: Cookies.get("user_id"),
@@ -101,9 +78,8 @@ function Dashboard() {
 	const [currentMonthRecords, setCurrentMonthRecords] = useState([]);
 	const getRecords = (e) => {
 		const { user_id, month, year } = getMonthRecords;
-		axios.get(`${API_URL}/api/record/currentMonth/week/${user_id}?month=${month}&year=${year}`).then((response) => {
+		axios.get(`${API_URL}/api/get/record/currentMonth/week/${user_id}?month=${month}&year=${year}`).then((response) => {
 			const data = response.data.records;
-			console.log(`${API_URL}/api/record/currentMonth/week/${user_id}?month=${month}&year=${year}`);
 			setCurrentMonthRecords(data);
 		});
 	};

@@ -1,7 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Container, Grid, Typography, CssBaseline } from "@mui/material";
+import { Container, Grid, Typography, CssBaseline, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import ReactLoading from "react-loading";
 import "dayjs/locale/en-gb";
 
 import UserVerification from "../main/UserVerification";
@@ -44,6 +45,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import "../../../assets/css/main.css";
 import getWeekInfo from "../../components/main/GetWeekInfo";
+import Cookies from "js-cookie";
 
 const currentWeekData = getWeekInfo(new Date());
 const titleMap = {
@@ -71,6 +73,29 @@ const titleMap = {
 	evaluator_user_edit_data: "Edit User Data",
 };
 
+const adminLayouts = [
+	"admin_trainee_list",
+	"admin_supervisor_list",
+	"admin_evaluator_list",
+	"admin_create_user",
+	"admin_trainee_edit",
+	"admin_evaluator_edit",
+	"admin_supervisor_edit",
+	"admin_print",
+];
+
+const traineeLayouts = [
+	"trainee_dashboard",
+	"trainee_past_reports",
+	"trainee_user_instruction",
+	"trainee_user_edit_data",
+	"trainee_current_month_report",
+];
+
+const supervisorLayouts = ["supervisor_dashboard", "supervisor_trainee_list", "supervisor_user_edit_data"];
+
+const evaluatorLayouts = ["evaluator_dashboard", "evaluator_trainee_list", "evaluator_user_edit_data"];
+
 const Layout = (props) => {
 	const { layout } = props;
 	const [loading, setLoading] = useState(true);
@@ -86,6 +111,23 @@ const Layout = (props) => {
 			}
 		});
 	}, [navigate]);
+
+	// Limit others users from accessing other pages
+	useEffect(() => {
+		if (layout) {
+			if (Cookies.get("role") === "admin" && !adminLayouts.includes(layout)) {
+				navigate("/admin_trainee_list");
+			} else if (Cookies.get("role") === "trainee" && !traineeLayouts.includes(layout)) {
+				navigate("/trainee_dashboard");
+			} else if (Cookies.get("role") === "supervisor" && !supervisorLayouts.includes(layout)) {
+				navigate("/supervisor_dashboard");
+			} else if (Cookies.get("role") === "evaluator" && !evaluatorLayouts.includes(layout)) {
+				navigate("/evaluator_dashboard");
+			} else {
+				setLoading(false);
+			}
+		}
+	}, [props.user, layout, navigate]);
 
 	const getComponent = () => {
 		switch (layout) {
@@ -135,8 +177,8 @@ const Layout = (props) => {
 	};
 
 	if (loading) {
-		// Todo: Add loading animation
-		return <div>Loading...</div>;
+		return <Box sx={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}><ReactLoading type="spin" color="white"
+			height={100} width={50} /></Box>;
 	}
 
 	const { Header, LeftWidget, Main } = getComponent();
@@ -170,7 +212,7 @@ const Layout = (props) => {
 				<Grid item xs={0} sm={0} md={0} lg={3} className="calendar">
 					<Container className="calendar_container">
 						<LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
-							<DateCalendar readOnly displayWeekNumber/>
+							<DateCalendar readOnly displayWeekNumber />
 						</LocalizationProvider>
 					</Container>
 				</Grid>

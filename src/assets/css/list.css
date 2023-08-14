@@ -1,380 +1,388 @@
-.list_container, .month_report_container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+.list_container,
+.month_report_container {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
 }
 
-.list_box, .month_report_box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    background-color: white;
-    border-radius: 1.5rem;
-    padding: 2rem 2rem 1.5rem 2rem;
-    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+.list_box,
+.month_report_box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	background-color: white;
+	border-radius: 1.5rem;
+	padding: 2rem 2rem 1.5rem 2rem;
+	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
-.month_report_box2{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    background-color: #dfefff;
-    border-radius: 1.5rem;
-    padding: 2rem 2rem 1.5rem 2rem;
-
+.month_report_box2 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	background-color: #dfefff;
+	border-radius: 1.5rem;
+	padding: 2rem 2rem 1.5rem 2rem;
 }
 .trainee_assign_form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    background-color: #b9ddff;
-    border-radius: 0.5rem;
-    padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+	background-color: #b9ddff;
+	border-radius: 0.5rem;
+	padding: 1rem;
 }
 
 .trainee_assign_form .MuiInputBase-root {
-    border-radius: 1.5rem;
+	border-radius: 1.5rem;
 }
 
-.trainee_assign_form .assign_evaluator_row, .trainee_assign_form .assign_supervisor_row {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: 0.5rem auto;
-    width: 100%;
-    background-color: white;
-    border-radius: 1.5rem;
+.trainee_assign_form .assign_evaluator_row,
+.trainee_assign_form .assign_supervisor_row {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin: 0.5rem auto;
+	width: 100%;
+	background-color: white;
+	border-radius: 1.5rem;
 }
 
 .trainee_assign_form .assign_save {
-    margin: 0.5rem 0 0 0;
-    width: 100%;
-    background-color: #78beff;
-    color: #414141;
-    font-size: 16px;
-    height: 3rem;
-    border-radius: 0.5rem;
-    box-shadow: none;
+	margin: 0.5rem 0 0 0;
+	width: 100%;
+	background-color: #78beff;
+	color: #414141;
+	font-size: 16px;
+	height: 3rem;
+	border-radius: 0.5rem;
+	box-shadow: none;
 }
 
 .trainee_assign_form .assign_save:hover {
-    background-color: #2a95ff;
-    color: white;
-    box-shadow: none;
+	background-color: #2a95ff;
+	color: white;
+	box-shadow: none;
 }
 
 .month_report_box .accordion_item {
-    background-color: #9dd0ff;
+	background-color: #9dd0ff;
 }
 
 .month_report_box2 .accordion_item {
-    background-color: #9dd0ff;
+	background-color: #9dd0ff;
 }
 
 .accordion_item:before {
-    display: none;
+	display: none;
 }
 
 /* Supervisor List, Evaluator List */
 
-.supervisor_assign_box, .evaluator_assign_box {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    background-color: #b9ddff;
-    border-radius: 1.5rem;
+.supervisor_assign_box,
+.evaluator_assign_box {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	background-color: #b9ddff;
+	border-radius: 1.5rem;
 }
 
-.comment_box{
-    display: flex;
-    /* width: 750px;*/
-    height: 150px; 
-    flex-direction: row;
-    justify-content: left;
-    background-color: white;
-    border-radius: 1.5rem;
-    cursor: pointer;
-    object-fit: cover;
+.comment_box {
+	display: flex;
+	/* width: 750px;*/
+	height: 150px;
+	flex-direction: row;
+	justify-content: left;
+	background-color: white;
+	border-radius: 1.5rem;
+	cursor: pointer;
+	object-fit: cover;
 }
 
-.supervisor_assign_box p, .evaluator_assign_box p {
-    margin: 1rem 2rem;
-    font-size: 18px;
+.supervisor_assign_box p,
+.evaluator_assign_box p {
+	margin: 1rem 2rem;
+	font-size: 18px;
 }
 
 /* Create new user */
 
 .create_new_container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
 }
 
 .create_new_form {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: baseline;
-    height: 100%;
-    background-color: white;
-    border-radius: 1.5rem;
-    padding: 2rem;
-    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: baseline;
+	height: 100%;
+	background-color: white;
+	border-radius: 1.5rem;
+	padding: 2rem;
+	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
 .create_new_form p {
-    font-weight: 500;
-    margin-top: 20px;
-    line-height: 0.5;
-    margin-bottom: 10px;
+	font-weight: 500;
+	margin-top: 20px;
+	line-height: 0.5;
+	margin-bottom: 10px;
 }
 
-.create_new_form_left, .create_new_form_right {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: baseline !important;
-    margin: 0 auto;
-    width: 50%;
-    padding: 0 1rem;
-    height: 100%;
+.create_new_form_left,
+.create_new_form_right {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: baseline !important;
+	margin: 0 auto;
+	width: 50%;
+	padding: 0 1rem;
+	height: 100%;
 }
 
 .training_period {
-    width: 100%;
-    justify-content: space-between;
+	width: 100%;
+	justify-content: space-between;
 }
 
 .training_period p {
-    text-align: left;
+	text-align: left;
 }
 
-.training_period_from, .training_period_to {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 48%;
+.training_period_from,
+.training_period_to {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 48%;
 }
 
 .training_period_from {
-    padding-right: 10px;
+	padding-right: 10px;
 }
 
 /* trainee user */
 
-.trainee_box_heading{
-    display: flex;
-    color: #ffffff;
-    align-content: start;
-    font-size: 20px;
-    padding-left: 15px;
+.trainee_box_heading {
+	display: flex;
+	color: #ffffff;
+	align-content: start;
+	font-size: 20px;
+	padding-left: 15px;
 }
 
-.trainee_box_description, .trainee_box_solutions{
-    outline: none;
+.trainee_box_description,
+.trainee_box_solutions {
+	outline: none;
 }
 
-.trainee_box_description{
-    height: 300px;
+.trainee_box_description {
+	height: 300px;
 }
 
-.trainee_box_description_text{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: baseline;
-    height: 100%;
-    background-color: white;
-    border-radius: 1.0rem;
-    padding: 1rem;
-    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+.trainee_box_description_text {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: baseline;
+	height: 100%;
+	background-color: white;
+	border-radius: 1rem;
+	padding: 1rem;
+	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
-.supervisor_box_comment_text{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: baseline;
-    height: 100%;
-    width: 100%;
-    background-color: white;
-    border-radius: 1.0rem;
-    padding: 1rem;
-    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
-}
-
-.trainee_month_accordion{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 15px;
-    border-radius: 20px;
-    font-size: 30px;
+.supervisor_box_comment_text {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: baseline;
+	height: 100%;
+	width: 100%;
+	background-color: white;
+	border-radius: 1rem;
+	padding: 1rem;
+	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
-.trainee_week{
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 5px;
-}
-.supervisor_week{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    background-color:#b9ddff;
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 1rem;
+.trainee_month_accordion {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 15px;
+	border-radius: 20px;
+	font-size: 30px;
 }
 
-Button.save_button_trainee{
-    align-items: start;
-    margin: 0.4rem 2rem;   
+.trainee_week {
+	padding: 10px;
+	border-radius: 10px;
+	margin-bottom: 5px;
+}
+.supervisor_week {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	background-color: #b9ddff;
+	padding: 10px;
+	margin-bottom: 5px;
+	border-radius: 1rem;
+}
+
+Button.save_button_trainee {
+	align-items: start;
+	margin: 0.4rem 2rem;
 	background-color: #ffffff;
 	color: #414141;
 	font-size: 16px;
-    font-weight: 600;
-    height: 100%;
-    width: 25%;
+	font-weight: 600;
+	height: 100%;
+	width: 25%;
 	border-radius: 0.75rem;
 	box-shadow: none;
 }
 
 Button.save_button_trainee:hover {
 	background-color: #88c6ff;
-    color: black;
+	color: black;
 	box-shadow: none;
 }
 
-.trainee_submission_box{
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    margin-top: 2rem;
+.trainee_submission_box {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	margin-top: 2rem;
 }
 
 .trainee_submission_box_text {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
-.trainee_past_report{
-    background-color: white;
-    border-radius: 1.0rem;
-    padding: 1rem;
-    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+.trainee_past_report {
+	background-color: white;
+	border-radius: 1rem;
+	padding: 1rem;
+	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
-.trainee_instruction_box{
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
-    height: 100%;
-    width: 100%;
-    background-color: #379eff60;
-    border-radius: 1.0rem;
-    padding: 2rem;
+.trainee_instruction_box {
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	height: 100%;
+	width: 100%;
+	background-color: #379eff60;
+	border-radius: 1rem;
+	padding: 2rem;
 }
 
 .trainee_month_accordion_root {
-    border-radius: 10px !important;
+	border-radius: 10px !important;
 }
 
-.agreement_trainee_submission{
-    color: white;
-    text-align: left;
+.agreement_trainee_submission {
+	color: white;
+	text-align: left;
 }
 
 /* bulk user entry */
 
 .bulk_user_entry {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: baseline;
-    background-color: white;
-    border-radius: 1.5rem;
-    margin-top: 1rem;
-    padding: 1rem 2rem;
-    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: baseline;
+	background-color: white;
+	border-radius: 1.5rem;
+	margin-top: 1rem;
+	padding: 1rem 2rem;
+	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
 .bulk_user_entry_input {
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: baseline;
-    width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+	align-items: baseline;
+	width: 100%;
 }
 
 /* user controllers */
 
 .user_controller_container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-top: 1rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: baseline;
+	margin-top: 1rem;
 }
 
 Button.user_controller_button {
-    height: 3rem;
-    width: 49%;
-    box-shadow: none;
+	height: 3rem;
+	width: 49%;
+	box-shadow: none;
 }
 
 Button.reset_button {
-    background-color: white;
-    color: #414141;
+	background-color: white;
+	color: #414141;
 }
 
 Button.reset_button:hover {
-    background-color: #d32f2f;
-    color: white;
-    box-shadow: none;
+	background-color: #d32f2f;
+	color: white;
+	box-shadow: none;
 }
 
 Button.delete_button {
-    background-color: white;
-    color: #414141;
+	background-color: white;
+	color: #414141;
 }
 
 Button.delete_button:hover {
-    background-color: #d32f2f;
-    color: white;
-    box-shadow: none;
+	background-color: #d32f2f;
+	color: white;
+	box-shadow: none;
 }
 
 Button.import_button {
-    height: 3rem;
-    width: 10rem;
+	height: 3rem;
+	width: 10rem;
 	box-shadow: none;
 }
 
 /* Trainee UI : reports view */
 
 .weekly_report_container {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
-.weekly_report_des, .weekly_report_sol {
-    display:flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    background-color: white;
+.weekly_report_des,
+.weekly_report_sol {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 100%;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	background-color: white;
 }
 
 .weekly_report_super{
@@ -387,179 +395,203 @@ Button.import_button {
 
 }
 .weekly_report_container .report_title {
-    font-size: 16px;
-    font-weight: 600;
-    text-align: left;
-    margin-bottom: 0.5rem ;
-    padding-left: 0.5rem;
+	font-size: 16px;
+	font-weight: 600;
+	text-align: left;
+	margin-bottom: 0.5rem;
+	padding-left: 0.5rem;
 }
 
 .weekly_report_container .report_title_sol {
-    margin-top: 1rem;
+	margin-top: 1rem;
 }
 
 .month_report_container .month_item {
-    border-radius: 0.5rem !important;
-    background-color: white;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    box-shadow: none;
+	border-radius: 0.5rem !important;
+	background-color: white;
+	padding: 0.5rem;
+	margin-bottom: 0.5rem;
+	box-shadow: none;
 }
 
 /* Supervisor dashboard */
 
 .supervisor_report_field {
-    background-color: white;
-    margin: 1rem;
-    border-radius: 1rem;
+	background-color: white;
+	margin: 1rem;
+	border-radius: 1rem;
 }
 
 .list_box .report_submit {
-    margin: 0.5rem 0 0 0;
-    width: 95%;
-    background-color: #93cbff;
-    color: #414141;
-    font-size: 16px;
-    height: 3rem;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-    box-shadow: none;
+	margin: 0.5rem 0 0 0;
+	width: 95%;
+	background-color: #93cbff;
+	color: #414141;
+	font-size: 16px;
+	height: 3rem;
+	border-radius: 0.5rem;
+	margin-bottom: 1rem;
+	box-shadow: none;
 }
 
 .list_box .report_submit:hover {
-    background-color: #2a95ff;
-    color: white;
-    box-shadow: none;
+	background-color: #2a95ff;
+	color: white;
+	box-shadow: none;
+}
+
+/* hide increase and decrease buttons from number field */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
 }
 
 @media only screen and (max-width: 1200px) {
-    .list_container, .create_new_container, .month_report_container {
-        padding-right: 16px !important;
-    }
+	.list_container,
+	.create_new_container,
+	.month_report_container {
+		padding-right: 16px !important;
+	}
 
-    .create_new_form {
-        padding: 1.5rem;
-    }
+	.create_new_form {
+		padding: 1.5rem;
+	}
 
-    .bulk_user_entry_input {
-        justify-content: center;
-    }
+	.bulk_user_entry_input {
+		justify-content: center;
+	}
 }
 
 @media only screen and (max-width: 900px) {
-    .list_container, .create_new_container, .month_report_container {
-        padding-left: 16px !important;
-    }
+	.list_container,
+	.create_new_container,
+	.month_report_container {
+		padding-left: 16px !important;
+	}
 
-	.list_box, .month_report_box {
+	.list_box,
+	.month_report_box {
 		padding: 1rem 1rem 0.5rem 1rem;
 	}
 
-    .month_report_box2{
-        padding: 1rem 1rem 0.5rem 1rem;
-    }
+	.month_report_box2 {
+		padding: 1rem 1rem 0.5rem 1rem;
+	}
 
-    .assign_supervisor_row .MuiSelect-select, .assign_evaluator_row .MuiSelect-select {
-        font-size: 14px;
-    }
+	.assign_supervisor_row .MuiSelect-select,
+	.assign_evaluator_row .MuiSelect-select {
+		font-size: 14px;
+	}
 
-    .assign_supervisor_row p, .assign_evaluator_row p {
-        width: 50%;
-    }
+	.assign_supervisor_row p,
+	.assign_evaluator_row p {
+		width: 50%;
+	}
 
-    .trainee_assign_form {
-        margin: 0;
-    }
+	.trainee_assign_form {
+		margin: 0;
+	}
 
-    .trainee_assign_form .MuiButton-root {
-        font-size: 14px;
-    }
+	.trainee_assign_form .MuiButton-root {
+		font-size: 14px;
+	}
 
-    .bulk_user_entry {
-        padding: 1rem;
-    }
-
+	.bulk_user_entry {
+		padding: 1rem;
+	}
 }
 
 /* mobile view css */
 
 @media only screen and (max-width: 600px) {
-    .list_container, .create_new_container, .month_report_container {
-        padding-left: 16px !important;
-    }
+	.list_container,
+	.create_new_container,
+	.month_report_container {
+		padding-left: 16px !important;
+	}
 
-    .list_box .MuiAccordionSummary-contentGutters p, .list_box .MuiAccordionSummary-contentGutters a svg {
-        font-size: 14px;
-    }
+	.list_box .MuiAccordionSummary-contentGutters p,
+	.list_box .MuiAccordionSummary-contentGutters a svg {
+		font-size: 14px;
+	}
 
-    .list_box .MuiAccordionSummary-contentGutters > p {
-        width: 50%;
-    }
+	.list_box .MuiAccordionSummary-contentGutters > p {
+		width: 50%;
+	}
 
-    .MuiList-root.MuiMenu-list li {
-        font-size: 14px;
-    }
+	.MuiList-root.MuiMenu-list li {
+		font-size: 14px;
+	}
 
-    .assign_supervisor_row, .assign_evaluator_row {
-        height: 40px;
-    }
+	.assign_supervisor_row,
+	.assign_evaluator_row {
+		height: 40px;
+	}
 
-    .assign_supervisor_row .MuiOutlinedInput-root, .assign_evaluator_row .MuiOutlinedInput-root {
-        height: 40px;
-    }
+	.assign_supervisor_row .MuiOutlinedInput-root,
+	.assign_evaluator_row .MuiOutlinedInput-root {
+		height: 40px;
+	}
 
-    .trainee_assign_form .assign_save {
-        height: 40px;
-    }
+	.trainee_assign_form .assign_save {
+		height: 40px;
+	}
 
-    .supervisor_assign_form p, .evaluator_assign_form p {
-        font-size: 14px;
-    }
+	.supervisor_assign_form p,
+	.evaluator_assign_form p {
+		font-size: 14px;
+	}
 
-    .create_menu_container {
-        max-width: 400px !important;
-    }
+	.create_menu_container {
+		max-width: 400px !important;
+	}
 
-    .create_new_form {
-        padding: 1rem;
-        flex-direction: column;
-    }
+	.create_new_form {
+		padding: 1rem;
+		flex-direction: column;
+	}
 
-    .create_new_form_left, .create_new_form_right {
-        width: 100%;
-        padding: 0 0.5rem;
-    }
+	.create_new_form_left,
+	.create_new_form_right {
+		width: 100%;
+		padding: 0 0.5rem;
+	}
 
-    .create_new_form p {
-        font-size: 14px;
-        line-height: 1;
-    }
+	.create_new_form p {
+		font-size: 14px;
+		line-height: 1;
+	}
 
-    Button.create_menu_button {
-        font-size: 14px;
-        width: 6.5rem;
-    }
+	Button.create_menu_button {
+		font-size: 14px;
+		width: 6.5rem;
+	}
 
-    .bulk_user_entry {
-        flex-direction: column;
-        padding: 1rem;
-    }
+	.bulk_user_entry {
+		flex-direction: column;
+		padding: 1rem;
+	}
 
-    .bulk_user_entry_input p {
-        font-size: 14px;
-    }
+	.bulk_user_entry_input p {
+		font-size: 14px;
+	}
 
-    Button.import_button {
-        font-size: 14px;
-        margin-top: 10px;
-        width: 100%;
-    }
+	Button.import_button {
+		font-size: 14px;
+		margin-top: 10px;
+		width: 100%;
+	}
 
-    Button.user_controller_button {
-        font-size: 14px;
-    }
+	Button.user_controller_button {
+		font-size: 14px;
+	}
 
-    .month_report_container .MuiAccordionDetails-root {
-        padding: 8px 8px 16px ;
-    }
+	.month_report_container .MuiAccordionDetails-root {
+		padding: 8px 8px 16px;
+	}
 }
+

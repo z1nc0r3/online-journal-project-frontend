@@ -4,7 +4,7 @@ const UserVerification = () => {
 	return new Promise((resolve) => {
 		const authorized = Cookies.get("authorized");
 
-		if (authorized === "false") {
+		if (authorized === "false" || authorized === undefined) {
 			window.location.href = "/login";
 			resolve(false);
 		} else {

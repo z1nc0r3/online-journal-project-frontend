@@ -11,9 +11,13 @@ import Checkbox from "@mui/material/Checkbox";
 import getWeekInfo from "../../components/main/GetWeekInfo";
 import "../../../assets/css/list.css";
 
+const API_URL = process.env.REACT_APP_BACKEND_API_URL;
+
 function Dashboard() {
 	const [recordData, setRecordData] = useState({
-		user_id: "",
+		user_id: Cookies.get("user_id"),
+		supervisor_id: "",
+		evaluator_id: "",
 		description: Cookies.get("description") || "",
 		solutions: Cookies.get("solutions") || "",
 		week: "",
@@ -21,6 +25,8 @@ function Dashboard() {
 		year: "",
 	});
 
+	const [isLoading, setIsLoading] = useState(true);
+	const [recordExists, setRecordExists] = useState(false);
 	const [isChecked, setIsChecked] = useState(false);
 
 	useEffect(() => {
@@ -36,13 +42,48 @@ function Dashboard() {
 		Cookies.set("solutions", recordData.solutions);
 	}, [recordData]);
 
-	const handleChange = (e) => {
-		const { name, value } = e.target;
-		setRecordData((prevFormData) => ({
-			...prevFormData,
-			[name]: value,
-		}));
-	};
+
+	useEffect(() => {
+		const getConnection = async () => {
+		  const response = await axios.get(
+			`${API_URL}/api/get/connection/trainee/${recordData.user_id}`
+		  );
+		  const data = response.data.records;
+	
+		  if (!data.error) {
+			setRecordData((prevData) => ({
+			  ...prevData,
+			  supervisor_id: data.supervisor_id,
+			  evaluator_id: data.evaluator_id,
+			}));
+		  }
+		};
+	
+		const getCurrentWeekRecord = async () => {
+		  const weekDetails = getWeekInfo(new Date());
+		  const response = await axios.get(
+			`${API_URL}/api/get/record/current/week/${recordData.user_id}?week=${weekDetails.currentWeek}&month=${weekDetails.currentMonth}&year=${weekDetails.currentYear}`
+		  );
+		  const data = response.data.record;
+	
+		  if (data && !data.error) {
+			setRecordData((prevData) => ({
+			  ...prevData,
+			  week: weekDetails.currentWeek,
+			  month: weekDetails.currentMonth,
+			  year: weekDetails.currentYear,
+			  description: data.description ? data.description : '',
+			  solutions: data.solutions ? data.solutions : '',
+			}));
+			setRecordExists(true);
+		  }
+	
+		  setIsLoading(false); // set loading to false once we're done fetching data
+		};
+	
+		getConnection();
+		getCurrentWeekRecord();
+	  }, []);
 
 	const handleSubmitRecord = (event) => {
 		event.preventDefault();
@@ -54,22 +95,52 @@ function Dashboard() {
 		recordData.month = data.currentMonth;
 		recordData.year = data.currentYear;
 
-		console.log(recordData);
+		if(recordExists){
+			axios
+				.post(`${API_URL}/api/update/record/week/${recordData.user_id}`, recordData)
+				.then((response) => {
+					toast.success("User data updated Successfully. Redirecting...");
+					setTimeout(() => {
+						window.location.reload();
+					}, 2000);
+				})
+				.catch((error) => {
+					toast.error("Error updating user data. Please try again." + error);
+					console.log(error);
+				});
+		} else {
+			axios
+				.post(`${API_URL}/api/set/record/week`, recordData)
+				.then((response) => {
+					toast.success("Form submitted successfully. Reloading...");
+					Cookies.remove("description");
+					Cookies.remove("solutions");
 
-		axios
-			.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/addRecord/week`, recordData)
-			.then((response) => {
-				toast.success("Form submitted successfully. Reloading...");
-				Cookies.remove("description");
-				Cookies.remove("solutions");
+					setTimeout(() => {
+						window.location.reload();
+					}, 2000);
+				})
+				.catch((error) => {
+					toast.error("Error submitting the form. Please try again.");
+					console.log(error);
+				});
+		}
+	};
 
-				setTimeout(() => {
-					window.location.reload();
-				}, 2000);
-			})
-			.catch((error) => {
-				toast.error("Error submitting the form. Please try again.");
-			});
+	const handleChangeDescription = (e) => {
+		const { value } = e.target;
+		setRecordData((prevFormData) => ({
+			...prevFormData,
+			description: value,
+		}));
+	};
+
+	const handleChangeSolution = (e) => {
+		const { value } = e.target;
+		setRecordData((prevFormData) => ({
+			...prevFormData,
+			solutions: value,
+		}));
 	};
 
 	return (
@@ -94,7 +165,7 @@ function Dashboard() {
 									type="text"
 									value={recordData.description}
 									placeholder="Write your description here."
-									onChange={handleChange}
+									onChange={handleChangeDescription}
 									sx={{
 										"& fieldset": { border: "none" },
 									}}
@@ -116,7 +187,7 @@ function Dashboard() {
 									type="text"
 									value={recordData.solutions}
 									placeholder="Write your problems and solutions here."
-									onChange={handleChange}
+									onChange={handleChangeSolution}
 									sx={{
 										"& fieldset": { border: "none" },
 									}}
@@ -125,9 +196,9 @@ function Dashboard() {
 						</Box>
 					</Box>
 					<Box className="trainee_submission_box">
-						<Button variant="contained" className="save_button_trainee" type="submit" disabled={!isChecked}>
-							Submit
-						</Button>
+							<Button variant="contained" className="save_button_trainee" type="submit" disabled={!isChecked}>
+								{recordExists ? 'Update' : 'Submit'}
+							</Button>
 						<Box className="trainee_submission_box_text">
 							<Checkbox
 								sx={{

@@ -56,11 +56,18 @@ function EvaluatorList() {
 							<Typography sx={{ color: "text.secondary", fontSize: "14px" }}>{evaluator.department}</Typography>
 						</AccordionSummary>
 						<AccordionDetails>
-							<Box className="evaluator_assign_form">
-								<div className="assigned_student">
-									<Typography sx={{ fontSize: "16px", textAlign: "left" }}>
-										Assigned for : {evaluator.evaluator_connection ? evaluator.evaluator_connection.trainee_name : "Not Assigned"}
-									</Typography>
+							<Box className="evaluator_assign_form" sx={{ display: "flex", flexDirection: "row" }}>
+								<Typography sx={{ fontSize: "16px", textAlign: "left", marginRight: 1 }}>
+									Assigned for :
+								</Typography>
+								<div>
+									{evaluator.evaluator_connection.map((evaluatorConnection, index) => (
+										<div className="assigned_student" key={index}>
+											<Typography sx={{ fontSize: "16px", textAlign: "left", fontWeight: "500" }}>
+												{evaluatorConnection.trainee_name}
+											</Typography>
+										</div>
+									))}
 								</div>
 							</Box>
 						</AccordionDetails>
