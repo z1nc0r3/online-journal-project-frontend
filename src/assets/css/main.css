@@ -238,7 +238,7 @@ Button.print_details_button:hover {
 		margin-right: 20px;
 	}
 
-	.headername{
+	.headername {
 		display: flex;
 		font-size: 20px !important;
 	}
@@ -257,12 +257,12 @@ Button.print_details_button:hover {
 		margin: 0 20px;
 	}
 
-	.headername{
-		font-size: 23px !important;
+	.headername {
+		font-size: 24px !important;
 	}
 
-	.rolename{
-		font-size: 15px !important;
+	.rolename {
+		font-size: 16px !important;
 	}
 }
 
@@ -286,14 +286,14 @@ Button.print_details_button:hover {
 		font-size: 14px;
 	}
 
-	.headername{
+	.headername {
 		display: flex;
-		font-size: 21px !important;
+		font-size: 20px !important;
 		padding: 1px;
 	}
 
-	.rolename{
-		font-size: 14.5px !important;
+	.rolename {
+		font-size: 14px !important;
 	}
 }
 
@@ -302,12 +302,12 @@ Button.print_details_button:hover {
 		width: 80%;
 	}
 
-	.headername{
+	.headername {
 		display: flex;
-		font-size: 19.5px !important;
+		font-size: 18px !important;
 	}
 
-	.rolename{
-		font-size: 13px !important;
+	.rolename {
+		font-size: 12px !important;
 	}
 }
