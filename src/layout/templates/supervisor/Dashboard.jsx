@@ -126,8 +126,14 @@ function Dashboard() {
 														{record.description}
 													</Typography>
 												</Box>
-												{/* <Typography className="report_title report_title_sol">Supervisor Weekly Report :</Typography>
+												<Typography className="report_title report_title_sol">Solution :</Typography>
 												<Box className="weekly_report_sol">
+													<Typography sx={{ fontSize: "16px", textAlign: "left" }}>
+														{record.solutions}
+													</Typography>
+												</Box>
+												<Typography className="report_title report_title_sol">Supervisor Weekly Report :</Typography>
+												<Box className="weekly_report_super">
 													<Typography component={"span"} variant="body1">
 														<TextField
 															multiline
@@ -135,15 +141,16 @@ function Dashboard() {
 															variant="outlined"
 															required
 															fullWidth
-															name="description"
+															name="weeklyComment"
 															type="text"
-															value={recordData.description}
 															placeholder="Write comments here."
 															onChange={handleChange2}
-															sx={{ "& fieldset": { border: "none" } }}
+															sx={{
+																"& fieldset": { border: "none" },
+															}}
 															/>
 													</Typography>
-												</Box> */}
+												</Box>
 											</Box>
 										</AccordionDetails>
 									</Accordion>
@@ -161,13 +168,13 @@ function Dashboard() {
 										<Typography component={"span"} variant="body1">
 										<TextField
 											multiline
-											rows={6}
+											rows={5}
 											variant="outlined"
 											required
 											fullWidth
-											name="description"
+											name="monthlyComment"
 											type="text"
-											placeholder="Write your description here."
+											placeholder="Write your monthly comment here."
 											onChange={handleChange2}
 											sx={{
 												"& fieldset": { border: "none" },
