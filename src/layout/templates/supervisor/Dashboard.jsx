@@ -40,6 +40,7 @@ function Dashboard() {
 		}));
 	};
 
+	// get filtered trainee list for the supervisor
 	const getTraineeList = (event) => {
 		axios.get(`${API_URL}/api/get/trainee/list/supervisor/${Cookies.get("user_id")}`).then((response) => {
 			const data = response.data;
@@ -77,7 +78,7 @@ function Dashboard() {
 	const [currentMonthRecords, setCurrentMonthRecords] = useState([]);
 	const getRecords = (e) => {
 		const { user_id, month, year } = getMonthRecords;
-		axios.get(`${API_URL}/api/get/record/currentMonth/week/${user_id}?month=${month}&year=${year}`).then((response) => {
+		axios.get(`${API_URL}/api/get/record/current/week/${user_id}?month=${month}&year=${year}`).then((response) => {
 			const data = response.data.records;
 			setCurrentMonthRecords(data);
 		});
