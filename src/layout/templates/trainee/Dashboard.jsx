@@ -97,7 +97,7 @@ function Dashboard() {
 
 		if(recordExists){
 			axios
-				.post(`${API_URL}/api/update/record/week/${recordData.user_id}`, recordData)
+				.post(`${API_URL}/api/update/record/trainee/week/${recordData.user_id}`, recordData)
 				.then((response) => {
 					toast.success("User data updated Successfully. Redirecting...");
 					setTimeout(() => {
@@ -110,7 +110,7 @@ function Dashboard() {
 				});
 		} else {
 			axios
-				.post(`${API_URL}/api/set/record/week`, recordData)
+				.post(`${API_URL}/api/set/record/trainee/week`, recordData)
 				.then((response) => {
 					toast.success("Form submitted successfully. Reloading...");
 					Cookies.remove("description");

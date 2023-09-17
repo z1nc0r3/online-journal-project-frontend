@@ -1,13 +1,13 @@
 import * as React from "react";
 import "../../../assets/css/list.css";
 import { useState, useEffect } from "react";
-import { Box, Container, Button, colors } from "@mui/material";
-import { CssBaseline, Typography, Select, MenuItem } from "@mui/material";
+import { Box, Container, Button } from "@mui/material";
+import { CssBaseline, Typography} from "@mui/material";
 import axios from "axios";
+import Cookies from "js-cookie"
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
-//import CssBaseline from "@mui/material/CssBaseline";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
 import { ToastContainer, toast } from "react-toastify";
@@ -24,8 +24,9 @@ function TraineeList() {
 
 	};
 
+	// get filtered trainee list for the supervisor
 	const getTraineeList = (event) => {
-		axios.get(`${API_URL}/api/get/trainee/list`).then((response) => {
+		axios.get(`${API_URL}/api/get/trainee/list/supervisor/${Cookies.get("user_id")}`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
