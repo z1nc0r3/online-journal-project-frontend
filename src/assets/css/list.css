@@ -385,6 +385,15 @@ Button.import_button {
 	background-color: white;
 }
 
+.weekly_report_super{
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: white;
+
+}
 .weekly_report_container .report_title {
 	font-size: 16px;
 	font-weight: 600;

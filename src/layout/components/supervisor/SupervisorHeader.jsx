@@ -96,12 +96,15 @@ function SupervisorNavbar() {
 						<IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={toggleDrawer("left", true)} color="inherit">
 							<MenuIcon />
 						</IconButton>
-						<Typography variant="h6" component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light", marginLeft: 1}}>
-							{Cookies.get("fName")}
-						</Typography>
-						<Typography  component="div" sx={{ display: "flex",alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light" }}>
-							Supervisor Dashboard 
-						</Typography>
+						<Box>
+							<Typography className="headername" variant="h6" component="div" sx={{display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light", marginLeft:1}}>
+								{Cookies.get("fName")} 
+							</Typography>
+							<Typography className="rolename" component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light", marginLeft: 1,fontSize: "16px", marginTop:-0.7}}> 
+								Supervisor Dashboard
+							</Typography>	
+						</Box>
+						
 						<Menu
 							id="menu-appbar"
 							anchorEl={anchorElNav}
@@ -131,7 +134,7 @@ function SupervisorNavbar() {
 					<Typography variant="h5" component="div" sx={{ flexGrow: 1, textAlign: "left", fontWeight: "light" }}>
 							{Cookies.get("fName")}
 							<Typography component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light"}} >Supervisor Dashboard</Typography>
-						</Typography>
+					</Typography>
 					</Box>
 
 					<Box sx={{ flexGrow: 0 }}>
