@@ -416,6 +416,18 @@ Button.import_button {
 
 /* Supervisor dashboard */
 
+.month_item {
+	margin-bottom: 0.3rem !important;
+}
+
+.list_container .month_item {
+	border-radius: 0.5rem !important;
+	background-color: white;
+	padding: 0.5rem;
+	margin-bottom: 0.3rem;
+	box-shadow: none;
+}
+
 .supervisor_report_field {
 	background-color: white;
 	margin: 1rem;
