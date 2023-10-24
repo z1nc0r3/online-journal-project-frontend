@@ -434,6 +434,20 @@ Button.import_button {
 	border-radius: 1rem;
 }
 
+.leave_input_field {
+	background-color: white;
+	border-radius: 0.5rem;
+	width: 60% !important;
+}
+
+.supervisor_leaves_field {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 1rem;
+}
+
 .list_box .report_submit {
 	margin: 0.5rem 0 0 0;
 	width: 95%;
@@ -607,3 +621,6 @@ input[type="number"] {
 	}
 }
 
+.text_align_right {
+	text-align: right !important;
+}

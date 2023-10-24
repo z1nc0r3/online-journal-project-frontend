@@ -133,6 +133,12 @@ function Dashboard() {
 																	<Typography sx={{ fontSize: "16px", textAlign: "left" }}></Typography>
 																</Box>
 															</Box>
+															<Box className="weekly_report_container" sx={{ marginTop: 2 }}>
+																<Typography className="report_title report_title_des">Solutions :</Typography>
+																<Box className="weekly_report_des">
+																	<Typography sx={{ fontSize: "16px", textAlign: "left" }}></Typography>
+																</Box>
+															</Box>
 														</AccordionDetails>
 													</Accordion>
 												</Box>
@@ -163,6 +169,25 @@ function Dashboard() {
 															</Typography>
 														</div>
 													</Box>
+
+													<Box className="supervisor_leaves_field" variant="outlined">
+														<Typography sx={{ width: "80%", flexShrink: 0, fontWeight: "medium", fontSize: "18px", textAlign: "left" }}>Number of leaves</Typography>
+														<div className="text_align_right">
+															<Typography component={"span"} variant="body1">
+																<TextField
+																	className="leave_input_field"
+																	variant="outlined"
+																	required
+																	fullWidth
+																	name="leaves"
+																	type="number"
+																	onChange={handleChange}
+																	sx={{ "& fieldset": { border: "none" }}}
+																/>
+															</Typography>
+														</div>
+													</Box>
+
 													<Button variant="contained" type="submit" className="report_submit" sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }}>
 														Save
 													</Button>
