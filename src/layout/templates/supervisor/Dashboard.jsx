@@ -8,8 +8,6 @@ import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { CssBaseline, Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TextField from "@mui/material/TextField";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import getWeekInfo from "../../components/main/GetWeekInfo";
 import "../../../assets/css/list.css";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -17,7 +15,6 @@ const API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
 function Dashboard() {
 	const [expanded, setExpanded] = useState(false);
-	const [trainees, setTrainees] = useState([]);
 	const [traineeConnection, setConnection] = useState({});
 	const [recordData, setRecordData] = useState({});
 	const [formData, setFormData] = useState({});
