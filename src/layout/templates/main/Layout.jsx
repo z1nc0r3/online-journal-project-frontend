@@ -30,7 +30,7 @@ import TraineeCurrentMonthReport from "../trainee/CurrentMonthReport";
 import SupervisorHeader from "../../components/supervisor/SupervisorHeader";
 import SupervisorDashboard from "../supervisor/Dashboard";
 import SupervisorLeftWidget from "../../components/supervisor/LeftWidget";
-import SupervisorTraineeList from "../supervisor/traineeList";
+import SupervisorTraineeList from "../supervisor/TraineeList";
 import SupervisorUserEditData from "../supervisor/UserEditData";
 
 import EvaluatorHeader from "../../components/evaluator/EvaluatorHeader";

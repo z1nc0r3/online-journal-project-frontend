@@ -82,8 +82,8 @@ function Dashboard() {
 				evaluator_id: traineeConnection[traineeId].evaluator_id,
 				record: (name === "description") ? value : Cookies.get(`${id}_desc`),
 				leaves: Cookies.get(`${id}_leaves`),
-				month: month[0][0].month,
-				year: month[0][0].year
+				month: month[0].month,
+				year: month[0].year
 			}
 		}));
 	};
@@ -148,7 +148,7 @@ function Dashboard() {
 
 						<AccordionDetails>
 							{Object.keys(recordData[trainee]).map((month, j) => (
-								<Box className="list_container">
+								<Box className="list_container" key={j}>
 									<Accordion className="month_item">
 										<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="month1-content" id="month1-header">
 											<Typography sx={{ fontWeight: "bold", textAlign: "center", color: "#414141", paddingLeft: 0.5 }}>{getMonthName(month)}</Typography>
@@ -156,22 +156,22 @@ function Dashboard() {
 
 										<AccordionDetails>
 											{Object.keys(recordData[trainee][month]).map((week, k) => (
-												<Box className="list_container">
+												<Box className="list_container" key={k}>
 													<Accordion sx={{ width: "100%", backgroundColor: "#9dd0ff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }} className="accordion_item">
 														<AccordionSummary>
-															<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{`Week ${recordData[trainee][month][week][0].week}`}</Typography>
+															<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{`Week ${recordData[trainee][month][week].week}`}</Typography>
 														</AccordionSummary>
 														<AccordionDetails className="report_detail_container">
 															<Box className="weekly_report_container">
 																<Typography className="report_title report_title_des">Description :</Typography>
 																<Box className="weekly_report_des">
-																	<Typography sx={{ fontSize: "16px", textAlign: "left" }}>{recordData[trainee][month][week][0].description}</Typography>
+																	<Typography sx={{ fontSize: "16px", textAlign: "left" }}>{recordData[trainee][month][week].description}</Typography>
 																</Box>
 															</Box>
 															<Box className="weekly_report_container" sx={{ marginTop: 2 }}>
 																<Typography className="report_title report_title_des">Solutions :</Typography>
 																<Box className="weekly_report_des">
-																	<Typography sx={{ fontSize: "16px", textAlign: "left" }}>{recordData[trainee][month][week][0].solutions}</Typography>
+																	<Typography sx={{ fontSize: "16px", textAlign: "left" }}>{recordData[trainee][month][week].solutions}</Typography>
 																</Box>
 															</Box>
 														</AccordionDetails>
