@@ -28,7 +28,7 @@ function Dashboard() {
 
 	// get the records for the current trainees with approved = 0
 	const getRecords = (event) => {
-		axios.get(`${API_URL}/api/get/record/all/notapproved/${Cookies.get("user_id")}`).then((response) => {
+		axios.get(`${API_URL}/api/get/record/all/pending/supervisor/${Cookies.get("user_id")}`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
@@ -83,7 +83,7 @@ function Dashboard() {
 				trainee_id: traineeId,
 				supervisor_id: traineeConnection[traineeId].supervisor_id,
 				evaluator_id: traineeConnection[traineeId].evaluator_id,
-				review: (name === "description") ? value : Cookies.get(`${id}_desc`),
+				record: (name === "description") ? value : Cookies.get(`${id}_desc`),
 				leaves: Cookies.get(`${id}_leaves`),
 				month: month[0][0].month,
 				year: month[0][0].year
@@ -94,6 +94,25 @@ function Dashboard() {
 	const handleSubmit = (event, trainee) => {
 		event.preventDefault();
 		console.log(formData);
+
+		axios
+			.post(`${API_URL}/api/set/review/add/supervisor`, formData)
+			.then((response) => {
+				toast.success("Review added successfully. Reloading...");
+				
+				Object.keys(formData).map((key) => {
+					Cookies.remove(`${key}_desc`);
+					Cookies.remove(`${key}_leaves`);
+				});
+
+				setTimeout(() => {
+					window.location.reload();
+				}, 2000);
+			})
+			.catch((error) => {
+				toast.error("Error adding the review. Please try again.");
+				console.log(error["response"]["data"]["message"]);
+			});
 	};
 
 	useEffect(() => {
