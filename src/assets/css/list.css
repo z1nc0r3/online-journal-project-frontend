@@ -86,6 +86,10 @@
 	display: none;
 }
 
+.accordion_item.Mui-expanded {
+	margin-bottom: 10px !important;
+}
+
 /* Supervisor List, Evaluator List */
 
 .supervisor_assign_box,
@@ -430,7 +434,7 @@ Button.import_button {
 
 .supervisor_report_field {
 	background-color: white;
-	margin: 1rem;
+	margin: 0.5rem 1rem;
 	border-radius: 1rem;
 }
 
