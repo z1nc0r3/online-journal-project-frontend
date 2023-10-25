@@ -32,7 +32,6 @@ import SupervisorDashboard from "../supervisor/Dashboard";
 import SupervisorLeftWidget from "../../components/supervisor/LeftWidget";
 import SupervisorTraineeList from "../supervisor/traineeList";
 import SupervisorUserEditData from "../supervisor/UserEditData";
-import SupervisorReportPrevious from "../supervisor/traineeListReportPrevious";
 
 import EvaluatorHeader from "../../components/evaluator/EvaluatorHeader";
 import EvaluatorDashboard from "../evaluator/Dashboard";
@@ -163,8 +162,6 @@ const Layout = (props) => {
 				return { Header: SupervisorHeader, LeftWidget: SupervisorLeftWidget, Main: SupervisorTraineeList };
 			case "supervisor_user_edit_data":
 				return { Header: SupervisorHeader, LeftWidget: SupervisorLeftWidget, Main: SupervisorUserEditData };
-			case "supervisor_report_prev_data":
-				return { Header: SupervisorHeader, LeftWidget: SupervisorLeftWidget, Main: SupervisorReportPrevious };
 			case "evaluator_dashboard":
 				return { Header: EvaluatorHeader, LeftWidget: EvaluatorLeftWidget, Main: EvaluatorDashboard };
 			case "evaluator_trainee_list":
