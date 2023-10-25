@@ -20,6 +20,7 @@ function Dashboard() {
 	const [trainees, setTrainees] = useState([]);
 	const [traineeConnection, setConnection] = useState({});
 	const [recordData, setRecordData] = useState({});
+	const [formData, setFormData] = useState({});
 
 	const handleChange = (panel) => (event, isExpanded) => {
 		setExpanded(isExpanded ? panel : false);
@@ -57,15 +58,42 @@ function Dashboard() {
 					return acc;
 				}, {});
 
-				setTrainees(data.trainees);
 				setConnection(traineesData);
-				console.log(data.trainees);
 			}
 		});
 	};
 
+	const setCookie = (id, type, value) => {
+		if (Cookies.get(`${id}_leaves`) === undefined) {
+			Cookies.set(`${id}_leaves`, 0);
+		}
+		Cookies.set(`${id}_${type}`, value);
+	};
+
+	const handleInputChange = (traineeId, monthNo, month) => (event) => {
+		const { name, value } = event.target;
+		let id = `${traineeId}_${monthNo}`;
+
+		const type = (name === "description") ? "desc" : "leaves";
+		setCookie(id, type, value);
+
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			[id]: {
+				trainee_id: traineeId,
+				supervisor_id: traineeConnection[traineeId].supervisor_id,
+				evaluator_id: traineeConnection[traineeId].evaluator_id,
+				review: (name === "description") ? value : Cookies.get(`${id}_desc`),
+				leaves: Cookies.get(`${id}_leaves`),
+				month: month[0][0].month,
+				year: month[0][0].year
+			}
+		}));
+	};
+
 	const handleSubmit = (event, trainee) => {
-		console.log('supervisor report submit');
+		event.preventDefault();
+		console.log(formData);
 	};
 
 	useEffect(() => {
@@ -103,7 +131,7 @@ function Dashboard() {
 						</AccordionSummary>
 
 						<AccordionDetails>
-						{Object.keys(recordData[trainee]).map((month, j) => (
+							{Object.keys(recordData[trainee]).map((month, j) => (
 								<Box className="list_container">
 									<Accordion className="month_item">
 										<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="month1-content" id="month1-header">
@@ -152,9 +180,9 @@ function Dashboard() {
 																	fullWidth
 																	name="description"
 																	type="text"
-
+																	value={Cookies.get(`${trainee}_${month}_desc`) ? Cookies.get(`${trainee}_${month}_desc`) : ""}
+																	onChange={handleInputChange(trainee, month, recordData[trainee][month])}
 																	placeholder="Write comments here."
-																	onChange={handleChange}
 																	sx={{ "& fieldset": { border: "none" } }}
 																/>
 															</Typography>
@@ -172,8 +200,9 @@ function Dashboard() {
 																	fullWidth
 																	name="leaves"
 																	type="number"
-																	onChange={handleChange}
-																	sx={{ "& fieldset": { border: "none" }}}
+																	value={Cookies.get(`${trainee}_${month}_leaves`) ? Cookies.get(`${trainee}_${month}_leaves`) : 0}
+																	onChange={handleInputChange(trainee, month, recordData[trainee][month])}
+																	sx={{ "& fieldset": { border: "none" } }}
 																/>
 															</Typography>
 														</div>
