@@ -32,7 +32,6 @@ function Dashboard() {
 				console.log(data.error);
 			} else {
 				setRecordData(data.records);
-				console.log(data.records);
 			}
 		});
 	};
@@ -88,12 +87,13 @@ function Dashboard() {
 		}));
 	};
 
-	const handleSubmit = (event, trainee) => {
+	const handleSubmit = (traineeId, monthNo) => (event) => {
 		event.preventDefault();
-		console.log(formData);
+		let id = `${traineeId}_${monthNo}`;
+		console.log(formData[id]);
 
 		axios
-			.post(`${API_URL}/api/set/review/add/supervisor`, formData)
+			.post(`${API_URL}/api/set/review/add/supervisor`, formData[id])
 			.then((response) => {
 				toast.success("Review added successfully. Reloading...");
 				
@@ -179,7 +179,7 @@ function Dashboard() {
 												</Box>
 											))}
 
-											<form onSubmit={handleSubmit}>
+											<form onSubmit={handleSubmit(trainee, month)}>
 												<Accordion sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5 }}>
 													<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
 														<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Report</Typography>

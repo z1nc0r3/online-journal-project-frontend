@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
-function Dashboard() {
+function TraineeList() {
 	const [expanded, setExpanded] = useState(false);
 	const [traineeConnection, setConnection] = useState({});
 	const [recordData, setRecordData] = useState({});
@@ -225,7 +225,7 @@ function Dashboard() {
 													</Box>
 
 													<Button variant="contained" type="submit" className="report_submit" sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }}>
-														Save
+														Update
 													</Button>
 
 												</Accordion>
@@ -243,4 +243,4 @@ function Dashboard() {
 	);
 }
 
-export default Dashboard;
+export default TraineeList;
