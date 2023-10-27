@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
-function Dashboard() {
+function TraineeList() {
 	const [expanded, setExpanded] = useState(false);
 	const [traineeConnection, setConnection] = useState({});
 	const [recordData, setRecordData] = useState({});
@@ -23,15 +23,16 @@ function Dashboard() {
 		setExpanded(isExpanded ? panel : false);
 	};
 
-	// get the records for the current trainees with approved = 0
+	// get the records for the current trainees with approved = 1
 	const getRecords = (event) => {
-		axios.get(`${API_URL}/api/get/record/all/pending/supervisor/${Cookies.get("user_id")}`).then((response) => {
+		axios.get(`${API_URL}/api/get/record/all/approved/supervisor/${Cookies.get("user_id")}`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
 				console.log(data.error);
 			} else {
 				setRecordData(data.records);
+				console.log(data.records);
 			}
 		});
 	};
@@ -81,22 +82,21 @@ function Dashboard() {
 				evaluator_id: traineeConnection[traineeId].evaluator_id,
 				record: (name === "description") ? value : Cookies.get(`${id}_desc`),
 				leaves: Cookies.get(`${id}_leaves`),
-				month: month[0].month,
-				year: month[0].year
+				month: month[0][0].month,
+				year: month[0][0].year
 			}
 		}));
 	};
 
-	const handleSubmit = (traineeId, monthNo) => (event) => {
+	const handleSubmit = (event, trainee) => {
 		event.preventDefault();
-		let id = `${traineeId}_${monthNo}`;
-		console.log(formData[id]);
+		console.log(formData);
 
 		axios
-			.post(`${API_URL}/api/set/review/add/supervisor`, formData[id])
+			.post(`${API_URL}/api/set/review/add/supervisor`, formData)
 			.then((response) => {
 				toast.success("Review added successfully. Reloading...");
-				
+
 				Object.keys(formData).map((key) => {
 					Cookies.remove(`${key}_desc`);
 					Cookies.remove(`${key}_leaves`);
@@ -155,23 +155,23 @@ function Dashboard() {
 										</AccordionSummary>
 
 										<AccordionDetails>
-											{Object.keys(recordData[trainee][month]).map((week, k) => (
+											{Object.keys(recordData[trainee][month]["records"]).map((week, k) => (
 												<Box className="list_container" key={k}>
 													<Accordion sx={{ width: "100%", backgroundColor: "#9dd0ff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }} className="accordion_item">
 														<AccordionSummary>
-															<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{`Week ${recordData[trainee][month][week].week}`}</Typography>
+															<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{`Week ${recordData[trainee][month]["records"][week].week}`}</Typography>
 														</AccordionSummary>
 														<AccordionDetails className="report_detail_container">
 															<Box className="weekly_report_container">
 																<Typography className="report_title report_title_des">Description :</Typography>
 																<Box className="weekly_report_des">
-																	<Typography sx={{ fontSize: "16px", textAlign: "left" }}>{recordData[trainee][month][week].description}</Typography>
+																	<Typography sx={{ fontSize: "16px", textAlign: "left" }}>{recordData[trainee][month]["records"][week].description}</Typography>
 																</Box>
 															</Box>
 															<Box className="weekly_report_container" sx={{ marginTop: 2 }}>
 																<Typography className="report_title report_title_des">Solutions :</Typography>
 																<Box className="weekly_report_des">
-																	<Typography sx={{ fontSize: "16px", textAlign: "left" }}>{recordData[trainee][month][week].solutions}</Typography>
+																	<Typography sx={{ fontSize: "16px", textAlign: "left" }}>{recordData[trainee][month]["records"][week].solutions}</Typography>
 																</Box>
 															</Box>
 														</AccordionDetails>
@@ -179,7 +179,7 @@ function Dashboard() {
 												</Box>
 											))}
 
-											<form onSubmit={handleSubmit(trainee, month)}>
+											<form onSubmit={handleSubmit}>
 												<Accordion sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5 }}>
 													<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
 														<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Report</Typography>
@@ -196,7 +196,7 @@ function Dashboard() {
 																	fullWidth
 																	name="description"
 																	type="text"
-																	value={Cookies.get(`${trainee}_${month}_desc`) ? Cookies.get(`${trainee}_${month}_desc`) : ""}
+																	value={recordData[trainee][month]["reports"]}
 																	onChange={handleInputChange(trainee, month, recordData[trainee][month])}
 																	placeholder="Write comments here."
 																	sx={{ "& fieldset": { border: "none" } }}
@@ -216,7 +216,7 @@ function Dashboard() {
 																	fullWidth
 																	name="leaves"
 																	type="number"
-																	value={Cookies.get(`${trainee}_${month}_leaves`) ? Cookies.get(`${trainee}_${month}_leaves`) : 0}
+																	value={recordData[trainee][month]["number_of_leave"]}
 																	onChange={handleInputChange(trainee, month, recordData[trainee][month])}
 																	sx={{ "& fieldset": { border: "none" } }}
 																/>
@@ -225,7 +225,7 @@ function Dashboard() {
 													</Box>
 
 													<Button variant="contained" type="submit" className="report_submit" sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }}>
-														Save
+														Update
 													</Button>
 
 												</Accordion>
@@ -243,4 +243,4 @@ function Dashboard() {
 	);
 }
 
-export default Dashboard;
+export default TraineeList;
