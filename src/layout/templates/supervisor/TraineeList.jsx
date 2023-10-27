@@ -60,43 +60,62 @@ function TraineeList() {
 		});
 	};
 
-	const setCookie = (id, type, value) => {
-		if (Cookies.get(`${id}_leaves`) === undefined) {
-			Cookies.set(`${id}_leaves`, 0);
-		}
-		Cookies.set(`${id}_${type}`, value);
-	};
-
-	const handleInputChange = (traineeId, monthNo, month) => (event) => {
-		const { name, value } = event.target;
+	const handleInputChangeRecord = (traineeId, monthNo, month) => (event) => {
+		const { value } = event.target;
 		let id = `${traineeId}_${monthNo}`;
 
-		const type = (name === "description") ? "desc" : "leaves";
-		setCookie(id, type, value);
+		setFormData((prevFormData) => {
+			let leaves = month["number_of_leave"];
+			try {
+				leaves = prevFormData[id]["leaves"];
+			} catch (error) { }
 
-		setFormData((prevFormData) => ({
-			...prevFormData,
-			[id]: {
-				trainee_id: traineeId,
-				supervisor_id: traineeConnection[traineeId].supervisor_id,
-				evaluator_id: traineeConnection[traineeId].evaluator_id,
-				record: (name === "description") ? value : Cookies.get(`${id}_desc`),
-				leaves: Cookies.get(`${id}_leaves`),
-				month: month[0][0].month,
-				year: month[0][0].year
-			}
-		}));
+			return {
+				...prevFormData,
+				[id]: {
+					id: month["id"],
+					record: value,
+					leaves: leaves
+				}
+			};
+		});
+
+		console.log(formData);
 	};
 
-	const handleSubmit = (event, trainee) => {
+	const handleInputChangeLeaves = (traineeId, monthNo, month) => (event) => {
+		const { value } = event.target;
+		let id = `${traineeId}_${monthNo}`;
+
+		setFormData((prevFormData) => {
+			let record = month["reports"];
+			try {
+				record = prevFormData[id]["record"];
+			} catch (error) { }
+
+			return {
+				...prevFormData,
+				[id]: {
+					id: month["id"],
+					record: record,
+					leaves: value
+				}
+			};
+		});
+
+		console.log(formData);
+	};
+
+	const handleSubmit = (traineeId, monthNo) => (event) => {
 		event.preventDefault();
+		let id = `${traineeId}_${monthNo}`;
 		console.log(formData);
 
-		axios
-			.post(`${API_URL}/api/set/review/add/supervisor`, formData)
+		/* axios
+			.post(`${API_URL}/api/set/review/update/supervisor`, formData[id])
 			.then((response) => {
 				toast.success("Review added successfully. Reloading...");
-
+				
 				Object.keys(formData).map((key) => {
 					Cookies.remove(`${key}_desc`);
 					Cookies.remove(`${key}_leaves`);
@@ -109,7 +128,7 @@ function TraineeList() {
 			.catch((error) => {
 				toast.error("Error adding the review. Please try again.");
 				console.log(error["response"]["data"]["message"]);
-			});
+			}); */
 	};
 
 	useEffect(() => {
@@ -179,7 +198,7 @@ function TraineeList() {
 												</Box>
 											))}
 
-											<form onSubmit={handleSubmit}>
+											<form onSubmit={handleSubmit(trainee, month)}>
 												<Accordion sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5 }}>
 													<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
 														<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Report</Typography>
@@ -197,7 +216,7 @@ function TraineeList() {
 																	name="description"
 																	type="text"
 																	value={recordData[trainee][month]["reports"]}
-																	onChange={handleInputChange(trainee, month, recordData[trainee][month])}
+																	onChange={handleInputChangeRecord(trainee, month, recordData[trainee][month])}
 																	placeholder="Write comments here."
 																	sx={{ "& fieldset": { border: "none" } }}
 																/>
@@ -217,7 +236,7 @@ function TraineeList() {
 																	name="leaves"
 																	type="number"
 																	value={recordData[trainee][month]["number_of_leave"]}
-																	onChange={handleInputChange(trainee, month, recordData[trainee][month])}
+																	onChange={handleInputChangeLeaves(trainee, month, recordData[trainee][month])}
 																	sx={{ "& fieldset": { border: "none" } }}
 																/>
 															</Typography>
