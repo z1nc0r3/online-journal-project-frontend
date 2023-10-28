@@ -18,6 +18,7 @@ function TraineeList() {
 	const [traineeConnection, setConnection] = useState({});
 	const [recordData, setRecordData] = useState({});
 	const [formData, setFormData] = useState({});
+	const [isLoading, setIsLoading] = useState(true);
 
 	const handleChange = (panel) => (event, isExpanded) => {
 		setExpanded(isExpanded ? panel : false);
@@ -32,7 +33,7 @@ function TraineeList() {
 				console.log(data.error);
 			} else {
 				setRecordData(data.records);
-				console.log(data.records);
+				initializeFormData(data.records);
 			}
 		});
 	};
@@ -60,47 +61,55 @@ function TraineeList() {
 		});
 	};
 
-	const setCookie = (id, type, value) => {
-		if (Cookies.get(`${id}_leaves`) === undefined) {
-			Cookies.set(`${id}_leaves`, 0);
-		}
-		Cookies.set(`${id}_${type}`, value);
+	const handleInputChangeRecord = (traineeId, monthNo, month) => (event) => {
+		const { value } = event.target;
+		let id = recordData[traineeId][monthNo]["id"];
+
+		setFormData((prevFormData) => {
+			let leaves = month["number_of_leave"];
+			try {
+				leaves = prevFormData[id]["leaves"];
+			} catch (error) { }
+
+			return {
+				...prevFormData,
+				[id]: {
+					id: month["id"],
+					record: value,
+					leaves: leaves
+				}
+			};
+		});
 	};
 
-	const handleInputChange = (traineeId, monthNo, month) => (event) => {
-		const { name, value } = event.target;
-		let id = `${traineeId}_${monthNo}`;
+	const handleInputChangeLeaves = (traineeId, monthNo, month) => (event) => {
+		const { value } = event.target;
+		let id = recordData[traineeId][monthNo]["id"];
 
-		const type = (name === "description") ? "desc" : "leaves";
-		setCookie(id, type, value);
+		setFormData((prevFormData) => {
+			let record = month["reports"];
+			try {
+				record = prevFormData[id]["record"];
+			} catch (error) { }
 
-		setFormData((prevFormData) => ({
-			...prevFormData,
-			[id]: {
-				trainee_id: traineeId,
-				supervisor_id: traineeConnection[traineeId].supervisor_id,
-				evaluator_id: traineeConnection[traineeId].evaluator_id,
-				record: (name === "description") ? value : Cookies.get(`${id}_desc`),
-				leaves: Cookies.get(`${id}_leaves`),
-				month: month[0][0].month,
-				year: month[0][0].year
-			}
-		}));
+			return {
+				...prevFormData,
+				[id]: {
+					id: month["id"],
+					record: record,
+					leaves: value
+				}
+			};
+		});
 	};
 
-	const handleSubmit = (event, trainee) => {
+	const handleSubmit = (id) => (event) => {
 		event.preventDefault();
-		console.log(formData);
 
 		axios
-			.post(`${API_URL}/api/set/review/add/supervisor`, formData)
+			.post(`${API_URL}/api/set/review/update/supervisor`, formData[id])
 			.then((response) => {
 				toast.success("Review added successfully. Reloading...");
-
-				Object.keys(formData).map((key) => {
-					Cookies.remove(`${key}_desc`);
-					Cookies.remove(`${key}_leaves`);
-				});
 
 				setTimeout(() => {
 					window.location.reload();
@@ -110,6 +119,25 @@ function TraineeList() {
 				toast.error("Error adding the review. Please try again.");
 				console.log(error["response"]["data"]["message"]);
 			});
+	};
+
+	// initialize the form data
+	const initializeFormData = (recordData) => {
+		Object.keys(recordData).map((trainee) => {
+			Object.keys(recordData[trainee]).map((month) => {
+				let id = recordData[trainee][month]["id"];
+				setFormData((prevFormData) => ({
+					...prevFormData,
+					[id]: {
+						id: recordData[trainee][month]["id"],
+						record: recordData[trainee][month]["reports"],
+						leaves: recordData[trainee][month]["number_of_leave"]
+					}
+				}));
+			});
+		});
+
+		setIsLoading(false);
 	};
 
 	useEffect(() => {
@@ -125,6 +153,18 @@ function TraineeList() {
 			month: "long",
 		});
 	};
+
+	if (isLoading) {
+		return (
+			<Container component="main" className="list_container" maxWidth={false}>
+				<CssBaseline />
+
+				<Box className="list_box">
+					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>Loading...</Typography>
+				</Box>
+			</Container>
+		);
+	}
 
 	return (
 		<Container component="main" className="list_container" maxWidth={false}>
@@ -179,7 +219,7 @@ function TraineeList() {
 												</Box>
 											))}
 
-											<form onSubmit={handleSubmit}>
+											<form onSubmit={handleSubmit(recordData[trainee][month]["id"])}>
 												<Accordion sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5 }}>
 													<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
 														<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Report</Typography>
@@ -196,9 +236,8 @@ function TraineeList() {
 																	fullWidth
 																	name="description"
 																	type="text"
-																	value={recordData[trainee][month]["reports"]}
-																	onChange={handleInputChange(trainee, month, recordData[trainee][month])}
-																	placeholder="Write comments here."
+																	value={formData[recordData[trainee][month]["id"]]["record"]}
+																	onChange={handleInputChangeRecord(trainee, month, recordData[trainee][month])}
 																	sx={{ "& fieldset": { border: "none" } }}
 																/>
 															</Typography>
@@ -216,8 +255,8 @@ function TraineeList() {
 																	fullWidth
 																	name="leaves"
 																	type="number"
-																	value={recordData[trainee][month]["number_of_leave"]}
-																	onChange={handleInputChange(trainee, month, recordData[trainee][month])}
+																	value={formData[recordData[trainee][month]["id"]]["leaves"]}
+																	onChange={handleInputChangeLeaves(trainee, month, recordData[trainee][month])}
 																	sx={{ "& fieldset": { border: "none" } }}
 																/>
 															</Typography>
