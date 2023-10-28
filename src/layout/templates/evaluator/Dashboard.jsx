@@ -198,7 +198,7 @@ function TraineeList() {
 													</div>
 												</Box>
 
-												<Box className="supervisor_leaves_field" variant="outlined" sx={{padding: 3}}>
+												<Box className="supervisor_leaves_field" variant="outlined" sx={{ padding: 3 }}>
 													<Typography sx={{ width: "80%", flexShrink: 0, fontWeight: "medium", fontSize: "18px", textAlign: "left" }}>Number of leaves</Typography>
 													<div className="text_align_right">
 														<Typography component={"span"} className="leaves_count">
@@ -211,6 +211,39 @@ function TraineeList() {
 									</Accordion>
 								</Box>
 							))}
+
+							<form onSubmit={handleSubmit(trainee)}>
+								<Accordion sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5, marginTop: 0.5 }}>
+									<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
+										<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Evaluator Report</Typography>
+									</AccordionSummary>
+
+									<Box className="supervisor_report_field" variant="outlined">
+										<div className="assigned_student">
+											<Typography component={"span"} variant="body1">
+												<TextField
+													multiline
+													rows={6}
+													variant="outlined"
+													required
+													fullWidth
+													name="evaluatorReport"
+													type="text"
+													/* value={Cookies.get(`${trainee}_${month}_desc`) ? Cookies.get(`${trainee}_${month}_desc`) : ""}
+													onChange={handleInputChange(trainee, month, recordData[trainee][month])} */
+													placeholder="Write your review here."
+													sx={{ "& fieldset": { border: "none" } }}
+												/>
+											</Typography>
+										</div>
+									</Box>
+
+									<Button variant="contained" type="submit" className="report_submit" sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }} /* disabled={formData[`${trainee}_${month}`] ? false : true} */>
+										Submit
+									</Button>
+
+								</Accordion>
+							</form>
 						</AccordionDetails>
 					</Accordion>
 				))}
