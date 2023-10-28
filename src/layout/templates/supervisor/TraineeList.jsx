@@ -25,8 +25,9 @@ function TraineeList() {
 	};
 
 	// get the records for the current trainees with approved = 1
-	const getRecords = (event) => {
-		axios.get(`${API_URL}/api/get/record/all/approved/supervisor/${Cookies.get("user_id")}`).then((response) => {
+	const getRecords = async (event) => {
+		try {
+			const response = await axios.get(`${API_URL}/api/get/record/all/approved/supervisor/${Cookies.get("user_id")}`);
 			const data = response.data;
 
 			if (data.error) {
@@ -35,12 +36,15 @@ function TraineeList() {
 				setRecordData(data.records);
 				initializeFormData(data.records);
 			}
-		});
+		} catch (error) {
+			console.error(error);
+		}
 	};
 
 	// get filtered trainee list for the supervisor
-	const getTraineeList = (event) => {
-		axios.get(`${API_URL}/api/get/trainee/list/supervisor/${Cookies.get("user_id")}`).then((response) => {
+	const getTraineeList = async (event) => {
+		try {
+			const response = await axios.get(`${API_URL}/api/get/trainee/list/supervisor/${Cookies.get("user_id")}`);
 			const data = response.data;
 
 			if (data.error) {
@@ -58,8 +62,34 @@ function TraineeList() {
 
 				setConnection(traineesData);
 			}
-		});
+		} catch (error) {
+			console.error(error);
+		}
 	};
+
+	// initialize the form data
+	const initializeFormData = (recordData) => {
+		Object.keys(recordData).map((trainee) => {
+			Object.keys(recordData[trainee]).map((month) => {
+				let id = recordData[trainee][month]["id"];
+				setFormData((prevFormData) => ({
+					...prevFormData,
+					[id]: {
+						id: recordData[trainee][month]["id"],
+						record: recordData[trainee][month]["reports"],
+						leaves: recordData[trainee][month]["number_of_leave"]
+					}
+				}));
+			});
+		});
+
+		setIsLoading(false);
+	};
+
+	useEffect(() => {
+		getTraineeList();
+		getRecords();
+	}, []);
 
 	const handleInputChangeRecord = (traineeId, monthNo, month) => (event) => {
 		const { value } = event.target;
@@ -121,30 +151,6 @@ function TraineeList() {
 			});
 	};
 
-	// initialize the form data
-	const initializeFormData = (recordData) => {
-		Object.keys(recordData).map((trainee) => {
-			Object.keys(recordData[trainee]).map((month) => {
-				let id = recordData[trainee][month]["id"];
-				setFormData((prevFormData) => ({
-					...prevFormData,
-					[id]: {
-						id: recordData[trainee][month]["id"],
-						record: recordData[trainee][month]["reports"],
-						leaves: recordData[trainee][month]["number_of_leave"]
-					}
-				}));
-			});
-		});
-
-		setIsLoading(false);
-	};
-
-	useEffect(() => {
-		getTraineeList();
-		getRecords();
-	}, []);
-
 	const getMonthName = (monthNumber) => {
 		const date = new Date();
 		date.setMonth(monthNumber - 1);
@@ -154,6 +160,7 @@ function TraineeList() {
 		});
 	};
 
+	// if the data is loading
 	if (isLoading) {
 		return (
 			<Container component="main" className="list_container" maxWidth={false}>
