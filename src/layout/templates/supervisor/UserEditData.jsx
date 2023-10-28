@@ -25,7 +25,7 @@ function UserEditData() {
 	const id = localStorage.getItem("user_id");
 
 	const getSupervisorDetails = (event) => {
-		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/supervisor/${id}`).then((response) => {
+		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/supervisor/${Cookies.get("user_id")}`).then((response) => {
 			const data = response.data.user;
 
 			if (data.login_error) {
@@ -84,7 +84,7 @@ function UserEditData() {
 		e.preventDefault();
 
 		axios
-			.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/update/supervisor/${id}`, formData)
+			.post(`${process.env.REACT_APP_BACKEND_API_URL}/api/update/supervisor/${Cookies.get("user_id")}`, formData)
 			.then((response) => {
 				toast.success("User data updated Successfully. Redirecting...");
 				setTimeout(() => {

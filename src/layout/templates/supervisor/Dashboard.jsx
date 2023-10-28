@@ -18,6 +18,7 @@ function Dashboard() {
 	const [traineeConnection, setConnection] = useState({});
 	const [recordData, setRecordData] = useState({});
 	const [formData, setFormData] = useState({});
+	const [isLoading, setIsLoading] = useState(true);
 
 	const handleChange = (panel) => (event, isExpanded) => {
 		setExpanded(isExpanded ? panel : false);
@@ -32,6 +33,7 @@ function Dashboard() {
 				console.log(data.error);
 			} else {
 				setRecordData(data.records);
+				setIsLoading(false);
 			}
 		});
 	};
@@ -125,6 +127,18 @@ function Dashboard() {
 			month: "long",
 		});
 	};
+
+	if (isLoading) {
+		return (
+			<Container component="main" className="list_container" maxWidth={false}>
+				<CssBaseline />
+
+				<Box className="list_box">
+					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>Loading...</Typography>
+				</Box>
+			</Container>
+		);
+	}
 
 	return (
 		<Container component="main" className="list_container" maxWidth={false}>
