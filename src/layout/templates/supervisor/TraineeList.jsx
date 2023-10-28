@@ -34,7 +34,6 @@ function TraineeList() {
 			} else {
 				setRecordData(data.records);
 				initializeFormData(data.records);
-				console.log("getRecords", data.records);
 			}
 		});
 	};
@@ -81,8 +80,6 @@ function TraineeList() {
 				}
 			};
 		});
-
-		console.log(formData);
 	};
 
 	const handleInputChangeLeaves = (traineeId, monthNo, month) => (event) => {
@@ -104,23 +101,15 @@ function TraineeList() {
 				}
 			};
 		});
-
-		console.log(formData);
 	};
 
 	const handleSubmit = (id) => (event) => {
 		event.preventDefault();
-		console.log(formData[id]);
 
-		/* axios
+		axios
 			.post(`${API_URL}/api/set/review/update/supervisor`, formData[id])
 			.then((response) => {
 				toast.success("Review added successfully. Reloading...");
-				
-				Object.keys(formData).map((key) => {
-					Cookies.remove(`${key}_desc`);
-					Cookies.remove(`${key}_leaves`);
-				});
 
 				setTimeout(() => {
 					window.location.reload();
@@ -129,14 +118,13 @@ function TraineeList() {
 			.catch((error) => {
 				toast.error("Error adding the review. Please try again.");
 				console.log(error["response"]["data"]["message"]);
-			}); */
+			});
 	};
 
 	// initialize the form data
 	const initializeFormData = (recordData) => {
 		Object.keys(recordData).map((trainee) => {
 			Object.keys(recordData[trainee]).map((month) => {
-				console.log("loooooooooping");
 				let id = recordData[trainee][month]["id"];
 				setFormData((prevFormData) => ({
 					...prevFormData,
@@ -149,7 +137,6 @@ function TraineeList() {
 			});
 		});
 
-		console.log("form", formData);
 		setIsLoading(false);
 	};
 
@@ -171,8 +158,6 @@ function TraineeList() {
 		return (
 			<Container component="main" className="list_container" maxWidth={false}>
 				<CssBaseline />
-
-				<ToastContainer />
 
 				<Box className="list_box">
 					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>Loading...</Typography>
