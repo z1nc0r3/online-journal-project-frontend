@@ -238,7 +238,7 @@ function Dashboard() {
 														</div>
 													</Box>
 
-													<Button variant="contained" type="submit" className="report_submit" sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }}>
+													<Button variant="contained" type="submit" className="report_submit" sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }} disabled={formData[`${trainee}_${month}`] ? false : true}>
 														Save
 													</Button>
 
