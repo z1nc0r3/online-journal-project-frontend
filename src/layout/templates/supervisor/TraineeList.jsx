@@ -18,6 +18,7 @@ function TraineeList() {
 	const [traineeConnection, setConnection] = useState({});
 	const [recordData, setRecordData] = useState({});
 	const [formData, setFormData] = useState({});
+	const [isLoading, setIsLoading] = useState(true);
 
 	const handleChange = (panel) => (event, isExpanded) => {
 		setExpanded(isExpanded ? panel : false);
@@ -32,7 +33,8 @@ function TraineeList() {
 				console.log(data.error);
 			} else {
 				setRecordData(data.records);
-				console.log(data.records);
+				initializeFormData(data.records);
+				console.log("getRecords", data.records);
 			}
 		});
 	};
@@ -62,7 +64,7 @@ function TraineeList() {
 
 	const handleInputChangeRecord = (traineeId, monthNo, month) => (event) => {
 		const { value } = event.target;
-		let id = `${traineeId}_${monthNo}`;
+		let id = recordData[traineeId][monthNo]["id"];
 
 		setFormData((prevFormData) => {
 			let leaves = month["number_of_leave"];
@@ -85,7 +87,7 @@ function TraineeList() {
 
 	const handleInputChangeLeaves = (traineeId, monthNo, month) => (event) => {
 		const { value } = event.target;
-		let id = `${traineeId}_${monthNo}`;
+		let id = recordData[traineeId][monthNo]["id"];
 
 		setFormData((prevFormData) => {
 			let record = month["reports"];
@@ -106,10 +108,9 @@ function TraineeList() {
 		console.log(formData);
 	};
 
-	const handleSubmit = (traineeId, monthNo) => (event) => {
+	const handleSubmit = (id) => (event) => {
 		event.preventDefault();
-		let id = `${traineeId}_${monthNo}`;
-		console.log(formData);
+		console.log(formData[id]);
 
 		/* axios
 			.post(`${API_URL}/api/set/review/update/supervisor`, formData[id])
@@ -131,6 +132,27 @@ function TraineeList() {
 			}); */
 	};
 
+	// initialize the form data
+	const initializeFormData = (recordData) => {
+		Object.keys(recordData).map((trainee) => {
+			Object.keys(recordData[trainee]).map((month) => {
+				console.log("loooooooooping");
+				let id = recordData[trainee][month]["id"];
+				setFormData((prevFormData) => ({
+					...prevFormData,
+					[id]: {
+						id: recordData[trainee][month]["id"],
+						record: recordData[trainee][month]["reports"],
+						leaves: recordData[trainee][month]["number_of_leave"]
+					}
+				}));
+			});
+		});
+
+		console.log("form", formData);
+		setIsLoading(false);
+	};
+
 	useEffect(() => {
 		getTraineeList();
 		getRecords();
@@ -144,6 +166,20 @@ function TraineeList() {
 			month: "long",
 		});
 	};
+
+	if (isLoading) {
+		return (
+			<Container component="main" className="list_container" maxWidth={false}>
+				<CssBaseline />
+
+				<ToastContainer />
+
+				<Box className="list_box">
+					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>Loading...</Typography>
+				</Box>
+			</Container>
+		);
+	}
 
 	return (
 		<Container component="main" className="list_container" maxWidth={false}>
@@ -198,7 +234,7 @@ function TraineeList() {
 												</Box>
 											))}
 
-											<form onSubmit={handleSubmit(trainee, month)}>
+											<form onSubmit={handleSubmit(recordData[trainee][month]["id"])}>
 												<Accordion sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5 }}>
 													<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
 														<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Report</Typography>
@@ -215,9 +251,8 @@ function TraineeList() {
 																	fullWidth
 																	name="description"
 																	type="text"
-																	value={recordData[trainee][month]["reports"]}
+																	value={formData[recordData[trainee][month]["id"]]["record"]}
 																	onChange={handleInputChangeRecord(trainee, month, recordData[trainee][month])}
-																	placeholder="Write comments here."
 																	sx={{ "& fieldset": { border: "none" } }}
 																/>
 															</Typography>
@@ -235,7 +270,7 @@ function TraineeList() {
 																	fullWidth
 																	name="leaves"
 																	type="number"
-																	value={recordData[trainee][month]["number_of_leave"]}
+																	value={formData[recordData[trainee][month]["id"]]["leaves"]}
 																	onChange={handleInputChangeLeaves(trainee, month, recordData[trainee][month])}
 																	sx={{ "& fieldset": { border: "none" } }}
 																/>
