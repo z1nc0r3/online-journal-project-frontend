@@ -181,7 +181,7 @@ function TraineeList() {
 								<Box className="evaluator_report_field_sub" variant="outlined">
 									<div className="assigned_student">
 										<Typography component={"span"} variant="body1">
-										{recordData[trainee]["evalReport"]}
+											{recordData[trainee]["evalReport"]}
 										</Typography>
 									</div>
 								</Box>

@@ -28,7 +28,6 @@ function SupervisorList() {
 				console.log(data.error);
 			} else {
 				setSupervisors(data.supervisors);
-				console.log(data);
 			}
 		});
 	};
@@ -57,9 +56,9 @@ function SupervisorList() {
 							<Typography sx={{ color: "text.secondary", fontSize: "14px" }}>{supervisor.estName}</Typography>
 						</AccordionSummary>
 						<AccordionDetails>
-							<Box className="supervisor_assign_form" sx={{ display: "flex", flexDirection: "row"}}>
+							<Box className="supervisor_assign_form" sx={{ display: "flex", flexDirection: "row" }}>
 								<Typography sx={{ fontSize: "16px", textAlign: "left", marginRight: 1 }}>
-									Assigned for : 
+									Assigned for :
 								</Typography>
 								<div>
 									{supervisor.supervisor_connection.map((supervisorConnection, index) => (
