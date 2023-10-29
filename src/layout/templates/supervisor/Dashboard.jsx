@@ -98,7 +98,7 @@ function Dashboard() {
 			.post(`${API_URL}/api/set/review/add/supervisor`, formData[id])
 			.then((response) => {
 				toast.success("Review added successfully. Reloading...");
-				
+
 				Object.keys(formData).map((key) => {
 					Cookies.remove(`${key}_desc`);
 					Cookies.remove(`${key}_leaves`);

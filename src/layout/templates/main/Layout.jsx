@@ -36,7 +36,7 @@ import SupervisorUserEditData from "../supervisor/UserEditData";
 import EvaluatorHeader from "../../components/evaluator/EvaluatorHeader";
 import EvaluatorDashboard from "../evaluator/Dashboard";
 import EvaluatorLeftWidget from "../../components/evaluator/LeftWidget";
-import EvaluatorTraineeList from "../evaluator/traineeList";
+import EvaluatorTraineeList from "../evaluator/TraineeList";
 import EvaluatorUserEditData from "../evaluator/UserEditData";
 
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";

@@ -439,6 +439,16 @@ Button.import_button {
 	border-radius: 1rem;
 }
 
+.supervisor_review_box.Mui-expanded {
+	margin-top: 0px !important;
+}
+
+.evaluator_report_field_sub {
+	background-color: white;
+	margin: 0.5rem 0.5rem;
+	border-radius: 1rem;
+}
+
 .leave_input_field {
 	background-color: white;
 	border-radius: 0.5rem;

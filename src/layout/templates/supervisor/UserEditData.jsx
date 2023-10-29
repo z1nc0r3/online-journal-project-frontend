@@ -22,8 +22,6 @@ function UserEditData() {
 		password: ""
 	});
 
-	const id = localStorage.getItem("user_id");
-
 	const getSupervisorDetails = (event) => {
 		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/supervisor/${Cookies.get("user_id")}`).then((response) => {
 			const data = response.data.user;
@@ -145,7 +143,7 @@ function UserEditData() {
 						<TextField
 							variant="outlined"
 							required
-							fullWidth 
+							fullWidth
 							autoFocus
 							type="text"
 							value={formData.fName}

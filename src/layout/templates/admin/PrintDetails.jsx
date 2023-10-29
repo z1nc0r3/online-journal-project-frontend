@@ -9,7 +9,6 @@ const API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
 const PrintPDF = () => {
 	const generateTraineePDF = () => {
-		// Create a new jsPDF instance
 		const doc = new jsPDF();
 
 		//get trainee list
@@ -20,15 +19,10 @@ const PrintPDF = () => {
 				console.log(data.error);
 			} else {
 				let y = 10;
-				// Add content to the PDF
 				const tableHeaders = ["ID", "Name", "Department"];
-
-				// Define the table rows
 				const tableRows = data.trainees.map((item) => [item.id, item.fName, item.department]);
 
-				// Set the table options
 				const tableOptions = {
-					// eslint-disable-next-line no-undef
 					startY: y + 10, // Adjust the vertical position for the table
 					margin: { top: 10 },
 					styles: { overflow: "linebreak" },
@@ -40,17 +34,13 @@ const PrintPDF = () => {
 					},
 				};
 
-				// Add the table to the PDF
 				doc.autoTable(tableHeaders, tableRows, tableOptions);
-
-				// Save the PDF
 				doc.save("trainees.pdf");
 			}
 		});
 	};
 
 	const generateEvaluatorPDF = () => {
-		// Create a new jsPDF instance
 		const doc = new jsPDF();
 
 		//get trainee list
@@ -60,19 +50,12 @@ const PrintPDF = () => {
 			if (data.error) {
 				console.log(data.error);
 			} else {
-				// Add content to the PDF
 				let y = 10;
-
-				// Add content to the PDF
 				const tableHeaders = ["ID", "Name"];
-
-				// Define the table rows
 				const tableRows = data.evaluators.map((item) => [item.id, item.fName]);
 
-				// Set the table options
 				const tableOptions = {
-					// eslint-disable-next-line no-undef
-					startY: y + 10, // Adjust the vertical position for the table
+					startY: y + 10,
 					margin: { top: 10 },
 					styles: { overflow: "linebreak" },
 					headStyles: { fillColor: "#dddddd" },
@@ -82,17 +65,13 @@ const PrintPDF = () => {
 					},
 				};
 
-				// Add the table to the PDF
 				doc.autoTable(tableHeaders, tableRows, tableOptions);
-
-				// Save the PDF
 				doc.save("evaluators.pdf");
 			}
 		});
 	};
 
 	const generateSupervisorPDF = () => {
-		// Create a new jsPDF instance
 		const doc = new jsPDF();
 
 		//get trainee list
@@ -102,19 +81,12 @@ const PrintPDF = () => {
 			if (data.error) {
 				console.log(data.error);
 			} else {
-				// Add content to the PDF
 				let y = 10;
-
-				// Add content to the PDF
 				const tableHeaders = ["ID", "Name", "EstName"];
-
-				// Define the table rows
 				const tableRows = data.supervisors.map((item) => [item.id, item.fName, item.estName]);
 
-				// Set the table options
 				const tableOptions = {
-					// eslint-disable-next-line no-undef
-					startY: y + 10, // Adjust the vertical position for the table
+					startY: y + 10,
 					margin: { top: 10 },
 					styles: { overflow: "linebreak" },
 					headStyles: { fillColor: "#dddddd" },
@@ -127,10 +99,7 @@ const PrintPDF = () => {
 					},
 				};
 
-				// Add the table to the PDF
 				doc.autoTable(tableHeaders, tableRows, tableOptions);
-
-				// Save the PDF
 				doc.save("supervisors.pdf");
 			}
 		});
