@@ -133,6 +133,7 @@ function TraineeList() {
 		});
 	};
 
+	// TODO: only update if the approved = 0 in monthly journal records table
 	const handleSubmit = (id) => (event) => {
 		event.preventDefault();
 
@@ -168,6 +169,18 @@ function TraineeList() {
 
 				<Box className="list_box">
 					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>Loading...</Typography>
+				</Box>
+			</Container>
+		);
+	}
+
+	if (Object.keys(recordData).length === 0) {
+		return (
+			<Container component="main" className="list_container" maxWidth={false}>
+				<CssBaseline />
+
+				<Box className="list_box">
+					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>No records found</Typography>
 				</Box>
 			</Container>
 		);
