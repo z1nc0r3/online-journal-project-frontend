@@ -25,6 +25,7 @@ function Dashboard() {
 		year: "",
 	});
 
+	// TODO: add a loading spinner
 	const [isLoading, setIsLoading] = useState(true);
 	const [recordExists, setRecordExists] = useState(false);
 	const [isChecked, setIsChecked] = useState(false);
@@ -41,7 +42,6 @@ function Dashboard() {
 		Cookies.set("description", recordData.description);
 		Cookies.set("solutions", recordData.solutions);
 	}, [recordData]);
-
 
 	useEffect(() => {
 		const getConnection = async () => {

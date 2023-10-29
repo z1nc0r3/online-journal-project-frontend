@@ -24,7 +24,7 @@ function TraineeList() {
 		setExpanded(isExpanded ? panel : false);
 	};
 
-	// get the records for the current trainees with approved = 1
+	// get the records for the current trainees with approved = 0 using evaluator id
 	const getRecords = async (event) => {
 		try {
 			const response = await axios.get(`${API_URL}/api/get/record/all/pending/evaluator/${Cookies.get("user_id")}`);
@@ -34,14 +34,14 @@ function TraineeList() {
 				console.log(data.error);
 			} else {
 				setRecordData(data.records);
-				initializeFormData(data.records);
+				setIsLoading(false);
 			}
 		} catch (error) {
 			console.error(error);
 		}
 	};
 
-	// get filtered trainee list for the supervisor
+	// get filtered trainee list for the evaluator
 	const getTraineeList = async (event) => {
 		try {
 			const response = await axios.get(`${API_URL}/api/get/trainee/list/evaluator/${Cookies.get("user_id")}`);
@@ -67,38 +67,57 @@ function TraineeList() {
 		}
 	};
 
-	// TODO: remove this and make this more general
-	// initialize the form data
-	const initializeFormData = (recordData) => {
-		Object.keys(recordData).map((trainee) => {
-			Object.keys(recordData[trainee]).map((month) => {
-				let id = recordData[trainee][month]["id"];
-				setFormData((prevFormData) => ({
-					...prevFormData,
-					[id]: {
-						id: recordData[trainee][month]["id"],
-						record: recordData[trainee][month]["reports"],
-						leaves: recordData[trainee][month]["number_of_leave"]
-					}
-				}));
-			});
-		});
-
-		setIsLoading(false);
-	};
-
 	useEffect(() => {
 		getTraineeList();
 		getRecords();
 	}, []);
 
-	const handleSubmit = (id) => (event) => {
+	const handleInputChange = (traineeId) => (event) => {
+		const { value } = event.target;
+
+		Cookies.set(traineeId, value);
+
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			[traineeId]: {
+				trainee_id: traineeId,
+				supervisor_id: traineeConnection[traineeId].supervisor_id,
+				evaluator_id: traineeConnection[traineeId].evaluator_id,
+				record: value
+			}
+		}));
+
+		console.log(formData);
+	};
+
+	useEffect(() => {
+		Object.keys(recordData).map((traineeId) => {
+			console.log(traineeId);
+			if (formData[traineeId] === undefined) {
+				setFormData((prevFormData) => ({
+					...prevFormData,
+					[traineeId]: {
+						trainee_id: traineeId,
+						supervisor_id: traineeConnection[traineeId].supervisor_id,
+						evaluator_id: traineeConnection[traineeId].evaluator_id,
+						record: Cookies.get(traineeId) ? Cookies.get(traineeId) : ""
+					}
+				}));
+			}
+		});
+	}, [recordData]);
+
+	const handleSubmit = (traineeId) => (event) => {
 		event.preventDefault();
 
 		axios
-			.post(`${API_URL}/api/set/review/update/supervisor`, formData[id])
+			.post(`${API_URL}/api/set/review/add/supervisor`, formData[traineeId])
 			.then((response) => {
 				toast.success("Review added successfully. Reloading...");
+
+				Object.keys(formData).map((key) => {
+					Cookies.remove(traineeId);
+				});
 
 				setTimeout(() => {
 					window.location.reload();
@@ -193,7 +212,7 @@ function TraineeList() {
 												<Box className="supervisor_report_field" variant="outlined">
 													<div className="assigned_student">
 														<Typography component={"span"} variant="body1">
-															{formData[recordData[trainee][month]["id"]]["record"]}
+															{recordData[trainee][month]["id"]["record"]}
 														</Typography>
 													</div>
 												</Box>
@@ -202,7 +221,7 @@ function TraineeList() {
 													<Typography sx={{ width: "80%", flexShrink: 0, fontWeight: "medium", fontSize: "18px", textAlign: "left" }}>Number of leaves</Typography>
 													<div className="text_align_right">
 														<Typography component={"span"} className="leaves_count">
-															{formData[recordData[trainee][month]["id"]]["leaves"]}
+															{recordData[trainee][month]["id"]["leaves"]}
 														</Typography>
 													</div>
 												</Box>
@@ -213,7 +232,7 @@ function TraineeList() {
 							))}
 
 							<form onSubmit={handleSubmit(trainee)}>
-								<Accordion sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5, marginTop: 0.5 }}>
+								<Accordion className="evaluator_report_field" sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5, marginTop: 0.5 }}>
 									<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
 										<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Evaluator Report</Typography>
 									</AccordionSummary>
@@ -229,8 +248,8 @@ function TraineeList() {
 													fullWidth
 													name="evaluatorReport"
 													type="text"
-													/* value={Cookies.get(`${trainee}_${month}_desc`) ? Cookies.get(`${trainee}_${month}_desc`) : ""}
-													onChange={handleInputChange(trainee, month, recordData[trainee][month])} */
+													value={Cookies.get(trainee) ? Cookies.get(trainee) : ""}
+													onChange={handleInputChange(trainee)}
 													placeholder="Write your review here."
 													sx={{ "& fieldset": { border: "none" } }}
 												/>
@@ -238,7 +257,7 @@ function TraineeList() {
 										</div>
 									</Box>
 
-									<Button variant="contained" type="submit" className="report_submit" sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }} /* disabled={formData[`${trainee}_${month}`] ? false : true} */>
+									<Button variant="contained" type="submit" className="report_submit" sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }} disabled={Cookies.get(trainee) ? false : true}>
 										Submit
 									</Button>
 

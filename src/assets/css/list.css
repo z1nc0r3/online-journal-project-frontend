@@ -87,6 +87,7 @@
 }
 
 .accordion_item.Mui-expanded {
+	margin-top: 0 !important;
 	margin-bottom: 10px !important;
 }
 
@@ -481,6 +482,14 @@ Button.import_button {
 	border-radius: 15px;
 	font-size: 18px !important;
 	font-weight: bold !important;
+}
+
+.evaluator_report_field {
+	border-radius: 8px !important;
+}
+
+.evaluator_report_field.Mui-expanded {
+	margin-top: 4px !important;
 }
 
 /* hide increase and decrease buttons from number field */
