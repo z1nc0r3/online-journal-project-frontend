@@ -86,13 +86,10 @@ function TraineeList() {
 				record: value
 			}
 		}));
-
-		console.log(formData);
 	};
 
 	useEffect(() => {
 		Object.keys(recordData).map((traineeId) => {
-			console.log(traineeId);
 			if (formData[traineeId] === undefined) {
 				setFormData((prevFormData) => ({
 					...prevFormData,
@@ -110,15 +107,13 @@ function TraineeList() {
 	const handleSubmit = (traineeId) => (event) => {
 		event.preventDefault();
 
+		console.log(formData[traineeId]);
+
 		axios
-			.post(`${API_URL}/api/set/review/add/supervisor`, formData[traineeId])
+			.post(`${API_URL}/api/set/review/add/evaluator`, formData[traineeId])
 			.then((response) => {
 				toast.success("Review added successfully. Reloading...");
-
-				Object.keys(formData).map((key) => {
-					Cookies.remove(traineeId);
-				});
-
+				Cookies.remove(traineeId);
 				setTimeout(() => {
 					window.location.reload();
 				}, 2000);
@@ -206,13 +201,13 @@ function TraineeList() {
 
 											<Accordion sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5 }}>
 												<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
-													<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Report</Typography>
+													<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Review</Typography>
 												</AccordionSummary>
 
 												<Box className="supervisor_report_field" variant="outlined">
 													<div className="assigned_student">
 														<Typography component={"span"} variant="body1">
-															{recordData[trainee][month]["id"]["record"]}
+															{recordData[trainee][month]["reports"]}
 														</Typography>
 													</div>
 												</Box>
@@ -221,7 +216,7 @@ function TraineeList() {
 													<Typography sx={{ width: "80%", flexShrink: 0, fontWeight: "medium", fontSize: "18px", textAlign: "left" }}>Number of leaves</Typography>
 													<div className="text_align_right">
 														<Typography component={"span"} className="leaves_count">
-															{recordData[trainee][month]["id"]["leaves"]}
+															{recordData[trainee][month]["number_of_leave"]}
 														</Typography>
 													</div>
 												</Box>
@@ -234,7 +229,7 @@ function TraineeList() {
 							<form onSubmit={handleSubmit(trainee)}>
 								<Accordion className="evaluator_report_field" sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5, marginTop: 0.5 }}>
 									<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
-										<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Evaluator Report</Typography>
+										<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Evaluator Review</Typography>
 									</AccordionSummary>
 
 									<Box className="supervisor_report_field" variant="outlined">
