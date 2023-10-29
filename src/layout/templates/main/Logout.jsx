@@ -17,13 +17,10 @@ const LogoutButton = () => {
 
 	const handleLogout = () => {
 		// User agreed with logout, clear the cookies
+		Object.keys(Cookies.get()).forEach(cookieName => {
+			Cookies.remove(cookieName);
+		});
 		Cookies.set("authorized", false);
-		Cookies.remove("role");
-		Cookies.remove("user_id");
-		Cookies.remove("fName");
-
-		Cookies.remove("description");
-		Cookies.remove("solutions");
 
 		// Redirect the user to the login page or homepage
 		window.location.href = "/login";
