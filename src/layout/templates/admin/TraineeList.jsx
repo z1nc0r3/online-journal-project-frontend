@@ -185,11 +185,16 @@ function TraineeList() {
 											type="text"
 											onChange={handleEvaluatorUpdate(trainee)}>
 											<MenuItem value="">Not Assigned</MenuItem>
-											{evaluators.map((evaluator, i) => (
-												<MenuItem key={i} value={evaluator.fName}>
-													{evaluator.fName}
-												</MenuItem>
-											))}
+											{evaluators.map((evaluator, i) => {
+												if (evaluator.department === trainee.department) {
+													return (
+														<MenuItem key={i} value={evaluator.fName}>
+															{evaluator.fName}
+														</MenuItem>
+													);
+												}
+												return null;
+											})}
 										</Select>
 									</div>
 

@@ -486,6 +486,10 @@ Button.import_button {
 	text-align: left;
 }
 
+.pb-10 {
+	padding: 0 0 10px 0;
+}
+
 .leaves_count {
 	background-color: white;
 	padding: 5px 10px;

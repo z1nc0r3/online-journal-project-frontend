@@ -62,7 +62,7 @@ function EvaluatorList() {
 								</Typography>
 								<div>
 									{evaluator.evaluator_connection.map((evaluatorConnection, index) => (
-										<div className="assigned_student" key={index}>
+										<div className="assigned_student pb-10" key={index}>
 											<Typography sx={{ fontSize: "16px", textAlign: "left", fontWeight: "500" }}>
 												{evaluatorConnection.trainee_name}
 											</Typography>
