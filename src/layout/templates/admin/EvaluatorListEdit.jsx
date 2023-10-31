@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 import { Box, Container, Button, Typography, TextField, Select, MenuItem } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import "../../../assets/css/list.css";
@@ -83,6 +84,7 @@ const UpdateUser = () => {
 			.post(`${API_URL}/api/update/evaluator/${id}`, formData)
 			.then((response) => {
 				toast.success("User data updated Successfully. Redirecting...");
+				Cookies.set("isLatestEvaluator", false);
 				setTimeout(() => {
 					window.location.href = "..";
 				}, 2000);
@@ -190,6 +192,7 @@ const UpdateUser = () => {
 			const response = await axios.post(`${API_URL}/api/delete/${id}`);
 			if (response.status === 200) {
 				showToast("User deleted successfully. Redirecting...");
+				Cookies.set("isLatestEvaluator", false);
 				setTimeout(() => {
 					window.location.href = "..";
 				}, 2000);
