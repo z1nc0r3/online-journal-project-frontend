@@ -62,7 +62,7 @@ function SupervisorList() {
 								</Typography>
 								<div>
 									{supervisor.supervisor_connection.map((supervisorConnection, index) => (
-										<div className="assigned_student" key={index}>
+										<div className="assigned_student pb-10" key={index}>
 											<Typography sx={{ fontSize: "16px", textAlign: "left", fontWeight: "500" }}>
 												{supervisorConnection.trainee_name}
 											</Typography>
