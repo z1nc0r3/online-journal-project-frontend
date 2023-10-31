@@ -148,7 +148,6 @@ function TraineeList() {
 			})
 			.catch((error) => {
 				toast.error("Error adding the review. Please try again.");
-				console.log(error["response"]["data"]["message"]);
 			});
 	};
 
