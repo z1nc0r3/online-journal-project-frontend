@@ -13,13 +13,10 @@ import "react-toastify/dist/ReactToastify.css";
 function UserEditData() {
 	const [formData, setFormData] = useState({
 		fName: "",
-		regNo: "",
-		address: "",
 		email: "",
 		phone: "",
 		estName: "",
-		estAddress: "",
-		password: ""
+		estAddress: ""
 	});
 
 	const getSupervisorDetails = (event) => {
@@ -32,7 +29,6 @@ function UserEditData() {
 				setFormData((prevFormData) => ({
 					...prevFormData,
 					fName: data.fName,
-					address: data.address,
 					email: data.email,
 					phone: data.phone,
 					estName: data.estName,
