@@ -59,8 +59,8 @@ function PastReports() {
 							<Typography sx={{ fontWeight: "bold", textAlign: "center", color: "#414141", paddingLeft: 0.5 }}>{`${getMonthName(month)}`}</Typography>
 						</AccordionSummary>
 						<AccordionDetails>
-							{currentMonthRecords[month].map((record, i) => (
-								<Accordion sx={{ width: "100%", backgroundColor: "#9dd0ff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }} className="accordion_item">
+							{currentMonthRecords[month].map((record, j) => (
+								<Accordion sx={{ width: "100%", backgroundColor: "#9dd0ff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }} className="accordion_item" key={j}>
 									<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
 										<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>Week : {record.week}</Typography>
 									</AccordionSummary>
