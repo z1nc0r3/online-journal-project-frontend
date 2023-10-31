@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 import { Box, Container, Button } from "@mui/material";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { CssBaseline, Typography, Select, MenuItem } from "@mui/material";
@@ -52,6 +53,12 @@ function TraineeList() {
 	};
 
 	const getTraineeList = (event) => {
+		if (Cookies.get("traineeLastUpdate") - new Date().getTime() < 86400000) {
+			setTrainees(JSON.parse(localStorage.getItem("traineesData")));
+			setIsLoading(false);
+			return;
+		}
+
 		axios.get(`${API_URL}/api/get/trainee/list`).then((response) => {
 			const data = response.data;
 
@@ -70,12 +77,20 @@ function TraineeList() {
 
 				setTrainees(data.trainees);
 				setFormData(traineesData);
+				Cookies.set("traineeLastUpdate", new Date().getTime());
+				localStorage.setItem("traineesData", JSON.stringify(data.trainees));
 				setIsLoading(false);
 			}
 		});
 	};
 
 	const getSupervisorList = (event) => {
+		if (Cookies.get("supervisorLastUpdate") - new Date().getTime() < 86400000) {
+			setSupervisor(JSON.parse(localStorage.getItem("supervisorsData")));
+			setIsLoading(false);
+			return;
+		}
+
 		axios.get(`${API_URL}/api/get/supervisor/list`).then((response) => {
 			const data = response.data;
 
@@ -83,11 +98,19 @@ function TraineeList() {
 				console.log(data.error);
 			} else {
 				setSupervisor(data.supervisors);
+				Cookies.set("supervisorLastUpdate", new Date().getTime());
+				localStorage.setItem("supervisorsData", JSON.stringify(data.supervisors));
 			}
 		});
 	};
 
 	const getEvaluatorList = (event) => {
+		if (Cookies.get("evaluatorLastUpdate") - new Date().getTime() < 86400000) {
+			setEvaluator(JSON.parse(localStorage.getItem("evaluatorsData")));
+			setIsLoading(false);
+			return;
+		}
+
 		axios.get(`${API_URL}/api/get/evaluator/list`).then((response) => {
 			const data = response.data;
 
@@ -95,6 +118,8 @@ function TraineeList() {
 				console.log(data.error);
 			} else {
 				setEvaluator(data.evaluators);
+				Cookies.set("evaluatorLastUpdate", new Date().getTime());
+				localStorage.setItem("evaluatorsData", JSON.stringify(data.evaluators));
 			}
 		});
 	};
@@ -155,6 +180,12 @@ function TraineeList() {
 			</Container>
 		);
 	}
+	
+	const supervisorItems = supervisors.map((supervisor, i) => (
+		<MenuItem key={i} value={supervisor.fName}>
+			{supervisor.fName}
+		</MenuItem>
+	));
 
 	return (
 		<Container component="main" className="list_container" maxWidth={false}>
@@ -191,11 +222,7 @@ function TraineeList() {
 											type="text"
 											onChange={handleSupervisorUpdate(trainee)}>
 											<MenuItem value="">Not Assigned</MenuItem>
-											{supervisors.map((supervisor, i) => (
-												<MenuItem key={i} value={supervisor.fName}>
-													{supervisor.fName}
-												</MenuItem>
-											))}
+											{supervisorItems}
 										</Select>
 									</div>
 
