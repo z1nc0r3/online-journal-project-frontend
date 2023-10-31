@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Box, Container } from "@mui/material";
 import axios from "axios";
-import { useEffect } from "react";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -14,27 +15,64 @@ import { Link } from "react-router-dom";
 
 function SupervisorList() {
 	const [expanded, setExpanded] = React.useState(false);
-	const [supervisors, setSupervisors] = React.useState([]);
+	const [supervisors, setSupervisor] = React.useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const handleChange = (panel) => (event, isExpanded) => {
 		setExpanded(isExpanded ? panel : false);
 	};
 
 	const getSupervisorList = (event) => {
+		if (new Date().getTime() - Cookies.get("supervisorLastUpdate") < 86400000 && Cookies.get("isLatestSupervisor") === "true") {
+			setSupervisor(JSON.parse(localStorage.getItem("supervisorsData")));
+			setIsLoading(false);
+			return;
+		}
+
 		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/supervisor/list`).then((response) => {
 			const data = response.data;
 
 			if (data.error) {
 				console.log(data.error);
 			} else {
-				setSupervisors(data.supervisors);
+				setSupervisor(data.supervisors);
+				Cookies.set("supervisorLastUpdate", new Date().getTime());
+				Cookies.set("isLatestSupervisor", true);
+				localStorage.setItem("supervisorsData", JSON.stringify(data.supervisors));
+				setIsLoading(false);
 			}
 		});
 	};
 
 	useEffect(() => {
+		if (!Cookies.get("isLatestSupervisor")) Cookies.set("isLatestSupervisor", false);
+
 		getSupervisorList();
 	}, []);
+
+	if (isLoading) {
+		return (
+			<Container component="main" className="list_container" maxWidth={false}>
+				<CssBaseline />
+
+				<Box className="list_box">
+					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>Loading...</Typography>
+				</Box>
+			</Container>
+		);
+	}
+
+	if (Object.keys(supervisors).length === 0) {
+		return (
+			<Container component="main" className="list_container" maxWidth={false}>
+				<CssBaseline />
+
+				<Box className="list_box">
+					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>No records found.</Typography>
+				</Box>
+			</Container>
+		);
+	}
 
 	return (
 		<Container component="main" className="list_container" maxWidth={false}>

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 import { Box, Container, Button } from "@mui/material";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { CssBaseline, Typography, Select, MenuItem } from "@mui/material";
@@ -18,7 +19,7 @@ function TraineeList() {
 	const [trainees, setTrainees] = React.useState([]);
 	const [supervisors, setSupervisor] = React.useState([]);
 	const [evaluators, setEvaluator] = React.useState([]);
-
+	const [isLoading, setIsLoading] = useState(true);
 	const [formData, setFormData] = useState({});
 
 	const handleChange = (panel) => (event, isExpanded) => {
@@ -52,6 +53,13 @@ function TraineeList() {
 	};
 
 	const getTraineeList = (event) => {
+		if (new Date().getTime() - Cookies.get("traineeLastUpdate") < 86400000) {
+			setTrainees(JSON.parse(localStorage.getItem("traineesData")));
+			setFormData(JSON.parse(localStorage.getItem("traineesFormData")));
+			setIsLoading(false);
+			return;
+		}
+
 		axios.get(`${API_URL}/api/get/trainee/list`).then((response) => {
 			const data = response.data;
 
@@ -70,11 +78,21 @@ function TraineeList() {
 
 				setTrainees(data.trainees);
 				setFormData(traineesData);
+				Cookies.set("traineeLastUpdate", new Date().getTime());
+				localStorage.setItem("traineesData", JSON.stringify(data.trainees));
+				localStorage.setItem("traineesFormData", JSON.stringify(traineesData));
+				setIsLoading(false);
 			}
 		});
 	};
 
 	const getSupervisorList = (event) => {
+		if (new Date().getTime() - Cookies.get("traineeLastUpdate") < 86400000) {
+			setSupervisor(JSON.parse(localStorage.getItem("supervisorsData")));
+			setIsLoading(false);
+			return;
+		}
+
 		axios.get(`${API_URL}/api/get/supervisor/list`).then((response) => {
 			const data = response.data;
 
@@ -82,11 +100,19 @@ function TraineeList() {
 				console.log(data.error);
 			} else {
 				setSupervisor(data.supervisors);
+				Cookies.set("supervisorLastUpdate", new Date().getTime());
+				localStorage.setItem("supervisorsData", JSON.stringify(data.supervisors));
 			}
 		});
 	};
 
 	const getEvaluatorList = (event) => {
+		if (new Date().getTime() - Cookies.get("traineeLastUpdate") < 86400000) {
+			setEvaluator(JSON.parse(localStorage.getItem("evaluatorsData")));
+			setIsLoading(false);
+			return;
+		}
+
 		axios.get(`${API_URL}/api/get/evaluator/list`).then((response) => {
 			const data = response.data;
 
@@ -94,6 +120,8 @@ function TraineeList() {
 				console.log(data.error);
 			} else {
 				setEvaluator(data.evaluators);
+				Cookies.set("evaluatorLastUpdate", new Date().getTime());
+				localStorage.setItem("evaluatorsData", JSON.stringify(data.evaluators));
 			}
 		});
 	};
@@ -116,6 +144,9 @@ function TraineeList() {
 			.post(`${API_URL}/api/update/assign/`, updatedTrainee)
 			.then((response) => {
 				toast.success(response.data.message);
+				Cookies.set("traineeLastUpdate", 0);
+				Cookies.set("isLatest", false);
+
 				setTimeout(() => {
 					window.location.reload();
 				}, 2000);
@@ -126,10 +157,42 @@ function TraineeList() {
 	};
 
 	useEffect(() => {
+		if (!Cookies.get("isLatest")) Cookies.set("isLatest", false);
+
 		getTraineeList();
 		getSupervisorList();
 		getEvaluatorList();
 	}, []);
+
+	if (isLoading) {
+		return (
+			<Container component="main" className="list_container" maxWidth={false}>
+				<CssBaseline />
+
+				<Box className="list_box">
+					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>Loading...</Typography>
+				</Box>
+			</Container>
+		);
+	}
+
+	if (Object.keys(trainees).length === 0) {
+		return (
+			<Container component="main" className="list_container" maxWidth={false}>
+				<CssBaseline />
+
+				<Box className="list_box">
+					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>No records found.</Typography>
+				</Box>
+			</Container>
+		);
+	}
+	
+	const supervisorItems = supervisors.map((supervisor, i) => (
+		<MenuItem key={i} value={supervisor.fName}>
+			{supervisor.fName}
+		</MenuItem>
+	));
 
 	return (
 		<Container component="main" className="list_container" maxWidth={false}>
@@ -166,11 +229,7 @@ function TraineeList() {
 											type="text"
 											onChange={handleSupervisorUpdate(trainee)}>
 											<MenuItem value="">Not Assigned</MenuItem>
-											{supervisors.map((supervisor, i) => (
-												<MenuItem key={i} value={supervisor.fName}>
-													{supervisor.fName}
-												</MenuItem>
-											))}
+											{supervisorItems}
 										</Select>
 									</div>
 
