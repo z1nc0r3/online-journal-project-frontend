@@ -91,7 +91,7 @@ function TraineeList() {
 			</Container>
 		);
 	}
-
+  
 	if (Object.keys(recordData).length === 0) {
 		return (
 			<Container component="main" className="list_container" maxWidth={false}>
