@@ -92,6 +92,18 @@ function TraineeList() {
 			</Container>
 		);
 	}
+	
+	if (Object.keys(recordData).length === 0) {
+		return (
+			<Container component="main" className="list_container" maxWidth={false}>
+				<CssBaseline />
+
+				<Box className="list_box">
+					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>No records found.</Typography>
+				</Box>
+			</Container>
+		);
+	}
 
 	return (
 		<Container component="main" className="list_container" maxWidth={false}>
