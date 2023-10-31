@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Box, Container } from "@mui/material";
 import axios from "axios";
-import { useEffect } from "react";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -15,12 +16,18 @@ import { Link } from "react-router-dom";
 function EvaluatorList() {
 	const [expanded, setExpanded] = React.useState(false);
 	const [evaluators, setEvaluators] = React.useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const handleChange = (panel) => (event, isExpanded) => {
 		setExpanded(isExpanded ? panel : false);
 	};
 
 	const getEvaluatorList = (event) => {
+		if (new Date().getTime() - Cookies.get("evaluatorLastUpdate") < 86400000 && Cookies.get("isLatestEvaluator") === "true") {
+			setEvaluators(JSON.parse(localStorage.getItem("evaluatorsData")));
+			setIsLoading(false);
+			return;
+		}
 		axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/get/evaluator/list`).then((response) => {
 			const data = response.data;
 
@@ -28,13 +35,43 @@ function EvaluatorList() {
 				console.log(data.error);
 			} else {
 				setEvaluators(data.evaluators);
+				Cookies.set("evaluatorLastUpdate", new Date().getTime());
+				Cookies.set("isLatestEvaluator", true);
+				localStorage.setItem("evaluatorsData", JSON.stringify(data.evaluators));
+				setIsLoading(false);
 			}
 		});
 	};
 
 	useEffect(() => {
+		if (!Cookies.get("isLatestEvaluator")) Cookies.set("isLatestEvaluator", false);
+
 		getEvaluatorList();
 	}, []);
+
+	if (isLoading) {
+		return (
+			<Container component="main" className="list_container" maxWidth={false}>
+				<CssBaseline />
+
+				<Box className="list_box">
+					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>Loading...</Typography>
+				</Box>
+			</Container>
+		);
+	}
+
+	if (Object.keys(evaluators).length === 0) {
+		return (
+			<Container component="main" className="list_container" maxWidth={false}>
+				<CssBaseline />
+
+				<Box className="list_box">
+					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>No records found.</Typography>
+				</Box>
+			</Container>
+		);
+	}
 
 	return (
 		<Container component="main" className="list_container" maxWidth={false}>

@@ -23,7 +23,7 @@ function SupervisorList() {
 	};
 
 	const getSupervisorList = (event) => {
-		if (new Date().getTime() - Cookies.get("traineeLastUpdate") < 86400000 && Cookies.get("isLatest") === "true") {
+		if (new Date().getTime() - Cookies.get("supervisorLastUpdate") < 86400000 && Cookies.get("isLatestSupervisor") === "true") {
 			setSupervisor(JSON.parse(localStorage.getItem("supervisorsData")));
 			setIsLoading(false);
 			return;
@@ -37,7 +37,7 @@ function SupervisorList() {
 			} else {
 				setSupervisor(data.supervisors);
 				Cookies.set("supervisorLastUpdate", new Date().getTime());
-				Cookies.set("isLatest", true);
+				Cookies.set("isLatestSupervisor", true);
 				localStorage.setItem("supervisorsData", JSON.stringify(data.supervisors));
 				setIsLoading(false);
 			}
@@ -45,7 +45,7 @@ function SupervisorList() {
 	};
 
 	useEffect(() => {
-		if (!Cookies.get("isLatest")) Cookies.set("isLatest", false);
+		if (!Cookies.get("isLatestSupervisor")) Cookies.set("isLatestSupervisor", false);
 
 		getSupervisorList();
 	}, []);
