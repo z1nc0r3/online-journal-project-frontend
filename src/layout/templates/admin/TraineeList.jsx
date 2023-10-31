@@ -53,8 +53,9 @@ function TraineeList() {
 	};
 
 	const getTraineeList = (event) => {
-		if (Cookies.get("traineeLastUpdate") - new Date().getTime() < 86400000) {
+		if (new Date().getTime() - Cookies.get("traineeLastUpdate") < 86400000) {
 			setTrainees(JSON.parse(localStorage.getItem("traineesData")));
+			setFormData(JSON.parse(localStorage.getItem("traineesFormData")));
 			setIsLoading(false);
 			return;
 		}
@@ -79,13 +80,14 @@ function TraineeList() {
 				setFormData(traineesData);
 				Cookies.set("traineeLastUpdate", new Date().getTime());
 				localStorage.setItem("traineesData", JSON.stringify(data.trainees));
+				localStorage.setItem("traineesFormData", JSON.stringify(traineesData));
 				setIsLoading(false);
 			}
 		});
 	};
 
 	const getSupervisorList = (event) => {
-		if (Cookies.get("supervisorLastUpdate") - new Date().getTime() < 86400000) {
+		if (new Date().getTime() - Cookies.get("traineeLastUpdate") < 86400000) {
 			setSupervisor(JSON.parse(localStorage.getItem("supervisorsData")));
 			setIsLoading(false);
 			return;
@@ -105,7 +107,7 @@ function TraineeList() {
 	};
 
 	const getEvaluatorList = (event) => {
-		if (Cookies.get("evaluatorLastUpdate") - new Date().getTime() < 86400000) {
+		if (new Date().getTime() - Cookies.get("traineeLastUpdate") < 86400000) {
 			setEvaluator(JSON.parse(localStorage.getItem("evaluatorsData")));
 			setIsLoading(false);
 			return;
@@ -142,6 +144,9 @@ function TraineeList() {
 			.post(`${API_URL}/api/update/assign/`, updatedTrainee)
 			.then((response) => {
 				toast.success(response.data.message);
+				Cookies.set("traineeLastUpdate", 0);
+				Cookies.set("isLatest", false);
+
 				setTimeout(() => {
 					window.location.reload();
 				}, 2000);
@@ -152,6 +157,8 @@ function TraineeList() {
 	};
 
 	useEffect(() => {
+		if (!Cookies.get("isLatest")) Cookies.set("isLatest", false);
+
 		getTraineeList();
 		getSupervisorList();
 		getEvaluatorList();
