@@ -18,7 +18,7 @@ function TraineeList() {
 	const [trainees, setTrainees] = React.useState([]);
 	const [supervisors, setSupervisor] = React.useState([]);
 	const [evaluators, setEvaluator] = React.useState([]);
-
+	const [isLoading, setIsLoading] = useState(true);
 	const [formData, setFormData] = useState({});
 
 	const handleChange = (panel) => (event, isExpanded) => {
@@ -70,6 +70,7 @@ function TraineeList() {
 
 				setTrainees(data.trainees);
 				setFormData(traineesData);
+				setIsLoading(false);
 			}
 		});
 	};
@@ -130,6 +131,30 @@ function TraineeList() {
 		getSupervisorList();
 		getEvaluatorList();
 	}, []);
+
+	if (isLoading) {
+		return (
+			<Container component="main" className="list_container" maxWidth={false}>
+				<CssBaseline />
+
+				<Box className="list_box">
+					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>Loading...</Typography>
+				</Box>
+			</Container>
+		);
+	}
+
+	if (Object.keys(trainees).length === 0) {
+		return (
+			<Container component="main" className="list_container" maxWidth={false}>
+				<CssBaseline />
+
+				<Box className="list_box">
+					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>No records found.</Typography>
+				</Box>
+			</Container>
+		);
+	}
 
 	return (
 		<Container component="main" className="list_container" maxWidth={false}>
