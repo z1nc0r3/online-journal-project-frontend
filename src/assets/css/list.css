@@ -419,6 +419,10 @@ Button.import_button {
 	box-shadow: none;
 }
 
+.month_report_container .month_item.Mui-expanded {
+	margin-top: 4px !important;
+}
+
 /* Supervisor dashboard */
 
 .month_item {
