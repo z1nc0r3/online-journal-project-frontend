@@ -24,16 +24,12 @@ import MenuItem from "@mui/material/MenuItem";
 import LogoutButton from "../../templates/main/Logout";
 import "../../../assets/css/main.css";
 
-const pages = ["Dashboard", "Trainee list", "Edit User Data"];
-
 export default function EvaluatorNavbar() {
-
+	const pages = ["Dashboard", "Trainee list", "Edit User Data"];
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
-
 	const handleCloseNavMenu = () => {
 		setAnchorElNav(null);
 	};
-
 	const [state, setState] = React.useState({
 		left: false,
 	});
@@ -50,8 +46,6 @@ export default function EvaluatorNavbar() {
 		{ label: "DashBoard", path: "/evaluator/dashboard" },
 		{ label: "Current Report", path: "/evaluator/trainee_list" },
 		{ label: "Edit User Data", path: "/evaluator/user_edit_data" },
-
-
 	];
 
 	const list = (anchor) => (
@@ -96,9 +90,14 @@ export default function EvaluatorNavbar() {
 						<IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={toggleDrawer("left", true)} color="inherit">
 							<MenuIcon />
 						</IconButton>
-						<Typography variant="h6" component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light", marginLeft: 1 }}>
-							{Cookies.get("fName")}
-						</Typography>
+						<Box>
+							<Typography className="headername" variant="h6" component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light", marginLeft: 1 }}>
+								{Cookies.get("fName")}
+							</Typography>
+							<Typography className="rolename" component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light", marginLeft: 1, fontSize: "16px", marginTop: -0.7 }}>
+								Supervisor Dashboard
+							</Typography>
+						</Box>
 						<Menu
 							id="menu-appbar"
 							anchorEl={anchorElNav}
@@ -127,6 +126,7 @@ export default function EvaluatorNavbar() {
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
 						<Typography variant="h5" component="div" sx={{ flexGrow: 1, textAlign: "left", fontWeight: "light" }}>
 							{Cookies.get("fName")}
+							<Typography component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light" }} >Supervisor Dashboard</Typography>
 						</Typography>
 					</Box>
 
