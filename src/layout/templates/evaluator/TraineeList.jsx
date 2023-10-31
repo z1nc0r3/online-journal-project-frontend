@@ -33,7 +33,6 @@ function TraineeList() {
 			} else {
 				setRecordData(data.records);
 				setIsLoading(false);
-				console.log(data.records);
 			}
 		} catch (error) {
 			console.error(error);
@@ -92,7 +91,7 @@ function TraineeList() {
 			</Container>
 		);
 	}
-	
+  
 	if (Object.keys(recordData).length === 0) {
 		return (
 			<Container component="main" className="list_container" maxWidth={false}>

@@ -92,7 +92,6 @@ function Dashboard() {
 	const handleSubmit = (traineeId, monthNo) => (event) => {
 		event.preventDefault();
 		let id = `${traineeId}_${monthNo}`;
-		console.log(formData[id]);
 
 		axios
 			.post(`${API_URL}/api/set/review/add/supervisor`, formData[id])
@@ -110,7 +109,6 @@ function Dashboard() {
 			})
 			.catch((error) => {
 				toast.error("Error adding the review. Please try again.");
-				console.log(error["response"]["data"]["message"]);
 			});
 	};
 

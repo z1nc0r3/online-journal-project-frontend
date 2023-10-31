@@ -12,15 +12,9 @@ const API_URL = process.env.REACT_APP_BACKEND_API_URL;
 const UpdateUser = () => {
 	const [formData, setFormData] = useState({
 		fName: "",
-		regNo: "",
 		department: "",
-		address: "",
 		email: "",
 		phone: "",
-		estName: "",
-		estAddress: "",
-		startDate: "",
-		duration: "",
 	});
 
 	const id = Cookies.get("user_id");
@@ -35,15 +29,9 @@ const UpdateUser = () => {
 				setFormData((prevFormData) => ({
 					...prevFormData,
 					fName: data.fName,
-					regNo: data.regNo,
 					department: data.department,
-					address: data.address,
 					email: data.email,
 					phone: data.phone,
-					estName: data.estName,
-					estAddress: data.estAddress,
-					startDate: data.startDate,
-					duration: data.duration,
 				}));
 			}
 		});
@@ -91,7 +79,7 @@ const UpdateUser = () => {
 		e.preventDefault();
 
 		axios
-			.post(`${API_URL}/api/update/trainee/${id}`, formData)
+			.post(`${API_URL}/api/update/evaluator/${id}`, formData)
 			.then((response) => {
 				toast.success("User data updated Successfully. Redirecting...");
 				setTimeout(() => {
@@ -154,9 +142,7 @@ const UpdateUser = () => {
 					<Box className="create_new_form_left">
 						<Typography>Full Name </Typography>
 						<TextField variant="outlined" required fullWidth name="fName" autoFocus type="text" value={formData.fName} onChange={handleFullNameChange} disabled />
-
 						{emailPhoneFields()}
-
 					</Box>
 
 					<Box className="create_new_form_right">
