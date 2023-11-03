@@ -663,6 +663,29 @@ input[type="number"] {
 	.month_report_container .MuiAccordionDetails-root {
 		padding: 8px 8px 16px;
 	}
+
+	.trainee_box_heading {
+		font-size: 18px;
+		text-align: left;
+	}
+
+	.trainee_submission_box {
+		flex-direction: column-reverse;
+	}
+
+	.trainee_submission_box .save_button_trainee {
+		margin: 1.5rem 0 1rem 0;
+		font-size: 14px;
+		padding: 10px 20px;
+	}
+
+	.trainee_submission_box_text .agreement_trainee_submission {
+		font-size: 14px;
+	}
+
+	.month_report_container .MuiAccordionDetails-root {
+		padding: 8px 8px 10px;
+	}
 }
 
 .text_align_right {
