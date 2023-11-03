@@ -682,6 +682,10 @@ input[type="number"] {
 	.trainee_submission_box_text .agreement_trainee_submission {
 		font-size: 14px;
 	}
+
+	.month_report_container .MuiAccordionDetails-root {
+		padding: 8px 8px 10px;
+	}
 }
 
 .text_align_right {
