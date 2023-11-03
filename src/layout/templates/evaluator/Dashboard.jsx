@@ -107,8 +107,6 @@ function TraineeList() {
 	const handleSubmit = (traineeId) => (event) => {
 		event.preventDefault();
 
-		console.log(formData[traineeId]);
-
 		axios
 			.post(`${API_URL}/api/set/review/add/evaluator`, formData[traineeId])
 			.then((response) => {
@@ -120,7 +118,6 @@ function TraineeList() {
 			})
 			.catch((error) => {
 				toast.error("Error adding the review. Please try again.");
-				console.log(error["response"]["data"]["message"]);
 			});
 	};
 
