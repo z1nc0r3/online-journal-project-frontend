@@ -1,12 +1,13 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { Box, Container } from "@mui/material";
-import { ToastContainer } from "react-toastify";
+import { Box, Container, Button } from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { CssBaseline, Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import TextField from "@mui/material/TextField";
 import "../../../assets/css/list.css";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -17,6 +18,7 @@ function TraineeList() {
 	const [traineeConnection, setConnection] = useState({});
 	const [recordData, setRecordData] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
+	const [formData, setFormData] = useState({});
 
 	const handleChange = (panel) => (event, isExpanded) => {
 		setExpanded(isExpanded ? panel : false);
@@ -32,8 +34,8 @@ function TraineeList() {
 				console.log(data.error);
 			} else {
 				setRecordData(data.records);
+				initializeFormData(data.records);
 				setIsLoading(false);
-				console.log(data.records);
 			}
 		} catch (error) {
 			console.error(error);
@@ -66,6 +68,24 @@ function TraineeList() {
 		}
 	};
 
+	// initialize the form data
+	const initializeFormData = (recordData) => {
+		Object.keys(recordData).map((trainee) => {
+			Object.keys(recordData[trainee]).map((month) => {
+				let id = recordData[trainee][month]["id"];
+				setFormData((prevFormData) => ({
+					...prevFormData,
+					[id]: {
+						id: recordData[trainee][month]["id"],
+						review: recordData[trainee][month]["review"],
+					}
+				}));
+			});
+		});
+
+		setIsLoading(false);
+	};
+
 	useEffect(() => {
 		getTraineeList();
 		getRecords();
@@ -80,6 +100,42 @@ function TraineeList() {
 		});
 	};
 
+	const handleInputChange = (traineeId) => (event) => {
+		const { value } = event.target;
+
+		Cookies.set(traineeId, value);
+
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			[traineeId]: {
+				trainee_id: traineeId,
+				supervisor_id: traineeConnection[traineeId].supervisor_id,
+				evaluator_id: traineeConnection[traineeId].evaluator_id,
+				record: value
+			}
+		}));
+	};
+
+	const handleSubmit = (traineeId) => (event) => {
+		event.preventDefault();
+
+		console.log(formData[traineeId]);
+
+		axios
+			.post(`${API_URL}/api/set/review/add/evaluator`, formData[traineeId])
+			.then((response) => {
+				toast.success("Review added successfully. Reloading...");
+				Cookies.remove(traineeId);
+				setTimeout(() => {
+					window.location.reload();
+				}, 2000);
+			})
+			.catch((error) => {
+				toast.error("Error adding the review. Please try again.");
+				console.log(error["response"]["data"]["message"]);
+			});
+	};
+
 	// if the data is loading
 	if (isLoading) {
 		return (
@@ -92,7 +148,7 @@ function TraineeList() {
 			</Container>
 		);
 	}
-	
+
 	if (Object.keys(recordData).length === 0) {
 		return (
 			<Container component="main" className="list_container" maxWidth={false}>
@@ -185,20 +241,38 @@ function TraineeList() {
 								</Box>
 							))}
 
-							<Accordion className="evaluator_report_field" sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5, marginTop: 0.5 }}>
-								<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
-									<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Evaluator Review</Typography>
-								</AccordionSummary>
+							<form onSubmit={handleSubmit(trainee)}>
+								<Accordion className="evaluator_report_field" sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5, marginTop: 0.5 }}>
+									<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
+										<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Evaluator Review</Typography>
+									</AccordionSummary>
 
-								<Box className="evaluator_report_field_sub" variant="outlined">
-									<div className="assigned_student">
-										<Typography component={"span"} variant="body1">
-											{recordData[trainee]["evalReport"]}
-										</Typography>
-									</div>
-								</Box>
+									<Box className="supervisor_report_field" variant="outlined">
+										<div className="assigned_student">
+											<Typography component={"span"} variant="body1">
+												<TextField
+													multiline
+													rows={6}
+													variant="outlined"
+													required
+													fullWidth
+													name="evaluatorReport"
+													type="text"
+													value={recordData[trainee]["months"][Object.keys(recordData[trainee]["months"])[0]]["evaluator_report"]}
+													onChange={handleInputChange(trainee)}
+													placeholder="Write your review here."
+													sx={{ "& fieldset": { border: "none" } }}
+												/>
+											</Typography>
+										</div>
+									</Box>
 
-							</Accordion>
+									<Button variant="contained" type="submit" className="report_submit" sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }} disabled={Cookies.get(trainee) ? false : true}>
+										Submit
+									</Button>
+
+								</Accordion>
+							</form>
 						</AccordionDetails>
 					</Accordion>
 				))}
