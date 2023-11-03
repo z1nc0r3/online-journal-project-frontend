@@ -664,12 +664,17 @@ input[type="number"] {
 		padding: 8px 8px 16px;
 	}
 
+	.trainee_box_heading {
+		font-size: 18px;
+		text-align: left;
+	}
+
 	.trainee_submission_box {
 		flex-direction: column-reverse;
 	}
 
 	.trainee_submission_box .save_button_trainee {
-		margin: 1rem 0;
+		margin: 1.5rem 0 1rem 0;
 		font-size: 14px;
 		padding: 10px 20px;
 	}
