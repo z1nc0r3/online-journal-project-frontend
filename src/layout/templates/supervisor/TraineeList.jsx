@@ -200,7 +200,7 @@ function TraineeList() {
 						key={i}
 						className="accordion_item">
 						<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
-							<Typography sx={{ marginRight: "1rem", fontSize: "18px" }}>{i + 1}</Typography>
+							<Typography className="w-5" sx={{ marginRight: "1rem", fontSize: "18px" }}>{i + 1}</Typography>
 							<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{traineeConnection[trainee].fName}</Typography>
 							<Typography sx={{ color: "text.secondary", fontSize: "14px" }}>{traineeConnection[trainee].department}</Typography>
 						</AccordionSummary>
@@ -215,7 +215,7 @@ function TraineeList() {
 
 										<AccordionDetails className="month_accordion_details">
 											{Object.keys(recordData[trainee][month]["records"]).map((week, k) => (
-												<Box className="list_container" key={k}>
+												<Box className="list_container p-0" key={k}>
 													<Accordion sx={{ width: "100%", backgroundColor: "#9dd0ff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }} className="accordion_item">
 														<AccordionSummary>
 															<Typography className="mta-left" sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{`Week ${recordData[trainee][month]["records"][week].week}`}</Typography>

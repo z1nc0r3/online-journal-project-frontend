@@ -746,6 +746,10 @@ input[type="number"] {
 		width: 10% !important;
 	}
 
+	.list_box .report_submit {
+		font-size: 14px;
+	}
+
 	.p-0 {
 		padding-left: 0 !important;
 		padding-right: 0 !important;
@@ -754,6 +758,10 @@ input[type="number"] {
 	.p-2 {
 		padding-left: 2px !important;
 		padding-right: 2px !important;
+	}
+
+	.w-5 {
+		width: 5% !important;
 	}
 }
 
