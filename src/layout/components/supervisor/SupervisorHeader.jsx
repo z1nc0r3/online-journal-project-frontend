@@ -101,7 +101,7 @@ function SupervisorNavbar() {
 								{Cookies.get("fName")} 
 							</Typography>
 							<Typography className="rolename" component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light", marginLeft: 1,fontSize: "16px", marginTop:-0.7}}> 
-								Supervisor Dashboard
+								Supervisor
 							</Typography>	
 						</Box>
 						
@@ -133,7 +133,7 @@ function SupervisorNavbar() {
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
 					<Typography variant="h5" component="div" sx={{ flexGrow: 1, textAlign: "left", fontWeight: "light" }}>
 							{Cookies.get("fName")}
-							<Typography component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light"}} >Supervisor Dashboard</Typography>
+							<Typography component="div" sx={{ display: "flex", alignItems: "center", flexGrow: 1, textAlign: "left", fontWeight: "light"}} >Supervisor</Typography>
 					</Typography>
 					</Box>
 

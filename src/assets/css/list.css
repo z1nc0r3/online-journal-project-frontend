@@ -510,6 +510,10 @@ Button.import_button {
 	margin-top: 4px !important;
 }
 
+.list_box .MuiAccordionSummary-content {
+	align-items: center;
+}
+
 /* hide increase and decrease buttons from number field */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
@@ -578,6 +582,10 @@ input[type="number"] {
 /* mobile view css */
 
 @media only screen and (max-width: 600px) {
+	.dashboard_title {
+		font-size: 20px !important;
+	}
+
 	.list_container,
 	.create_new_container,
 	.month_report_container {
@@ -685,6 +693,75 @@ input[type="number"] {
 
 	.month_report_container .MuiAccordionDetails-root {
 		padding: 8px 8px 10px;
+	}
+
+	.supervisor_dashboard.list_container {
+		padding-left: 8px !important;
+		padding-right: 8px !important;
+	}
+
+	.supervisor_dashboard .accordion_details {
+		padding: 8px;
+	}
+
+	.supervisor_dashboard .month_item .month_accordion_details {
+		padding: 0px;
+	}
+
+	.report_detail_container {
+		padding: 8px !important;
+	}
+
+	.weekly_report_container .report_title {
+		font-size: 14px;
+	}
+
+	.weekly_report_container > div > p {
+		font-size: 14px;
+	
+	}
+
+	.supervisor_dashboard .assigned_student {
+		padding: 0;
+	}
+
+	.supervisor_leaves_field > p {
+		font-size: 14px;
+		width: 70%;
+	}
+
+	.supervisor_report_field {
+		margin: 0.5rem 0.5rem;
+	}
+
+	.mta-left {
+		text-align: left !important;
+	}
+
+	.align-items-center {
+		align-items: center;
+	}
+
+	.list_box .w-10 {
+		width: 10% !important;
+	}
+
+	.list_box .report_submit {
+		font-size: 14px;
+	}
+
+	.p-0 {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+
+	.p-2 {
+		padding-left: 2px !important;
+		padding-right: 2px !important;
+	}
+
+	.w-5 {
+		width: 5% !important;
 	}
 }
 
