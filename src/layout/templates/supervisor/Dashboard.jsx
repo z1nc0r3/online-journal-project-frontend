@@ -151,7 +151,7 @@ function Dashboard() {
 	}
 
 	return (
-		<Container component="main" className="list_container" maxWidth={false}>
+		<Container component="main" className="list_container supervisor_dashboard" maxWidth={false}>
 			<CssBaseline />
 
 			<ToastContainer />
@@ -165,25 +165,25 @@ function Dashboard() {
 						key={i}
 						className="accordion_item">
 						<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
-							<Typography sx={{ marginRight: "1rem", fontSize: "18px" }}>{i + 1}</Typography>
+							<Typography className="w-10" sx={{ marginRight: "1rem", fontSize: "18px" }}>{i + 1}</Typography>
 							<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{traineeConnection[trainee].fName}</Typography>
 							<Typography sx={{ color: "text.secondary", fontSize: "14px" }}>{traineeConnection[trainee].department}</Typography>
 						</AccordionSummary>
 
-						<AccordionDetails>
+						<AccordionDetails className="accordion_details">
 							{Object.keys(recordData[trainee]).map((month, j) => (
-								<Box className="list_container" key={j}>
+								<Box className="list_container p-2" key={j}>
 									<Accordion className="month_item">
 										<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="month1-content" id="month1-header">
-											<Typography sx={{ fontWeight: "bold", textAlign: "center", color: "#414141", paddingLeft: 0.5 }}>{getMonthName(month)}</Typography>
+											<Typography className="mta-left" sx={{ fontWeight: "bold", textAlign: "center", color: "#414141", paddingLeft: 0.5 }}>{getMonthName(month)}</Typography>
 										</AccordionSummary>
 
-										<AccordionDetails>
+										<AccordionDetails className="month_accordion_details">
 											{Object.keys(recordData[trainee][month]).map((week, k) => (
-												<Box className="list_container" key={k}>
+												<Box key={k}>
 													<Accordion sx={{ width: "100%", backgroundColor: "#9dd0ff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }} className="accordion_item">
-														<AccordionSummary>
-															<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{`Week ${recordData[trainee][month][week].week}`}</Typography>
+														<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+															<Typography className="mta-left" sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{`Week : ${recordData[trainee][month][week].week}`}</Typography>
 														</AccordionSummary>
 														<AccordionDetails className="report_detail_container">
 															<Box className="weekly_report_container">
@@ -206,7 +206,7 @@ function Dashboard() {
 											<form onSubmit={handleSubmit(trainee, month)}>
 												<Accordion sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5 }}>
 													<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
-														<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Review</Typography>
+														<Typography className="mta-left" sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Review</Typography>
 													</AccordionSummary>
 
 													<Box className="supervisor_report_field" variant="outlined">
