@@ -21,7 +21,7 @@
 	height: 100%;
 	background-color: white;
 	border-radius: 1.5rem;
-	padding: 1rem;
+	padding: 16px 16px 6px 16px;
 	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -255,7 +255,7 @@
 
 Button.save_button_trainee {
 	align-items: start;
-	margin: 0.4rem 2rem;
+	margin: 0.4rem 1rem;
 	background-color: #ffffff;
 	color: #414141;
 	font-size: 16px;
@@ -264,6 +264,7 @@ Button.save_button_trainee {
 	width: 25%;
 	border-radius: 0.75rem;
 	box-shadow: none;
+	padding: 10px 25px;
 }
 
 Button.save_button_trainee:hover {
@@ -395,14 +396,13 @@ Button.import_button {
 	background-color: white;
 }
 
-.weekly_report_super{
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    background-color: white;
-
+.weekly_report_super {
+	flex-direction: row;
+	align-items: center;
+	width: 100%;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	background-color: white;
 }
 .weekly_report_container .report_title {
 	font-size: 16px;
@@ -552,6 +552,15 @@ input[type="number"] {
 	.month_accordion_details {
 		padding: 10px;
 	}
+
+	.css-ur2jdm-MuiContainer-root {
+		padding-right: 10px;
+	}
+
+	.css-ur2jdm-MuiContainer-root {
+		padding-left: 0px !important;
+		padding-right: 20px !important;
+	}
 }
 
 @media only screen and (max-width: 900px) {
@@ -590,6 +599,11 @@ input[type="number"] {
 
 	.bulk_user_entry {
 		padding: 1rem;
+	}
+
+	.css-ur2jdm-MuiContainer-root {
+		padding-left: 20px !important;
+		padding-right: 20px !important;
 	}
 }
 
@@ -783,6 +797,12 @@ input[type="number"] {
 
 	.w-5 {
 		width: 5% !important;
+	}
+}
+@media only screen and (min-width: 1200) {
+	.css-ur2jdm-MuiContainer-root {
+		padding-left: 0px !important;
+		padding-right: 0px !important;
 	}
 }
 

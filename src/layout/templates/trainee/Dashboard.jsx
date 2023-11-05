@@ -25,8 +25,6 @@ function Dashboard() {
 		year: "",
 	});
 
-	// TODO: add a loading spinner
-	const [isLoading, setIsLoading] = useState(true);
 	const [recordExists, setRecordExists] = useState(false);
 	const [isChecked, setIsChecked] = useState(false);
 
@@ -77,8 +75,6 @@ function Dashboard() {
 			}));
 			setRecordExists(true);
 		  }
-	
-		  setIsLoading(false); // set loading to false once we're done fetching data
 		};
 	
 		getConnection();
@@ -97,7 +93,7 @@ function Dashboard() {
 
 		if(recordExists){
 			axios
-				.post(`${API_URL}/api/update/record/trainee/week/${recordData.user_id}`, recordData)
+				.post(`${API_URL}/api/update/record/week/${recordData.user_id}`, recordData)
 				.then((response) => {
 					toast.success("User data updated Successfully. Redirecting...");
 					setTimeout(() => {
