@@ -82,10 +82,10 @@ function TraineeList() {
 	// if the data is loading
 	if (isLoading) {
 		return (
-			<Container component="main" className="list_container" maxWidth={false}>
+			<Container component="main" className="list_container trainee_list" maxWidth={false}>
 				<CssBaseline />
 
-				<Box className="list_box">
+				<Box className="list_box" sx={{padding: 2}}>
 					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>Loading...</Typography>
 				</Box>
 			</Container>
@@ -94,10 +94,10 @@ function TraineeList() {
   
 	if (Object.keys(recordData).length === 0) {
 		return (
-			<Container component="main" className="list_container" maxWidth={false}>
+			<Container component="main" className="list_container trainee_list" maxWidth={false}>
 				<CssBaseline />
 
-				<Box className="list_box">
+				<Box className="list_box" sx={{padding: 2}}>
 					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>No records found.</Typography>
 				</Box>
 			</Container>
@@ -105,7 +105,7 @@ function TraineeList() {
 	}
 
 	return (
-		<Container component="main" className="list_container" maxWidth={false}>
+		<Container component="main" className="list_container trainee_list" maxWidth={false}>
 			<CssBaseline />
 
 			<ToastContainer />
@@ -119,25 +119,25 @@ function TraineeList() {
 						key={i}
 						className="accordion_item">
 						<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
-							<Typography sx={{ marginRight: "1rem", fontSize: "18px" }}>{i + 1}</Typography>
+							<Typography className="w-10" sx={{ marginRight: "1rem", fontSize: "18px" }}>{i + 1}</Typography>
 							<Typography sx={{ width: "66%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{traineeConnection[trainee].fName}</Typography>
 							<Typography sx={{ color: "text.secondary", fontSize: "14px" }}>{traineeConnection[trainee].department}</Typography>
 						</AccordionSummary>
 
-						<AccordionDetails>
+						<AccordionDetails className="accordion_details">
 							{Object.keys(recordData[trainee]["months"]).map((month, j) => (
-								<Box className="list_container" key={j}>
+								<Box className="list_container p-2" key={j}>
 									<Accordion className="month_item">
 										<AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="month1-content" id="month1-header">
-											<Typography sx={{ fontWeight: "bold", textAlign: "center", color: "#414141", paddingLeft: 0.5 }}>{getMonthName(month)}</Typography>
+											<Typography className="mta-left" sx={{ fontWeight: "bold", textAlign: "center", color: "#414141", paddingLeft: 0.5 }}>{getMonthName(month)}</Typography>
 										</AccordionSummary>
 
-										<AccordionDetails>
+										<AccordionDetails className="month_accordion_details">
 											{Object.keys(recordData[trainee]["months"][month]["weekly"]).map((week, k) => (
-												<Box className="list_container" key={k}>
+												<Box className="list_container p-0" key={k}>
 													<Accordion sx={{ width: "100%", backgroundColor: "#9dd0ff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }} className="accordion_item">
 														<AccordionSummary>
-															<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{`Week ${recordData[trainee]["months"][month]["weekly"][week].week}`}</Typography>
+															<Typography className="mta-left" sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{`Week ${recordData[trainee]["months"][month]["weekly"][week].week}`}</Typography>
 														</AccordionSummary>
 														<AccordionDetails className="report_detail_container">
 															<Box className="weekly_report_container">
@@ -159,11 +159,11 @@ function TraineeList() {
 
 											<Accordion className="supervisor_review_box" sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5 }}>
 												<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
-													<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Review</Typography>
+													<Typography className="mta-left" sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Supervisor Review</Typography>
 												</AccordionSummary>
 
 												<Box className="supervisor_report_field" variant="outlined">
-													<div className="assigned_student">
+													<div className="assigned_student p-10">
 														<Typography component={"span"} variant="body1">
 															{recordData[trainee]["months"][month]["reports"]}
 														</Typography>
@@ -190,7 +190,7 @@ function TraineeList() {
 								</AccordionSummary>
 
 								<Box className="evaluator_report_field_sub" variant="outlined">
-									<div className="assigned_student">
+									<div className="assigned_student p-10">
 										<Typography component={"span"} variant="body1">
 											{recordData[trainee]["evalReport"]}
 										</Typography>
