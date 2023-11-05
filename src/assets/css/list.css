@@ -799,10 +799,11 @@ input[type="number"] {
 		width: 5% !important;
 	}
 }
-@media only screen and (min-width: 1200) {
-	.css-ur2jdm-MuiContainer-root {
-		padding-left: 0px !important;
-		padding-right: 0px !important;
+
+@media (min-width: 1200) {
+	.list_container.trainee_list.css-ur2jdm-MuiContainer-root {
+		padding-left: 0px;
+		padding-right: 0px;
 	}
 }
 
