@@ -18,8 +18,8 @@ function PastReports() {
 		year: new Date().getFullYear(),
 	});
 
+	const [isLoading, setIsLoading] = useState(true);
 	const [currentMonthRecords, setCurrentMonthRecords] = useState([]);
-
 	const groupByMonth = (records) => {
 		return records.reduce((grouped, record) => {
 			(grouped[record.month] = grouped[record.month] || []).push(record);
@@ -33,6 +33,7 @@ function PastReports() {
 			const data = response.data.records;
 			const groupedByMonth = groupByMonth(data);
 			setCurrentMonthRecords(groupedByMonth);
+			setIsLoading(false);
 		});
 	};
 
@@ -48,6 +49,30 @@ function PastReports() {
 			month: "long",
 		});
 	};
+
+	if (isLoading) {
+		return (
+			<Container component="main" className="list_container" maxWidth={false}>
+				<CssBaseline />
+
+				<Box className="list_box" sx={{ padding: 2 }}>
+					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>Loading...</Typography>
+				</Box>
+			</Container>
+		);
+	}
+
+	if (Object.keys(currentMonthRecords).length === 0) {
+		return (
+			<Container component="main" className="list_container" maxWidth={false}>
+				<CssBaseline />
+
+				<Box className="list_box" sx={{ padding: 2 }}>
+					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>No records found.</Typography>
+				</Box>
+			</Container>
+		);
+	}
 
 	return (
 		<Container component="main" className="month_report_container" maxWidth={false}>
