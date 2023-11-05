@@ -169,7 +169,7 @@ function TraineeList() {
 			<Container component="main" className="list_container" maxWidth={false}>
 				<CssBaseline />
 
-				<Box className="list_box">
+				<Box className="list_box" sx={{padding: 2}}>
 					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>Loading...</Typography>
 				</Box>
 			</Container>
@@ -181,7 +181,7 @@ function TraineeList() {
 			<Container component="main" className="list_container" maxWidth={false}>
 				<CssBaseline />
 
-				<Box className="list_box">
+				<Box className="list_box" sx={{padding: 2}}>
 					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>No records found.</Typography>
 				</Box>
 			</Container>

@@ -3,10 +3,15 @@
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-	padding-left: 0 !important;
-	padding-right: 0 !important;
+	padding-left: 0;
+	padding-right: 0;
 }
 
+/* .list_container.trainee_list {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+ */
 .list_box,
 .month_report_box {
 	display: flex;
@@ -16,7 +21,7 @@
 	height: 100%;
 	background-color: white;
 	border-radius: 1.5rem;
-	padding: 2rem 2rem 1.5rem 2rem;
+	padding: 1rem;
 	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -126,8 +131,8 @@
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-	padding-left: 0 !important;
-	padding-right: 0 !important;
+	padding-left: 0;
+	padding-right: 0;
 }
 
 .create_new_form {
@@ -525,11 +530,11 @@ input[type="number"] {
 }
 
 @media only screen and (max-width: 1200px) {
-	.list_container,
+	/* .list_container,
 	.create_new_container,
 	.month_report_container {
-		padding-right: 16px !important;
-	}
+		padding-right: 16px;
+	} */
 
 	.create_new_form {
 		padding: 1.5rem;
@@ -538,13 +543,22 @@ input[type="number"] {
 	.bulk_user_entry_input {
 		justify-content: center;
 	}
+
+	/* .list_container.trainee_list {
+		padding-left: 0px;
+		padding-right: 10px;
+	} */
+
+	.month_accordion_details {
+		padding: 10px;
+	}
 }
 
 @media only screen and (max-width: 900px) {
 	.list_container,
 	.create_new_container,
 	.month_report_container {
-		padding-left: 16px !important;
+		padding-left: 16px;
 	}
 
 	.list_box,
@@ -695,16 +709,16 @@ input[type="number"] {
 		padding: 8px 8px 10px;
 	}
 
-	.supervisor_dashboard.list_container {
+	/* .trainee_list.list_container {
 		padding-left: 8px !important;
 		padding-right: 8px !important;
-	}
+	} */
 
-	.supervisor_dashboard .accordion_details {
+	.trainee_list .accordion_details {
 		padding: 8px;
 	}
 
-	.supervisor_dashboard .month_item .month_accordion_details {
+	.trainee_list .month_item .month_accordion_details {
 		padding: 0px;
 	}
 
@@ -718,10 +732,9 @@ input[type="number"] {
 
 	.weekly_report_container > div > p {
 		font-size: 14px;
-	
 	}
 
-	.supervisor_dashboard .assigned_student {
+	.trainee_list .assigned_student {
 		padding: 0;
 	}
 
@@ -750,6 +763,10 @@ input[type="number"] {
 		font-size: 14px;
 	}
 
+	.create_new_container {
+		padding-right: 16px;
+	}
+
 	.p-0 {
 		padding-left: 0 !important;
 		padding-right: 0 !important;
@@ -758,6 +775,10 @@ input[type="number"] {
 	.p-2 {
 		padding-left: 2px !important;
 		padding-right: 2px !important;
+	}
+
+	.p-10 {
+		padding: 10px !important;
 	}
 
 	.w-5 {

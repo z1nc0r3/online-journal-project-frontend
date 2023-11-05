@@ -131,7 +131,7 @@ function Dashboard() {
 			<Container component="main" className="list_container" maxWidth={false}>
 				<CssBaseline />
 
-				<Box className="list_box">
+				<Box className="list_box" sx={{padding: 2}}>
 					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>Loading...</Typography>
 				</Box>
 			</Container>
@@ -143,7 +143,7 @@ function Dashboard() {
 			<Container component="main" className="list_container" maxWidth={false}>
 				<CssBaseline />
 
-				<Box className="list_box">
+				<Box className="list_box" sx={{padding: 2}}>
 					<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>No records found.</Typography>
 				</Box>
 			</Container>
@@ -151,7 +151,7 @@ function Dashboard() {
 	}
 
 	return (
-		<Container component="main" className="list_container supervisor_dashboard" maxWidth={false}>
+		<Container component="main" className="list_container trainee_list" maxWidth={false}>
 			<CssBaseline />
 
 			<ToastContainer />
@@ -180,7 +180,7 @@ function Dashboard() {
 
 										<AccordionDetails className="month_accordion_details">
 											{Object.keys(recordData[trainee][month]).map((week, k) => (
-												<Box key={k}>
+												<Box className="list_container" key={k}>
 													<Accordion sx={{ width: "100%", backgroundColor: "#9dd0ff", boxShadow: "none", marginBottom: "10px", borderRadius: "4px" }} className="accordion_item">
 														<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 															<Typography className="mta-left" sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "16px" }}>{`Week : ${recordData[trainee][month][week].week}`}</Typography>
