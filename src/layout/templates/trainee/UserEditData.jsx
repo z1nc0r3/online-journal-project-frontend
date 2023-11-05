@@ -156,7 +156,7 @@ const UpdateUser = () => {
 	};
 
 	return (
-		<Container component="main" className="create_new_container" maxWidth={false}>
+		<Container component="main" className="list_container create_new_container" maxWidth={false}>
 			<CssBaseline />
 
 			<ToastContainer />

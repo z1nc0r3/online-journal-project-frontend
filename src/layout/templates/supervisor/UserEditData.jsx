@@ -126,7 +126,7 @@ function UserEditData() {
 	};
 
 	return (
-		<Container component="main" className="create_new_container" maxWidth={false}>
+		<Container component="main" className="list_container trainee_list create_new_container" maxWidth={false}>
 			<CssBaseline />
 
 			<ToastContainer />
