@@ -254,7 +254,6 @@ function TraineeList() {
 									</div>
 								</Box>
 								</Accordion>
-							</form>
 						</AccordionDetails>
 					</Accordion>
 				))}
