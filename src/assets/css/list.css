@@ -529,13 +529,12 @@ input[type="number"] {
 	-moz-appearance: textfield;
 }
 
-@media only screen and (max-width: 1200px) {
-	/* .list_container,
-	.create_new_container,
-	.month_report_container {
-		padding-right: 16px;
-	} */
+.list_container.css-ur2jdm-MuiContainer-root, .month_report_container.css-ur2jdm-MuiContainer-root {
+	padding-left: 0px;
+	padding-right: 0px;
+}
 
+@media only screen and (max-width: 1200px) {
 	.create_new_form {
 		padding: 1.5rem;
 	}
@@ -544,22 +543,13 @@ input[type="number"] {
 		justify-content: center;
 	}
 
-	/* .list_container.trainee_list {
-		padding-left: 0px;
-		padding-right: 10px;
-	} */
-
 	.month_accordion_details {
 		padding: 10px;
 	}
 
-	.css-ur2jdm-MuiContainer-root {
-		padding-right: 10px;
-	}
-
-	.css-ur2jdm-MuiContainer-root {
-		padding-left: 0px !important;
-		padding-right: 20px !important;
+	.list_container.css-ur2jdm-MuiContainer-root, .month_report_container.css-ur2jdm-MuiContainer-root {
+		padding-left: 0px;
+		padding-right: 20px;
 	}
 }
 
@@ -601,9 +591,9 @@ input[type="number"] {
 		padding: 1rem;
 	}
 
-	.css-ur2jdm-MuiContainer-root {
-		padding-left: 20px !important;
-		padding-right: 20px !important;
+	.list_container.css-ur2jdm-MuiContainer-root, .month_report_container.css-ur2jdm-MuiContainer-root {
+		padding-left: 20px;
+		padding-right: 20px;
 	}
 }
 
@@ -617,7 +607,7 @@ input[type="number"] {
 	.list_container,
 	.create_new_container,
 	.month_report_container {
-		padding-left: 16px !important;
+		padding-left: 16px;
 	}
 
 	.list_box .MuiAccordionSummary-contentGutters p,
@@ -723,10 +713,10 @@ input[type="number"] {
 		padding: 8px 8px 10px;
 	}
 
-	/* .trainee_list.list_container {
-		padding-left: 8px !important;
-		padding-right: 8px !important;
-	} */
+	.list_container.css-ur2jdm-MuiContainer-root, .month_report_container.css-ur2jdm-MuiContainer-root {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
 
 	.trainee_list .accordion_details {
 		padding: 8px;
@@ -797,12 +787,6 @@ input[type="number"] {
 
 	.w-5 {
 		width: 5% !important;
-	}
-}
-@media only screen and (min-width: 1200) {
-	.css-ur2jdm-MuiContainer-root {
-		padding-left: 0px !important;
-		padding-right: 0px !important;
 	}
 }
 

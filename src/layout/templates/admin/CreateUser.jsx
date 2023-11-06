@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 import { Box, Container, Button, Typography, TextField, Select, MenuItem } from "@mui/material";
 import Alert from "@mui/material/Alert";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -144,6 +145,9 @@ const CreateUser = (props) => {
 			.post(url, formData)
 			.then((response) => {
 				toast.success("New User Created Successfully. Redirecting...");
+				Cookies.set("traineeLastUpdate", 0);
+				Cookies.set("supervisorLastUpdate", 0);
+				Cookies.set("evaluatorLastUpdate", 0);
 				setTimeout(() => {
 					window.location.href = userType;
 				}, 2000);
@@ -271,12 +275,19 @@ const CreateUser = (props) => {
 					.post(`${API_URL}/api/create/bulk`, fileContent)
 					.then((response) => {
 						toast.success("Bulk Users Successfully. Redirecting...");
+						Cookies.set("traineeLastUpdate", 0);
+						Cookies.set("supervisorLastUpdate", 0);
+						Cookies.set("evaluatorLastUpdate", 0);
 						setTimeout(() => {
-							window.location.href.reload();
+							window.location.reload();
 						}, 2000);
 					})
 					.catch((error) => {
-						toast.error("Error adding bulk users." + error.response.data.message);
+						if (error.response.data.message.includes("SQLSTATE[23000]")) {
+							toast.error("Error adding bulk users. Duplicate entry.");
+						} else {
+							toast.error("Error adding bulk users.");
+						}
 					});
 			};
 			reader.readAsText(selectedFile);
