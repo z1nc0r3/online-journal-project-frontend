@@ -283,7 +283,11 @@ const CreateUser = (props) => {
 						}, 2000);
 					})
 					.catch((error) => {
-						toast.error("Error adding bulk users." + error.response.data.message);
+						if (error.response.data.message.includes("SQLSTATE[23000]")) {
+							toast.error("Error adding bulk users. Duplicate entry.");
+						} else {
+							toast.error("Error adding bulk users.");
+						}
 					});
 			};
 			reader.readAsText(selectedFile);
