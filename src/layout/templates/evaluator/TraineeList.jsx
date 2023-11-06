@@ -29,7 +29,7 @@ function TraineeList() {
 		try {
 			const response = await axios.get(`${API_URL}/api/get/record/all/approved/evaluator/${Cookies.get("user_id")}`);
 			const data = response.data;
-			console.log(data);
+
 			if (data.error) {
 				console.log(data.error);
 			} else {
@@ -47,7 +47,6 @@ function TraineeList() {
 		try {
 			const response = await axios.get(`${API_URL}/api/get/trainee/list/evaluator/${Cookies.get("user_id")}`);
 			const data = response.data;
-			
 
 			if (data.error) {
 				console.log(data.error);
@@ -259,7 +258,7 @@ function TraineeList() {
 													fullWidth
 													name="evaluatorReport"
 													type="text"
-													value={recordData[trainee]["evalReport"]}
+													value={recordData[trainee]["months"][Object.keys(recordData[trainee]["months"])[0]]["evaluator_report"]}
 													onChange={handleInputChange(trainee)}
 													placeholder="Write your review here."
 													sx={{ "& fieldset": { border: "none" } }}
@@ -267,6 +266,11 @@ function TraineeList() {
 											</Typography>
 										</div>
 									</Box>
+
+									<Button variant="contained" type="submit" className="report_submit" sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }} disabled={Cookies.get(trainee) ? false : true}>
+										Submit
+									</Button>
+
 								</Accordion>
 							</form>
 						</AccordionDetails>
