@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { Box, Container, Button } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
+import AlertDialog from "../../components/main/AlertDialog";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
@@ -19,6 +20,21 @@ function TraineeList() {
 	const [recordData, setRecordData] = useState({});
 	const [formData, setFormData] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
+	const [isSubmitAlertOpen, setSubmitAlertOpen] = useState(false);
+
+	const handleOpenSubmitAlert = (event) => {
+		event.preventDefault();
+		setSubmitAlertOpen(true);
+	};
+
+	const handleCloseSubmitAlert = () => {
+		setSubmitAlertOpen(false);
+	};
+
+	const handleDisagree = () => {
+		// User disagreed with logout, simply close the AlertDialog
+		handleCloseSubmitAlert();
+	};
 
 	const handleChange = (panel) => (event, isExpanded) => {
 		setExpanded(isExpanded ? panel : false);
@@ -104,7 +120,8 @@ function TraineeList() {
 		});
 	}, [recordData]);
 
-	const handleSubmit = (traineeId) => (event) => {
+	const handleSubmit = (traineeId) =>async  (event) => {
+		
 		event.preventDefault();
 
 		axios
@@ -112,12 +129,14 @@ function TraineeList() {
 			.then((response) => {
 				toast.success("Review added successfully. Reloading...");
 				Cookies.remove(traineeId);
+				handleCloseSubmitAlert();
 				setTimeout(() => {
 					window.location.reload();
 				}, 2000);
 			})
 			.catch((error) => {
 				toast.error("Error adding the review. Please try again.");
+				handleCloseSubmitAlert();
 			});
 	};
 
@@ -235,7 +254,7 @@ function TraineeList() {
 								</Box>
 							))}
 
-							<form onSubmit={handleSubmit(trainee)}>
+							<form onSubmit={handleOpenSubmitAlert}>
 								<Accordion className="evaluator_report_field" sx={{ width: "100%", backgroundColor: "#69b7ff", boxShadow: "none", borderRadius: 1.5, marginTop: 0.5 }}>
 									<AccordionSummary aria-controls="panel1bh-content" id="panel1bh-header">
 										<Typography sx={{ width: "100%", flexShrink: 0, fontWeight: "medium", fontSize: "18px" }}>Evaluator Review</Typography>
@@ -264,6 +283,17 @@ function TraineeList() {
 									<Button variant="contained" type="submit" className="report_submit" sx={{ width: "95%", bgcolor: "#379fff", fontSize: "18px" }} disabled={Cookies.get(trainee) ? false : true}>
 										Submit
 									</Button>
+
+									<AlertDialog
+										open={isSubmitAlertOpen}
+										onClose={handleCloseSubmitAlert}
+										onAgree={handleSubmit(trainee)}
+										onDisagree={handleDisagree}
+										title="Submission Confirmation"
+										description="Are you sure you want to submit ?Submission can not able to change."
+										agreeText="Yes"
+										disagreeText="No"
+									/>
 
 								</Accordion>
 							</form>
