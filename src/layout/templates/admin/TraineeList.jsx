@@ -141,7 +141,7 @@ function TraineeList() {
 		};
 
 		axios
-			.post(`${API_URL}/api/update/assign/`, updatedTrainee)
+			.post(`${API_URL}/api/update/assign`, updatedTrainee)
 			.then((response) => {
 				toast.success(response.data.message);
 				Cookies.set("traineeLastUpdate", 0);
