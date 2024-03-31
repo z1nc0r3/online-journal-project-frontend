@@ -26,3 +26,21 @@ Your app is ready to be deployed!
 ### Super Admin
  - Email : _admin@interntracker.com_
  - Password : _admin123_
+## Software Details
+ - React - version 18 
+ - Node Js - version 18.14.0 
+ - PHP - version 8.1.10 
+ - Laravel - version 10.10 
+ - Composer – version 2.5.5 
+ - XAMPP – Version: 8.1.1 
+ - MySQL
+## User GUI flow
+### Admin
+login to their dashboard then create, edit, view, and print the details of trainee , supervisor and evaluator.
+### Trainee
+login to their dashboard then write and view their report and edit their details.
+### Supervisor
+login to their dashboard then view the trainees’ report and comment by once a month and edit their commends.
+### Evaluator
+login to their dashboard then view the trainees’ and evaluator’s report, and comment after the trainee’s internship period is finished , and edit their comments.
+
